@@ -10,12 +10,12 @@ public class StatsSection : MonoBehaviour
       [SerializeField] private Button subtractButton;
 
       private int totalStat;
-      private int currentStat;
-      
+      public int CurrentStat { get; private set; }
+
       public void LoadStat(int _totalStat)
       {
             totalStat = _totalStat;
-            currentStat = _totalStat;
+            CurrentStat = _totalStat;
 
             UpdateText();
             UpdateButtonStates();
@@ -23,13 +23,13 @@ public class StatsSection : MonoBehaviour
 
       public void Add()
       {
-            currentStat++;
+            CurrentStat++;
             UpdateStatSection();
       }
 
       public void Subtract()
       {
-            currentStat--;
+            CurrentStat--;
             UpdateStatSection();
       }
 
@@ -42,12 +42,12 @@ public class StatsSection : MonoBehaviour
       private void UpdateText()
       {
             totalStatText.text = totalStat.ToString();
-            currentStatText.text = currentStat.ToString(); 
+            currentStatText.text = CurrentStat.ToString(); 
       }
       
       private void UpdateButtonStates()
       {
-            subtractButton.interactable = currentStat > 0;
-            plusButton.interactable = currentStat < totalStat;
+            subtractButton.interactable = CurrentStat > 0;
+            plusButton.interactable = CurrentStat < totalStat;
       }
 }

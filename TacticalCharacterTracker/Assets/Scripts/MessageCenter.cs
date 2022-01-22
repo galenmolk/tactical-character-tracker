@@ -7,6 +7,7 @@ public static class MessageCenter
     private static readonly UnityEvent TurnStarted = new UnityEvent();
     private static readonly UnityEvent TurnEnded = new UnityEvent();
     private static readonly CooldownAbilitySlotEvent CooldownAbilityTriggered = new CooldownAbilitySlotEvent();
+    private static readonly UnityEvent BurningTokenActivated = new UnityEvent();
     
     #region AbilityInfoButtonPressed
     public static void InvokeAbilityInfoButtonPressed(Ability ability)
@@ -90,6 +91,23 @@ public static class MessageCenter
     public static void UnsubscribeCooldownAbilityTriggered(UnityAction<CooldownAbilitySlot> action)
     {
         CooldownAbilityTriggered.RemoveListener(action);
+    }
+    #endregion
+
+    #region BurningTokenActivated
+    public static void InvokeBurningTokenActivated()
+    {
+        BurningTokenActivated.Invoke();
+    }
+    
+    public static void SubscribeBurningTokenActivated(UnityAction action)
+    {
+        BurningTokenActivated.AddListener(action);
+    }
+    
+    public static void UnsubscribeBurningTokenActivated(UnityAction action)
+    {
+        BurningTokenActivated.RemoveListener(action);
     }
     #endregion
 }
