@@ -1,14 +1,18 @@
 using TMPro;
 using UnityEngine;
 
-public class AbilityInfo : AbilityUI
+public class AbilityInfo : MonoBehaviour
 {
     [SerializeField] private TMP_Text abilityDescription;
     [SerializeField] private CanvasGroup canvasGroup;
     
-    protected override void DisplayAbilityInfo(Ability ability)
+    [SerializeField] private TMP_Text abilityName;
+    [SerializeField] private TMP_Text abilityCooldown;
+
+    private void DisplayAbilityInfo(Ability ability)
     {
-        base.DisplayAbilityInfo(ability);
+        abilityName.text = ability.name;
+        abilityCooldown.text = ability.GetCooldownDescription();
         abilityDescription.text = ability.description;
         Utils.SetIsCanvasGroupActive(canvasGroup, true);
     }

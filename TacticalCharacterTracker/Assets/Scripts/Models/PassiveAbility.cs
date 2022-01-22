@@ -4,6 +4,9 @@ using UnityEngine;
 public class PassiveAbility : Ability
 {
     private const string PASSIVE_TEXT = "(Passive)";
-    
-    public override string CooldownText => PASSIVE_TEXT;
+
+    public override string GetCooldownDescription()
+    {
+        return PASSIVE_TEXT;
+    }
 }

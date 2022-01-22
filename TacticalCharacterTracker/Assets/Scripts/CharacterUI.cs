@@ -6,8 +6,8 @@ public class CharacterUI : MonoBehaviour
     [SerializeField] private Character testCharacter;
     [SerializeField] private TMP_Text characterName;
     [SerializeField] private StatsUI statsUI;
-    [SerializeField] private AbilitySlot abilitySlotPrefab;
-    [SerializeField] private Transform abilityParent;
+   
+    [SerializeField] private AbilityManager abilityManager;
     
     private Character character;
     
@@ -16,18 +16,7 @@ public class CharacterUI : MonoBehaviour
         character = _character;
         characterName.text = character.name;
         statsUI.LoadStats(character);
-        DisplayAbilities(character.abilities);
-    }
-
-    private void DisplayAbilities(Ability[] abilities)
-    {
-        for (int i = 0, length = abilities.Length; i < length; i++)
-            DisplayAbility(abilities[i]);
-    }
-
-    private void DisplayAbility(Ability ability)
-    {
-        Instantiate(abilitySlotPrefab, abilityParent).Initialize(ability);
+        abilityManager.DisplayAbilities(character.abilities);
     }
     
     private void Awake()
