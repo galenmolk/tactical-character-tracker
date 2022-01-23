@@ -10,14 +10,14 @@ public class CooldownAbilitySlot : MonoBehaviour
 
     private int totalCooldown;
     private int currentCooldown;
-    private CooldownAbility ability;
+    private CooldownAbilityConfig ability;
     private bool isCooldownActive;
     
-    public void Initialize(CooldownAbility _ability)
+    public void Initialize(CooldownAbilityConfig _ability)
     {
         ability = _ability;
         abilityName.text = ability.name;
-        totalCooldown = _ability.CooldownTurns;
+        totalCooldown = _ability.cooldown;
         currentCooldown = totalCooldown;
         UpdateCooldownText();
     }

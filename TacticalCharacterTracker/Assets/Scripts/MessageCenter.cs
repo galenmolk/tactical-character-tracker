@@ -2,25 +2,26 @@ using UnityEngine.Events;
 
 public static class MessageCenter
 {
-    private static readonly AbilityEvent AbilityInfoButtonPressed = new AbilityEvent();
+    private static readonly AbilityConfigEvent AbilityInfoButtonPressed = new AbilityConfigEvent();
     private static readonly UnityEvent OverlayCloseButtonPressed = new UnityEvent();
     private static readonly UnityEvent TurnStarted = new UnityEvent();
     private static readonly UnityEvent TurnEnded = new UnityEvent();
     private static readonly CooldownAbilitySlotEvent CooldownAbilityTriggered = new CooldownAbilitySlotEvent();
     private static readonly UnityEvent BurningTokenActivated = new UnityEvent();
+    private static readonly CharacterListEvent CharacterListReceived = new CharacterListEvent();
     
     #region AbilityInfoButtonPressed
-    public static void InvokeAbilityInfoButtonPressed(Ability ability)
+    public static void InvokeAbilityInfoButtonPressed(AbilityConfig ability)
     {
         AbilityInfoButtonPressed.Invoke(ability);
     }
     
-    public static void SubscribeAbilityInfoButtonPressed(UnityAction<Ability> action)
+    public static void SubscribeAbilityInfoButtonPressed(UnityAction<AbilityConfig> action)
     {
         AbilityInfoButtonPressed.AddListener(action);
     }
     
-    public static void UnsubscribeAbilityInfoButtonPressed(UnityAction<Ability> action)
+    public static void UnsubscribeAbilityInfoButtonPressed(UnityAction<AbilityConfig> action)
     {
         AbilityInfoButtonPressed.RemoveListener(action);
     }
@@ -108,6 +109,23 @@ public static class MessageCenter
     public static void UnsubscribeBurningTokenActivated(UnityAction action)
     {
         BurningTokenActivated.RemoveListener(action);
+    }
+    #endregion
+    
+    #region CharacterListReceived
+    public static void InvokeCharacterListReceived(CharacterListConfig characterListConfig)
+    {
+        CharacterListReceived.Invoke(characterListConfig);
+    }
+    
+    public static void SubscribeCharacterListReceived(UnityAction<CharacterListConfig> action)
+    {
+        CharacterListReceived.AddListener(action);
+    }
+    
+    public static void UnsubscribeCharacterListReceived(UnityAction<CharacterListConfig> action)
+    {
+        CharacterListReceived.RemoveListener(action);
     }
     #endregion
 }

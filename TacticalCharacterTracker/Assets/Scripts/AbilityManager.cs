@@ -11,33 +11,28 @@ public class AbilityManager : MonoBehaviour
 
     private readonly List<CooldownAbilitySlot> cooldownAbilitySlots = new List<CooldownAbilitySlot>();
     
-    public void DisplayAbilities(Ability[] abilities)
+    public void DisplayPassiveAbilities(PassiveAbilityConfig[] abilities)
     {
         for (int i = 0, length = abilities.Length; i < length; i++)
-            DisplayAbility(abilities[i]);
+            CreatePassiveSlot(abilities[i]);
+    }
+    
+    public void DisplayCooldownAbilities(CooldownAbilityConfig[] abilities)
+    {
+        for (int i = 0, length = abilities.Length; i < length; i++)
+            CreateCooldownSlot(abilities[i]);
     }
 
-    private void DisplayAbility(Ability ability)
+    private void CreatePassiveSlot(PassiveAbilityConfig ability)
     {
-        if (ability is CooldownAbility)
-            CreateCooldownSlot(ability);
-        
-        if (ability is PassiveAbility)
-            CreatePassiveSlot(ability);
+        Instantiate(passiveAbilitySlotPrefab, abilityParent).Initialize(ability);
     }
-
-    private void CreateCooldownSlot(Ability ability)
+    
+    private void CreateCooldownSlot(CooldownAbilityConfig ability)
     {
-        CooldownAbility cooldownAbility = ability as CooldownAbility;
         CooldownAbilitySlot slot = Instantiate(cooldownAbilitySlotPrefab, abilityParent);
-        slot.Initialize(cooldownAbility);
+        slot.Initialize(ability);
         cooldownAbilitySlots.Add(slot);
-    }
-
-    private void CreatePassiveSlot(Ability ability)
-    {
-        PassiveAbility passiveAbility = ability as PassiveAbility;
-        Instantiate(passiveAbilitySlotPrefab, abilityParent).Initialize(passiveAbility);
     }
 
     private void OnEnable()

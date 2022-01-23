@@ -1,26 +1,36 @@
+using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 
 public class CharacterUI : MonoBehaviour
 {
-    [SerializeField] private Character testCharacter;
     [SerializeField] private TMP_Text characterName;
     [SerializeField] private StatsUI statsUI;
    
     [SerializeField] private AbilityManager abilityManager;
+
+    [SerializeField] private string testJson;
     
-    private Character character;
+    private CharacterConfig activeCharacter;
     
-    public void LoadCharacter(Character _character)
+    public void LoadCharacter(CharacterConfig characterConfig)
     {
-        character = _character;
-        characterName.text = character.name;
-        statsUI.LoadStats(character);
-        abilityManager.DisplayAbilities(character.abilities);
+        activeCharacter = characterConfig;
+        characterName.text = activeCharacter.name;
+        statsUI.LoadStats(activeCharacter);
+        abilityManager.DisplayPassiveAbilities(activeCharacter.passiveAbilities);
+        abilityManager.DisplayCooldownAbilities(activeCharacter.cooldownAbilities);
     }
     
     private void Awake()
     {
-        LoadCharacter(testCharacter);
+        MessageCenter.SubscribeCharacterListReceived(LoadCharacters);
+        CharacterListConfig list = JsonConvert.DeserializeObject<CharacterListConfig>(testJson);
+        LoadCharacter(list.characterList[0]);
+    }
+
+    private void LoadCharacters(CharacterListConfig characterListConfig)
+    {
+        
     }
 }

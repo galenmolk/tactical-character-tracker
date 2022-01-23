@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class StatsUI : MonoBehaviour
@@ -7,11 +6,11 @@ public class StatsUI : MonoBehaviour
     [SerializeField] private StatsSection healthSection;
     [SerializeField] private StatsSection speedSection;
 
-    public void LoadStats(Character character)
+    public void LoadStats(CharacterConfig character)
     {
-        defenseSection.LoadStat(character.totalDefense);
-        healthSection.LoadStat(character.totalHealth);
-        speedSection.LoadStat(character.totalSpeed);
+        defenseSection.LoadStat(character.defense);
+        healthSection.LoadStat(character.health);
+        speedSection.LoadStat(character.speed);
     }
 
     private void OnEnable()

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[System.Serializable]
 [CreateAssetMenu(fileName = "New Character", menuName = "Custom Assets/Character", order = 2)]
 public class Character : GameElement
 {
@@ -7,10 +8,6 @@ public class Character : GameElement
     public int totalHealth;
     public int totalSpeed;
     
-    private int currentDefense;
-    private int currentHealth;
-    private int currentSpeed;
-    
-    public Ability[] abilities;
-    public Token[] tokens;
+    public PassiveAbility[] passiveAbilities;
+    public CooldownAbility[] cooldownAbilities;
 }

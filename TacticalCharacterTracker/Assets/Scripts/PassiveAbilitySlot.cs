@@ -5,9 +5,9 @@ public class PassiveAbilitySlot : MonoBehaviour
 {
     [SerializeField] protected TMP_Text abilityName;
 
-    private PassiveAbility ability;
+    private PassiveAbilityConfig ability;
     
-    public void Initialize(PassiveAbility _ability)
+    public void Initialize(PassiveAbilityConfig _ability)
     {
         ability = _ability;
         abilityName.text = ability.name;

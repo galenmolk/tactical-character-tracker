@@ -9,7 +9,9 @@ public class AbilityInfo : MonoBehaviour
     [SerializeField] private TMP_Text abilityName;
     [SerializeField] private TMP_Text abilityCooldown;
 
-    private void DisplayAbilityInfo(Ability ability)
+    [SerializeField] private RectTransform textParent;
+    
+    private void DisplayAbilityInfo(AbilityConfig ability)
     {
         abilityName.text = ability.name;
         abilityCooldown.text = ability.GetCooldownDescription();
