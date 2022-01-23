@@ -25,12 +25,12 @@ public class CharacterUI : MonoBehaviour
     private void Awake()
     {
         MessageCenter.SubscribeCharacterListReceived(LoadCharacters);
-        CharacterListConfig list = JsonConvert.DeserializeObject<CharacterListConfig>(testJson);
-        LoadCharacter(list.characterList[0]);
+        // CharacterListConfig list = JsonConvert.DeserializeObject<CharacterListConfig>(testJson);
+        // LoadCharacter(list.characterList[0]);
     }
 
     private void LoadCharacters(CharacterListConfig characterListConfig)
     {
-        
+        LoadCharacter(characterListConfig.characterList[0]);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 using Unity.RemoteConfig;
 using UnityEngine;
@@ -14,14 +15,31 @@ public class CharacterDownloader : MonoBehaviour
     public void GetRemoteConfigSettings()
     {
         ConfigManager.FetchCompleted += LoadCharacters;
-        ConfigManager.FetchConfigs(new userAttributes(), appParams);
+        ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), appParams);
+    }
+
+    private void Awake()
+    {
+        GetRemoteConfigSettings();
     }
 
     private void LoadCharacters(ConfigResponse response)
     {
         string characterListJson = ConfigManager.appConfig.GetJson(RemoteConfigKeys.CHARACTER_LIST_KEY);
         characterListConfig = JsonConvert.DeserializeObject<CharacterListConfig>(characterListJson);
-        MessageCenter.InvokeCharacterListReceived(characterListConfig);
+        
+        Debug.Log(characterListJson);
+        Debug.Log(characterListConfig);
+
+        
+        if (characterListConfig != null)
+            MessageCenter.InvokeCharacterListReceived(characterListConfig);
+        else
+        {
+            Debug.Log("CharacterListConfig is null.");
+        }
+        
+        
         ConfigManager.FetchCompleted -= LoadCharacters;
     }
 }
