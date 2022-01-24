@@ -12,8 +12,257 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: '[]'
-  _rsLastCachedKeyList: '[]'
-  _environments: '[]'
+  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"9383e1f3-e7d1-4acb-b550-fc4d0e069341\"\n   
+    },\n    \"rs\": {\n      \"key\": \"characterList\",\n      \"type\": \"json\",\n     
+    \"schemaId\": null,\n      \"value\": {\n        \"characterList\": [\n         
+    {\n            \"name\": \"Aggo\",\n            \"defense\": 22,\n           
+    \"health\": 13,\n            \"speed\": 6,\n            \"passiveAbilities\":
+    [\n              {\n                \"name\": \"Rage\",\n                \"description\":
+    \"When Aggo's combined defense and health is below 12, it gains an additional
+    +1 damage to all damage-dealing abilities and an additional +1 movement to all
+    movement abilities and move actions.\"\n              },\n              {\n               
+    \"name\": \"Unstoppable\",\n                \"description\": \"Gain 2 defense
+    at the beginning of each turn.\"\n              }\n            ],\n           
+    \"cooldownAbilities\": [\n              {\n                \"name\": \"Slither\",\n               
+    \"description\": \"Melee. An adjacent target receives 2 damage. AND/OR Aggo gains
+    2 defense.\",\n                \"cooldown\": 0\n              },\n             
+    {\n                \"name\": \"Flurry\",\n                \"description\": \"Burst
+    1. All creatures in burst receive 3 damage.\",\n                \"cooldown\":
+    3\n              },\n              {\n                \"name\": \"Tentacle Slam\",\n               
+    \"description\": \"Line 3. All creatures in line receive 4 damage.\",\n               
+    \"cooldown\": 4\n              },\n              {\n                \"name\":
+    \"Protect Brood\",\n                \"description\": \"When an ally within 8
+    hexes is hit by an enemy\u2019s ability, Aggo may leap up to 8 hexes and must
+    end the leap in the space occupied by the ally. Aggo must then push the ally
+    into any unoccupied adjacent hex. If there are no unoccupied adjacent hexes to
+    the targeted ally, Protect Packmate may  not be performed. Aggo then receives
+    the ability\u2019s effects as if he was the one targeted. If the pushed ally
+    is still in the ability\u2019s area of effect, Aggo and the targeted ally both 
+    receive the ability\u2019s effects.\",\n                \"cooldown\": 4\n             
+    },\n              {\n                \"name\": \"Demonic Cackle\",\n               
+    \"description\": \"Burst 3. All enemies in burst are taunted.\",\n               
+    \"cooldown\": 5\n              },\n              {\n                \"name\":
+    \"Abduct\",\n                \"description\": \"Melee reach 6. Pull a target
+    within reach into the closest adjacent hex. The creature receives 2 damage and
+    is immobilized. \",\n                \"cooldown\": 5\n              },\n             
+    {\n                \"name\": \"Entangling Rush\",\n                \"description\":
+    \"Melee. An adjacent target receives 2 damage. Dash up to 3 hexes and dash the
+    target up to 4 hexes. Aggo and the target must remain adjacent for the entire
+    movement.\",\n                \"cooldown\": 5\n              },\n             
+    {\n                \"name\": \"Gather Shadows\",\n                \"description\":
+    \"Gain 7 defense.\",\n                \"cooldown\": 5\n              },\n             
+    {\n                \"name\": \"Kaiju\",\n                \"description\": \"Gain
+    3 defense. Aggo gains 3 size counters that decay by 1 each turn. Aggo grows to
+    fill all unoccupied hexes in a burst 1. All occupied hexes have threat fields.
+    Any ranged attacks targeting Aggo must only target the center of one of the hexes
+    they occupy. Any area of effect abilities must fill only a single hex occupied
+    by Aggo to take effect, but do not stack damage by hitting multiple hexes occupied
+    by Aggo. Any ability used by Aggo may originate from any of the hexes they occupy.
+    Any damage-dealing ability used by Aggo deals 1 additional damage. When Aggo
+    moves in any way, they are treated as occupying only a single hex. When the movement
+    ends, Aggo grows to fill all unoccupied hexes in a burst 1. When no size counters
+    remain, the ability ends.\",\n                \"cooldown\": 6\n             
+    },\n              {\n                \"name\": \"Overwhelm\",\n               
+    \"description\": \"Rush up to 8 hexes. All creatures in the rush receive 3 damage
+    and are immobilized.\",\n                \"cooldown\": 6\n              },\n             
+    {\n                \"name\": \"Heart of Darkness\",\n                \"description\":
+    \"Leap up to 6 hexes. Burst 2. All creatures in the burst receive 2 damage and
+    are pulled to the closest adjacent hex.\",\n                \"cooldown\": 6\n             
+    },\n              {\n                \"name\": \"Cleave\",\n                \"description\":
+    \"Melee. An adjacent target receives 8 damage. \",\n                \"cooldown\":
+    6\n              },\n              {\n                \"name\": \"Punish\",\n               
+    \"description\": \"Melee. An adjacent target receives 5 damage and is pushed
+    up to 4 hexes.\",\n                \"cooldown\": 6\n              },\n             
+    {\n                \"name\": \"Riposte\",\n                \"description\": \"Interrupt
+    when hit by a melee ability. The adjacent creature using the ability receives
+    4 damage.\",\n                \"cooldown\": 7\n              },\n             
+    {\n                \"name\": \"Devour Essence\",\n                \"description\":
+    \"Melee. An adjacent creature receives 9 damage. Gain 4 defense.\",\n               
+    \"cooldown\": 9\n              }\n            ]\n          },\n          {\n           
+    \"name\": \"Dio\",\n            \"defense\": 14,\n            \"health\": 10,\n           
+    \"speed\": 6,\n            \"passiveAbilities\": [],\n            \"cooldownAbilities\":
+    [\n              {\n                \"cooldown\": 0,\n                \"name\":
+    \"Hum\",\n                \"description\": \"Melee. Deal 2 damage to an adjacent
+    target. AND/OR Gain 2 defense.\"\n              },\n              {\n               
+    \"cooldown\": 2,\n                \"name\": \"Note of Discord\",\n               
+    \"description\": \"Ranged 10. Deal 3 damage to a target within range. May target
+    enemies not in line of sight.\"\n              },\n              {\n               
+    \"cooldown\": 3,\n                \"name\": \"Turret\",\n                \"description\":
+    \"Summon a turret in an unoccupied adjacent hex. The turret has: Speed 0 (cannot
+    move), Health 2, Defense 0, no threat aura, does not block line of sight, blocks
+    movement. The turret's ability is: Ranged 10. Deal 2 damage to a target within
+    range. The turret may act at any point during the players' round.\"\n             
+    },\n              {\n                \"cooldown\": 3,\n                \"name\":
+    \"Quick Fix\",\n                \"description\": \"Interrupt. Ranged 10. A target
+    within range gains 3 defense. OR. Interrupt. Gain 3 defense.\"\n             
+    },\n              {\n                \"cooldown\": 3,\n                \"name\":
+    \"Tether\",\n                \"description\": \"Ranged 8. Summon a tether in
+    an unoccupied hex within range. The tether has: Speed 0 (cannot move), Health
+    2, Defense 0, no threat aura, blocks line of sight, blocks movement. The tether
+    uses its ability immediately: Melee reach 1. A target within reach cannot move
+    out of a burst 1 of the tether and receives 2 damage at the end of the players'
+    turn. Ability ends when the tether is destroyed.\"\n              },\n             
+    {\n                \"cooldown\": 5,\n                \"name\": \"Musical Blast\",\n               
+    \"description\": \"An adjacent target recieves 2 damage and is pushed up to 3
+    hexes. Dio is pushed away from the adjacent target up to 4 hexes in a line of
+    Dio's choosing.\"\n              },\n              {\n                \"cooldown\":
+    5,\n                \"name\": \"Bouncing Note\",\n                \"description\":
+    \"Ranged 5. A target within range receives 4 damage. A second ability may be
+    used this turn, originating from the targeted creature's hex. Melee reach 5.
+    A creature within reach receives 4 damage.\"\n              },\n             
+    {\n                \"cooldown\": 5,\n                \"name\": \"Unbearable Beat\",\n               
+    \"description\": \"Ranged 10 Burst 1. All creatures in burst receive 4 damage.\"\n             
+    },\n              {\n                \"cooldown\": 5,\n                \"name\":
+    \"Frantic Melody\",\n                \"description\": \"Dash up to 8 hexes. May
+    dash through hexes occupied by creatures. Allies dashed through gain 2 defense.
+    Enemies dashed through receive 2 damage. A creature cannot gain defense or receive
+    damage more than once.\"\n              },\n              {\n               
+    \"cooldown\": 5,\n                \"name\": \"Song of Prosperity\",\n               
+    \"description\": \"Ranged 10. A target within range gains 6 defense. OR. Gain
+    6 defense.\"\n              },\n              {\n                \"cooldown\":
+    6,\n                \"name\": \"Song of the Victorious\",\n                \"description\":
+    \"Cone 4. All enemies in cone receive 4 damage.\"\n              },\n             
+    {\n                \"cooldown\": 6,\n                \"name\": \"Rapid Rhythm\",\n               
+    \"description\": \"Dio and another ally within 8 hexes may move up to 3 hexes.\"\n             
+    },\n              {\n                \"cooldown\": 7,\n                \"name\":
+    \"Bounce Pad\",\n                \"description\": \"Ranged 8. Summon a bounce
+    pad in an unoccupied hex within range. The bouce pad has: Speed 0 (cannot move),
+    untargetable and immune, no threat aura, does not block line of sight, does not
+    block movement. The bounce pad's ability is active as soon as it's placed: The
+    bounce pad has 3 charge tokens. Whenever a creature moves into the bounce pad's
+    hex a token is consumed and Dio may leap the creature up to 4 hexes. When no
+    charges remain, the bounce pad vanishes.\"\n              },\n              {\n               
+    \"cooldown\": 7,\n                \"name\": \"Piper's Plan\",\n               
+    \"description\": \"Ranged 6. Dio dashes a target within range up to 5 hexes.
+    The target and all enemies within a burst 1 receive 4 damage.\"\n             
+    }\n            ]\n          }\n        ]\n      }\n    }\n  }\n]"
+  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"9383e1f3-e7d1-4acb-b550-fc4d0e069341\"\n   
+    },\n    \"rs\": {\n      \"key\": \"characterList\",\n      \"type\": \"json\",\n     
+    \"schemaId\": null,\n      \"value\": {\n        \"characterList\": [\n         
+    {\n            \"name\": \"Aggo\",\n            \"defense\": 22,\n           
+    \"health\": 13,\n            \"speed\": 6,\n            \"passiveAbilities\":
+    [\n              {\n                \"name\": \"Rage\",\n                \"description\":
+    \"When Aggo's combined defense and health is below 12, it gains an additional
+    +1 damage to all damage-dealing abilities and an additional +1 movement to all
+    movement abilities and move actions.\"\n              },\n              {\n               
+    \"name\": \"Unstoppable\",\n                \"description\": \"Gain 2 defense
+    at the beginning of each turn.\"\n              }\n            ],\n           
+    \"cooldownAbilities\": [\n              {\n                \"name\": \"Slither\",\n               
+    \"description\": \"Melee. An adjacent target receives 2 damage. AND/OR Aggo gains
+    2 defense.\",\n                \"cooldown\": 0\n              },\n             
+    {\n                \"name\": \"Flurry\",\n                \"description\": \"Burst
+    1. All creatures in burst receive 3 damage.\",\n                \"cooldown\":
+    3\n              },\n              {\n                \"name\": \"Tentacle Slam\",\n               
+    \"description\": \"Line 3. All creatures in line receive 4 damage.\",\n               
+    \"cooldown\": 4\n              },\n              {\n                \"name\":
+    \"Protect Brood\",\n                \"description\": \"When an ally within 8
+    hexes is hit by an enemy\u2019s ability, Aggo may leap up to 8 hexes and must
+    end the leap in the space occupied by the ally. Aggo must then push the ally
+    into any unoccupied adjacent hex. If there are no unoccupied adjacent hexes to
+    the targeted ally, Protect Packmate may  not be performed. Aggo then receives
+    the ability\u2019s effects as if he was the one targeted. If the pushed ally
+    is still in the ability\u2019s area of effect, Aggo and the targeted ally both 
+    receive the ability\u2019s effects.\",\n                \"cooldown\": 4\n             
+    },\n              {\n                \"name\": \"Demonic Cackle\",\n               
+    \"description\": \"Burst 3. All enemies in burst are taunted.\",\n               
+    \"cooldown\": 5\n              },\n              {\n                \"name\":
+    \"Abduct\",\n                \"description\": \"Melee reach 6. Pull a target
+    within reach into the closest adjacent hex. The creature receives 2 damage and
+    is immobilized. \",\n                \"cooldown\": 5\n              },\n             
+    {\n                \"name\": \"Entangling Rush\",\n                \"description\":
+    \"Melee. An adjacent target receives 2 damage. Dash up to 3 hexes and dash the
+    target up to 4 hexes. Aggo and the target must remain adjacent for the entire
+    movement.\",\n                \"cooldown\": 5\n              },\n             
+    {\n                \"name\": \"Gather Shadows\",\n                \"description\":
+    \"Gain 7 defense.\",\n                \"cooldown\": 5\n              },\n             
+    {\n                \"name\": \"Kaiju\",\n                \"description\": \"Gain
+    3 defense. Aggo gains 3 size counters that decay by 1 each turn. Aggo grows to
+    fill all unoccupied hexes in a burst 1. All occupied hexes have threat fields.
+    Any ranged attacks targeting Aggo must only target the center of one of the hexes
+    they occupy. Any area of effect abilities must fill only a single hex occupied
+    by Aggo to take effect, but do not stack damage by hitting multiple hexes occupied
+    by Aggo. Any ability used by Aggo may originate from any of the hexes they occupy.
+    Any damage-dealing ability used by Aggo deals 1 additional damage. When Aggo
+    moves in any way, they are treated as occupying only a single hex. When the movement
+    ends, Aggo grows to fill all unoccupied hexes in a burst 1. When no size counters
+    remain, the ability ends.\",\n                \"cooldown\": 6\n             
+    },\n              {\n                \"name\": \"Overwhelm\",\n               
+    \"description\": \"Rush up to 8 hexes. All creatures in the rush receive 3 damage
+    and are immobilized.\",\n                \"cooldown\": 6\n              },\n             
+    {\n                \"name\": \"Heart of Darkness\",\n                \"description\":
+    \"Leap up to 6 hexes. Burst 2. All creatures in the burst receive 2 damage and
+    are pulled to the closest adjacent hex.\",\n                \"cooldown\": 6\n             
+    },\n              {\n                \"name\": \"Cleave\",\n                \"description\":
+    \"Melee. An adjacent target receives 8 damage. \",\n                \"cooldown\":
+    6\n              },\n              {\n                \"name\": \"Punish\",\n               
+    \"description\": \"Melee. An adjacent target receives 5 damage and is pushed
+    up to 4 hexes.\",\n                \"cooldown\": 6\n              },\n             
+    {\n                \"name\": \"Riposte\",\n                \"description\": \"Interrupt
+    when hit by a melee ability. The adjacent creature using the ability receives
+    4 damage.\",\n                \"cooldown\": 7\n              },\n             
+    {\n                \"name\": \"Devour Essence\",\n                \"description\":
+    \"Melee. An adjacent creature receives 9 damage. Gain 4 defense.\",\n               
+    \"cooldown\": 9\n              }\n            ]\n          },\n          {\n           
+    \"name\": \"Dio\",\n            \"defense\": 14,\n            \"health\": 10,\n           
+    \"speed\": 6,\n            \"passiveAbilities\": [],\n            \"cooldownAbilities\":
+    [\n              {\n                \"cooldown\": 0,\n                \"name\":
+    \"Hum\",\n                \"description\": \"Melee. Deal 2 damage to an adjacent
+    target. AND/OR Gain 2 defense.\"\n              },\n              {\n               
+    \"cooldown\": 2,\n                \"name\": \"Note of Discord\",\n               
+    \"description\": \"Ranged 10. Deal 3 damage to a target within range. May target
+    enemies not in line of sight.\"\n              },\n              {\n               
+    \"cooldown\": 3,\n                \"name\": \"Turret\",\n                \"description\":
+    \"Summon a turret in an unoccupied adjacent hex. The turret has: Speed 0 (cannot
+    move), Health 2, Defense 0, no threat aura, does not block line of sight, blocks
+    movement. The turret's ability is: Ranged 10. Deal 2 damage to a target within
+    range. The turret may act at any point during the players' round.\"\n             
+    },\n              {\n                \"cooldown\": 3,\n                \"name\":
+    \"Quick Fix\",\n                \"description\": \"Interrupt. Ranged 10. A target
+    within range gains 3 defense. OR. Interrupt. Gain 3 defense.\"\n             
+    },\n              {\n                \"cooldown\": 3,\n                \"name\":
+    \"Tether\",\n                \"description\": \"Ranged 8. Summon a tether in
+    an unoccupied hex within range. The tether has: Speed 0 (cannot move), Health
+    2, Defense 0, no threat aura, blocks line of sight, blocks movement. The tether
+    uses its ability immediately: Melee reach 1. A target within reach cannot move
+    out of a burst 1 of the tether and receives 2 damage at the end of the players'
+    turn. Ability ends when the tether is destroyed.\"\n              },\n             
+    {\n                \"cooldown\": 5,\n                \"name\": \"Musical Blast\",\n               
+    \"description\": \"An adjacent target recieves 2 damage and is pushed up to 3
+    hexes. Dio is pushed away from the adjacent target up to 4 hexes in a line of
+    Dio's choosing.\"\n              },\n              {\n                \"cooldown\":
+    5,\n                \"name\": \"Bouncing Note\",\n                \"description\":
+    \"Ranged 5. A target within range receives 4 damage. A second ability may be
+    used this turn, originating from the targeted creature's hex. Melee reach 5.
+    A creature within reach receives 4 damage.\"\n              },\n             
+    {\n                \"cooldown\": 5,\n                \"name\": \"Unbearable Beat\",\n               
+    \"description\": \"Ranged 10 Burst 1. All creatures in burst receive 4 damage.\"\n             
+    },\n              {\n                \"cooldown\": 5,\n                \"name\":
+    \"Frantic Melody\",\n                \"description\": \"Dash up to 8 hexes. May
+    dash through hexes occupied by creatures. Allies dashed through gain 2 defense.
+    Enemies dashed through receive 2 damage. A creature cannot gain defense or receive
+    damage more than once.\"\n              },\n              {\n               
+    \"cooldown\": 5,\n                \"name\": \"Song of Prosperity\",\n               
+    \"description\": \"Ranged 10. A target within range gains 6 defense. OR. Gain
+    6 defense.\"\n              },\n              {\n                \"cooldown\":
+    6,\n                \"name\": \"Song of the Victorious\",\n                \"description\":
+    \"Cone 4. All enemies in cone receive 4 damage.\"\n              },\n             
+    {\n                \"cooldown\": 6,\n                \"name\": \"Rapid Rhythm\",\n               
+    \"description\": \"Dio and another ally within 8 hexes may move up to 3 hexes.\"\n             
+    },\n              {\n                \"cooldown\": 7,\n                \"name\":
+    \"Bounce Pad\",\n                \"description\": \"Ranged 8. Summon a bounce
+    pad in an unoccupied hex within range. The bouce pad has: Speed 0 (cannot move),
+    untargetable and immune, no threat aura, does not block line of sight, does not
+    block movement. The bounce pad's ability is active as soon as it's placed: The
+    bounce pad has 3 charge tokens. Whenever a creature moves into the bounce pad's
+    hex a token is consumed and Dio may leap the creature up to 4 hexes. When no
+    charges remain, the bounce pad vanishes.\"\n              },\n              {\n               
+    \"cooldown\": 7,\n                \"name\": \"Piper's Plan\",\n               
+    \"description\": \"Ranged 6. Dio dashes a target within range up to 5 hexes.
+    The target and all enemies within a burst 1 receive 4 damage.\"\n             
+    }\n            ]\n          }\n        ]\n      }\n    }\n  }\n]"
+  _environments: "[\n  {\n    \"projectId\": \"453bba21-e125-4ee1-9d67-a3a4128dd33b\",\n   
+    \"name\": \"production\",\n    \"id\": \"a6730ee0-c005-4398-a4b9-86f0aa933b57\",\n   
+    \"isDefault\": true,\n    \"createdAt\": \"2022-01-23T03:15:49Z\",\n    \"updatedAt\":
+    \"2022-01-23T03:15:49Z\"\n  }\n]"
   _rulesList: '[]'
   _lastCachedRulesList: '[]'

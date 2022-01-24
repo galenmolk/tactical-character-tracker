@@ -220,195 +220,84 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterConfig:
-    name: Aggo
-    defense: 22
-    health: 13
-    speed: 6
-    passiveAbilities:
-    - name: Rage
-      description: When Aggo's combined defense and health is below 12, it gains
-        an additional +1 damage to all damage-dealing abilities and an additional
-        +1 movement to all movement abilities and move actions.
-    - name: Unstoppable
-      description: Gain 2 defense at the beginning of each turn.
-    cooldownAbilities:
-    - name: Slither
-      description: Melee. An adjacent target receives 2 damage. AND/OR Aggo gains
-        2 defense.
-      cooldown: 0
-    - name: Flurry
-      description: Burst 1. All creatures in burst receive 3 damage.
-      cooldown: 3
-    - name: Tentacle Slam
-      description: Line 3. All creatures in line receive 4 damage.
-      cooldown: 4
-    - name: Protect Brood
-      description: "When an ally within 8 hexes is hit by an enemy\u2019s ability,
-        Aggo may leap up to 8 hexes and must end the leap in the space occupied by
-        the ally. Aggo must then push the ally into any unoccupied adjacent hex.
-        If there are no unoccupied adjacent hexes to the targeted ally, Protect Packmate
-        may  not be performed. Aggo then receives the ability\u2019s effects as if
-        he was the one targeted. If the pushed ally is still in the ability\u2019s
-        area of effect, Aggo and the targeted ally both  receive the ability\u2019s
-        effects."
-      cooldown: 4
-    - name: Demonic Cackle
-      description: Burst 3. All enemies in burst are taunted.
-      cooldown: 5
-    - name: Abduct
-      description: 'Melee reach 6. Pull a target within reach into the closest adjacent
-        hex. The creature receives 2 damage and is immobilized. '
-      cooldown: 5
-    - name: Entangling Rush
-      description: Melee. An adjacent target receives 2 damage. Dash up to 3 hexes
-        and dash the target up to 4 hexes. Aggo and the target must remain adjacent
-        for the entire movement.
-      cooldown: 5
-    - name: Gather Shadows
-      description: Gain 7 defense.
-      cooldown: 5
-    - name: Kaiju
-      description: Gain 3 defense. Aggo gains 3 size counters that decay by 1 each
-        turn. Aggo grows to fill all unoccupied hexes in a burst 1. All occupied
-        hexes have threat fields. Any ranged attacks targeting Aggo must only target
-        the center of one of the hexes they occupy. Any area of effect abilities
-        must fill only a single hex occupied by Aggo to take effect, but do not stack
-        damage by hitting multiple hexes occupied by Aggo. Any ability used by Aggo
-        may originate from any of the hexes they occupy. Any damage-dealing ability
-        used by Aggo deals 1 additional damage. When Aggo moves in any way, they
-        are treated as occupying only a single hex. When the movement ends, Aggo
-        grows to fill all unoccupied hexes in a burst 1. When no size counters remain,
-        the ability ends.
-      cooldown: 6
-    - name: Kaiju
-      description: Gain 3 defense. Aggo gains 3 size counters that decay by 1 each
-        turn. Aggo grows to fill all unoccupied hexes in a burst 1. All occupied
-        hexes have threat fields. Any ranged attacks targeting Aggo must only target
-        the center of one of the hexes they occupy. Any area of effect abilities
-        must fill only a single hex occupied by Aggo to take effect, but do not stack
-        damage by hitting multiple hexes occupied by Aggo. Any ability used by Aggo
-        may originate from any of the hexes they occupy. Any damage-dealing ability
-        used by Aggo deals 1 additional damage. When Aggo moves in any way, they
-        are treated as occupying only a single hex. When the movement ends, Aggo
-        grows to fill all unoccupied hexes in a burst 1. When no size counters remain,
-        the ability ends.
-      cooldown: 6
-    - name: Overwhelm
-      description: Rush up to 8 hexes. All creatures in the rush receive 3 damage
-        and are immobilized.
-      cooldown: 6
-    - name: Heart of Darkness
-      description: Leap up to 6 hexes. Burst 2. All creatures in the burst receive
-        2 damage and are pulled to the closest adjacent hex.
-      cooldown: 6
-    - name: Cleave
-      description: 'Melee. An adjacent target receives 8 damage. '
-      cooldown: 6
-    - name: Punish
-      description: Melee. An adjacent target receives 5 damage and is pushed up to
-        4 hexes.
-      cooldown: 6
-    - name: Riposte
-      description: Interrupt when hit by a melee ability. The adjacent creature using
-        the ability receives 4 damage.
-      cooldown: 7
-    - name: Devour Essence
-      description: Melee. An adjacent creature receives 9 damage. Gain 4 defense.
-      cooldown: 9
+    name: 
+    defense: 0
+    health: 0
+    speed: 0
+    passiveAbilities: []
+    cooldownAbilities: []
   characterListConfig:
     characterList:
-    - name: Aggo
-      defense: 22
-      health: 13
+    - name: Dio
+      defense: 14
+      health: 10
       speed: 6
-      passiveAbilities:
-      - name: Rage
-        description: When Aggo's combined defense and health is below 12, it gains
-          an additional +1 damage to all damage-dealing abilities and an additional
-          +1 movement to all movement abilities and move actions.
-      - name: Unstoppable
-        description: Gain 2 defense at the beginning of each turn.
+      passiveAbilities: []
       cooldownAbilities:
-      - name: Slither
-        description: Melee. An adjacent target receives 2 damage. AND/OR Aggo gains
-          2 defense.
+      - name: Hum
+        description: Melee. Deal 2 damage to an adjacent target. AND/OR Gain 2 defense.
         cooldown: 0
-      - name: Flurry
-        description: Burst 1. All creatures in burst receive 3 damage.
+      - name: Note of Discord
+        description: Ranged 10. Deal 3 damage to a target within range. May target
+          enemies not in line of sight.
+        cooldown: 2
+      - name: Turret
+        description: 'Summon a turret in an unoccupied adjacent hex. The turret has:
+          Speed 0 (cannot move), Health 2, Defense 0, no threat aura, does not block
+          line of sight, blocks movement. The turret''s ability is: Ranged 10. Deal
+          2 damage to a target within range. The turret may act at any point during
+          the players'' round.'
         cooldown: 3
-      - name: Tentacle Slam
-        description: Line 3. All creatures in line receive 4 damage.
-        cooldown: 4
-      - name: Protect Brood
-        description: "When an ally within 8 hexes is hit by an enemy\u2019s ability,
-          Aggo may leap up to 8 hexes and must end the leap in the space occupied
-          by the ally. Aggo must then push the ally into any unoccupied adjacent
-          hex. If there are no unoccupied adjacent hexes to the targeted ally, Protect
-          Packmate may  not be performed. Aggo then receives the ability\u2019s effects
-          as if he was the one targeted. If the pushed ally is still in the ability\u2019s
-          area of effect, Aggo and the targeted ally both  receive the ability\u2019s
-          effects."
-        cooldown: 4
-      - name: Demonic Cackle
-        description: Burst 3. All enemies in burst are taunted.
+      - name: Quick Fix
+        description: Interrupt. Ranged 10. A target within range gains 3 defense.
+          OR. Interrupt. Gain 3 defense.
+        cooldown: 3
+      - name: Tether
+        description: 'Ranged 8. Summon a tether in an unoccupied hex within range.
+          The tether has: Speed 0 (cannot move), Health 2, Defense 0, no threat aura,
+          blocks line of sight, blocks movement. The tether uses its ability immediately:
+          Melee reach 1. A target within reach cannot move out of a burst 1 of the
+          tether and receives 2 damage at the end of the players'' turn. Ability
+          ends when the tether is destroyed.'
+        cooldown: 3
+      - name: Musical Blast
+        description: An adjacent target recieves 2 damage and is pushed up to 3 hexes.
+          Dio is pushed away from the adjacent target up to 4 hexes in a line of
+          Dio's choosing.
         cooldown: 5
-      - name: Abduct
-        description: 'Melee reach 6. Pull a target within reach into the closest
-          adjacent hex. The creature receives 2 damage and is immobilized. '
+      - name: Bouncing Note
+        description: Ranged 5. A target within range receives 4 damage. A second
+          ability may be used this turn, originating from the targeted creature's
+          hex. Melee reach 5. A creature within reach receives 4 damage.
         cooldown: 5
-      - name: Entangling Rush
-        description: Melee. An adjacent target receives 2 damage. Dash up to 3 hexes
-          and dash the target up to 4 hexes. Aggo and the target must remain adjacent
-          for the entire movement.
+      - name: Unbearable Beat
+        description: Ranged 10 Burst 1. All creatures in burst receive 4 damage.
         cooldown: 5
-      - name: Gather Shadows
-        description: Gain 7 defense.
+      - name: Frantic Melody
+        description: Dash up to 8 hexes. May dash through hexes occupied by creatures.
+          Allies dashed through gain 2 defense. Enemies dashed through receive 2
+          damage. A creature cannot gain defense or receive damage more than once.
         cooldown: 5
-      - name: Kaiju
-        description: Gain 3 defense. Aggo gains 3 size counters that decay by 1 each
-          turn. Aggo grows to fill all unoccupied hexes in a burst 1. All occupied
-          hexes have threat fields. Any ranged attacks targeting Aggo must only target
-          the center of one of the hexes they occupy. Any area of effect abilities
-          must fill only a single hex occupied by Aggo to take effect, but do not
-          stack damage by hitting multiple hexes occupied by Aggo. Any ability used
-          by Aggo may originate from any of the hexes they occupy. Any damage-dealing
-          ability used by Aggo deals 1 additional damage. When Aggo moves in any
-          way, they are treated as occupying only a single hex. When the movement
-          ends, Aggo grows to fill all unoccupied hexes in a burst 1. When no size
-          counters remain, the ability ends.
+      - name: Song of Prosperity
+        description: Ranged 10. A target within range gains 6 defense. OR. Gain 6
+          defense.
+        cooldown: 5
+      - name: Song of the Victorious
+        description: Cone 4. All enemies in cone receive 4 damage.
         cooldown: 6
-      - name: Kaiju
-        description: Gain 3 defense. Aggo gains 3 size counters that decay by 1 each
-          turn. Aggo grows to fill all unoccupied hexes in a burst 1. All occupied
-          hexes have threat fields. Any ranged attacks targeting Aggo must only target
-          the center of one of the hexes they occupy. Any area of effect abilities
-          must fill only a single hex occupied by Aggo to take effect, but do not
-          stack damage by hitting multiple hexes occupied by Aggo. Any ability used
-          by Aggo may originate from any of the hexes they occupy. Any damage-dealing
-          ability used by Aggo deals 1 additional damage. When Aggo moves in any
-          way, they are treated as occupying only a single hex. When the movement
-          ends, Aggo grows to fill all unoccupied hexes in a burst 1. When no size
-          counters remain, the ability ends.
+      - name: Rapid Rhythm
+        description: Dio and another ally within 8 hexes may move up to 3 hexes.
         cooldown: 6
-      - name: Overwhelm
-        description: Rush up to 8 hexes. All creatures in the rush receive 3 damage
-          and are immobilized.
-        cooldown: 6
-      - name: Heart of Darkness
-        description: Leap up to 6 hexes. Burst 2. All creatures in the burst receive
-          2 damage and are pulled to the closest adjacent hex.
-        cooldown: 6
-      - name: Cleave
-        description: 'Melee. An adjacent target receives 8 damage. '
-        cooldown: 6
-      - name: Punish
-        description: Melee. An adjacent target receives 5 damage and is pushed up
-          to 4 hexes.
-        cooldown: 6
-      - name: Riposte
-        description: Interrupt when hit by a melee ability. The adjacent creature
-          using the ability receives 4 damage.
+      - name: Bounce Pad
+        description: 'Ranged 8. Summon a bounce pad in an unoccupied hex within range.
+          The bouce pad has: Speed 0 (cannot move), untargetable and immune, no threat
+          aura, does not block line of sight, does not block movement. The bounce
+          pad''s ability is active as soon as it''s placed: The bounce pad has 3
+          charge tokens. Whenever a creature moves into the bounce pad''s hex a token
+          is consumed and Dio may leap the creature up to 4 hexes. When no charges
+          remain, the bounce pad vanishes.'
         cooldown: 7
-      - name: Devour Essence
-        description: Melee. An adjacent creature receives 9 damage. Gain 4 defense.
-        cooldown: 9
+      - name: Piper's Plan
+        description: Ranged 6. Dio dashes a target within range up to 5 hexes. The
+          target and all enemies within a burst 1 receive 4 damage.
+        cooldown: 7

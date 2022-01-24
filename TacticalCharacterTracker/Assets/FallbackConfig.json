@@ -92,6 +92,84 @@
           "cooldown": 9
         }
       ]
+    },
+    {
+      "name": "Dio",
+      "defense": 14,
+      "health": 10,
+      "speed": 6,
+      "passiveAbilities": [],
+      "cooldownAbilities": [
+        {
+          "cooldown": 0,
+          "name": "Hum",
+          "description": "Melee. Deal 2 damage to an adjacent target. AND/OR Gain 2 defense."
+        },
+        {
+          "cooldown": 2,
+          "name": "Note of Discord",
+          "description": "Ranged 10. Deal 3 damage to a target within range. May target enemies not in line of sight."
+        },
+        {
+          "cooldown": 3,
+          "name": "Turret",
+          "description": "Summon a turret in an unoccupied adjacent hex. The turret has: Speed 0 (cannot move), Health 2, Defense 0, no threat aura, does not block line of sight, blocks movement. The turret's ability is: Ranged 10. Deal 2 damage to a target within range. The turret may act at any point during the players' round."
+        },
+        {
+          "cooldown": 3,
+          "name": "Quick Fix",
+          "description": "Interrupt. Ranged 10. A target within range gains 3 defense. OR. Interrupt. Gain 3 defense."
+        },
+        {
+          "cooldown": 3,
+          "name": "Tether",
+          "description": "Ranged 8. Summon a tether in an unoccupied hex within range. The tether has: Speed 0 (cannot move), Health 2, Defense 0, no threat aura, blocks line of sight, blocks movement. The tether uses its ability immediately: Melee reach 1. A target within reach cannot move out of a burst 1 of the tether and receives 2 damage at the end of the players' turn. Ability ends when the tether is destroyed."
+        },
+        {
+          "cooldown": 5,
+          "name": "Musical Blast",
+          "description": "An adjacent target recieves 2 damage and is pushed up to 3 hexes. Dio is pushed away from the adjacent target up to 4 hexes in a line of Dio's choosing."
+        },
+        {
+          "cooldown": 5,
+          "name": "Bouncing Note",
+          "description": "Ranged 5. A target within range receives 4 damage. A second ability may be used this turn, originating from the targeted creature's hex. Melee reach 5. A creature within reach receives 4 damage."
+        },
+        {
+          "cooldown": 5,
+          "name": "Unbearable Beat",
+          "description": "Ranged 10 Burst 1. All creatures in burst receive 4 damage."
+        },
+        {
+          "cooldown": 5,
+          "name": "Frantic Melody",
+          "description": "Dash up to 8 hexes. May dash through hexes occupied by creatures. Allies dashed through gain 2 defense. Enemies dashed through receive 2 damage. A creature cannot gain defense or receive damage more than once."
+        },
+        {
+          "cooldown": 5,
+          "name": "Song of Prosperity",
+          "description": "Ranged 10. A target within range gains 6 defense. OR. Gain 6 defense."
+        },
+        {
+          "cooldown": 6,
+          "name": "Song of the Victorious",
+          "description": "Cone 4. All enemies in cone receive 4 damage."
+        },
+        {
+          "cooldown": 6,
+          "name": "Rapid Rhythm",
+          "description": "Dio and another ally within 8 hexes may move up to 3 hexes."
+        },
+        {
+          "cooldown": 7,
+          "name": "Bounce Pad",
+          "description": "Ranged 8. Summon a bounce pad in an unoccupied hex within range. The bouce pad has: Speed 0 (cannot move), untargetable and immune, no threat aura, does not block line of sight, does not block movement. The bounce pad's ability is active as soon as it's placed: The bounce pad has 3 charge tokens. Whenever a creature moves into the bounce pad's hex a token is consumed and Dio may leap the creature up to 4 hexes. When no charges remain, the bounce pad vanishes."
+        },
+        {
+          "cooldown": 7,
+          "name": "Piper's Plan",
+          "description": "Ranged 6. Dio dashes a target within range up to 5 hexes. The target and all enemies within a burst 1 receive 4 damage."
+        }]
     }
   ]
 }
