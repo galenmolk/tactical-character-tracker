@@ -22,6 +22,17 @@ public class TurnManager : MonoBehaviour
 
     private void Awake()
     {
+        MessageCenter.SubscribeCharacterLoaded(_ => Initialize());
+        Initialize();
+    }
+
+    private void OnDestroy()
+    {
+        MessageCenter.UnsubscribeCharacterLoaded(_ => Initialize());
+    }
+
+    private void Initialize()
+    {
         startTurnButton.gameObject.SetActive(true);
         endTurnButton.gameObject.SetActive(false);
     }

@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +12,7 @@ public class CharacterUI : MonoBehaviour
     
     public void LoadCharacter(CharacterConfig characterConfig)
     {
+        MessageCenter.InvokeCharacterLoaded(characterConfig);
         activeCharacter = characterConfig;
         characterName.text = activeCharacter.name;
         statsUI.LoadStats(activeCharacter);

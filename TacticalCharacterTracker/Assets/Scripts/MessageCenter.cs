@@ -9,6 +9,7 @@ public static class MessageCenter
     private static readonly CooldownAbilitySlotEvent CooldownAbilityTriggered = new CooldownAbilitySlotEvent();
     private static readonly UnityEvent BurningTokenActivated = new UnityEvent();
     private static readonly CharacterListEvent CharacterListReceived = new CharacterListEvent();
+    private static readonly CharacterConfigEvent CharacterLoaded = new CharacterConfigEvent();
     
     #region AbilityInfoButtonPressed
     public static void InvokeAbilityInfoButtonPressed(AbilityConfig ability)
@@ -126,6 +127,23 @@ public static class MessageCenter
     public static void UnsubscribeCharacterListReceived(UnityAction<CharacterListConfig> action)
     {
         CharacterListReceived.RemoveListener(action);
+    }
+    #endregion
+    
+    #region CharacterLoaded
+    public static void InvokeCharacterLoaded(CharacterConfig character)
+    {
+        CharacterLoaded.Invoke(character);
+    }
+    
+    public static void SubscribeCharacterLoaded(UnityAction<CharacterConfig> action)
+    {
+        CharacterLoaded.AddListener(action);
+    }
+    
+    public static void UnsubscribeCharacterLoaded(UnityAction<CharacterConfig> action)
+    {
+        CharacterLoaded.RemoveListener(action);
     }
     #endregion
 }

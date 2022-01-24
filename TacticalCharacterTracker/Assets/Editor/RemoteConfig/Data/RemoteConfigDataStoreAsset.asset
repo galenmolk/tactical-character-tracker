@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"9383e1f3-e7d1-4acb-b550-fc4d0e069341\"\n   
+  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"6cc29f16-e091-4997-bdf0-1b7a5a6c6746\"\n   
     },\n    \"rs\": {\n      \"key\": \"characterList\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"characterList\": [\n         
     {\n            \"name\": \"Aggo\",\n            \"defense\": 22,\n           
@@ -135,8 +135,70 @@ MonoBehaviour:
     \"cooldown\": 7,\n                \"name\": \"Piper's Plan\",\n               
     \"description\": \"Ranged 6. Dio dashes a target within range up to 5 hexes.
     The target and all enemies within a burst 1 receive 4 damage.\"\n             
+    }\n            ]\n          },\n          {\n            \"name\": \"Kazak\",\n           
+    \"defense\": 16,\n            \"health\": 10,\n            \"speed\": 6,\n           
+    \"passiveAbilities\": [\n              {\n                \"name\": \"Heart of
+    Fire\",\n                \"description\": \"At the start of battle, a magic orb
+    may be summoned in any adjacent hex as a free action. At any time during Kasak\u2019s
+    turn, the orb may be moved up to 3 hexes as a free action. The orb can move through
+    or occupy the same hex as creatures, but not obstacles. At any point during the
+    player's round, Kazak may deal 2 damage to one creature that occupies the orb\u2019s
+    hex. The orb may be dismissed on Kazak\u2019s turn as a free action, but an action
+    must be spent to resummon it in an adjacent hex.\"\n              }\n           
+    ],\n            \"cooldownAbilities\": [\n              {\n                \"cooldown\":
+    0,\n                \"name\": \"Rock Fist\",\n                \"description\":
+    \"Melee. Deal 2 damage to an adjacent target. AND/OR gain 2 defense.\"\n             
+    },\n              {\n                \"cooldown\": 3,\n                \"name\":
+    \"Elemental Displacement\",\n                \"description\": \"Melee. Deal 3
+    damage to an adjacent target.  Teleport the target up to 3 hexes.\"\n             
+    },\n              {\n                \"cooldown\": 3,\n                \"name\":
+    \"Sprint 'n Spell\",\n                \"description\": \"Move up to 3 hexes.
+    Ranged 10. A target within range receives 3 damage.\"\n              },\n             
+    {\n                \"cooldown\": 3,\n                \"name\": \"Ice Shards\",\n               
+    \"description\": \"Ranged 10. Deal 2 damage to up to 4 targets within range.
+    If the targets are hit by another ability this round, they receive 2 additional
+    damage.\"\n              },\n              {\n                \"cooldown\": 4,\n               
+    \"name\": \"Fire Breath\",\n                \"description\": \"Cone 3. All creatures
+    in cone receive 4 damage.\"\n              },\n              {\n               
+    \"cooldown\": 5,\n                \"name\": \"Meteor Shower\",\n               
+    \"description\": \"Ranged 10 Burst 1. All creatures in burst receive 5 damage.\"\n             
+    },\n              {\n                \"cooldown\": 6,\n                \"name\":
+    \"Forked Fire\",\n                \"description\": \"Ranged 8. Deal 4 damage
+    to up to 2 targets within range.\"\n              },\n              {\n               
+    \"cooldown\": 6,\n                \"name\": \"Flicker or Fire\",\n               
+    \"description\": \"Charge 1. If Kazak is successfully targeted while charging:
+    Interrupt. teleport up to 4 hexes and gain 5 defense. If Kazak is not successfully
+    targeted before charge ends: Free action. Melee reach 7. A target within reach
+    receives 8 damage.\"\n              },\n              {\n                \"cooldown\":
+    6,\n                \"name\": \"Earth Wall\",\n                \"description\":
+    \"Interrupt. When Kazak or an ally is targeted by a ranged or melee reach attack: 
+    Ranged 8. An unoccupied hex within range becomes the origin hex for a 3 hex long
+    wall. The wall may be in any configuration from the origin hex as long as it
+    is straight and it blocks line of sight for the ranged attack. Each wall segment
+    has: Speed 0 (cannot move), Health 2, Defense 0,  no threat aura, blocks line
+    of sight.\"\n              },\n              {\n                \"cooldown\":
+    6,\n                \"name\": \"Earth Dragon\",\n                \"description\":
+    \"Line 3. All creatures in line receive 4 damage. All creatures in line may be
+    pushed up to 3 hexes.\"\n              },\n              {\n                \"cooldown\":
+    7,\n                \"name\": \"Emerald Lance\",\n                \"description\":
+    \"Melee reach 8. A creature within reach receives 5 damage. Place a Lance in
+    the hex occupied by the target. The Lance may occupy hexes occupied by creatures
+    but not obstacles. The Lance has: Speed 0 (cannot move), untargetable and immune,
+    no threat aura, does not block line of sight.\"\n              },\n             
+    {\n                \"cooldown\": 0,\n                \"name\": \"Emerald Lightning\",\n               
+    \"description\": \"Cannot be used unless the Lance from the Emerald Lance ability
+    is occupying a hex. Line 4 originating from the hex occupied by the Lance. All
+    creatures in the line and any creatures occupying the hex with the Lance receive
+    4 damage. The Lance vanishes. Cooldown begins on Emerald Lance ability.\"\n             
+    },\n              {\n                \"cooldown\": 7,\n                \"name\":
+    \"Incinerate\",\n                \"description\": \"Ranged 10. A target within
+    range receives 7 damage.\"\n              },\n              {\n               
+    \"cooldown\": 8,\n                \"name\": \"Laser\",\n                \"description\":
+    \"Line 10. All creatures in the line receive 5 damage.\"\n              },\n             
+    {\n                \"cooldown\": 10,\n                \"name\": \"Wind Walk\",\n               
+    \"description\": \"Teleport up to 10 hexes. Gain 6 defense.\"\n             
     }\n            ]\n          }\n        ]\n      }\n    }\n  }\n]"
-  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"9383e1f3-e7d1-4acb-b550-fc4d0e069341\"\n   
+  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"6cc29f16-e091-4997-bdf0-1b7a5a6c6746\"\n   
     },\n    \"rs\": {\n      \"key\": \"characterList\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"characterList\": [\n         
     {\n            \"name\": \"Aggo\",\n            \"defense\": 22,\n           
@@ -259,6 +321,68 @@ MonoBehaviour:
     \"cooldown\": 7,\n                \"name\": \"Piper's Plan\",\n               
     \"description\": \"Ranged 6. Dio dashes a target within range up to 5 hexes.
     The target and all enemies within a burst 1 receive 4 damage.\"\n             
+    }\n            ]\n          },\n          {\n            \"name\": \"Kazak\",\n           
+    \"defense\": 16,\n            \"health\": 10,\n            \"speed\": 6,\n           
+    \"passiveAbilities\": [\n              {\n                \"name\": \"Heart of
+    Fire\",\n                \"description\": \"At the start of battle, a magic orb
+    may be summoned in any adjacent hex as a free action. At any time during Kasak\u2019s
+    turn, the orb may be moved up to 3 hexes as a free action. The orb can move through
+    or occupy the same hex as creatures, but not obstacles. At any point during the
+    player's round, Kazak may deal 2 damage to one creature that occupies the orb\u2019s
+    hex. The orb may be dismissed on Kazak\u2019s turn as a free action, but an action
+    must be spent to resummon it in an adjacent hex.\"\n              }\n           
+    ],\n            \"cooldownAbilities\": [\n              {\n                \"cooldown\":
+    0,\n                \"name\": \"Rock Fist\",\n                \"description\":
+    \"Melee. Deal 2 damage to an adjacent target. AND/OR gain 2 defense.\"\n             
+    },\n              {\n                \"cooldown\": 3,\n                \"name\":
+    \"Elemental Displacement\",\n                \"description\": \"Melee. Deal 3
+    damage to an adjacent target.  Teleport the target up to 3 hexes.\"\n             
+    },\n              {\n                \"cooldown\": 3,\n                \"name\":
+    \"Sprint 'n Spell\",\n                \"description\": \"Move up to 3 hexes.
+    Ranged 10. A target within range receives 3 damage.\"\n              },\n             
+    {\n                \"cooldown\": 3,\n                \"name\": \"Ice Shards\",\n               
+    \"description\": \"Ranged 10. Deal 2 damage to up to 4 targets within range.
+    If the targets are hit by another ability this round, they receive 2 additional
+    damage.\"\n              },\n              {\n                \"cooldown\": 4,\n               
+    \"name\": \"Fire Breath\",\n                \"description\": \"Cone 3. All creatures
+    in cone receive 4 damage.\"\n              },\n              {\n               
+    \"cooldown\": 5,\n                \"name\": \"Meteor Shower\",\n               
+    \"description\": \"Ranged 10 Burst 1. All creatures in burst receive 5 damage.\"\n             
+    },\n              {\n                \"cooldown\": 6,\n                \"name\":
+    \"Forked Fire\",\n                \"description\": \"Ranged 8. Deal 4 damage
+    to up to 2 targets within range.\"\n              },\n              {\n               
+    \"cooldown\": 6,\n                \"name\": \"Flicker or Fire\",\n               
+    \"description\": \"Charge 1. If Kazak is successfully targeted while charging:
+    Interrupt. teleport up to 4 hexes and gain 5 defense. If Kazak is not successfully
+    targeted before charge ends: Free action. Melee reach 7. A target within reach
+    receives 8 damage.\"\n              },\n              {\n                \"cooldown\":
+    6,\n                \"name\": \"Earth Wall\",\n                \"description\":
+    \"Interrupt. When Kazak or an ally is targeted by a ranged or melee reach attack: 
+    Ranged 8. An unoccupied hex within range becomes the origin hex for a 3 hex long
+    wall. The wall may be in any configuration from the origin hex as long as it
+    is straight and it blocks line of sight for the ranged attack. Each wall segment
+    has: Speed 0 (cannot move), Health 2, Defense 0,  no threat aura, blocks line
+    of sight.\"\n              },\n              {\n                \"cooldown\":
+    6,\n                \"name\": \"Earth Dragon\",\n                \"description\":
+    \"Line 3. All creatures in line receive 4 damage. All creatures in line may be
+    pushed up to 3 hexes.\"\n              },\n              {\n                \"cooldown\":
+    7,\n                \"name\": \"Emerald Lance\",\n                \"description\":
+    \"Melee reach 8. A creature within reach receives 5 damage. Place a Lance in
+    the hex occupied by the target. The Lance may occupy hexes occupied by creatures
+    but not obstacles. The Lance has: Speed 0 (cannot move), untargetable and immune,
+    no threat aura, does not block line of sight.\"\n              },\n             
+    {\n                \"cooldown\": 0,\n                \"name\": \"Emerald Lightning\",\n               
+    \"description\": \"Cannot be used unless the Lance from the Emerald Lance ability
+    is occupying a hex. Line 4 originating from the hex occupied by the Lance. All
+    creatures in the line and any creatures occupying the hex with the Lance receive
+    4 damage. The Lance vanishes. Cooldown begins on Emerald Lance ability.\"\n             
+    },\n              {\n                \"cooldown\": 7,\n                \"name\":
+    \"Incinerate\",\n                \"description\": \"Ranged 10. A target within
+    range receives 7 damage.\"\n              },\n              {\n               
+    \"cooldown\": 8,\n                \"name\": \"Laser\",\n                \"description\":
+    \"Line 10. All creatures in the line receive 5 damage.\"\n              },\n             
+    {\n                \"cooldown\": 10,\n                \"name\": \"Wind Walk\",\n               
+    \"description\": \"Teleport up to 10 hexes. Gain 6 defense.\"\n             
     }\n            ]\n          }\n        ]\n      }\n    }\n  }\n]"
   _environments: "[\n  {\n    \"projectId\": \"453bba21-e125-4ee1-9d67-a3a4128dd33b\",\n   
     \"name\": \"production\",\n    \"id\": \"a6730ee0-c005-4398-a4b9-86f0aa933b57\",\n   
