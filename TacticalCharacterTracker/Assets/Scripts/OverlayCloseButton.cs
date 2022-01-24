@@ -4,7 +4,7 @@ public class OverlayCloseButton : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
 
-    private void Open()
+    public void Open()
     {
         Utils.SetIsCanvasGroupActive(canvasGroup, true);
     }

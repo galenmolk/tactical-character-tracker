@@ -1,45 +1,69 @@
 using System;
+using System.Collections;
 using Newtonsoft.Json;
 using Unity.RemoteConfig;
 using UnityEngine;
 
 public class CharacterDownloader : MonoBehaviour
 {
-    public struct userAttributes { }
-    public struct appAttributes { }
+    [SerializeField] private LoadingText loadingText;
+    [SerializeField] private TextAsset fallbackCharacterListConfig;
     
-    private appAttributes appParams = new appAttributes();
+    private struct UserAttributes { }
 
-    private CharacterListConfig characterListConfig;
+    private struct AppAttributes { }
     
-    public void GetRemoteConfigSettings()
+    private readonly AppAttributes appParams = new AppAttributes();
+
+    [NonSerialized] private CharacterListConfig characterListConfig;
+
+    private void GetRemoteConfigSettings()
     {
-        ConfigManager.FetchCompleted += LoadCharacters;
-        ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), appParams);
+        ConfigManager.FetchCompleted += ParseResponse;
+        ConfigManager.FetchConfigs(new UserAttributes(), appParams);
     }
 
     private void Awake()
     {
+        loadingText.StartAnimation();
         GetRemoteConfigSettings();
     }
 
-    private void LoadCharacters(ConfigResponse response)
+    private void ParseResponse(ConfigResponse response)
     {
-        string characterListJson = ConfigManager.appConfig.GetJson(RemoteConfigKeys.CHARACTER_LIST_KEY);
-        characterListConfig = JsonConvert.DeserializeObject<CharacterListConfig>(characterListJson);
-        
-        Debug.Log(characterListJson);
-        Debug.Log(characterListConfig);
+        ConfigManager.FetchCompleted -= ParseResponse;
 
-        
-        if (characterListConfig != null)
-            MessageCenter.InvokeCharacterListReceived(characterListConfig);
-        else
+        if (ConfigManager.requestStatus != ConfigRequestStatus.Success)
         {
-            Debug.Log("CharacterListConfig is null.");
+            StartCoroutine(DisplayError());
+            return;
         }
-        
-        
-        ConfigManager.FetchCompleted -= LoadCharacters;
+
+        LoadConfig(GetCharacterListConfigForJson(GetAppConfigJson()));
+    }
+
+    private void LoadConfig(CharacterListConfig characterListConfig)
+    {
+        MessageCenter.InvokeCharacterListReceived(characterListConfig);
+        loadingText.StopAnimation();
+    }
+    
+    private IEnumerator DisplayError()
+    {
+        CharacterListConfig characterListConfig = GetCharacterListConfigForJson(GetAppConfigJson()) ??
+                                                  GetCharacterListConfigForJson(fallbackCharacterListConfig.text);
+
+        yield return StartCoroutine(loadingText.DisplayError());
+        LoadConfig(characterListConfig);
+    }
+    
+    private CharacterListConfig GetCharacterListConfigForJson(string json)
+    {
+        return JsonConvert.DeserializeObject<CharacterListConfig>(json);
+    }
+
+    private string GetAppConfigJson()
+    {
+        return ConfigManager.appConfig.GetJson(RemoteConfigKeys.CHARACTER_LIST_KEY);
     }
 }

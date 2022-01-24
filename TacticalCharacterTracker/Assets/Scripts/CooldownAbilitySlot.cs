@@ -43,7 +43,6 @@ public class CooldownAbilitySlot : MonoBehaviour
     {
         MessageCenter.SubscribeTurnStarted(OnTurnStarted);
         MessageCenter.SubscribeTurnEnded(OnTurnEnded);
-        Deactivate();
     }
 
     private void OnDisable()

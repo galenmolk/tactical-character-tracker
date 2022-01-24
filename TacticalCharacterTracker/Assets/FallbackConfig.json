@@ -1,0 +1,97 @@
+{
+  "characterList": [
+    {
+      "name": "Aggo",
+      "defense": 22,
+      "health": 13,
+      "speed": 6,
+      "passiveAbilities": [
+        {
+          "name": "Rage",
+          "description": "When Aggo's combined defense and health is below 12, it gains an additional +1 damage to all damage-dealing abilities and an additional +1 movement to all movement abilities and move actions."
+        },
+        {
+          "name": "Unstoppable",
+          "description": "Gain 2 defense at the beginning of each turn."
+        }
+      ],
+      "cooldownAbilities": [
+        {
+          "name": "Slither",
+          "description": "Melee. An adjacent target receives 2 damage. AND/OR Aggo gains 2 defense.",
+          "cooldown": 0
+        },
+        {
+          "name": "Flurry",
+          "description": "Burst 1. All creatures in burst receive 3 damage.",
+          "cooldown": 3
+        },
+        {
+          "name": "Tentacle Slam",
+          "description": "Line 3. All creatures in line receive 4 damage.",
+          "cooldown": 4
+        },
+        {
+          "name": "Protect Brood",
+          "description": "When an ally within 8 hexes is hit by an enemy’s ability, Aggo may leap up to 8 hexes and must end the leap in the space occupied by the ally. Aggo must then push the ally into any unoccupied adjacent hex. If there are no unoccupied adjacent hexes to the targeted ally, Protect Packmate may  not be performed. Aggo then receives the ability’s effects as if he was the one targeted. If the pushed ally is still in the ability’s area of effect, Aggo and the targeted ally both  receive the ability’s effects.",
+          "cooldown": 4
+        },
+        {
+          "name": "Demonic Cackle",
+          "description": "Burst 3. All enemies in burst are taunted.",
+          "cooldown": 5
+        },
+        {
+          "name": "Abduct",
+          "description": "Melee reach 6. Pull a target within reach into the closest adjacent hex. The creature receives 2 damage and is immobilized. ",
+          "cooldown": 5
+        },
+        {
+          "name": "Entangling Rush",
+          "description": "Melee. An adjacent target receives 2 damage. Dash up to 3 hexes and dash the target up to 4 hexes. Aggo and the target must remain adjacent for the entire movement.",
+          "cooldown": 5
+        },
+        {
+          "name": "Gather Shadows",
+          "description": "Gain 7 defense.",
+          "cooldown": 5
+        },
+        {
+          "name": "Kaiju",
+          "description": "Gain 3 defense. Aggo gains 3 size counters that decay by 1 each turn. Aggo grows to fill all unoccupied hexes in a burst 1. All occupied hexes have threat fields. Any ranged attacks targeting Aggo must only target the center of one of the hexes they occupy. Any area of effect abilities must fill only a single hex occupied by Aggo to take effect, but do not stack damage by hitting multiple hexes occupied by Aggo. Any ability used by Aggo may originate from any of the hexes they occupy. Any damage-dealing ability used by Aggo deals 1 additional damage. When Aggo moves in any way, they are treated as occupying only a single hex. When the movement ends, Aggo grows to fill all unoccupied hexes in a burst 1. When no size counters remain, the ability ends.",
+          "cooldown": 6
+        },
+        {
+          "name": "Overwhelm",
+          "description": "Rush up to 8 hexes. All creatures in the rush receive 3 damage and are immobilized.",
+          "cooldown": 6
+        },
+        {
+          "name": "Heart of Darkness",
+          "description": "Leap up to 6 hexes. Burst 2. All creatures in the burst receive 2 damage and are pulled to the closest adjacent hex.",
+          "cooldown": 6
+        },
+        {
+          "name": "Cleave",
+          "description": "Melee. An adjacent target receives 8 damage. ",
+          "cooldown": 6
+        },
+        {
+          "name": "Punish",
+          "description": "Melee. An adjacent target receives 5 damage and is pushed up to 4 hexes.",
+          "cooldown": 6
+        },
+        {
+          "name": "Riposte",
+          "description": "Interrupt when hit by a melee ability. The adjacent creature using the ability receives 4 damage.",
+          "cooldown": 7
+        },
+        {
+          "name": "Devour Essence",
+          "description": "Melee. An adjacent creature receives 9 damage. Gain 4 defense.",
+          "cooldown": 9
+        }
+      ]
+    }
+  ]
+}

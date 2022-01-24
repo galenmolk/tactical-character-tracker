@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,22 +9,47 @@ public class AbilityManager : MonoBehaviour
     [SerializeField] private Transform abilityParent;
 
     private readonly List<CooldownAbilitySlot> cooldownAbilitySlots = new List<CooldownAbilitySlot>();
+    private readonly List<PassiveAbilitySlot> passiveAbilitySlots = new List<PassiveAbilitySlot>();
     
     public void DisplayPassiveAbilities(PassiveAbilityConfig[] abilities)
     {
+        DestroyPassiveAbilities();
         for (int i = 0, length = abilities.Length; i < length; i++)
             CreatePassiveSlot(abilities[i]);
     }
     
     public void DisplayCooldownAbilities(CooldownAbilityConfig[] abilities)
     {
+        DestroyCooldownAbilities();
         for (int i = 0, length = abilities.Length; i < length; i++)
             CreateCooldownSlot(abilities[i]);
     }
 
+    private void DestroyCooldownAbilities()
+    {
+        for (int i = cooldownAbilitySlots.Count - 1; i >= 0; i--)
+        {
+            Destroy(cooldownAbilitySlots[i].gameObject);
+        }
+        
+        cooldownAbilitySlots.Clear();
+    }
+    
+    private void DestroyPassiveAbilities()
+    {
+        for (int i = passiveAbilitySlots.Count - 1; i >= 0; i--)
+        {
+            Destroy(passiveAbilitySlots[i].gameObject);
+        }
+        
+        passiveAbilitySlots.Clear();
+    }
+
     private void CreatePassiveSlot(PassiveAbilityConfig ability)
     {
-        Instantiate(passiveAbilitySlotPrefab, abilityParent).Initialize(ability);
+        PassiveAbilitySlot slot = Instantiate(passiveAbilitySlotPrefab, abilityParent);
+        slot.Initialize(ability);
+        passiveAbilitySlots.Add(slot);
     }
     
     private void CreateCooldownSlot(CooldownAbilityConfig ability)
