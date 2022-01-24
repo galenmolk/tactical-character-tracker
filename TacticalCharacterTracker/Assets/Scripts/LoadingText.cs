@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -10,27 +9,23 @@ public class LoadingText : MonoBehaviour
     [SerializeField] private string[] textFrames;
     [Min(0)] [SerializeField] private float framesPerSecond;
 
-    private Coroutine animation;
     private WaitForSeconds frameDelay;
     private readonly WaitForSeconds errorDelay = new WaitForSeconds(3f);
     private int textFrameIndex;
     private int totalFrames;
-    
-    public void StartAnimation()
+
+    private void StartAnimation()
     {
         frameDelay = new WaitForSeconds(1f / framesPerSecond);
         textFrameIndex = 0;
         text.text = textFrames[0];
         totalFrames = textFrames.Length;
-        animation = StartCoroutine(Animation());
+        StartCoroutine(Animation());
     }
 
     public void StopAnimation()
     {
-        if (animation != null)
-            StopCoroutine(animation);
-        
-        gameObject.SetActive(false);
+        text.gameObject.SetActive(false);
     }
 
     public IEnumerator DisplayError()
@@ -53,5 +48,10 @@ public class LoadingText : MonoBehaviour
             
             text.text = textFrames[textFrameIndex];
         }
+    }
+
+    private void OnEnable()
+    {
+        StartAnimation();
     }
 }

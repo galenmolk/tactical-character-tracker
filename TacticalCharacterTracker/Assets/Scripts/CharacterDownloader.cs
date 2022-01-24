@@ -25,7 +25,6 @@ public class CharacterDownloader : MonoBehaviour
 
     private void Awake()
     {
-        loadingText.StartAnimation();
         GetRemoteConfigSettings();
     }
 
