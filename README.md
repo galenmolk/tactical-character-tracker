@@ -3,5 +3,7 @@
 Next up:
 
 1. Add Passive Abilities
-2. Add character select
-3. Add Remote Config fetching for characters
+8. Think about where tokens can go
+9. Maybe above footer
+16. create json for other characters
+18. add color to description text
