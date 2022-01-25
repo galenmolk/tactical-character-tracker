@@ -15,7 +15,6 @@ public class TurnManager : MonoBehaviour
 
     public void EndTurn()
     {
-        Debug.Log("TurnManager.EndTurn");
         startTurnButton.gameObject.SetActive(true);
         endTurnButton.gameObject.SetActive(false);
         MessageCenter.InvokeTurnEnded();

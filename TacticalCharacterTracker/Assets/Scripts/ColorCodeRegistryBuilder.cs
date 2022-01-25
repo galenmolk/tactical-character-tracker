@@ -17,7 +17,6 @@ public static class ColorCoder
     {
         foreach (var code in colorCodeRegistry)
         {
-            Debug.Log(code.Key);
             int codedWordLength = code.Key.Length;
             
             int index = 0;
