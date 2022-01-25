@@ -94,7 +94,6 @@ public class CooldownAbilitySlot : MonoBehaviour
     private void EndCooldown()
     {
         isCooldownActive = false;
-        Activate();
         currentCooldown = totalCooldown;
     }
 
@@ -108,6 +107,12 @@ public class CooldownAbilitySlot : MonoBehaviour
         
         if (ability.isInterrupt)
         {
+            if (currentCooldown <= 0)
+            {
+                EndCooldown();
+                UpdateCooldownText();
+            }
+
             Deactivate();
             return;
         }
@@ -122,6 +127,7 @@ public class CooldownAbilitySlot : MonoBehaviour
             return;
         
         EndCooldown();
+        Activate();
         UpdateCooldownText();
     }
     
@@ -129,7 +135,8 @@ public class CooldownAbilitySlot : MonoBehaviour
     {
         if (!ability.isInterrupt)
             Deactivate();
-        else if (!isCooldownActive)
+        
+        if (ability.isInterrupt && !isCooldownActive)
             Activate();
         
         if (!isCooldownActive)
