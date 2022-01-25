@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class AbilityInfo : MonoBehaviour
 {
@@ -9,13 +11,14 @@ public class AbilityInfo : MonoBehaviour
     [SerializeField] private TMP_Text abilityName;
     [SerializeField] private TMP_Text abilityCooldown;
 
-    [SerializeField] private RectTransform textParent;
+    [SerializeField] private ScrollRect textScrollRect;
     
     private void DisplayAbilityInfo(AbilityConfig ability)
     {
         abilityName.text = ability.name;
         abilityCooldown.text = ability.GetCooldownDescription();
-        abilityDescription.text = ability.description;
+        abilityDescription.text = ability.colorCodedDescription;
+        textScrollRect.normalizedPosition = Vector2.up;
         Utils.SetIsCanvasGroupActive(canvasGroup, true);
     }
     

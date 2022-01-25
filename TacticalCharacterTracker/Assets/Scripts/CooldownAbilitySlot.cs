@@ -8,10 +8,19 @@ public class CooldownAbilitySlot : MonoBehaviour
     [SerializeField] private TMP_Text abilityCooldown;
     [SerializeField] protected TMP_Text abilityName;
 
+    public string AbilityName => ability.name;
+    
+    public bool IsInterruptAbility => ability.isInterrupt;
+    
     private int totalCooldown;
     private int currentCooldown;
     private CooldownAbilityConfig ability;
-    private bool isCooldownActive;
+    public bool isCooldownActive;
+
+    private const string EMERALD_LANCE = "Emerald Lance";
+    private const string EMERALD_LIGHTNING = "Emerald Lightning";
+
+    private static bool isEmeraldLanceActive;
     
     public void Initialize(CooldownAbilityConfig _ability)
     {
@@ -25,6 +34,26 @@ public class CooldownAbilitySlot : MonoBehaviour
     public void TriggerAbility()
     {
         isCooldownActive = true;
+
+        if (ability.name == EMERALD_LANCE)
+        {
+            isEmeraldLanceActive = true;
+            isCooldownActive = false;
+        }
+
+        if (ability.name == EMERALD_LIGHTNING)
+        {
+            var allSlots = FindObjectsOfType<CooldownAbilitySlot>();
+
+            foreach (var slot in allSlots)
+            {
+                if (slot.AbilityName == EMERALD_LANCE)
+                    slot.isCooldownActive = true;
+            }
+
+            isEmeraldLanceActive = false;
+        }
+        
         UpdateCooldownText();
         MessageCenter.InvokeCooldownAbilityTriggered(this);
     }
@@ -37,6 +66,11 @@ public class CooldownAbilitySlot : MonoBehaviour
     public void Deactivate()
     {
         button.interactable = false;
+    }
+
+    private void Activate()
+    {
+        button.interactable = true;
     }
     
     private void OnEnable()
@@ -60,15 +94,27 @@ public class CooldownAbilitySlot : MonoBehaviour
     private void EndCooldown()
     {
         isCooldownActive = false;
-        button.interactable = true;
+        Activate();
         currentCooldown = totalCooldown;
     }
 
     private void OnTurnStarted()
     {
+        if (ability.name == EMERALD_LIGHTNING && !isEmeraldLanceActive)
+            return;
+        
+        if (ability.name == EMERALD_LANCE && isEmeraldLanceActive)
+            return;
+        
+        if (ability.isInterrupt)
+        {
+            Deactivate();
+            return;
+        }
+        
         if (!isCooldownActive)
         {
-            button.interactable = true;
+            Activate();
             return;
         }
         
@@ -81,6 +127,11 @@ public class CooldownAbilitySlot : MonoBehaviour
     
     private void OnTurnEnded()
     {
+        if (!ability.isInterrupt)
+            Deactivate();
+        else if (!isCooldownActive)
+            Activate();
+        
         if (!isCooldownActive)
             return;
         

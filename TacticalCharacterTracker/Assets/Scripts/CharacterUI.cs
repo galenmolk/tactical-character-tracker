@@ -16,7 +16,6 @@ public class CharacterUI : MonoBehaviour
         activeCharacter = characterConfig;
         characterName.text = activeCharacter.name;
         statsUI.LoadStats(activeCharacter);
-        abilityManager.DisplayPassiveAbilities(activeCharacter.passiveAbilities);
-        abilityManager.DisplayCooldownAbilities(activeCharacter.cooldownAbilities);
+        abilityManager.DisplayAbilities(activeCharacter);
     }
 }

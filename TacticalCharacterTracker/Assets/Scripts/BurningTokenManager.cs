@@ -33,14 +33,22 @@ public class BurningTokenManager : MonoBehaviour
     private void OnEnable()
     {
         UpdateUI();
+        MessageCenter.SubscribeCharacterLoaded(_ => Reset());
         MessageCenter.SubscribeTurnEnded(ActivateBurningToken);
     }
 
     private void OnDisable()
     {
+        MessageCenter.UnsubscribeCharacterLoaded(_ => Reset());
         MessageCenter.UnsubscribeTurnEnded(ActivateBurningToken);
     }
 
+    private void Reset()
+    {
+        tokenCount = 0;
+        UpdateUI();
+    }
+    
     private void ActivateBurningToken()
     {
         if (tokenCount <= 0)

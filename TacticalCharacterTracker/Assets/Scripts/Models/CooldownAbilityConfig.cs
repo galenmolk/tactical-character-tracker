@@ -4,6 +4,7 @@ using System;
 public class CooldownAbilityConfig : AbilityConfig
 {
     public int cooldown;
+    public bool isInterrupt;
     
     private const string TURNS_PLURAL = "Turns";
     private const string TURNS_SINGULAR = "Turn";

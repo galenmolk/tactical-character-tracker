@@ -17,6 +17,7 @@ public static class ColorCoder
     {
         foreach (var code in colorCodeRegistry)
         {
+            Debug.Log(code.Key);
             int codedWordLength = code.Key.Length;
             
             int index = 0;
@@ -54,9 +55,6 @@ public static class ColorCoder
 public class ColorCodeRegistryBuilder : MonoBehaviour
 {
     [SerializeField] private ColorCode[] colorCodes;
-
-    [SerializeField] private TMP_Text testText;
-    [SerializeField] private string testString;
     
     private static Dictionary<string, Color> colorCodeRegistry = new Dictionary<string, Color>();
     
@@ -64,7 +62,6 @@ public class ColorCodeRegistryBuilder : MonoBehaviour
     {
         BuildColorCodeRegistry();
         ColorCoder.SetColorCodeRegistry(colorCodeRegistry);
-        testText.text = ColorCoder.GetColorCodedText(testString);
     }
 
     private void BuildColorCodeRegistry()

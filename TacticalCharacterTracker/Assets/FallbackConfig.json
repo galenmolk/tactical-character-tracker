@@ -84,7 +84,8 @@
         {
           "name": "Riposte",
           "description": "Interrupt when hit by a melee ability. The adjacent creature using the ability receives 4 damage.",
-          "cooldown": 7
+          "cooldown": 7,
+          "isInterrupt": true
         },
         {
           "name": "Devour Essence",
@@ -118,7 +119,8 @@
         {
           "cooldown": 3,
           "name": "Quick Fix",
-          "description": "Interrupt. Ranged 10. A target within range gains 3 defense. OR. Interrupt. Gain 3 defense."
+          "description": "Interrupt. Ranged 10. A target within range gains 3 defense. OR. Interrupt. Gain 3 defense.",
+          "isInterrupt": true
         },
         {
           "cooldown": 3,
@@ -220,12 +222,13 @@
         {
           "cooldown": 6,
           "name": "Flicker or Fire",
-          "description": "Charge 1. If Kazak is successfully targeted while charging: Interrupt. teleport up to 4 hexes and gain 5 defense. If Kazak is not successfully targeted before charge ends: Free action. Melee reach 7. A target within reach receives 8 damage."
+          "description": "Charge 1. If Kazak is successfully targeted while charging: Interrupt. teleport up to 4 hexes and gain 5 defense. If Kazak is not successfully targeted before charge ends: Free action. Melee reach 7. A target within reach receives 8 damage.",
         },
         {
           "cooldown": 6,
           "name": "Earth Wall",
-          "description": "Interrupt. When Kazak or an ally is targeted by a ranged or melee reach attack:  Ranged 8. An unoccupied hex within range becomes the origin hex for a 3 hex long wall. The wall may be in any configuration from the origin hex as long as it is straight and it blocks line of sight for the ranged attack. Each wall segment has: Speed 0 (cannot move), Health 2, Defense 0,  no threat aura, blocks line of sight."
+          "description": "Interrupt. When Kazak or an ally is targeted by a ranged or melee reach attack:  Ranged 8. An unoccupied hex within range becomes the origin hex for a 3 hex long wall. The wall may be in any configuration from the origin hex as long as it is straight and it blocks line of sight for the ranged attack. Each wall segment has: Speed 0 (cannot move), Health 2, Defense 0,  no threat aura, blocks line of sight.",
+          "isInterrupt": true
         },
         {
           "cooldown": 6,

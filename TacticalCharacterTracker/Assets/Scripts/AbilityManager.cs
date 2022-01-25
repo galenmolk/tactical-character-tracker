@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AbilityManager : MonoBehaviour
 {
@@ -8,17 +9,26 @@ public class AbilityManager : MonoBehaviour
 
     [SerializeField] private Transform abilityParent;
 
+    [SerializeField] private ScrollRect abilityScrollRect;
+    
     private readonly List<CooldownAbilitySlot> cooldownAbilitySlots = new List<CooldownAbilitySlot>();
     private readonly List<PassiveAbilitySlot> passiveAbilitySlots = new List<PassiveAbilitySlot>();
-    
-    public void DisplayPassiveAbilities(PassiveAbilityConfig[] abilities)
+
+    public void DisplayAbilities(CharacterConfig config)
+    {
+        DisplayPassiveAbilities(config.passiveAbilities);
+        DisplayCooldownAbilities(config.cooldownAbilities);
+        abilityScrollRect.normalizedPosition = Vector2.up;
+    }
+
+    private void DisplayPassiveAbilities(PassiveAbilityConfig[] abilities)
     {
         DestroyPassiveAbilities();
         for (int i = 0, length = abilities.Length; i < length; i++)
             CreatePassiveSlot(abilities[i]);
     }
-    
-    public void DisplayCooldownAbilities(CooldownAbilityConfig[] abilities)
+
+    private void DisplayCooldownAbilities(CooldownAbilityConfig[] abilities)
     {
         DestroyCooldownAbilities();
         for (int i = 0, length = abilities.Length; i < length; i++)
@@ -71,6 +81,9 @@ public class AbilityManager : MonoBehaviour
 
     private void DeactivateCooldownAbilities(CooldownAbilitySlot cooldownAbilitySlot)
     {
+        if (cooldownAbilitySlot.IsInterruptAbility)
+            return;
+        
         for (int i = 0, length = cooldownAbilitySlots.Count; i < length; i++)
         {
             cooldownAbilitySlots[i].Deactivate();
