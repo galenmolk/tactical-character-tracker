@@ -2978,7 +2978,6 @@ GameObject:
   - component: {fileID: 301760085}
   - component: {fileID: 301760084}
   - component: {fileID: 301760086}
-  - component: {fileID: 301760087}
   m_Layer: 5
   m_Name: AbilityInfoBox
   m_TagString: Untagged
@@ -3045,33 +3044,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &301760087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301760082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8fc0495143574d859b3ec7e0ece0f74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onDoubleClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 183146019}
-        m_TargetAssemblyTypeName: OverlayCloseButton, Assembly-CSharp
-        m_MethodName: Close
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &315948069
 PrefabInstance:
   m_ObjectHideFlags: 0
