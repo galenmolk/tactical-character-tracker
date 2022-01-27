@@ -11,6 +11,18 @@ public class PassiveAbilitySlot : MonoBehaviour
     {
         ability = _ability;
         abilityName.text = ability.name;
+        if (ability.name == "Unstoppable")
+            Unstoppable();
+    }
+
+    private void Unstoppable()
+    {
+        MessageCenter.SubscribeTurnStarted(Gain2Health);
+    }
+
+    private void Gain2Health()
+    {
+        FindObjectOfType<StatsUI>().Unstoppable();
     }
     
     public void InfoButtonPressed()

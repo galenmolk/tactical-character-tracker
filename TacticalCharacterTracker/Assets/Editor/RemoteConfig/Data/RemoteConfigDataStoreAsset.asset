@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"6cc29f16-e091-4997-bdf0-1b7a5a6c6746\"\n   
+  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"98e86f28-adfd-4e2f-b77a-259be3d3910a\"\n   
     },\n    \"rs\": {\n      \"key\": \"characterList\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"characterList\": [\n         
     {\n            \"name\": \"Aggo\",\n            \"defense\": 22,\n           
@@ -61,7 +61,7 @@ MonoBehaviour:
     Any damage-dealing ability used by Aggo deals 1 additional damage. When Aggo
     moves in any way, they are treated as occupying only a single hex. When the movement
     ends, Aggo grows to fill all unoccupied hexes in a burst 1. When no size counters
-    remain, the ability ends.\",\n                \"cooldown\": 6\n             
+    remain, the ability ends.\",\n                \"cooldown\": 9\n             
     },\n              {\n                \"name\": \"Overwhelm\",\n               
     \"description\": \"Rush up to 8 hexes. All creatures in the rush receive 3 damage
     and are immobilized.\",\n                \"cooldown\": 6\n              },\n             
@@ -75,9 +75,9 @@ MonoBehaviour:
     up to 4 hexes.\",\n                \"cooldown\": 6\n              },\n             
     {\n                \"name\": \"Riposte\",\n                \"description\": \"Interrupt
     when hit by a melee ability. The adjacent creature using the ability receives
-    4 damage.\",\n                \"cooldown\": 7\n              },\n             
-    {\n                \"name\": \"Devour Essence\",\n                \"description\":
-    \"Melee. An adjacent creature receives 9 damage. Gain 4 defense.\",\n               
+    4 damage.\",\n                \"cooldown\": 7,\n                \"isInterrupt\":
+    true\n              },\n              {\n                \"name\": \"Devour Essence\",\n               
+    \"description\": \"Melee. An adjacent creature receives 9 damage. Gain 4 defense.\",\n               
     \"cooldown\": 9\n              }\n            ]\n          },\n          {\n           
     \"name\": \"Dio\",\n            \"defense\": 14,\n            \"health\": 10,\n           
     \"speed\": 6,\n            \"passiveAbilities\": [],\n            \"cooldownAbilities\":
@@ -94,22 +94,22 @@ MonoBehaviour:
     range. The turret may act at any point during the players' round.\"\n             
     },\n              {\n                \"cooldown\": 3,\n                \"name\":
     \"Quick Fix\",\n                \"description\": \"Interrupt. Ranged 10. A target
-    within range gains 3 defense. OR. Interrupt. Gain 3 defense.\"\n             
-    },\n              {\n                \"cooldown\": 3,\n                \"name\":
-    \"Tether\",\n                \"description\": \"Ranged 8. Summon a tether in
-    an unoccupied hex within range. The tether has: Speed 0 (cannot move), Health
-    2, Defense 0, no threat aura, blocks line of sight, blocks movement. The tether
-    uses its ability immediately: Melee reach 1. A target within reach cannot move
-    out of a burst 1 of the tether and receives 2 damage at the end of the players'
-    turn. Ability ends when the tether is destroyed.\"\n              },\n             
-    {\n                \"cooldown\": 5,\n                \"name\": \"Musical Blast\",\n               
-    \"description\": \"An adjacent target recieves 2 damage and is pushed up to 3
-    hexes. Dio is pushed away from the adjacent target up to 4 hexes in a line of
-    Dio's choosing.\"\n              },\n              {\n                \"cooldown\":
-    5,\n                \"name\": \"Bouncing Note\",\n                \"description\":
-    \"Ranged 5. A target within range receives 4 damage. A second ability may be
-    used this turn, originating from the targeted creature's hex. Melee reach 5.
-    A creature within reach receives 4 damage.\"\n              },\n             
+    within range gains 3 defense. OR. Interrupt. Gain 3 defense.\",\n               
+    \"isInterrupt\": true\n              },\n              {\n                \"cooldown\":
+    3,\n                \"name\": \"Tether\",\n                \"description\": \"Ranged
+    8. Summon a tether in an unoccupied hex within range. The tether has: Speed 0
+    (cannot move), Health 2, Defense 0, no threat aura, blocks line of sight, blocks
+    movement. The tether uses its ability immediately: Melee reach 1. A target within
+    reach cannot move out of a burst 1 of the tether and receives 2 damage at the
+    end of the players' turn. Ability ends when the tether is destroyed.\"\n             
+    },\n              {\n                \"cooldown\": 5,\n                \"name\":
+    \"Musical Blast\",\n                \"description\": \"An adjacent target recieves
+    2 damage and is pushed up to 3 hexes. Dio is pushed away from the adjacent target
+    up to 4 hexes in a line of Dio's choosing.\"\n              },\n             
+    {\n                \"cooldown\": 5,\n                \"name\": \"Bouncing Note\",\n               
+    \"description\": \"Ranged 5. A target within range receives 4 damage. A second
+    ability may be used this turn, originating from the targeted creature's hex.
+    Melee reach 5. A creature within reach receives 4 damage.\"\n              },\n             
     {\n                \"cooldown\": 5,\n                \"name\": \"Unbearable Beat\",\n               
     \"description\": \"Ranged 10 Burst 1. All creatures in burst receive 4 damage.\"\n             
     },\n              {\n                \"cooldown\": 5,\n                \"name\":
@@ -165,7 +165,7 @@ MonoBehaviour:
     },\n              {\n                \"cooldown\": 6,\n                \"name\":
     \"Forked Fire\",\n                \"description\": \"Ranged 8. Deal 4 damage
     to up to 2 targets within range.\"\n              },\n              {\n               
-    \"cooldown\": 6,\n                \"name\": \"Flicker or Fire\",\n               
+    \"cooldown\": 7,\n                \"name\": \"Flicker or Fire\",\n               
     \"description\": \"Charge 1. If Kazak is successfully targeted while charging:
     Interrupt. teleport up to 4 hexes and gain 5 defense. If Kazak is not successfully
     targeted before charge ends: Free action. Melee reach 7. A target within reach
@@ -176,15 +176,15 @@ MonoBehaviour:
     wall. The wall may be in any configuration from the origin hex as long as it
     is straight and it blocks line of sight for the ranged attack. Each wall segment
     has: Speed 0 (cannot move), Health 2, Defense 0,  no threat aura, blocks line
-    of sight.\"\n              },\n              {\n                \"cooldown\":
-    6,\n                \"name\": \"Earth Dragon\",\n                \"description\":
-    \"Line 3. All creatures in line receive 4 damage. All creatures in line may be
-    pushed up to 3 hexes.\"\n              },\n              {\n                \"cooldown\":
-    7,\n                \"name\": \"Emerald Lance\",\n                \"description\":
-    \"Melee reach 8. A creature within reach receives 5 damage. Place a Lance in
-    the hex occupied by the target. The Lance may occupy hexes occupied by creatures
-    but not obstacles. The Lance has: Speed 0 (cannot move), untargetable and immune,
-    no threat aura, does not block line of sight.\"\n              },\n             
+    of sight.\",\n                \"isInterrupt\": true\n              },\n             
+    {\n                \"cooldown\": 6,\n                \"name\": \"Earth Dragon\",\n               
+    \"description\": \"Line 3. All creatures in line receive 4 damage. All creatures
+    in line may be pushed up to 3 hexes.\"\n              },\n              {\n               
+    \"cooldown\": 7,\n                \"name\": \"Emerald Lance\",\n               
+    \"description\": \"Melee reach 8. A creature within reach receives 5 damage.
+    Place a Lance in the hex occupied by the target. The Lance may occupy hexes occupied
+    by creatures but not obstacles. The Lance has: Speed 0 (cannot move), untargetable
+    and immune, no threat aura, does not block line of sight.\"\n              },\n             
     {\n                \"cooldown\": 0,\n                \"name\": \"Emerald Lightning\",\n               
     \"description\": \"Cannot be used unless the Lance from the Emerald Lance ability
     is occupying a hex. Line 4 originating from the hex occupied by the Lance. All
@@ -198,7 +198,7 @@ MonoBehaviour:
     {\n                \"cooldown\": 10,\n                \"name\": \"Wind Walk\",\n               
     \"description\": \"Teleport up to 10 hexes. Gain 6 defense.\"\n             
     }\n            ]\n          }\n        ]\n      }\n    }\n  }\n]"
-  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"6cc29f16-e091-4997-bdf0-1b7a5a6c6746\"\n   
+  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"98e86f28-adfd-4e2f-b77a-259be3d3910a\"\n   
     },\n    \"rs\": {\n      \"key\": \"characterList\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"characterList\": [\n         
     {\n            \"name\": \"Aggo\",\n            \"defense\": 22,\n           
@@ -247,7 +247,7 @@ MonoBehaviour:
     Any damage-dealing ability used by Aggo deals 1 additional damage. When Aggo
     moves in any way, they are treated as occupying only a single hex. When the movement
     ends, Aggo grows to fill all unoccupied hexes in a burst 1. When no size counters
-    remain, the ability ends.\",\n                \"cooldown\": 6\n             
+    remain, the ability ends.\",\n                \"cooldown\": 9\n             
     },\n              {\n                \"name\": \"Overwhelm\",\n               
     \"description\": \"Rush up to 8 hexes. All creatures in the rush receive 3 damage
     and are immobilized.\",\n                \"cooldown\": 6\n              },\n             
@@ -261,9 +261,9 @@ MonoBehaviour:
     up to 4 hexes.\",\n                \"cooldown\": 6\n              },\n             
     {\n                \"name\": \"Riposte\",\n                \"description\": \"Interrupt
     when hit by a melee ability. The adjacent creature using the ability receives
-    4 damage.\",\n                \"cooldown\": 7\n              },\n             
-    {\n                \"name\": \"Devour Essence\",\n                \"description\":
-    \"Melee. An adjacent creature receives 9 damage. Gain 4 defense.\",\n               
+    4 damage.\",\n                \"cooldown\": 7,\n                \"isInterrupt\":
+    true\n              },\n              {\n                \"name\": \"Devour Essence\",\n               
+    \"description\": \"Melee. An adjacent creature receives 9 damage. Gain 4 defense.\",\n               
     \"cooldown\": 9\n              }\n            ]\n          },\n          {\n           
     \"name\": \"Dio\",\n            \"defense\": 14,\n            \"health\": 10,\n           
     \"speed\": 6,\n            \"passiveAbilities\": [],\n            \"cooldownAbilities\":
@@ -280,22 +280,22 @@ MonoBehaviour:
     range. The turret may act at any point during the players' round.\"\n             
     },\n              {\n                \"cooldown\": 3,\n                \"name\":
     \"Quick Fix\",\n                \"description\": \"Interrupt. Ranged 10. A target
-    within range gains 3 defense. OR. Interrupt. Gain 3 defense.\"\n             
-    },\n              {\n                \"cooldown\": 3,\n                \"name\":
-    \"Tether\",\n                \"description\": \"Ranged 8. Summon a tether in
-    an unoccupied hex within range. The tether has: Speed 0 (cannot move), Health
-    2, Defense 0, no threat aura, blocks line of sight, blocks movement. The tether
-    uses its ability immediately: Melee reach 1. A target within reach cannot move
-    out of a burst 1 of the tether and receives 2 damage at the end of the players'
-    turn. Ability ends when the tether is destroyed.\"\n              },\n             
-    {\n                \"cooldown\": 5,\n                \"name\": \"Musical Blast\",\n               
-    \"description\": \"An adjacent target recieves 2 damage and is pushed up to 3
-    hexes. Dio is pushed away from the adjacent target up to 4 hexes in a line of
-    Dio's choosing.\"\n              },\n              {\n                \"cooldown\":
-    5,\n                \"name\": \"Bouncing Note\",\n                \"description\":
-    \"Ranged 5. A target within range receives 4 damage. A second ability may be
-    used this turn, originating from the targeted creature's hex. Melee reach 5.
-    A creature within reach receives 4 damage.\"\n              },\n             
+    within range gains 3 defense. OR. Interrupt. Gain 3 defense.\",\n               
+    \"isInterrupt\": true\n              },\n              {\n                \"cooldown\":
+    3,\n                \"name\": \"Tether\",\n                \"description\": \"Ranged
+    8. Summon a tether in an unoccupied hex within range. The tether has: Speed 0
+    (cannot move), Health 2, Defense 0, no threat aura, blocks line of sight, blocks
+    movement. The tether uses its ability immediately: Melee reach 1. A target within
+    reach cannot move out of a burst 1 of the tether and receives 2 damage at the
+    end of the players' turn. Ability ends when the tether is destroyed.\"\n             
+    },\n              {\n                \"cooldown\": 5,\n                \"name\":
+    \"Musical Blast\",\n                \"description\": \"An adjacent target recieves
+    2 damage and is pushed up to 3 hexes. Dio is pushed away from the adjacent target
+    up to 4 hexes in a line of Dio's choosing.\"\n              },\n             
+    {\n                \"cooldown\": 5,\n                \"name\": \"Bouncing Note\",\n               
+    \"description\": \"Ranged 5. A target within range receives 4 damage. A second
+    ability may be used this turn, originating from the targeted creature's hex.
+    Melee reach 5. A creature within reach receives 4 damage.\"\n              },\n             
     {\n                \"cooldown\": 5,\n                \"name\": \"Unbearable Beat\",\n               
     \"description\": \"Ranged 10 Burst 1. All creatures in burst receive 4 damage.\"\n             
     },\n              {\n                \"cooldown\": 5,\n                \"name\":
@@ -351,7 +351,7 @@ MonoBehaviour:
     },\n              {\n                \"cooldown\": 6,\n                \"name\":
     \"Forked Fire\",\n                \"description\": \"Ranged 8. Deal 4 damage
     to up to 2 targets within range.\"\n              },\n              {\n               
-    \"cooldown\": 6,\n                \"name\": \"Flicker or Fire\",\n               
+    \"cooldown\": 7,\n                \"name\": \"Flicker or Fire\",\n               
     \"description\": \"Charge 1. If Kazak is successfully targeted while charging:
     Interrupt. teleport up to 4 hexes and gain 5 defense. If Kazak is not successfully
     targeted before charge ends: Free action. Melee reach 7. A target within reach
@@ -362,15 +362,15 @@ MonoBehaviour:
     wall. The wall may be in any configuration from the origin hex as long as it
     is straight and it blocks line of sight for the ranged attack. Each wall segment
     has: Speed 0 (cannot move), Health 2, Defense 0,  no threat aura, blocks line
-    of sight.\"\n              },\n              {\n                \"cooldown\":
-    6,\n                \"name\": \"Earth Dragon\",\n                \"description\":
-    \"Line 3. All creatures in line receive 4 damage. All creatures in line may be
-    pushed up to 3 hexes.\"\n              },\n              {\n                \"cooldown\":
-    7,\n                \"name\": \"Emerald Lance\",\n                \"description\":
-    \"Melee reach 8. A creature within reach receives 5 damage. Place a Lance in
-    the hex occupied by the target. The Lance may occupy hexes occupied by creatures
-    but not obstacles. The Lance has: Speed 0 (cannot move), untargetable and immune,
-    no threat aura, does not block line of sight.\"\n              },\n             
+    of sight.\",\n                \"isInterrupt\": true\n              },\n             
+    {\n                \"cooldown\": 6,\n                \"name\": \"Earth Dragon\",\n               
+    \"description\": \"Line 3. All creatures in line receive 4 damage. All creatures
+    in line may be pushed up to 3 hexes.\"\n              },\n              {\n               
+    \"cooldown\": 7,\n                \"name\": \"Emerald Lance\",\n               
+    \"description\": \"Melee reach 8. A creature within reach receives 5 damage.
+    Place a Lance in the hex occupied by the target. The Lance may occupy hexes occupied
+    by creatures but not obstacles. The Lance has: Speed 0 (cannot move), untargetable
+    and immune, no threat aura, does not block line of sight.\"\n              },\n             
     {\n                \"cooldown\": 0,\n                \"name\": \"Emerald Lightning\",\n               
     \"description\": \"Cannot be used unless the Lance from the Emerald Lance ability
     is occupying a hex. Line 4 originating from the hex occupied by the Lance. All
@@ -388,5 +388,3 @@ MonoBehaviour:
     \"name\": \"production\",\n    \"id\": \"a6730ee0-c005-4398-a4b9-86f0aa933b57\",\n   
     \"isDefault\": true,\n    \"createdAt\": \"2022-01-23T03:15:49Z\",\n    \"updatedAt\":
     \"2022-01-23T03:15:49Z\"\n  }\n]"
-  _rulesList: '[]'
-  _lastCachedRulesList: '[]'

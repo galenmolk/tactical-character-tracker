@@ -34,4 +34,29 @@ public class StatsUI : MonoBehaviour
         if (healthSection.CurrentStat > 0)
             healthSection.Subtract();
     }
+
+    public void Unstoppable()
+    {
+        int defenseDiff = defenseSection.TotalStat - defenseSection.CurrentStat;
+        
+        Debug.Log(defenseDiff);
+        
+        if (defenseDiff == 0)
+            return;
+
+        Debug.Log(defenseSection.TotalStat);
+        
+        
+        Debug.Log(defenseSection.CurrentStat);
+
+        if (defenseDiff == 1)
+        {
+            defenseSection.Add();
+        }
+        else
+        {
+            defenseSection.Add();
+            defenseSection.Add();
+        }
+    }
 }
