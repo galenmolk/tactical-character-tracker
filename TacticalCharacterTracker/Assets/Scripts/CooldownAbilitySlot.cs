@@ -34,26 +34,7 @@ public class CooldownAbilitySlot : MonoBehaviour
     public void TriggerAbility()
     {
         isCooldownActive = true;
-
-        if (ability.name == EMERALD_LANCE)
-        {
-            isEmeraldLanceActive = true;
-            isCooldownActive = false;
-        }
-
-        if (ability.name == EMERALD_LIGHTNING)
-        {
-            var allSlots = FindObjectsOfType<CooldownAbilitySlot>();
-
-            foreach (var slot in allSlots)
-            {
-                if (slot.AbilityName == EMERALD_LANCE)
-                    slot.isCooldownActive = true;
-            }
-
-            isEmeraldLanceActive = false;
-        }
-        
+        Deactivate();
         UpdateCooldownText();
         MessageCenter.InvokeCooldownAbilityTriggered(this);
     }
@@ -63,7 +44,7 @@ public class CooldownAbilitySlot : MonoBehaviour
         MessageCenter.InvokeAbilityInfoButtonPressed(ability);
     }
 
-    public void Deactivate()
+    private void Deactivate()
     {
         button.interactable = false;
     }
@@ -99,30 +80,6 @@ public class CooldownAbilitySlot : MonoBehaviour
 
     private void OnTurnStarted()
     {
-        if (ability.name == EMERALD_LIGHTNING && !isEmeraldLanceActive)
-            return;
-        
-        if (ability.name == EMERALD_LANCE && isEmeraldLanceActive)
-            return;
-        
-        if (ability.isInterrupt)
-        {
-            if (currentCooldown <= 0)
-            {
-                EndCooldown();
-                UpdateCooldownText();
-            }
-
-            Deactivate();
-            return;
-        }
-        
-        if (!isCooldownActive)
-        {
-            Activate();
-            return;
-        }
-        
         if (currentCooldown > 0)
             return;
         
@@ -133,12 +90,6 @@ public class CooldownAbilitySlot : MonoBehaviour
     
     private void OnTurnEnded()
     {
-        if (!ability.isInterrupt)
-            Deactivate();
-        
-        if (ability.isInterrupt && !isCooldownActive)
-            Activate();
-        
         if (!isCooldownActive)
             return;
         

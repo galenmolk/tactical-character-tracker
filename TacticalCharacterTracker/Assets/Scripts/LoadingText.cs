@@ -50,7 +50,7 @@ public class LoadingText : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void Awake()
     {
         StartAnimation();
     }

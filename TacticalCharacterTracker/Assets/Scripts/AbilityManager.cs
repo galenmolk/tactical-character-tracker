@@ -68,25 +68,4 @@ public class AbilityManager : MonoBehaviour
         slot.Initialize(ability);
         cooldownAbilitySlots.Add(slot);
     }
-
-    private void OnEnable()
-    {
-        MessageCenter.SubscribeCooldownAbilityTriggered(DeactivateCooldownAbilities);
-    }
-
-    private void OnDisable()
-    {
-        MessageCenter.UnsubscribeCooldownAbilityTriggered(DeactivateCooldownAbilities);
-    }
-
-    private void DeactivateCooldownAbilities(CooldownAbilitySlot cooldownAbilitySlot)
-    {
-        if (cooldownAbilitySlot.IsInterruptAbility)
-            return;
-        
-        for (int i = 0, length = cooldownAbilitySlots.Count; i < length; i++)
-        {
-            cooldownAbilitySlots[i].Deactivate();
-        }
-    }
 }
