@@ -1,28 +1,20 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class CharacterButton : MonoBehaviour
 {
-    public CharacterConfig CharacterConfig { get; private set; }
-
     [SerializeField] private TMP_Text characterName;
 
-    private UnityAction<CharacterButton> action;
-
+    private CharacterConfig characterConfig;
+    
     public void Initialize(CharacterConfig _characterConfig)
     {
-        CharacterConfig = _characterConfig;
-        characterName.text = CharacterConfig.name;
-    }
-
-    public void SetClickAction(UnityAction<CharacterButton> _action)
-    {
-        action = _action;
+        characterConfig = _characterConfig;
+        characterName.text = characterConfig.name;
     }
 
     public void Select()
     {
-        action(this);
+        CharacterSelect.Instance.SelectCharacter(characterConfig);
     }
 }

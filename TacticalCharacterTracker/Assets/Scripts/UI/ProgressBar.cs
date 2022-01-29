@@ -7,35 +7,34 @@ public class ProgressBar : MonoBehaviour
     [SerializeField] private Image barBackground;
     [SerializeField] private float fillDurationInSeconds;
     [SerializeField] private float preFillDelay;
-    [SerializeField] private float postFillDelay;
 
     private const float MIN_VALUE = 0f;
     private const float MAX_VALUE = 1f;
     
-    private float totalSliderTime =0f;
-
+    private float startTime = 0f;
+    
     private void Awake()
     {
         barBackground.material.SetFloat(ShaderProps.progressBarValue, MIN_VALUE);
-        StartCoroutine(BeginFill());
     }
 
-    private IEnumerator BeginFill()
+    public IEnumerator Fill()
     {
+        Debug.Log("Beginning Fill");
         yield return YieldRegistry.WaitForSeconds(preFillDelay);
         yield return StartCoroutine(FillBar());
-        yield return YieldRegistry.WaitForSeconds(postFillDelay);
-        gameObject.SetActive(false);
     }
     
     private IEnumerator FillBar()
     {
-        while (totalSliderTime < fillDurationInSeconds)
+        startTime = Time.time;
+        float totalTime = 0f;
+        while (totalTime < fillDurationInSeconds)
         {
-            totalSliderTime += Time.deltaTime;
-            float value = Mathf.Lerp(MIN_VALUE, MAX_VALUE, totalSliderTime / fillDurationInSeconds);
+            totalTime = Time.time - startTime;
+            float value = Mathf.Lerp(MIN_VALUE, MAX_VALUE, totalTime / fillDurationInSeconds);
             barBackground.material.SetFloat(ShaderProps.progressBarValue, value);
-            yield return YieldRegistry.WaitForEndOfFrame;
+            yield return null;
         }
     }
 }

@@ -483,6 +483,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1028812483}
+  - component: {fileID: 1028812484}
+  - component: {fileID: 1028812485}
   m_Layer: 0
   m_Name: Persistent
   m_TagString: Untagged
@@ -505,6 +507,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1028812484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028812481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb6f7b8dbf3b54837837a3f5690d3f3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persistent: 1
+--- !u!114 &1028812485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028812481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2522eb45231422da43cc8ee7e87e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persistent: 1
+  fallbackCharacterListConfig: {fileID: 4900000, guid: 67ada06233e1748a48841333e5f84477, type: 3}
+  progressBar: {fileID: 5484668146223904390}
 --- !u!1001 &1037081834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -837,6 +867,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SingleLineBorder
       objectReference: {fileID: 0}
+    - target: {fileID: 1379690303437197837, guid: f2ee473c3229c4749934c2c10779913f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00024414062
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2ee473c3229c4749934c2c10779913f, type: 3}
 --- !u!224 &1545336839 stripped
@@ -964,9 +998,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barBackground: {fileID: 5484668147438768693}
-  fillDurationInSeconds: 1.5
+  fillDurationInSeconds: 2
   preFillDelay: 0.4
-  postFillDelay: 0.4
 --- !u!222 &5484668147438768692
 CanvasRenderer:
   m_ObjectHideFlags: 0

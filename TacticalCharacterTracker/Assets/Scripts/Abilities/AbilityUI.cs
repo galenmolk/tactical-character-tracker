@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AbilityManager : MonoBehaviour
+public class AbilityUI : MonoBehaviour
 {
     [SerializeField] private CooldownAbilitySlot cooldownAbilitySlotPrefab;
     [SerializeField] private PassiveAbilitySlot passiveAbilitySlotPrefab;
