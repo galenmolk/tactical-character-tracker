@@ -8,20 +8,11 @@ public class CooldownAbilitySlot : MonoBehaviour
     [SerializeField] private TMP_Text abilityCooldown;
     [SerializeField] protected TMP_Text abilityName;
 
-    public string AbilityName => ability.name;
-    
-    public bool IsInterruptAbility => ability.isInterrupt;
-    
     private int totalCooldown;
     private int currentCooldown;
     private CooldownAbilityConfig ability;
     public bool isCooldownActive;
 
-    private const string EMERALD_LANCE = "Emerald Lance";
-    private const string EMERALD_LIGHTNING = "Emerald Lightning";
-
-    private static bool isEmeraldLanceActive;
-    
     public void Initialize(CooldownAbilityConfig _ability)
     {
         ability = _ability;
@@ -36,12 +27,17 @@ public class CooldownAbilitySlot : MonoBehaviour
         isCooldownActive = true;
         Deactivate();
         UpdateCooldownText();
-        MessageCenter.InvokeCooldownAbilityTriggered(this);
     }
 
     public void InfoButtonPressed()
     {
-        MessageCenter.InvokeAbilityInfoButtonPressed(ability);
+        AbilityInfoBox.Instance.DisplayAbilityInfo(ability);
+    }
+
+    private void Awake()
+    {
+        TurnManager.Instance.SubscribeTurnStarted(OnTurnStarted);
+        TurnManager.Instance.SubscribeTurnEnded(OnTurnEnded);
     }
 
     private void Deactivate()
@@ -52,18 +48,6 @@ public class CooldownAbilitySlot : MonoBehaviour
     private void Activate()
     {
         button.interactable = true;
-    }
-    
-    private void OnEnable()
-    {
-        MessageCenter.SubscribeTurnStarted(OnTurnStarted);
-        MessageCenter.SubscribeTurnEnded(OnTurnEnded);
-    }
-
-    private void OnDisable()
-    {
-        MessageCenter.UnsubscribeTurnStarted(OnTurnStarted);
-        MessageCenter.UnsubscribeTurnEnded(OnTurnEnded);
     }
 
     private void UpdateCooldownText()

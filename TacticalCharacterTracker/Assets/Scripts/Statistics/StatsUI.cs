@@ -13,41 +13,39 @@ public class StatsUI : MonoBehaviour
         speedSection.LoadStat(character.speed);
     }
 
-    private void OnEnable()
+    public void TakeDamage(int amount)
     {
-        MessageCenter.SubscribeBurningTokenActivated(OnBurningTokenActivated);
-    }
-
-    private void OnDisable()
-    {
-        MessageCenter.UnsubscribeBurningTokenActivated(OnBurningTokenActivated);
-    }
-
-    private void OnBurningTokenActivated()
-    {
-        if (defenseSection.CurrentStat > 0)
+        Debug.Log("Take Damage");
+        int health = healthSection.CurrentStat;
+        int defense = defenseSection.CurrentStat;
+        
+        // If both stats are 0, exit.
+        if (health + defense == 0)
+            return;
+        
+        // If defense will soak all damage, subtract amount from defense and exit.
+        if (defense >= amount)
         {
-            defenseSection.Subtract();
+            defenseSection.Subtract(amount);
             return;            
         }
         
-        if (healthSection.CurrentStat > 0)
-            healthSection.Subtract();
+        // Otherwise, the defense breaks.
+        defenseSection.Subtract(defense);
+
+        // Subtract defense from the amount to get the remaining un-dealt damage.
+        int healthDamage = amount - defense;
+        
+        // Subtract this remainder -- or just remove all health if damage would result in negative value.
+        healthSection.Subtract(health >= healthDamage ? healthDamage : health);
     }
 
     public void Unstoppable()
     {
         int defenseDiff = defenseSection.TotalStat - defenseSection.CurrentStat;
         
-        Debug.Log(defenseDiff);
-        
         if (defenseDiff == 0)
             return;
-
-        Debug.Log(defenseSection.TotalStat);
-        
-        
-        Debug.Log(defenseSection.CurrentStat);
 
         if (defenseDiff == 1)
         {

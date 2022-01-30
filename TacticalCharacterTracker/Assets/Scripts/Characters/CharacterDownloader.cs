@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class CharacterDownloader : Singleton<CharacterDownloader>
 {
-    public readonly CharacterListEvent CharactersDownloaded = new();
     public CharacterListConfig CharacterListConfig { get; private set; }
     
     [SerializeField] private TextAsset fallbackCharacterListConfig;
@@ -27,7 +26,6 @@ public class CharacterDownloader : Singleton<CharacterDownloader>
             return;
         }
         
-        Debug.Log("Internet detected");
         GetRemoteConfigSettings();
     }
     
@@ -35,29 +33,24 @@ public class CharacterDownloader : Singleton<CharacterDownloader>
     {
         progressFill = StartCoroutine(progressBar.Fill());
         ConfigManager.FetchCompleted += ParseResponse;
-        Debug.Log("Fetching Configs");
         ConfigManager.FetchConfigs(new UserAttributes(), appParams);
     }
     
     private void ParseResponse(ConfigResponse response)
     {
         ConfigManager.FetchCompleted -= ParseResponse;
-        Debug.Log("Done Fetching Configs");
         StartCoroutine(WaitAndLoad());
     }
 
     private IEnumerator WaitAndLoad()
     {
-        Debug.Log("Waiting For Fill");
         yield return progressFill;
-        Debug.Log("Done");
         LoadCharacterConfigs();
     }
 
     private void LoadCharacterConfigs()
     {
         CharacterListConfig = GetConfigOrFallback();
-        CharactersDownloaded.Invoke(CharacterListConfig);
         SceneLoadManager.Instance.LoadScene(Scenes.CHARACTER_SELECT);
     }
 

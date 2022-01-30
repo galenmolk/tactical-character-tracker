@@ -1,12 +1,14 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BurningTokenManager : MonoBehaviour
 {
+    private const int BURNING_TOKEN_DAMAGE_AMOUNT = 1;
+    
     [SerializeField] private Image tokenImage;
     [SerializeField] private TMP_Text tokenCounterText;
-    [SerializeField] private Button addButton;
     [SerializeField] private Button subtractButton;
 
     private int tokenCount;
@@ -23,24 +25,17 @@ public class BurningTokenManager : MonoBehaviour
         UpdateUI();
     }
 
+    private void Awake()
+    {
+        UpdateUI();
+        TurnManager.Instance.SubscribeTurnEnded(ActivateBurningToken);
+    }
+
     private void UpdateUI()
     {
         subtractButton.interactable = tokenCount > 0;
         tokenImage.color = tokenCount > 0 ? Color.white : Color.gray;
         tokenCounterText.text = tokenCount.ToString();
-    }
-
-    private void OnEnable()
-    {
-        UpdateUI();
-        MessageCenter.SubscribeCharacterLoaded(_ => Reset());
-        MessageCenter.SubscribeTurnEnded(ActivateBurningToken);
-    }
-
-    private void OnDisable()
-    {
-        MessageCenter.UnsubscribeCharacterLoaded(_ => Reset());
-        MessageCenter.UnsubscribeTurnEnded(ActivateBurningToken);
     }
 
     private void Reset()
@@ -55,6 +50,6 @@ public class BurningTokenManager : MonoBehaviour
             return;
         
         Subtract();
-        MessageCenter.InvokeBurningTokenActivated();
+        CharacterSheet.Instance.TakeDamage(BURNING_TOKEN_DAMAGE_AMOUNT);
     }
 }

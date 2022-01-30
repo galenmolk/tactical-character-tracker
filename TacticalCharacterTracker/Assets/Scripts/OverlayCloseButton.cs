@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class OverlayCloseButton : MonoBehaviour
+public class OverlayCloseButton : Singleton<OverlayCloseButton>
 {
     [SerializeField] private CanvasGroup canvasGroup;
 
@@ -11,22 +11,13 @@ public class OverlayCloseButton : MonoBehaviour
     
     public void Close()
     {
-        MessageCenter.InvokeOverlayCloseButtonPressed();
+        ConfirmationBox.Instance.Close();
+        AbilityInfoBox.Instance.CloseAbilityInfo();
         Utils.SetIsCanvasGroupActive(canvasGroup, false);
     }
     
     private void Awake()
     {
         Utils.SetIsCanvasGroupActive(canvasGroup, false);
-    }
-
-    private void OnEnable()
-    {
-        MessageCenter.SubscribeAbilityInfoButtonPressed(_ => Open());  
-    }
-
-    private void OnDisable()
-    {
-        MessageCenter.UnsubscribeAbilityInfoButtonPressed(_ => Open());
     }
 }

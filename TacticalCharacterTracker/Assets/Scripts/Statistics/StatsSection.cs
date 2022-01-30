@@ -27,9 +27,9 @@ public class StatsSection : MonoBehaviour
             UpdateStatSection();
       }
 
-      public void Subtract()
+      public void Subtract(int amount)
       {
-            CurrentStat--;
+            CurrentStat -= amount;
             UpdateStatSection();
       }
 

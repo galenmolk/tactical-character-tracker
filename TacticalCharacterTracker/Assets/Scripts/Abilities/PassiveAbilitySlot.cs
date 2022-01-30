@@ -17,7 +17,7 @@ public class PassiveAbilitySlot : MonoBehaviour
 
     private void Unstoppable()
     {
-        MessageCenter.SubscribeTurnStarted(Gain2Health);
+        TurnManager.Instance.SubscribeTurnStarted(Gain2Health);
     }
 
     private void Gain2Health()
@@ -27,6 +27,6 @@ public class PassiveAbilitySlot : MonoBehaviour
     
     public void InfoButtonPressed()
     {
-        MessageCenter.InvokeAbilityInfoButtonPressed(ability);
+        AbilityInfoBox.Instance.DisplayAbilityInfo(ability);
     }
 }

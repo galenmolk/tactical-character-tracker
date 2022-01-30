@@ -1,9 +1,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
-public class AbilityInfoBox : MonoBehaviour
+public class AbilityInfoBox : Singleton<AbilityInfoBox>
 {
     [SerializeField] private TMP_Text abilityDescription;
     [SerializeField] private CanvasGroup canvasGroup;
@@ -13,30 +12,24 @@ public class AbilityInfoBox : MonoBehaviour
 
     [SerializeField] private ScrollRect textScrollRect;
     
-    private void DisplayAbilityInfo(AbilityConfig ability)
+    public void DisplayAbilityInfo(AbilityConfig ability)
     {
         abilityName.text = ability.name;
         abilityCooldown.text = ability.GetCooldownDescription();
         abilityDescription.text = ability.colorCodedDescription;
         textScrollRect.normalizedPosition = Vector2.up;
+        OverlayCloseButton.Instance.Open();
         Utils.SetIsCanvasGroupActive(canvasGroup, true);
     }
     
-    private void CloseAbilityInfo()
+    public void CloseAbilityInfo()
     {
         Utils.SetIsCanvasGroupActive(canvasGroup, false);
     }
 
-    private void OnEnable()
+    protected override void OnAwake()
     {
-        Utils.SetIsCanvasGroupActive(canvasGroup, false);
-        MessageCenter.SubscribeOverlayCloseButtonPressed(CloseAbilityInfo);
-        MessageCenter.SubscribeAbilityInfoButtonPressed(DisplayAbilityInfo);  
-    }
-
-    private void OnDisable()
-    {
-        MessageCenter.UnsubscribeOverlayCloseButtonPressed(CloseAbilityInfo);
-        MessageCenter.UnsubscribeAbilityInfoButtonPressed(DisplayAbilityInfo);
+        base.OnAwake();
+        CloseAbilityInfo();
     }
 }

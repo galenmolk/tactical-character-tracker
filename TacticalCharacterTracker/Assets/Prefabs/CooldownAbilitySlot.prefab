@@ -579,7 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365151af333446fc867703f1eb8e60d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 0}
+  button: {fileID: 5700318235424149822}
   abilityCooldown: {fileID: 8394829584783539859}
   abilityName: {fileID: 8394829584706369760}
   isCooldownActive: 0
@@ -858,6 +858,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8394829584829434822}
     m_Modifications:
+    - target: {fileID: 3500428970091486013, guid: 627514413c9cd48ea90b6571e00e11c7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2375584834616813089}
+    - target: {fileID: 3500428970091486013, guid: 627514413c9cd48ea90b6571e00e11c7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InfoButtonPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500428970091486013, guid: 627514413c9cd48ea90b6571e00e11c7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CooldownAbilitySlot, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6271315395635213073, guid: 627514413c9cd48ea90b6571e00e11c7, type: 3}
       propertyPath: m_Name
       value: InfoButton
