@@ -1,20 +1,26 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class CharacterButton : MonoBehaviour
 {
     [SerializeField] private TMP_Text characterName;
-
-    private CharacterConfig characterConfig;
+    [SerializeField] private Image image;
     
-    public void Initialize(CharacterConfig _characterConfig)
+    private CharacterConfig characterConfig;
+    private UnityAction<CharacterConfig> selectAction;
+    
+    public void Initialize(CharacterConfig _characterConfig, UnityAction<CharacterConfig> _selectAction)
     {
+        selectAction = _selectAction;
         characterConfig = _characterConfig;
+        image.color = Utils.GetColorFromHex(characterConfig.nameButtonColor) ?? Color.white; 
         characterName.text = characterConfig.name;
     }
 
     public void Select()
     {
-        CharacterSelect.Instance.SelectCharacter(characterConfig);
+        selectAction.Invoke(characterConfig);
     }
 }

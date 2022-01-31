@@ -20,7 +20,6 @@ public class ProgressBar : MonoBehaviour
 
     public IEnumerator Fill()
     {
-        Debug.Log("Beginning Fill");
         yield return YieldRegistry.WaitForSeconds(preFillDelay);
         yield return StartCoroutine(FillBar());
     }

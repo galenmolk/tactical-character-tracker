@@ -14,11 +14,14 @@ public class CharacterSheet : Singleton<CharacterSheet>
     
     protected override void OnAwake()
     {
-        reselectParameters.SetConfirmationAction(CharacterSelect.Instance.ReselectCharacter);
-        LoadCharacter(CharacterSelect.Instance.SelectedCharacter);
+        base.OnAwake();
+        if (ActiveSession.SelectedCharacter == null)
+            return;
+        
+        LoadCharacter(ActiveSession.SelectedCharacter);
     }
 
-    public void LoadCharacter(CharacterConfig character)
+    private void LoadCharacter(CharacterConfig character)
     {
         characterNameUI.LoadCharacterName(character);
         statsUI.LoadStats(character);

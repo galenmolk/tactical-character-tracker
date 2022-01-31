@@ -3,10 +3,8 @@ using Newtonsoft.Json;
 using Unity.RemoteConfig;
 using UnityEngine;
 
-public class CharacterDownloader : Singleton<CharacterDownloader>
+public class CharacterDownloader : MonoBehaviour
 {
-    public CharacterListConfig CharacterListConfig { get; private set; }
-    
     [SerializeField] private TextAsset fallbackCharacterListConfig;
     [SerializeField] private ProgressBar progressBar;
 
@@ -50,7 +48,7 @@ public class CharacterDownloader : Singleton<CharacterDownloader>
 
     private void LoadCharacterConfigs()
     {
-        CharacterListConfig = GetConfigOrFallback();
+        ActiveSession.AvailableCharacters = GetConfigOrFallback();
         SceneLoadManager.Instance.LoadScene(Scenes.CHARACTER_SELECT);
     }
 

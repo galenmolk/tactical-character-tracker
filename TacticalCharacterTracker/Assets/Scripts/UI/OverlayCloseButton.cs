@@ -6,18 +6,23 @@ public class OverlayCloseButton : Singleton<OverlayCloseButton>
 
     public void Open()
     {
-        Utils.SetIsCanvasGroupActive(canvasGroup, true);
+        canvasGroup.SetIsActive(true);
+    }
+
+    public void Clicked()
+    {
+        ConfirmationBox.Instance.Close();
+        AbilityInfoBox.Instance.CloseAbilityInfo();
+        Close();
     }
     
     public void Close()
     {
-        ConfirmationBox.Instance.Close();
-        AbilityInfoBox.Instance.CloseAbilityInfo();
-        Utils.SetIsCanvasGroupActive(canvasGroup, false);
+        canvasGroup.SetIsActive(false);
     }
     
     private void Awake()
     {
-        Utils.SetIsCanvasGroupActive(canvasGroup, false);
+        canvasGroup.SetIsActive(false);
     }
 }

@@ -18,17 +18,23 @@ public class ConfirmationBox : Singleton<ConfirmationBox>
     [SerializeField] private TMP_Text denyButtonText;
     [SerializeField] private Button denyButton;
     
+    [Space(10)]
+    [SerializeField] private CanvasGroup canvasGroup;
+    
     private ConfirmationParameters parameters;
     
-    public void Open(ConfirmationParameters parameters)
+    public void Open(ConfirmationParameters _parameters)
     {
-        SetProperties(parameters);
-        gameObject.SetActive(true);
+        parameters = _parameters;
+        OverlayCloseButton.Instance.Open();
+        SetProperties();
+        canvasGroup.SetIsActive(true);
     }
 
     public void Close()
     {
-        gameObject.SetActive(false);
+        OverlayCloseButton.Instance.Close();
+        canvasGroup.SetIsActive(false);
     }
 
     public void Confirm()
@@ -48,13 +54,13 @@ public class ConfirmationBox : Singleton<ConfirmationBox>
         Close();
     }
 
-    private void SetProperties(ConfirmationParameters parameters)
+    private void SetProperties()
     {
         description.text = parameters.Description;
         prompt.text = parameters.Prompt;
         confirmButtonText.text = parameters.ConfirmButtonText;
-        confirmButton.colors = parameters.ConfirmButtonColorBlock;
+        confirmButton.colors = parameters.ConfirmBlock;
         denyButtonText.text = parameters.DenyButtonText;
-        denyButton.colors = parameters.DenyButtonColorBlock;
+        denyButton.colors = parameters.DenyBlock;
     }
 }

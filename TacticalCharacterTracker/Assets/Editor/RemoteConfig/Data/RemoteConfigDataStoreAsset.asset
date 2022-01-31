@@ -12,22 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"98e86f28-adfd-4e2f-b77a-259be3d3910a\"\n   
+  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"a22f4da1-b213-41ce-846c-a2fdb3aa9dfa\"\n   
     },\n    \"rs\": {\n      \"key\": \"characterList\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"characterList\": [\n         
-    {\n            \"name\": \"Aggo\",\n            \"defense\": 22,\n           
-    \"health\": 13,\n            \"speed\": 6,\n            \"passiveAbilities\":
-    [\n              {\n                \"name\": \"Rage\",\n                \"description\":
-    \"When Aggo's combined defense and health is below 12, it gains an additional
-    +1 damage to all damage-dealing abilities and an additional +1 movement to all
-    movement abilities and move actions.\"\n              },\n              {\n               
-    \"name\": \"Unstoppable\",\n                \"description\": \"Gain 2 defense
-    at the beginning of each turn.\"\n              }\n            ],\n           
-    \"cooldownAbilities\": [\n              {\n                \"name\": \"Slither\",\n               
-    \"description\": \"Melee. An adjacent target receives 2 damage. AND/OR Aggo gains
-    2 defense.\",\n                \"cooldown\": 0\n              },\n             
-    {\n                \"name\": \"Flurry\",\n                \"description\": \"Burst
-    1. All creatures in burst receive 3 damage.\",\n                \"cooldown\":
+    {\n            \"name\": \"Aggo\",\n            \"nameButtonColor\": \"#A0F7FF\",\n           
+    \"defense\": 22,\n            \"health\": 13,\n            \"speed\": 6,\n           
+    \"passiveAbilities\": [\n              {\n                \"name\": \"Rage\",\n               
+    \"description\": \"When Aggo's combined defense and health is below 12, it gains
+    an additional +1 damage to all damage-dealing abilities and an additional +1
+    movement to all movement abilities and move actions.\"\n              },\n             
+    {\n                \"name\": \"Unstoppable\",\n                \"description\":
+    \"Gain 2 defense at the beginning of each turn.\"\n              }\n           
+    ],\n            \"cooldownAbilities\": [\n              {\n                \"name\":
+    \"Slither\",\n                \"description\": \"Melee. An adjacent target receives
+    2 damage. AND/OR Aggo gains 2 defense.\",\n                \"cooldown\": 0\n             
+    },\n              {\n                \"name\": \"Flurry\",\n                \"description\":
+    \"Burst 1. All creatures in burst receive 3 damage.\",\n                \"cooldown\":
     3\n              },\n              {\n                \"name\": \"Tentacle Slam\",\n               
     \"description\": \"Line 3. All creatures in line receive 4 damage.\",\n               
     \"cooldown\": 4\n              },\n              {\n                \"name\":
@@ -79,37 +79,38 @@ MonoBehaviour:
     true\n              },\n              {\n                \"name\": \"Devour Essence\",\n               
     \"description\": \"Melee. An adjacent creature receives 9 damage. Gain 4 defense.\",\n               
     \"cooldown\": 9\n              }\n            ]\n          },\n          {\n           
-    \"name\": \"Dio\",\n            \"defense\": 14,\n            \"health\": 10,\n           
-    \"speed\": 6,\n            \"passiveAbilities\": [],\n            \"cooldownAbilities\":
-    [\n              {\n                \"cooldown\": 0,\n                \"name\":
-    \"Hum\",\n                \"description\": \"Melee. Deal 2 damage to an adjacent
-    target. AND/OR Gain 2 defense.\"\n              },\n              {\n               
-    \"cooldown\": 2,\n                \"name\": \"Note of Discord\",\n               
-    \"description\": \"Ranged 10. Deal 3 damage to a target within range. May target
-    enemies not in line of sight.\"\n              },\n              {\n               
-    \"cooldown\": 3,\n                \"name\": \"Turret\",\n                \"description\":
-    \"Summon a turret in an unoccupied adjacent hex. The turret has: Speed 0 (cannot
-    move), Health 2, Defense 0, no threat aura, does not block line of sight, blocks
-    movement. The turret's ability is: Ranged 10. Deal 2 damage to a target within
-    range. The turret may act at any point during the players' round.\"\n             
+    \"name\": \"Dio\",\n            \"nameButtonColor\": \"#A0A0FF\",\n           
+    \"defense\": 14,\n            \"health\": 10,\n            \"speed\": 6,\n           
+    \"passiveAbilities\": [],\n            \"cooldownAbilities\": [\n             
+    {\n                \"cooldown\": 0,\n                \"name\": \"Hum\",\n               
+    \"description\": \"Melee. Deal 2 damage to an adjacent target. AND/OR Gain 2
+    defense.\"\n              },\n              {\n                \"cooldown\":
+    2,\n                \"name\": \"Note of Discord\",\n                \"description\":
+    \"Ranged 10. Deal 3 damage to a target within range. May target enemies not in
+    line of sight.\"\n              },\n              {\n                \"cooldown\":
+    3,\n                \"name\": \"Turret\",\n                \"description\": \"Summon
+    a turret in an unoccupied adjacent hex. The turret has: Speed 0 (cannot move),
+    Health 2, Defense 0, no threat aura, does not block line of sight, blocks movement.
+    The turret's ability is: Ranged 10. Deal 2 damage to a target within range. The
+    turret may act at any point during the players' round.\"\n              },\n             
+    {\n                \"cooldown\": 3,\n                \"name\": \"Quick Fix\",\n               
+    \"description\": \"Interrupt. Ranged 10. A target within range gains 3 defense.
+    OR. Interrupt. Gain 3 defense.\",\n                \"isInterrupt\": true\n             
     },\n              {\n                \"cooldown\": 3,\n                \"name\":
-    \"Quick Fix\",\n                \"description\": \"Interrupt. Ranged 10. A target
-    within range gains 3 defense. OR. Interrupt. Gain 3 defense.\",\n               
-    \"isInterrupt\": true\n              },\n              {\n                \"cooldown\":
-    3,\n                \"name\": \"Tether\",\n                \"description\": \"Ranged
-    8. Summon a tether in an unoccupied hex within range. The tether has: Speed 0
-    (cannot move), Health 2, Defense 0, no threat aura, blocks line of sight, blocks
-    movement. The tether uses its ability immediately: Melee reach 1. A target within
-    reach cannot move out of a burst 1 of the tether and receives 2 damage at the
-    end of the players' turn. Ability ends when the tether is destroyed.\"\n             
-    },\n              {\n                \"cooldown\": 5,\n                \"name\":
-    \"Musical Blast\",\n                \"description\": \"An adjacent target recieves
-    2 damage and is pushed up to 3 hexes. Dio is pushed away from the adjacent target
-    up to 4 hexes in a line of Dio's choosing.\"\n              },\n             
-    {\n                \"cooldown\": 5,\n                \"name\": \"Bouncing Note\",\n               
-    \"description\": \"Ranged 5. A target within range receives 4 damage. A second
-    ability may be used this turn, originating from the targeted creature's hex.
-    Melee reach 5. A creature within reach receives 4 damage.\"\n              },\n             
+    \"Tether\",\n                \"description\": \"Ranged 8. Summon a tether in
+    an unoccupied hex within range. The tether has: Speed 0 (cannot move), Health
+    2, Defense 0, no threat aura, blocks line of sight, blocks movement. The tether
+    uses its ability immediately: Melee reach 1. A target within reach cannot move
+    out of a burst 1 of the tether and receives 2 damage at the end of the players'
+    turn. Ability ends when the tether is destroyed.\"\n              },\n             
+    {\n                \"cooldown\": 5,\n                \"name\": \"Musical Blast\",\n               
+    \"description\": \"An adjacent target recieves 2 damage and is pushed up to 3
+    hexes. Dio is pushed away from the adjacent target up to 4 hexes in a line of
+    Dio's choosing.\"\n              },\n              {\n                \"cooldown\":
+    5,\n                \"name\": \"Bouncing Note\",\n                \"description\":
+    \"Ranged 5. A target within range receives 4 damage. A second ability may be
+    used this turn, originating from the targeted creature's hex. Melee reach 5.
+    A creature within reach receives 4 damage.\"\n              },\n             
     {\n                \"cooldown\": 5,\n                \"name\": \"Unbearable Beat\",\n               
     \"description\": \"Ranged 10 Burst 1. All creatures in burst receive 4 damage.\"\n             
     },\n              {\n                \"cooldown\": 5,\n                \"name\":
@@ -136,14 +137,15 @@ MonoBehaviour:
     \"description\": \"Ranged 6. Dio dashes a target within range up to 5 hexes.
     The target and all enemies within a burst 1 receive 4 damage.\"\n             
     }\n            ]\n          },\n          {\n            \"name\": \"Kazak\",\n           
-    \"defense\": 16,\n            \"health\": 10,\n            \"speed\": 6,\n           
-    \"passiveAbilities\": [\n              {\n                \"name\": \"Heart of
-    Fire\",\n                \"description\": \"At the start of battle, a magic orb
-    may be summoned in any adjacent hex as a free action. At any time during Kasak\u2019s
-    turn, the orb may be moved up to 3 hexes as a free action. The orb can move through
-    or occupy the same hex as creatures, but not obstacles. At any point during the
-    player's round, Kazak may deal 2 damage to one creature that occupies the orb\u2019s
-    hex. The orb may be dismissed on Kazak\u2019s turn as a free action, but an action
+    \"nameButtonColor\": \"#FFA0C3\",\n            \"defense\": 16,\n           
+    \"health\": 10,\n            \"speed\": 6,\n            \"passiveAbilities\":
+    [\n              {\n                \"name\": \"Heart of Fire\",\n               
+    \"description\": \"At the start of battle, a magic orb may be summoned in any
+    adjacent hex as a free action. At any time during Kasak\u2019s turn, the orb
+    may be moved up to 3 hexes as a free action. The orb can move through or occupy
+    the same hex as creatures, but not obstacles. At any point during the player's
+    round, Kazak may deal 2 damage to one creature that occupies the orb\u2019s hex.
+    The orb may be dismissed on Kazak\u2019s turn as a free action, but an action
     must be spent to resummon it in an adjacent hex.\"\n              }\n           
     ],\n            \"cooldownAbilities\": [\n              {\n                \"cooldown\":
     0,\n                \"name\": \"Rock Fist\",\n                \"description\":
@@ -198,22 +200,22 @@ MonoBehaviour:
     {\n                \"cooldown\": 10,\n                \"name\": \"Wind Walk\",\n               
     \"description\": \"Teleport up to 10 hexes. Gain 6 defense.\"\n             
     }\n            ]\n          }\n        ]\n      }\n    }\n  }\n]"
-  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"98e86f28-adfd-4e2f-b77a-259be3d3910a\"\n   
+  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"a22f4da1-b213-41ce-846c-a2fdb3aa9dfa\"\n   
     },\n    \"rs\": {\n      \"key\": \"characterList\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"characterList\": [\n         
-    {\n            \"name\": \"Aggo\",\n            \"defense\": 22,\n           
-    \"health\": 13,\n            \"speed\": 6,\n            \"passiveAbilities\":
-    [\n              {\n                \"name\": \"Rage\",\n                \"description\":
-    \"When Aggo's combined defense and health is below 12, it gains an additional
-    +1 damage to all damage-dealing abilities and an additional +1 movement to all
-    movement abilities and move actions.\"\n              },\n              {\n               
-    \"name\": \"Unstoppable\",\n                \"description\": \"Gain 2 defense
-    at the beginning of each turn.\"\n              }\n            ],\n           
-    \"cooldownAbilities\": [\n              {\n                \"name\": \"Slither\",\n               
-    \"description\": \"Melee. An adjacent target receives 2 damage. AND/OR Aggo gains
-    2 defense.\",\n                \"cooldown\": 0\n              },\n             
-    {\n                \"name\": \"Flurry\",\n                \"description\": \"Burst
-    1. All creatures in burst receive 3 damage.\",\n                \"cooldown\":
+    {\n            \"name\": \"Aggo\",\n            \"nameButtonColor\": \"#A0F7FF\",\n           
+    \"defense\": 22,\n            \"health\": 13,\n            \"speed\": 6,\n           
+    \"passiveAbilities\": [\n              {\n                \"name\": \"Rage\",\n               
+    \"description\": \"When Aggo's combined defense and health is below 12, it gains
+    an additional +1 damage to all damage-dealing abilities and an additional +1
+    movement to all movement abilities and move actions.\"\n              },\n             
+    {\n                \"name\": \"Unstoppable\",\n                \"description\":
+    \"Gain 2 defense at the beginning of each turn.\"\n              }\n           
+    ],\n            \"cooldownAbilities\": [\n              {\n                \"name\":
+    \"Slither\",\n                \"description\": \"Melee. An adjacent target receives
+    2 damage. AND/OR Aggo gains 2 defense.\",\n                \"cooldown\": 0\n             
+    },\n              {\n                \"name\": \"Flurry\",\n                \"description\":
+    \"Burst 1. All creatures in burst receive 3 damage.\",\n                \"cooldown\":
     3\n              },\n              {\n                \"name\": \"Tentacle Slam\",\n               
     \"description\": \"Line 3. All creatures in line receive 4 damage.\",\n               
     \"cooldown\": 4\n              },\n              {\n                \"name\":
@@ -265,37 +267,38 @@ MonoBehaviour:
     true\n              },\n              {\n                \"name\": \"Devour Essence\",\n               
     \"description\": \"Melee. An adjacent creature receives 9 damage. Gain 4 defense.\",\n               
     \"cooldown\": 9\n              }\n            ]\n          },\n          {\n           
-    \"name\": \"Dio\",\n            \"defense\": 14,\n            \"health\": 10,\n           
-    \"speed\": 6,\n            \"passiveAbilities\": [],\n            \"cooldownAbilities\":
-    [\n              {\n                \"cooldown\": 0,\n                \"name\":
-    \"Hum\",\n                \"description\": \"Melee. Deal 2 damage to an adjacent
-    target. AND/OR Gain 2 defense.\"\n              },\n              {\n               
-    \"cooldown\": 2,\n                \"name\": \"Note of Discord\",\n               
-    \"description\": \"Ranged 10. Deal 3 damage to a target within range. May target
-    enemies not in line of sight.\"\n              },\n              {\n               
-    \"cooldown\": 3,\n                \"name\": \"Turret\",\n                \"description\":
-    \"Summon a turret in an unoccupied adjacent hex. The turret has: Speed 0 (cannot
-    move), Health 2, Defense 0, no threat aura, does not block line of sight, blocks
-    movement. The turret's ability is: Ranged 10. Deal 2 damage to a target within
-    range. The turret may act at any point during the players' round.\"\n             
+    \"name\": \"Dio\",\n            \"nameButtonColor\": \"#A0A0FF\",\n           
+    \"defense\": 14,\n            \"health\": 10,\n            \"speed\": 6,\n           
+    \"passiveAbilities\": [],\n            \"cooldownAbilities\": [\n             
+    {\n                \"cooldown\": 0,\n                \"name\": \"Hum\",\n               
+    \"description\": \"Melee. Deal 2 damage to an adjacent target. AND/OR Gain 2
+    defense.\"\n              },\n              {\n                \"cooldown\":
+    2,\n                \"name\": \"Note of Discord\",\n                \"description\":
+    \"Ranged 10. Deal 3 damage to a target within range. May target enemies not in
+    line of sight.\"\n              },\n              {\n                \"cooldown\":
+    3,\n                \"name\": \"Turret\",\n                \"description\": \"Summon
+    a turret in an unoccupied adjacent hex. The turret has: Speed 0 (cannot move),
+    Health 2, Defense 0, no threat aura, does not block line of sight, blocks movement.
+    The turret's ability is: Ranged 10. Deal 2 damage to a target within range. The
+    turret may act at any point during the players' round.\"\n              },\n             
+    {\n                \"cooldown\": 3,\n                \"name\": \"Quick Fix\",\n               
+    \"description\": \"Interrupt. Ranged 10. A target within range gains 3 defense.
+    OR. Interrupt. Gain 3 defense.\",\n                \"isInterrupt\": true\n             
     },\n              {\n                \"cooldown\": 3,\n                \"name\":
-    \"Quick Fix\",\n                \"description\": \"Interrupt. Ranged 10. A target
-    within range gains 3 defense. OR. Interrupt. Gain 3 defense.\",\n               
-    \"isInterrupt\": true\n              },\n              {\n                \"cooldown\":
-    3,\n                \"name\": \"Tether\",\n                \"description\": \"Ranged
-    8. Summon a tether in an unoccupied hex within range. The tether has: Speed 0
-    (cannot move), Health 2, Defense 0, no threat aura, blocks line of sight, blocks
-    movement. The tether uses its ability immediately: Melee reach 1. A target within
-    reach cannot move out of a burst 1 of the tether and receives 2 damage at the
-    end of the players' turn. Ability ends when the tether is destroyed.\"\n             
-    },\n              {\n                \"cooldown\": 5,\n                \"name\":
-    \"Musical Blast\",\n                \"description\": \"An adjacent target recieves
-    2 damage and is pushed up to 3 hexes. Dio is pushed away from the adjacent target
-    up to 4 hexes in a line of Dio's choosing.\"\n              },\n             
-    {\n                \"cooldown\": 5,\n                \"name\": \"Bouncing Note\",\n               
-    \"description\": \"Ranged 5. A target within range receives 4 damage. A second
-    ability may be used this turn, originating from the targeted creature's hex.
-    Melee reach 5. A creature within reach receives 4 damage.\"\n              },\n             
+    \"Tether\",\n                \"description\": \"Ranged 8. Summon a tether in
+    an unoccupied hex within range. The tether has: Speed 0 (cannot move), Health
+    2, Defense 0, no threat aura, blocks line of sight, blocks movement. The tether
+    uses its ability immediately: Melee reach 1. A target within reach cannot move
+    out of a burst 1 of the tether and receives 2 damage at the end of the players'
+    turn. Ability ends when the tether is destroyed.\"\n              },\n             
+    {\n                \"cooldown\": 5,\n                \"name\": \"Musical Blast\",\n               
+    \"description\": \"An adjacent target recieves 2 damage and is pushed up to 3
+    hexes. Dio is pushed away from the adjacent target up to 4 hexes in a line of
+    Dio's choosing.\"\n              },\n              {\n                \"cooldown\":
+    5,\n                \"name\": \"Bouncing Note\",\n                \"description\":
+    \"Ranged 5. A target within range receives 4 damage. A second ability may be
+    used this turn, originating from the targeted creature's hex. Melee reach 5.
+    A creature within reach receives 4 damage.\"\n              },\n             
     {\n                \"cooldown\": 5,\n                \"name\": \"Unbearable Beat\",\n               
     \"description\": \"Ranged 10 Burst 1. All creatures in burst receive 4 damage.\"\n             
     },\n              {\n                \"cooldown\": 5,\n                \"name\":
@@ -322,14 +325,15 @@ MonoBehaviour:
     \"description\": \"Ranged 6. Dio dashes a target within range up to 5 hexes.
     The target and all enemies within a burst 1 receive 4 damage.\"\n             
     }\n            ]\n          },\n          {\n            \"name\": \"Kazak\",\n           
-    \"defense\": 16,\n            \"health\": 10,\n            \"speed\": 6,\n           
-    \"passiveAbilities\": [\n              {\n                \"name\": \"Heart of
-    Fire\",\n                \"description\": \"At the start of battle, a magic orb
-    may be summoned in any adjacent hex as a free action. At any time during Kasak\u2019s
-    turn, the orb may be moved up to 3 hexes as a free action. The orb can move through
-    or occupy the same hex as creatures, but not obstacles. At any point during the
-    player's round, Kazak may deal 2 damage to one creature that occupies the orb\u2019s
-    hex. The orb may be dismissed on Kazak\u2019s turn as a free action, but an action
+    \"nameButtonColor\": \"#FFA0C3\",\n            \"defense\": 16,\n           
+    \"health\": 10,\n            \"speed\": 6,\n            \"passiveAbilities\":
+    [\n              {\n                \"name\": \"Heart of Fire\",\n               
+    \"description\": \"At the start of battle, a magic orb may be summoned in any
+    adjacent hex as a free action. At any time during Kasak\u2019s turn, the orb
+    may be moved up to 3 hexes as a free action. The orb can move through or occupy
+    the same hex as creatures, but not obstacles. At any point during the player's
+    round, Kazak may deal 2 damage to one creature that occupies the orb\u2019s hex.
+    The orb may be dismissed on Kazak\u2019s turn as a free action, but an action
     must be spent to resummon it in an adjacent hex.\"\n              }\n           
     ],\n            \"cooldownAbilities\": [\n              {\n                \"cooldown\":
     0,\n                \"name\": \"Rock Fist\",\n                \"description\":

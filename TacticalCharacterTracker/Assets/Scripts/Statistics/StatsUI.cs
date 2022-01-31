@@ -15,7 +15,6 @@ public class StatsUI : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        Debug.Log("Take Damage");
         int health = healthSection.CurrentStat;
         int defense = defenseSection.CurrentStat;
         

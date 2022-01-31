@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public static class Utils
+public static class CanvasGroupExtensions
 {
-    public static void SetIsCanvasGroupActive(CanvasGroup canvasGroup, bool isActive)
+    public static void SetIsActive(this CanvasGroup canvasGroup, bool isActive)
     {
         canvasGroup.alpha = isActive ? 1f : 0f;
         canvasGroup.interactable = isActive;

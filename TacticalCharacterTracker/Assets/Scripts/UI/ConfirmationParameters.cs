@@ -1,26 +1,17 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "Confirmation Parameters", menuName = "Custom/Confirmation Parameters")]
-public class ConfirmationParameters : ScriptableObject
+public abstract class ConfirmationParameters : ScriptableObject
 {
     public string Prompt => prompt;
     public string Description => description;
     public string ConfirmButtonText => confirmButtonText;
-    public ColorBlock ConfirmButtonColorBlock => confirmButtonColorBlock;
+    public ColorBlock ConfirmBlock => confirmBlock;
     public string DenyButtonText => denyButtonText;
-    public ColorBlock DenyButtonColorBlock => denyButtonColorBlock;
+    public ColorBlock DenyBlock => denyBlock;
 
-    public void InvokeConfirmationAction()
-    {
-        action.Invoke();
-    }
-
-    public void SetConfirmationAction(UnityAction unityAction)
-    {
-        action = unityAction;
-    }
+    public abstract void InvokeConfirmationAction();
     
     [Header("Confirmation Text")]
     [SerializeField] private string prompt;
@@ -29,12 +20,16 @@ public class ConfirmationParameters : ScriptableObject
     [Space(10)]
     [Header("Confirm Button")]
     [SerializeField] private string confirmButtonText;
-    [SerializeField] private ColorBlock confirmButtonColorBlock;
+    [SerializeField] private ColorBlock confirmBlock;
 
     [Space(10)]
     [Header("Deny Button")]
     [SerializeField] private string denyButtonText;
-    [SerializeField] private ColorBlock denyButtonColorBlock;
+    [SerializeField] private ColorBlock denyBlock;
 
-    private UnityAction action;
+    private void Awake()
+    {
+        confirmBlock.colorMultiplier = Mathf.Clamp(confirmBlock.colorMultiplier, 1f, 5f);
+        denyBlock.colorMultiplier = Mathf.Clamp(denyBlock.colorMultiplier, 1f, 5f);
+    }
 }

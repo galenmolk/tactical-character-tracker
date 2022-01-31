@@ -19,12 +19,13 @@ public class AbilityInfoBox : Singleton<AbilityInfoBox>
         abilityDescription.text = ability.colorCodedDescription;
         textScrollRect.normalizedPosition = Vector2.up;
         OverlayCloseButton.Instance.Open();
-        Utils.SetIsCanvasGroupActive(canvasGroup, true);
+        canvasGroup.SetIsActive(true);
     }
     
     public void CloseAbilityInfo()
     {
-        Utils.SetIsCanvasGroupActive(canvasGroup, false);
+        OverlayCloseButton.Instance.Close();
+        canvasGroup.SetIsActive(false);
     }
 
     protected override void OnAwake()

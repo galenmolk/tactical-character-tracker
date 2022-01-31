@@ -4,6 +4,7 @@ using System;
 public class CharacterConfig
 {
     public string name;
+    public string nameButtonColor;
     
     public int defense;
     public int health;

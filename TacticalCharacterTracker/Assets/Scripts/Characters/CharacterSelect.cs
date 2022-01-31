@@ -1,25 +1,30 @@
 using UnityEngine;
 
-public class CharacterSelect : Singleton<CharacterSelect>
+public class CharacterSelect : MonoBehaviour
 {
-    [SerializeField] private CharacterSelectUI characterSelectUI;
+    [SerializeField] private CharacterButton characterButtonPrefab;
+    [SerializeField] private RectTransform characterButtonParent;
     
-    public CharacterConfig SelectedCharacter { get; private set; }
-
-
-    public void ReselectCharacter()
+    protected void Awake()
     {
-        SceneLoadManager.Instance.LoadScene(Scenes.CHARACTER_SELECT);
+        if (ActiveSession.AvailableCharacters == null)
+            return;
+        
+        PopulateCharacterButtons(ActiveSession.AvailableCharacters);
     }
 
-    protected override void OnAwake()
+    private void SelectAndLoadCharacter(CharacterConfig characterConfig)
     {
-        characterSelectUI.PopulateCharacterButtons(CharacterDownloader.Instance.CharacterListConfig);
-    }
-
-    public void SelectCharacter(CharacterConfig characterConfig)
-    {
-        SelectedCharacter = characterConfig;
+        ActiveSession.SelectedCharacter = characterConfig;
         SceneLoadManager.Instance.LoadScene(Scenes.CHARACTER_SHEET);
+    }
+
+    private void PopulateCharacterButtons(CharacterListConfig characterListConfig)
+    {
+        for (int i = 0, length = characterListConfig.characterList.Count; i < length; i++)
+        {
+            CharacterButton button = Instantiate(characterButtonPrefab, characterButtonParent);
+            button.Initialize(characterListConfig.characterList[i], SelectAndLoadCharacter);
+        }
     }
 }

@@ -1155,10 +1155,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 183146015}
+  - component: {fileID: 183146019}
   - component: {fileID: 183146017}
   - component: {fileID: 183146016}
   - component: {fileID: 183146018}
-  - component: {fileID: 183146019}
   - component: {fileID: 183146020}
   m_Layer: 5
   m_Name: OverlayCloseButton
@@ -1271,7 +1271,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 183146019}
         m_TargetAssemblyTypeName: OverlayCloseButton, Assembly-CSharp
-        m_MethodName: Close
+        m_MethodName: Clicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34cdba5094b0480e89c218d8080ea7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _persistent: 1
+  _persistent: 0
   canvasGroup: {fileID: 183146020}
 --- !u!225 &183146020
 CanvasGroup:
@@ -2163,7 +2163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed567e4e81247b5885e3e60c4cb1183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _persistent: 1
+  _persistent: 0
   abilityDescription: {fileID: 1995078906}
   canvasGroup: {fileID: 301760086}
   abilityName: {fileID: 1620292901}
@@ -2393,6 +2393,63 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1379690303067583028, guid: f2ee473c3229c4749934c2c10779913f, type: 3}
   m_PrefabInstance: {fileID: 316929606}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &328316984
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 856464724005519887, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
+      propertyPath: m_Name
+      value: GoToLoad
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597123514256950471, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597123514256950471, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597123514256950471, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597123514256950471, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597123514256950471, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597123514256950471, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597123514256950471, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597123514256950471, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597123514256950471, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597123514256950471, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597123514256950471, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 03b9d67040ee849babb1d281d97580f9, type: 3}
 --- !u!1 &390220039
 GameObject:
   m_ObjectHideFlags: 0
@@ -4644,11 +4701,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1147044106}
         m_TargetAssemblyTypeName: StatsSection, Assembly-CSharp
         m_MethodName: Subtract
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6072,7 +6129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d954bf51a40754cdeb08ad1b7580f523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _persistent: 1
+  _persistent: 0
   startTurnButton: {fileID: 667575724}
   endTurnButton: {fileID: 1826330291}
 --- !u!1 &1238456664
@@ -6086,7 +6143,7 @@ GameObject:
   - component: {fileID: 1238456665}
   - component: {fileID: 1238456666}
   m_Layer: 0
-  m_Name: CharacterSheetPersistent
+  m_Name: CharacterSheet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6119,11 +6176,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f477be3130254955a73bf7b6bf18a01f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _persistent: 1
+  _persistent: 0
   statsUI: {fileID: 2113350743}
   abilityUI: {fileID: 807848517}
   characterNameUI: {fileID: 527868960}
-  reselectParameters: {fileID: 11400000, guid: 2a49ab3ce17784cd982437d6f9fa77c1, type: 2}
+  reselectParameters: {fileID: 11400000, guid: dd605c0c509bc4e689b8943f9d8ec001, type: 2}
 --- !u!1 &1300397844
 GameObject:
   m_ObjectHideFlags: 0
@@ -8883,11 +8940,11 @@ MonoBehaviour:
       - m_Target: {fileID: 2051449235}
         m_TargetAssemblyTypeName: StatsSection, Assembly-CSharp
         m_MethodName: Subtract
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -9552,8 +9609,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 35, y: 0}
+  m_SizeDelta: {x: 1504, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1995078906
 MonoBehaviour:
@@ -10025,11 +10082,11 @@ MonoBehaviour:
       - m_Target: {fileID: 635968878}
         m_TargetAssemblyTypeName: StatsSection, Assembly-CSharp
         m_MethodName: Subtract
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -10137,6 +10194,7 @@ GameObject:
   - component: {fileID: 2146175378}
   - component: {fileID: 2146175382}
   - component: {fileID: 2146175383}
+  - component: {fileID: 2146175384}
   m_Layer: 5
   m_Name: ConfirmationBox
   m_TagString: Untagged
@@ -10185,13 +10243,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624f9c3279b8440afad040d80604fc04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _persistent: 1
+  _persistent: 0
   prompt: {fileID: 1354257289}
   description: {fileID: 744026195}
   confirmButtonText: {fileID: 275997110}
   confirmButton: {fileID: 1701274697}
   denyButtonText: {fileID: 1475573054}
   denyButton: {fileID: 1049774455}
+  canvasGroup: {fileID: 2146175384}
+--- !u!225 &2146175384
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146175377}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!224 &76635245349844008
 RectTransform:
   m_ObjectHideFlags: 0
