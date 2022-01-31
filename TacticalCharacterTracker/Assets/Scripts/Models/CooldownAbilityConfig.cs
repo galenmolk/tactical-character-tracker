@@ -19,7 +19,7 @@ public class CooldownAbilityConfig : AbilityConfig
         return $"{cooldown} {GetTurnText(cooldown)}";
     }
 
-    public string GetCurrentCooldownDescription(int currentCooldown)
+    public override string GetCurrentCooldownDescription(int currentCooldown)
     {
         return $"{currentCooldown} {GetTurnText(currentCooldown)} Left";
     }

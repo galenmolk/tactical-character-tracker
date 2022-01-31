@@ -9,4 +9,9 @@ public class PassiveAbilityConfig : AbilityConfig
      {
           return PASSIVE_TEXT;
      }
+
+     public override string GetCurrentCooldownDescription(int currentCooldown)
+     {
+          return PASSIVE_TEXT;
+     }
 }

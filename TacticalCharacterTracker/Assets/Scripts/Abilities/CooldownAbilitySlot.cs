@@ -2,21 +2,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CooldownAbilitySlot : MonoBehaviour
+public class CooldownAbilitySlot : AbilitySlot<CooldownAbilityConfig>
 {
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text abilityCooldown;
-    [SerializeField] protected TMP_Text abilityName;
 
     private int totalCooldown;
     private int currentCooldown;
-    private CooldownAbilityConfig ability;
-    public bool isCooldownActive;
+    private bool isCooldownActive;
 
-    public void Initialize(CooldownAbilityConfig _ability)
+    public override void Initialize(CooldownAbilityConfig _ability)
     {
-        ability = _ability;
-        abilityName.text = ability.name;
+        base.Initialize(_ability);
         totalCooldown = _ability.cooldown;
         currentCooldown = totalCooldown;
         UpdateCooldownText();
@@ -27,11 +24,6 @@ public class CooldownAbilitySlot : MonoBehaviour
         isCooldownActive = true;
         Deactivate();
         UpdateCooldownText();
-    }
-
-    public void InfoButtonPressed()
-    {
-        AbilityInfoBox.Instance.DisplayAbilityInfo(ability);
     }
 
     private void Awake()

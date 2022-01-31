@@ -10,7 +10,8 @@ public abstract class AbilityConfig
     public string colorCodedDescription;
     
     public abstract string GetCooldownDescription();
-        
+    public abstract string GetCurrentCooldownDescription(int currentCooldown);
+    
     [OnDeserialized]
     private void OnDeserializedMethod(StreamingContext context)
     {

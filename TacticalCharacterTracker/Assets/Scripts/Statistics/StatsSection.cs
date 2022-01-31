@@ -21,9 +21,9 @@ public class StatsSection : MonoBehaviour
             UpdateButtonStates();
       }
 
-      public void Add()
+      public void Add(int amount)
       {
-            CurrentStat++;
+            CurrentStat += amount;
             UpdateStatSection();
       }
 
@@ -31,6 +31,16 @@ public class StatsSection : MonoBehaviour
       {
             CurrentStat -= amount;
             UpdateStatSection();
+      }
+
+      public void GainStat(int amount)
+      {
+            int differenceFromTotal = TotalStat - CurrentStat;
+        
+            if (differenceFromTotal == 0)
+                  return;
+
+            Add(Mathf.Min(amount, differenceFromTotal));
       }
 
       private void UpdateStatSection()

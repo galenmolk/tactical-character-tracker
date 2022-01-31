@@ -13,6 +13,11 @@ public class StatsUI : MonoBehaviour
         speedSection.LoadStat(character.speed);
     }
 
+    public void GainDefense(int amount)
+    {
+        defenseSection.GainStat(amount);
+    }
+    
     public void TakeDamage(int amount)
     {
         int health = healthSection.CurrentStat;
@@ -37,23 +42,5 @@ public class StatsUI : MonoBehaviour
         
         // Subtract this remainder -- or just remove all health if damage would result in negative value.
         healthSection.Subtract(health >= healthDamage ? healthDamage : health);
-    }
-
-    public void Unstoppable()
-    {
-        int defenseDiff = defenseSection.TotalStat - defenseSection.CurrentStat;
-        
-        if (defenseDiff == 0)
-            return;
-
-        if (defenseDiff == 1)
-        {
-            defenseSection.Add();
-        }
-        else
-        {
-            defenseSection.Add();
-            defenseSection.Add();
-        }
     }
 }
