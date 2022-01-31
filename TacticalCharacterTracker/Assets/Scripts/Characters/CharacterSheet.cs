@@ -35,6 +35,6 @@ public class CharacterSheet : Singleton<CharacterSheet>
 
     public void GainDefense(int amount)
     {
-        statsUI.TakeDamage(amount);
+        statsUI.GainDefense(amount);
     }
 }
