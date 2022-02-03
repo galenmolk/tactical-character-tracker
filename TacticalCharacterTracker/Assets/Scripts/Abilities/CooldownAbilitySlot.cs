@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CooldownAbilitySlot : AbilitySlot<CooldownAbilityConfig>
+public class CooldownAbilitySlot : AbilitySlot<AbilityConfig>
 {
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text abilityCooldown;
@@ -11,7 +11,7 @@ public class CooldownAbilitySlot : AbilitySlot<CooldownAbilityConfig>
     private int currentCooldown;
     private bool isCooldownActive;
 
-    public override void Initialize(CooldownAbilityConfig _ability)
+    public override void Initialize(AbilityConfig _ability)
     {
         base.Initialize(_ability);
         totalCooldown = _ability.cooldown;

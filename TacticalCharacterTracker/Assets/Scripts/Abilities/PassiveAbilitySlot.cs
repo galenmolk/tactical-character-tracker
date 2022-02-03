@@ -1,1 +1,1 @@
-public class PassiveAbilitySlot : AbilitySlot<PassiveAbilityConfig> { }
+//public class PassiveAbilitySlot : AbilitySlot<PassiveAbilityConfig> { }
