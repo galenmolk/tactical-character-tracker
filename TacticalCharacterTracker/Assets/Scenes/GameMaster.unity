@@ -1398,7 +1398,7 @@ GameObject:
   - component: {fileID: 151847363}
   - component: {fileID: 151847362}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: Enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7953,6 +7953,8 @@ MonoBehaviour:
   _persistent: 0
   canvasGroup: {fileID: 936885855}
   dungeonNameText: {fileID: 1064826194}
+  enemyCardParent: {fileID: 486385721}
+  enemyCardPrefab: {fileID: 7040680006107387389, guid: a84c6ce8d0c754487828a09d2ad65a69, type: 3}
 --- !u!1 &959762223
 GameObject:
   m_ObjectHideFlags: 0
@@ -12134,9 +12136,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1540400723}
-        m_TargetAssemblyTypeName: DungeonDisplay, Assembly-CSharp
-        m_MethodName: CreateNewDungeon
+      - m_Target: {fileID: 936885856}
+        m_TargetAssemblyTypeName: DungeonEditor, Assembly-CSharp
+        m_MethodName: AddNewEnemyCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

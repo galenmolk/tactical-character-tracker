@@ -5,13 +5,13 @@ public class DungeonCard : MonoBehaviour
 {
     [SerializeField] private TMP_Text dungeonNameText;
 
-    private DungeonConfig DungeonConfig { get; set; }
+    public DungeonConfig Config { get; private set; }
 
     public string DungeonName => dungeonNameText.text;
     
     public void Initialize(DungeonConfig config)
     {
-        DungeonConfig = config;
+        Config = config;
         dungeonNameText.text = config.name;
     }
     
@@ -36,7 +36,7 @@ public class DungeonCard : MonoBehaviour
     public void UpdateName(string name)
     {
         Debug.Log("UpdateName");
-        DungeonConfig.name = name;
+        Config.name = name;
         dungeonNameText.text = name;
     }
 }

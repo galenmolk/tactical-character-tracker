@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -5,8 +6,12 @@ public class DungeonEditor : MainPanel<DungeonEditor>
 {
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TMP_InputField dungeonNameText;
-
+    [SerializeField] private Transform enemyCardParent;
+    [SerializeField] private EnemyCard enemyCardPrefab;
+    
     private DungeonCard dungeonCard;
+
+    private List<EnemyCard> enemyCards = new List<EnemyCard>();
     
     public override void Open()
     {
@@ -28,6 +33,8 @@ public class DungeonEditor : MainPanel<DungeonEditor>
     {
         dungeonCard = card;
         dungeonNameText.text = card.DungeonName;
+        ClearEnemyTypes();
+        DisplayEnemyTypes();
     }
 
     public void SetName(string name)
@@ -37,10 +44,46 @@ public class DungeonEditor : MainPanel<DungeonEditor>
 
         dungeonCard.UpdateName(name);
     }
+
+    public void AddNewEnemyCard()
+    {
+        EnemyConfig newEnemyConfig = new EnemyConfig("NEW ENEMY #" + Random.Range(0, 100));
+        AddEnemyCard(newEnemyConfig);
+        dungeonCard.Config.enemies.Add(newEnemyConfig);
+    }
+
+    public void DeleteEnemyCard(EnemyCard enemyCard)
+    {
+        dungeonCard.Config.enemies.Remove(enemyCard.Config);
+        enemyCards.Remove(enemyCard);
+        Destroy(enemyCard.gameObject);
+    }
     
     protected override void OnAwake()
     {
         Close();
         gameObject.SetActive(true);
+    }
+    
+    private void DisplayEnemyTypes()
+    {
+        for (int i = 0, count = dungeonCard.Config.enemies.Count; i < count; i++)
+            AddEnemyCard(dungeonCard.Config.enemies[i]);
+    }
+
+    private void AddEnemyCard(EnemyConfig enemyConfig)
+    {
+        EnemyCard enemyCard = Instantiate(enemyCardPrefab, enemyCardParent);
+        enemyCard.Initialize(enemyConfig);
+        enemyCards.Add(enemyCard);
+    }
+
+    private void ClearEnemyTypes()
+    {
+        if (enemyCards.Count == 0)
+            return;
+        
+        enemyCards.Clear();
+        enemyCardParent.gameObject.DestroyChildrenOfType<EnemyCard>();
     }
 }

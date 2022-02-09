@@ -7,11 +7,11 @@ public class DungeonConfig
     public const string UNTITLED_NAME_PREFIX = "Untitled Dungeon #";
     
     public string name;
-    public List<Enemy> enemies;
+    public List<EnemyConfig> enemies;
     
     public DungeonConfig(string _name)
     {
         name = _name;
-        enemies = new List<Enemy>();
+        enemies = new List<EnemyConfig>();
     }
 }

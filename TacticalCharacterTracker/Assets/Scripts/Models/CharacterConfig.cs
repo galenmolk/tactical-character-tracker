@@ -4,8 +4,9 @@ using System.Collections.Generic;
 [Serializable]
 public class CharacterConfig
 {
-    public CharacterConfig()
+    public CharacterConfig(string _name = null)
     {
+        name = _name; 
         abilities = new List<AbilityConfig>();
     }
     
