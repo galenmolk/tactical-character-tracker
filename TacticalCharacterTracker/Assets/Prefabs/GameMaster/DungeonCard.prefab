@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 754937364900732865}
+  - component: {fileID: 2601793600056592549}
   - component: {fileID: 754937364900732867}
   - component: {fileID: 754937364900732864}
   - component: {fileID: 754937364900732866}
   m_Layer: 5
-  m_Name: Dungeon
+  m_Name: DungeonCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,6 +43,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2601793600056592549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754937364900732878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e4501e293342ff9bff49c02b64e7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dungeonNameText: {fileID: 754937365487715538}
 --- !u!222 &754937364900732867
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -270,6 +284,8 @@ GameObject:
   - component: {fileID: 754937365295879959}
   - component: {fileID: 754937365295879956}
   - component: {fileID: 754937365295879957}
+  - component: {fileID: 3001916775738216073}
+  - component: {fileID: 8567116933852462883}
   m_Layer: 5
   m_Name: Edit
   m_TagString: Untagged
@@ -379,7 +395,46 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 754937365295879956}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2601793600056592549}
+        m_TargetAssemblyTypeName: DungeonCard, Assembly-CSharp
+        m_MethodName: Edit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3001916775738216073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754937365295879955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.050980393}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &8567116933852462883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754937365295879955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e346c67ce1476c8003d5840ec4b897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &754937365487715536
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,6 +724,8 @@ GameObject:
   - component: {fileID: 754937365807709224}
   - component: {fileID: 754937365807709225}
   - component: {fileID: 754937365807709270}
+  - component: {fileID: 855562401616181132}
+  - component: {fileID: 7652024488314006943}
   m_Layer: 5
   m_Name: Delete
   m_TagString: Untagged
@@ -778,7 +835,46 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 754937365807709225}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2601793600056592549}
+        m_TargetAssemblyTypeName: DungeonCard, Assembly-CSharp
+        m_MethodName: Delete
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &855562401616181132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754937365807709268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.050980393}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &7652024488314006943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754937365807709268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e346c67ce1476c8003d5840ec4b897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &754937366069900867
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,6 +887,8 @@ GameObject:
   - component: {fileID: 754937366069900871}
   - component: {fileID: 754937366069900868}
   - component: {fileID: 754937366069900869}
+  - component: {fileID: 1828348745588736283}
+  - component: {fileID: 1221844455224230740}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -900,7 +998,46 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 754937366069900868}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2601793600056592549}
+        m_TargetAssemblyTypeName: DungeonCard, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1828348745588736283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754937366069900867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.050980393}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1221844455224230740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754937366069900867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e346c67ce1476c8003d5840ec4b897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &754937366291622061
 GameObject:
   m_ObjectHideFlags: 0
