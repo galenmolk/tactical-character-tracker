@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Unity.RemoteConfig;
 using UnityEngine;
@@ -52,12 +53,12 @@ public class CharacterDownloader : MonoBehaviour
         SceneLoadManager.Instance.LoadScene(Scenes.CHARACTER_SELECT);
     }
 
-    private CharacterListConfig GetCharacterListConfigForJson(string json)
+    private List<CharacterConfig> GetCharacterListConfigForJson(string json)
     {
-        return JsonConvert.DeserializeObject<CharacterListConfig>(json);
+        return JsonConvert.DeserializeObject<List<CharacterConfig>>(json);
     }
 
-    private CharacterListConfig GetConfigOrFallback()
+    private List<CharacterConfig> GetConfigOrFallback()
     {
         return GetCharacterListConfigForJson(GetCharacterListJson()) ?? 
                GetCharacterListConfigForJson(fallbackCharacterListConfig.text);
@@ -65,6 +66,6 @@ public class CharacterDownloader : MonoBehaviour
     
     private string GetCharacterListJson()
     {
-        return ConfigManager.appConfig.GetJson(RemoteConfigKeys.CHARACTER_LIST_KEY);
+        return ConfigManager.appConfig.GetJson(RemoteConfigKeys.HERO_LIST_KEY);
     }
 }

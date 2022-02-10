@@ -35,7 +35,6 @@ public class DungeonDisplay : Singleton<DungeonDisplay>
     protected override void OnAwake()
     {
         Close();
-        gameObject.SetActive(true);
     }
 
     private void AddDungeonCard(DungeonCard card)

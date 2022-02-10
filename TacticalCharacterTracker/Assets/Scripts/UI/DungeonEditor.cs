@@ -11,7 +11,7 @@ public class DungeonEditor : MainPanel<DungeonEditor>
     
     private DungeonCard dungeonCard;
 
-    private List<EnemyCard> enemyCards = new List<EnemyCard>();
+    private readonly List<EnemyCard> enemyCards = new();
     
     public override void Open()
     {
@@ -45,11 +45,11 @@ public class DungeonEditor : MainPanel<DungeonEditor>
         dungeonCard.UpdateName(name);
     }
 
-    public void AddNewEnemyCard()
+    public void AddNewEnemies()
     {
-        EnemyConfig newEnemyConfig = new EnemyConfig("NEW ENEMY #" + Random.Range(0, 100));
-        AddEnemyCard(newEnemyConfig);
-        dungeonCard.Config.enemies.Add(newEnemyConfig);
+        EnemySelector.Instance.Initialize(dungeonCard);
+        EnemySelector.Instance.Open();
+        Close();
     }
 
     public void DeleteEnemyCard(EnemyCard enemyCard)
@@ -62,7 +62,6 @@ public class DungeonEditor : MainPanel<DungeonEditor>
     protected override void OnAwake()
     {
         Close();
-        gameObject.SetActive(true);
     }
     
     private void DisplayEnemyTypes()

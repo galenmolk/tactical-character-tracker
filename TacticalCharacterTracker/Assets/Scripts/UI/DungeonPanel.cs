@@ -7,6 +7,7 @@ public class DungeonPanel : MainPanel<DungeonPanel>
     public override void Open()
     {
         DungeonEditor.Instance.Close();
+        EnemySelector.Instance.Close();
         DungeonDisplay.Instance.Open();
         canvasGroup.SetIsActive(true);
     }
@@ -19,6 +20,5 @@ public class DungeonPanel : MainPanel<DungeonPanel>
     protected override void OnAwake()
     {
         Close();
-        gameObject.SetActive(true);
     }
 }

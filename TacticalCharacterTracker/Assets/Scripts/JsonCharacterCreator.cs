@@ -1,21 +1,22 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
 public class JsonCharacterCreator : MonoBehaviour
 {
     [SerializeField] private CharacterConfig characterConfig;
-    [SerializeField] private CharacterListConfig characterListConfig;
+    [SerializeField] private List<CharacterConfig> characterList;
     
     [ContextMenu("LogCharacterAsJson")]
     public void LogCharacterAsJson()
     {
-        string characterListJson = JsonConvert.SerializeObject(characterListConfig);
+        string characterListJson = JsonConvert.SerializeObject(characterList);
         Debug.Log(characterListJson);
     }
     
     [ContextMenu("SetCharacter")]
     public void SetCharacter()
     {
-        characterListConfig.characterList.Add(characterConfig);
+        characterList.Add(characterConfig);
     }
 }

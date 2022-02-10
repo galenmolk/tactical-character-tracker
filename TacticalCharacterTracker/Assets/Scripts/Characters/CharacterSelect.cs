@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSelect : MonoBehaviour
@@ -19,12 +20,12 @@ public class CharacterSelect : MonoBehaviour
         SceneLoadManager.Instance.LoadScene(Scenes.CHARACTER_SHEET);
     }
 
-    private void PopulateCharacterButtons(CharacterListConfig characterListConfig)
+    private void PopulateCharacterButtons(List<CharacterConfig> characterList)
     {
-        for (int i = 0, length = characterListConfig.characterList.Count; i < length; i++)
+        for (int i = 0, length = characterList.Count; i < length; i++)
         {
             CharacterButton button = Instantiate(characterButtonPrefab, characterButtonParent);
-            button.Initialize(characterListConfig.characterList[i], SelectAndLoadCharacter);
+            button.Initialize(characterList[i], SelectAndLoadCharacter);
         }
     }
 }

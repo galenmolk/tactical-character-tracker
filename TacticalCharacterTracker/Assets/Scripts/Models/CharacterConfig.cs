@@ -19,3 +19,15 @@ public class CharacterConfig
     
     public List<AbilityConfig> abilities;
 }
+
+[Serializable]
+public class CharacterListConfig
+{
+    public List<CharacterConfig> characters;
+
+    public CharacterListConfig()
+    {
+        characters = new List<CharacterConfig>();
+    }
+}
+

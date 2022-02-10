@@ -4,9 +4,15 @@ using Newtonsoft.Json;
 [Serializable]
 public class EnemyConfig
 {
-    public EnemyConfig(string name = null)
+    // public EnemyConfig(string name = null)
+    // {
+    //     characterType = new CharacterConfig(name);
+    //     quantity = DEFAULT_QUANTITY;
+    // }
+    
+    public EnemyConfig(CharacterConfig type)
     {
-        characterType = new CharacterConfig(name);
+        characterType = type;
         quantity = DEFAULT_QUANTITY;
     }
     
