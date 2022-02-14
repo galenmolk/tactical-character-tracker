@@ -27,6 +27,7 @@ public class DungeonEditor : MainPanel<DungeonEditor>
     {
         Close();
         DungeonDisplay.Instance.Open();
+        EnemySelector.Instance.Close();
     }
 
     public void Initialize(DungeonCard card)
@@ -49,12 +50,13 @@ public class DungeonEditor : MainPanel<DungeonEditor>
     {
         EnemySelector.Instance.Initialize(dungeonCard);
         EnemySelector.Instance.Open();
-        Close();
+        //Close();
     }
 
     public void DeleteEnemyCard(EnemyCard enemyCard)
     {
         dungeonCard.Config.enemies.Remove(enemyCard.Config);
+        EnemySelector.Instance.Initialize(dungeonCard);
         enemyCards.Remove(enemyCard);
         Destroy(enemyCard.gameObject);
     }

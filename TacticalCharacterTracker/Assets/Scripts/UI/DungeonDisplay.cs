@@ -7,7 +7,7 @@ public class DungeonDisplay : Singleton<DungeonDisplay>
     [SerializeField] private Transform dungeonCardParent;
     [SerializeField] private CanvasGroup canvasGroup;
     
-    private List<DungeonCard> dungeonCards = new List<DungeonCard>();
+    private readonly List<DungeonCard> dungeonCards = new();
     
     public void Open()
     {
@@ -25,7 +25,7 @@ public class DungeonDisplay : Singleton<DungeonDisplay>
         dungeonCard.Initialize(GetNewDungeonConfig());
         AddDungeonCard(dungeonCard);
     }
-
+    
     public void DeleteDungeon(DungeonCard card)
     {
         RemoveDungeonCard(card);

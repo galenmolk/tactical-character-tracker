@@ -17,8 +17,8 @@ public class DungeonCard : MonoBehaviour
     
     public void Delete()
     {
-        Debug.Log("Delete");
-        DungeonDisplay.Instance.DeleteDungeon(this);
+        Debug.Log("Try Delete");
+        ConfirmationPanel.Instance.Open(new DeleteDungeonParams(this));
     }
 
     public void Edit()

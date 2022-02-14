@@ -18,7 +18,7 @@ public class DataManager : Singleton<DataManager>
     private struct UserAttributes { }
     private struct AppAttributes { }
     private readonly AppAttributes appParams = new();
-
+    
     private void Awake()
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)

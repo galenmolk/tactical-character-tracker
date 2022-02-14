@@ -8,3 +8,7 @@ public class CooldownAbilitySlotEvent : UnityEvent<CooldownAbilitySlot> { }
 public class CharacterListEvent : UnityEvent<List<CharacterConfig>> { }
 
 public class CharacterConfigEvent : UnityEvent<CharacterConfig> { }
+
+public class EnemyOptionCardEvent : UnityEvent<EnemyOptionCard>
+{
+}
