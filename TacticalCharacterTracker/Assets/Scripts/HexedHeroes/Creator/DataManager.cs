@@ -45,8 +45,10 @@ public class DataManager : Singleton<DataManager>
     private void LoadConfigs()
     {
         Debug.Log("parsing");
-        //Heroes = GetHeroes();
+        Heroes = GetHeroes();
         Enemies = GetEnemies();
+        CharacterDisplay.Instance.DisplayCharacters(Heroes);
+        
         //Dungeons = GetDungeons();
         //Abilities = GetAbilities();
     }
@@ -58,7 +60,7 @@ public class DataManager : Singleton<DataManager>
 
     private string GetHeroListJson()
     {
-        return ConfigManager.appConfig.GetJson(RemoteConfigKeys.HERO_LIST_KEY) ?? fallbackHeroes.text;
+        return /*ConfigManager.appConfig.GetJson(RemoteConfigKeys.HERO_LIST_KEY) ?? */ fallbackHeroes.text;
     }
     
     private List<CharacterConfig> GetEnemies()

@@ -8,4 +8,9 @@ public static class CanvasGroupExtensions
         canvasGroup.interactable = isActive;
         canvasGroup.blocksRaycasts = isActive;
     }
+    
+    public static void SetIsVisible(this CanvasGroup canvasGroup, bool isVisible)
+    {
+        canvasGroup.alpha = isVisible ? 1f : 0f;
+    }
 }

@@ -6,9 +6,9 @@ public class CharacterPanel : MainPanel<CharacterPanel>
     
     public override void Open()
     {
-        DungeonEditor.Instance.Close();
-        EnemySelector.Instance.Close();
-        DungeonDisplay.Instance.Open();
+        Debug.Log("Open");
+        DungeonPanel.Instance.Close();
+        CharacterDisplay.Instance.Open();
         canvasGroup.SetIsActive(true);
     }
 

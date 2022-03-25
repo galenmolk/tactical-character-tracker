@@ -23,28 +23,18 @@ public class DungeonDisplay : Singleton<DungeonDisplay>
     {
         DungeonCard dungeonCard = Instantiate(dungeonCardPrefab, dungeonCardParent);
         dungeonCard.Initialize(GetNewDungeonConfig());
-        AddDungeonCard(dungeonCard);
+        dungeonCards.Add(dungeonCard);
     }
     
     public void DeleteDungeon(DungeonCard card)
     {
-        RemoveDungeonCard(card);
+        dungeonCards.Remove(card);
         Destroy(card.gameObject);
     }
 
     protected override void OnAwake()
     {
         Close();
-    }
-
-    private void AddDungeonCard(DungeonCard card)
-    {
-        dungeonCards.Add(card);
-    }
-
-    private void RemoveDungeonCard(DungeonCard card)
-    {
-        dungeonCards.Remove(card);
     }
 
     private DungeonConfig GetNewDungeonConfig()

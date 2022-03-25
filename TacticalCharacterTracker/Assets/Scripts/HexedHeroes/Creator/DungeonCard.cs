@@ -15,7 +15,7 @@ public class DungeonCard : MonoBehaviour
         dungeonNameText.text = config.name;
     }
     
-    public void Delete()
+    public void TryDelete()
     {
         Debug.Log("Try Delete");
         ConfirmationPanel.Instance.Open(new DeleteDungeonParams(this));

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ConfirmationPanel : Singleton<ConfirmationPanel>
 {
@@ -8,6 +9,8 @@ public class ConfirmationPanel : Singleton<ConfirmationPanel>
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private TMP_Text confirmButtonText;
     [SerializeField] private TMP_Text denyButtonText;
+    [SerializeField] private Image confirmButtonImage;
+    [SerializeField] private Image denyButtonImage;
     
     private ConfirmationParams confirmationParams;
     
@@ -45,5 +48,11 @@ public class ConfirmationPanel : Singleton<ConfirmationPanel>
         descriptionText.text = confirmationParams.DescriptionText;
         confirmButtonText.text = confirmationParams.ConfirmButtonText;
         denyButtonText.text = confirmationParams.DenyButtonText;
+        
+        if (confirmationParams.ConfirmButtonColor.HasValue)
+            confirmButtonImage.color = confirmationParams.ConfirmButtonColor.Value;
+        
+        if (confirmationParams.DenyButtonColor.HasValue)
+            denyButtonImage.color = confirmationParams.DenyButtonColor.Value;
     }
 }

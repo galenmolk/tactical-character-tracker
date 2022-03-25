@@ -8,6 +8,7 @@ public class DungeonPanel : MainPanel<DungeonPanel>
     {
         DungeonEditor.Instance.Close();
         EnemySelector.Instance.Close();
+        CharacterPanel.Instance.Close();
         DungeonDisplay.Instance.Open();
         canvasGroup.SetIsActive(true);
     }

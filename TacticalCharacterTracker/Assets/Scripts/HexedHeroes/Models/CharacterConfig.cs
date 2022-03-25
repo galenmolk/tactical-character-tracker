@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 [Serializable]
 public class CharacterConfig
 {
+    public const string UNTITLED_NAME_PREFIX = "Untitled Character #";
+    
     public CharacterConfig(string _name = null)
     {
         name = _name; 

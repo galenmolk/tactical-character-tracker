@@ -23,7 +23,7 @@ public class TabButton : MonoBehaviour
             OnTabClosed.Invoke();
     }
 
-    private void Awake()
+    private void Start()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(OnClick);
