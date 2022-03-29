@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+namespace HexedHeroes.Utils
+{
+    public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T _instance;
         private static bool _quitting = false;
@@ -103,3 +105,4 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
         #endregion
     }
+}

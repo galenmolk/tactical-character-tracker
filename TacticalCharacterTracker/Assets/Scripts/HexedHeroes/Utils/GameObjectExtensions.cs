@@ -1,15 +1,17 @@
 using UnityEngine;
 
-public static class GameObjectExtensions
+namespace HexedHeroes.Utils
 {
-    public static void DestroyChildrenOfType<T>(this GameObject go) where T : Behaviour
+    public static class GameObjectExtensions
     {
-        T[] components = go.GetComponentsInChildren<T>();
-        for (int index = 0; index < components.Length; index++)
+        public static void DestroyChildrenOfType<T>(this GameObject go) where T : Behaviour
         {
-            T c = components[index];
-            c.transform.SetParent(null);
-            Object.Destroy(c.gameObject);
+            var components = go.GetComponentsInChildren<T>();
+            foreach (var c in components)
+            {
+                c.transform.SetParent(null);
+                Object.Destroy(c.gameObject);
+            }
         }
     }
 }

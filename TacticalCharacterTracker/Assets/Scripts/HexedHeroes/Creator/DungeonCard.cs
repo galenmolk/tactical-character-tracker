@@ -23,9 +23,9 @@ public class DungeonCard : MonoBehaviour
 
     public void Edit()
     {
-        DungeonDisplay.Instance.Close();
-        DungeonEditor.Instance.Open();
         DungeonEditor.Instance.Initialize(this);
+        DungeonEditor.Instance.Open();
+        DungeonDisplay.Instance.Close();
     }
 
     public void Play()

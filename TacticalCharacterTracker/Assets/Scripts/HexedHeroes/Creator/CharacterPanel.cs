@@ -1,24 +1,31 @@
+using HexedHeroes.Utils;
 using UnityEngine;
 
-public class CharacterPanel : MainPanel<CharacterPanel>
+namespace HexedHeroes.Creator
 {
-    [SerializeField] private CanvasGroup canvasGroup;
+    public class CharacterPanel : MainPanel<CharacterPanel>
+    {
+        [SerializeField] private CanvasGroup canvasGroup;
     
-    public override void Open()
-    {
-        Debug.Log("Open");
-        DungeonPanel.Instance.Close();
-        CharacterDisplay.Instance.Open();
-        canvasGroup.SetIsActive(true);
-    }
+        public override void Open()
+        {
+            Debug.Log("Open");
+            Close();
+            DungeonPanel.Instance.Close();
+            CharacterDisplay.Instance.Open();
+            canvasGroup.SetIsActive(true);
+        }
 
-    public override void Close()
-    {
-        canvasGroup.SetIsActive(false);
-    }
+        public override void Close()
+        {
+            CharacterDisplay.Instance.Close();
+            CharacterEditor.Instance.Close();
+            canvasGroup.SetIsActive(false);
+        }
 
-    protected override void OnAwake()
-    {
-        Close();
+        protected override void OnAwake()
+        {
+            Close();
+        }
     }
 }

@@ -1,3 +1,4 @@
+using HexedHeroes.Creator;
 using TMPro;
 using UnityEngine;
 
@@ -24,6 +25,9 @@ public class CharacterCard : MonoBehaviour
     public void Edit()
     {
         Debug.Log("Edit");
+        CharacterEditor.Instance.Initialize(this);
+        CharacterEditor.Instance.Open();
+        CharacterDisplay.Instance.Close();
     }
 
     public void UpdateName(string name)

@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public static class ShaderProps
+namespace HexedHeroes.Utils
 {
-    public static readonly int ProgressBarValue = Shader.PropertyToID("_Value");
+    public static class ShaderProps
+    {
+        public static readonly int ProgressBarValue = Shader.PropertyToID("_Value");
+    }
 }

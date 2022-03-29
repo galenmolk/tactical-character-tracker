@@ -1,3 +1,4 @@
+using HexedHeroes.Utils;
 using UnityEngine;
 
 public abstract class MainPanel<T> : Singleton<T> where T : MonoBehaviour

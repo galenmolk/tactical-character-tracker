@@ -1,3 +1,4 @@
+using HexedHeroes.Utils;
 using UnityEngine;
 
 public class OverlayCloseButton : Singleton<OverlayCloseButton>

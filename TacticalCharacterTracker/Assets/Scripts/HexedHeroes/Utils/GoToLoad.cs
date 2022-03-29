@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GoToLoad : MonoBehaviour
+namespace HexedHeroes.Utils
 {
-    private void Awake()
+    public class GoToLoad : MonoBehaviour
     {
-        if (ActiveSession.AvailableCharacters == null)
-            SceneManager.LoadScene(SceneKeys.LOAD);
+        private void Awake()
+        {
+            if (ActiveSession.AvailableCharacters == null)
+                SceneManager.LoadScene(SceneKeys.LOAD);
+        }
     }
 }

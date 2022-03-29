@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public static class Utils
+namespace HexedHeroes.Utils
 {
-    public static Color? GetColorFromHex(string hex, Color? fallbackColor = null)
+    public static class Utils
     {
-        return ColorUtility.TryParseHtmlString(hex, out Color color) ? color : fallbackColor;
+        public static Color? GetColorFromHex(string hex, Color? fallbackColor = null)
+        {
+            return ColorUtility.TryParseHtmlString(hex, out Color color) ? color : fallbackColor;
+        }
     }
 }

@@ -2,21 +2,24 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public class JsonCharacterCreator : MonoBehaviour
+namespace HexedHeroes.Utils
 {
-    [SerializeField] private CharacterConfig characterConfig;
-    [SerializeField] private List<CharacterConfig> characterList;
-    
-    [ContextMenu("LogCharacterAsJson")]
-    public void LogCharacterAsJson()
+    public class JsonCharacterCreator : MonoBehaviour
     {
-        string characterListJson = JsonConvert.SerializeObject(characterList);
-        Debug.Log(characterListJson);
-    }
+        [SerializeField] private CharacterConfig characterConfig;
+        [SerializeField] private List<CharacterConfig> characterList;
     
-    [ContextMenu("SetCharacter")]
-    public void SetCharacter()
-    {
-        characterList.Add(characterConfig);
+        [ContextMenu("LogCharacterAsJson")]
+        public void LogCharacterAsJson()
+        {
+            string characterListJson = JsonConvert.SerializeObject(characterList);
+            Debug.Log(characterListJson);
+        }
+    
+        [ContextMenu("SetCharacter")]
+        public void SetCharacter()
+        {
+            characterList.Add(characterConfig);
+        }
     }
 }

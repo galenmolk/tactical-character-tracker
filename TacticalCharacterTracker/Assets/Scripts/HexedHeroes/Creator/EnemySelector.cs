@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using HexedHeroes.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,13 +31,10 @@ public class EnemySelector : MainPanel<EnemySelector>
     {
         dungeonCard.Config.enemyTypes.AddRange(GetSelectedTypesAsEnemyConfigList());
         DungeonEditor.Instance.Initialize(dungeonCard);
-        //DungeonEditor.Instance.Open();
-        //Close();
     }
 
     public void Back()
     {
-        //DungeonEditor.Instance.Open();
         Close();
     }
 
@@ -76,7 +74,7 @@ public class EnemySelector : MainPanel<EnemySelector>
 
     private void CreateEnemyOptions()
     {
-        List<CharacterConfig> enemies = DataManager.Instance.Enemies;
+        List<CharacterConfig> enemies = DataManager.Instance.Characters;
         int enemyCount = enemies.Count;
 
         if (enemyCount < 1)

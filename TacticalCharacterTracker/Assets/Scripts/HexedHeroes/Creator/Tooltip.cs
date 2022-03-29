@@ -1,63 +1,70 @@
+using HexedHeroes.Utils;
 using TMPro;
 using UnityEngine;
 
-public class Tooltip : MonoBehaviour
+namespace HexedHeroes.Creator
 {
-    [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private TMP_Text tooltipText;
-
-    [SerializeField] private Vector2 offset;
-    [SerializeField] private float lifetime;
-    
-    private RectTransform RectTransform
+    public class Tooltip : MonoBehaviour
     {
-        get
-        {
-            if (rectTransform == null)
-                rectTransform = transform as RectTransform;
+        [SerializeField] private CanvasGroup canvasGroup;
+        [SerializeField] private TMP_Text tooltipText;
 
-            return rectTransform;
+        [SerializeField] private float fadeDuration = 0.1f;
+    
+        private RectTransform RectTransform
+        {
+            get
+            {
+                if (rectTransform == null)
+                    rectTransform = transform as RectTransform;
+
+                return rectTransform;
+            }
         }
-    }
 
-    private RectTransform rectTransform;
+        private RectTransform rectTransform;
     
-    private TooltipElementEventArgs currentArgs;
-    
-    private void Activate(TooltipElementEventArgs eventArgs)
-    {
-        if (currentArgs?.Element == eventArgs.Element)
-            return;
-        
-        currentArgs = eventArgs;
-        tooltipText.text = eventArgs.Element.Text;
-        this.DelayExecutionUntilEndOfFrame(() =>
+        private TooltipElementEventArgs currentArgs;
+
+        private void Activate(TooltipElementEventArgs eventArgs)
         {
-            Vector2 size = RectTransform.sizeDelta;
-            Debug.Log(size);
-            RectTransform.position = eventArgs.EventData.position + size * 0.5f;
-            canvasGroup.SetIsVisible(true);
-        });
-    }
+            if (currentArgs?.Element == eventArgs.Element)
+                return;
+        
+            currentArgs = eventArgs;
+            tooltipText.text = eventArgs.Element.Text;
+            this.DelayExecutionUntilEndOfFrame(() =>
+            {
+            
+                var size = RectTransform.sizeDelta * CanvasController.Instance.ScaleFactor;
 
-    private void Deactivate(TooltipElementEventArgs eventArgs)
-    {
-        if (eventArgs?.Element != currentArgs.Element)
-            return;
+                var tooltipPosition = (Vector2)Input.mousePosition + size * 0.5f;
 
-        currentArgs = null;
-        canvasGroup.SetIsVisible(false);
-    }
+                RectTransform.position = tooltipPosition;
+            
+                canvasGroup.SetIsVisible(true, fadeDuration);
+            });
+        }
+
+        private void Deactivate(TooltipElementEventArgs eventArgs)
+        {
+            if (currentArgs?.Element != eventArgs.Element)
+                return;
+
+            currentArgs = null;
+            canvasGroup.SetIsVisible(false, fadeDuration);
+        }
     
-    private void OnEnable()
-    {
-        TooltipElement.PointerEnter += Activate;
-        TooltipElement.PointerExit += Deactivate;
-    }
+        private void OnEnable()
+        {
+            TooltipElement.PointerEnter += Activate;
+            TooltipElement.PointerExit += Deactivate;
+        }
 
-    private void OnDisable()
-    {
-        TooltipElement.PointerEnter -= Activate;
-        TooltipElement.PointerExit -= Deactivate;
+        private void OnDisable()
+        {
+            TooltipElement.PointerEnter -= Activate;
+            TooltipElement.PointerExit -= Deactivate;
+        }
     }
 }

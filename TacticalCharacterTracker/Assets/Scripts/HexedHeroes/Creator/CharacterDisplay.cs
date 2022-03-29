@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using HexedHeroes.Utils;
 using UnityEngine;
 
 public class CharacterDisplay : Singleton<CharacterDisplay>

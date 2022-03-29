@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Serialization;
+using HexedHeroes.Utils;
 using Newtonsoft.Json;
 
 [Serializable]

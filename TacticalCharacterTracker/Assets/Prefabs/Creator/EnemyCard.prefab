@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 754937365807709270}
   - component: {fileID: 855562401616181132}
   - component: {fileID: 6493312078592381725}
+  - component: {fileID: 2219573777840148300}
   m_Layer: 5
   m_Name: Delete
   m_TagString: Untagged
@@ -469,6 +470,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &2219573777840148300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754937365807709268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1592e2fdc314b3894a522e5c625e491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: Remove
 --- !u!1 &754937366291622061
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,7 +543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

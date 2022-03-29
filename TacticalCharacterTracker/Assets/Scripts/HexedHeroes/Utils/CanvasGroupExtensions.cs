@@ -1,16 +1,28 @@
+using DG.Tweening;
 using UnityEngine;
 
-public static class CanvasGroupExtensions
+namespace HexedHeroes.Utils
 {
-    public static void SetIsActive(this CanvasGroup canvasGroup, bool isActive)
+    public static class CanvasGroupExtensions
     {
-        canvasGroup.alpha = isActive ? 1f : 0f;
-        canvasGroup.interactable = isActive;
-        canvasGroup.blocksRaycasts = isActive;
-    }
+        public static void SetIsActive(this CanvasGroup canvasGroup, bool isActive)
+        {
+            canvasGroup.alpha = isActive ? 1f : 0f;
+            canvasGroup.interactable = isActive;
+            canvasGroup.blocksRaycasts = isActive;
+        }
     
-    public static void SetIsVisible(this CanvasGroup canvasGroup, bool isVisible)
-    {
-        canvasGroup.alpha = isVisible ? 1f : 0f;
+        public static void SetIsVisible(this CanvasGroup canvasGroup, bool isVisible, float duration = 0f)
+        {
+            var target = isVisible ? 1f : 0f;
+        
+            if (duration <= 0f)
+            {
+                canvasGroup.alpha = target;
+                return;
+            }
+
+            canvasGroup.DOFade(target, duration);
+        }
     }
 }

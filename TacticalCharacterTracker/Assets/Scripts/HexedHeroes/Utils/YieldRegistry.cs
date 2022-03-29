@@ -2,37 +2,40 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class YieldRegistry
+namespace HexedHeroes.Utils
 {
-    public static WaitForEndOfFrame WaitForEndOfFrame { get; } = new();
-    public static WaitForFixedUpdate WaitForFixedUpdate { get; } = new();
-
-    private static readonly Dictionary<float, WaitForSeconds> TimeIntervalRegistry = new();
-    private static readonly Dictionary<Func<bool>, WaitUntil> PredicateRegistry = new();
-
-    public static WaitForSeconds WaitForSeconds(float seconds)
+    public static class YieldRegistry
     {
-        TimeIntervalRegistry.TryGetValue(seconds, out WaitForSeconds yield); 
-        return yield ?? RegisterNewWaitForSeconds(seconds);
-    }
+        public static WaitForEndOfFrame WaitForEndOfFrame { get; } = new();
+        public static WaitForFixedUpdate WaitForFixedUpdate { get; } = new();
 
-    public static WaitUntil WaitUntil(Func<bool> predicate)
-    {
-        PredicateRegistry.TryGetValue(predicate, out WaitUntil yield);
-        return yield ?? RegisterNewWaitUntil(predicate);
-    }
+        private static readonly Dictionary<float, WaitForSeconds> TimeIntervalRegistry = new();
+        private static readonly Dictionary<Func<bool>, WaitUntil> PredicateRegistry = new();
 
-    private static WaitUntil RegisterNewWaitUntil(Func<bool> predicate)
-    {
-        WaitUntil yield = new WaitUntil(predicate);
-        PredicateRegistry.Add(predicate, yield);
-        return yield;
-    }
+        public static WaitForSeconds WaitForSeconds(float seconds)
+        {
+            TimeIntervalRegistry.TryGetValue(seconds, out WaitForSeconds yield); 
+            return yield ?? RegisterNewWaitForSeconds(seconds);
+        }
 
-    private static WaitForSeconds RegisterNewWaitForSeconds(float seconds)
-    {
-        WaitForSeconds yield = new WaitForSeconds(seconds);
-        TimeIntervalRegistry.Add(seconds, yield);
-        return yield;
+        public static WaitUntil WaitUntil(Func<bool> predicate)
+        {
+            PredicateRegistry.TryGetValue(predicate, out WaitUntil yield);
+            return yield ?? RegisterNewWaitUntil(predicate);
+        }
+
+        private static WaitUntil RegisterNewWaitUntil(Func<bool> predicate)
+        {
+            WaitUntil yield = new WaitUntil(predicate);
+            PredicateRegistry.Add(predicate, yield);
+            return yield;
+        }
+
+        private static WaitForSeconds RegisterNewWaitForSeconds(float seconds)
+        {
+            WaitForSeconds yield = new WaitForSeconds(seconds);
+            TimeIntervalRegistry.Add(seconds, yield);
+            return yield;
+        }
     }
 }

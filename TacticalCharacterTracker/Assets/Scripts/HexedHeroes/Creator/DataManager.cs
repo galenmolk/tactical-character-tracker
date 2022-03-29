@@ -1,23 +1,29 @@
 using System.Collections.Generic;
+using System.IO;
+using HexedHeroes.Utils;
 using Newtonsoft.Json;
 using Unity.RemoteConfig;
 using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
 {
-    public List<CharacterConfig> Heroes { get; private set; }
-    public List<CharacterConfig> Enemies { get; private set; }
+    public List<CharacterConfig> Characters { get; private set; }
     public List<DungeonConfig> Dungeons { get; private set; }
     public List<AbilityConfig> Abilities { get; private set; }
 
-    [SerializeField] private TextAsset fallbackHeroes;
-    [SerializeField] private TextAsset fallbackEnemies;
+    [SerializeField] private TextAsset fallbackCharacters;
     [SerializeField] private TextAsset fallbackDungeons;
     [SerializeField] private TextAsset fallbackAbilities;
 
     private struct UserAttributes { }
     private struct AppAttributes { }
     private readonly AppAttributes appParams = new();
+
+    public void SaveCharacters()
+    {
+        var charactersJson = JsonConvert.SerializeObject(Characters);
+        fallbackCharacters = new TextAsset(charactersJson);
+    }
     
     private void Awake()
     {
@@ -45,33 +51,21 @@ public class DataManager : Singleton<DataManager>
     private void LoadConfigs()
     {
         Debug.Log("parsing");
-        Heroes = GetHeroes();
-        Enemies = GetEnemies();
-        CharacterDisplay.Instance.DisplayCharacters(Heroes);
+        Characters = GetCharacters();
+        CharacterDisplay.Instance.DisplayCharacters(Characters);
         
         //Dungeons = GetDungeons();
         //Abilities = GetAbilities();
     }
 
-    private List<CharacterConfig> GetHeroes()
+    private List<CharacterConfig> GetCharacters()
     {
-        return JsonConvert.DeserializeObject<List<CharacterConfig>>(GetHeroListJson()); 
-    }
-
-    private string GetHeroListJson()
-    {
-        return /*ConfigManager.appConfig.GetJson(RemoteConfigKeys.HERO_LIST_KEY) ?? */ fallbackHeroes.text;
+        return JsonConvert.DeserializeObject<List<CharacterConfig>>(GetCharacterListJson()); 
     }
     
-    private List<CharacterConfig> GetEnemies()
+    private string GetCharacterListJson()
     {
-        return JsonConvert.DeserializeObject<List<CharacterConfig>>(GetEnemyListJson()); 
-    }
-
-    private string GetEnemyListJson()
-    {
-        Debug.Log(fallbackEnemies.text);
-        return fallbackEnemies.text;
+        return /*ConfigManager.appConfig.GetJson(RemoteConfigKeys.HERO_LIST_KEY) ?? */ fallbackCharacters.text;
     }
     
     private List<DungeonConfig> GetDungeons()
