@@ -3,39 +3,42 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyOptionCard : MonoBehaviour
+namespace HexedHeroes.Creator
 {
-      [SerializeField] private TMP_Text nameText;
-      [SerializeField] private Toggle toggle;
+      public class EnemyOptionCard : MonoBehaviour
+      {
+            [SerializeField] private TMP_Text nameText;
+            [SerializeField] private Toggle toggle;
 
-      public EnemyOptionCardEvent OnSelectionChanged = new EnemyOptionCardEvent();
+            public readonly EnemyOptionCardEvent onSelectionChanged = new();
       
-      public CharacterConfig Config { get; private set; }
+            public CharacterConfig Config { get; private set; }
 
-      public bool IsSelected
-      {
-            get => toggle.isOn;
-            set => toggle.isOn = value;
-      }
+            public bool IsSelected
+            {
+                  get => toggle.isOn;
+                  set => toggle.isOn = value;
+            }
 
-      public void Initialize(CharacterConfig config)
-      {
-            Config = config;
-            nameText.text = config.name;
-      }
+            public void Initialize(CharacterConfig config)
+            {
+                  Config = config;
+                  nameText.text = config.name;
+            }
 
-      public void OptionCardClicked()
-      {
-            toggle.isOn = !toggle.isOn;
-      }
+            public void OptionCardClicked()
+            {
+                  toggle.isOn = !toggle.isOn;
+            }
 
-      private void Awake()
-      {
-            toggle.onValueChanged.AddListener(_ => SelectionChanged());
-      }
+            private void Awake()
+            {
+                  toggle.onValueChanged.AddListener(_ => SelectionChanged());
+            }
 
-      private void SelectionChanged()
-      {
-            OnSelectionChanged.Invoke(this);
+            private void SelectionChanged()
+            {
+                  onSelectionChanged.Invoke(this);
+            }
       }
 }

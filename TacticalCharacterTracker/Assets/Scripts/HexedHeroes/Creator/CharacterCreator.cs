@@ -12,11 +12,11 @@ namespace HexedHeroes.Creator
         [SerializeField] private TMP_InputField healthText;
         [SerializeField] private TMP_InputField speedText;
 
-        [SerializeField] private AbilityButton abilityButtonPrefab;
+        [SerializeField] private AbilityCard abilityCardPrefab;
         [SerializeField] private Transform abilityParent;
 
         private CharacterConfig config;
-        private AbilityButton activeButton;
+        private AbilityCard activeCard;
 
         protected override void OnAwake()
         {
@@ -38,10 +38,10 @@ namespace HexedHeroes.Creator
             AbilityCreator.Instance.Open(abilityConfig);
         }
     
-        private void AbilityButtonClicked(AbilityButton abilityButton)
+        private void AbilityButtonClicked(AbilityCard abilityCard)
         {
-            activeButton = abilityButton;
-            AbilityCreator.Instance.Open(abilityButton.AbilityConfig);
+            activeCard = abilityCard;
+            AbilityCreator.Instance.Open(abilityCard.AbilityConfig);
         }
 
         public void Save()
@@ -59,15 +59,15 @@ namespace HexedHeroes.Creator
 
         public void UpdateActiveAbilityButton(AbilityConfig abilityConfig)
         {
-            if (activeButton == null || activeButton.AbilityConfig != abilityConfig)
+            if (activeCard == null || activeCard.AbilityConfig != abilityConfig)
                 CreateActiveButton(abilityConfig);
             else
-                activeButton.Display(abilityConfig);
+                activeCard.Display(abilityConfig);
         }
     
         public void ClearActiveAbilityButton()
         {
-            activeButton = null;
+            activeCard = null;
         }
 
         private void DisplayStats()
@@ -88,14 +88,14 @@ namespace HexedHeroes.Creator
 
         private void CreateActiveButton(AbilityConfig config)
         {
-            activeButton = CreateButton(config);
+            activeCard = CreateButton(config);
         }
 
-        private AbilityButton CreateButton(AbilityConfig config)
+        private AbilityCard CreateButton(AbilityConfig config)
         {
-            AbilityButton button = Instantiate(abilityButtonPrefab, abilityParent);
-            button.Initialize(config, AbilityButtonClicked);
-            return button;
+            AbilityCard card = Instantiate(abilityCardPrefab, abilityParent);
+            card.Initialize(config);
+            return card;
         }
     }
 }

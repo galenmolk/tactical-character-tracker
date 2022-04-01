@@ -1,3 +1,4 @@
+using HexedHeroes.Creator;
 using UnityEngine;
 
 public class DeleteCharacterParams : ConfirmationParams

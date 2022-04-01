@@ -20,6 +20,7 @@ namespace HexedHeroes.Creator
         {
             CharacterDisplay.Instance.Close();
             CharacterEditor.Instance.Close();
+            AbilitySelector.Instance.Close();
             canvasGroup.SetIsActive(false);
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using HexedHeroes.Utils;
 using UnityEngine;
@@ -59,5 +60,10 @@ public class TooltipElement : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         args = new TooltipElementEventArgs(this);
         appearDelay = useAppearDelayOverride ? appearDelayOverride : APPEAR_DELAY;
+    }
+
+    private void OnDisable()
+    {
+        PointerExit?.Invoke(args);
     }
 }

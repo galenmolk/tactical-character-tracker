@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using HexedHeroes.Creator;
 using HexedHeroes.Utils;
 using Newtonsoft.Json;
 using Unity.RemoteConfig;
@@ -50,12 +51,10 @@ public class DataManager : Singleton<DataManager>
 
     private void LoadConfigs()
     {
-        Debug.Log("parsing");
         Characters = GetCharacters();
+        Abilities = new List<AbilityConfig>();
+        GetAbilitiesFromCharacters();
         CharacterDisplay.Instance.DisplayCharacters(Characters);
-        
-        //Dungeons = GetDungeons();
-        //Abilities = GetAbilities();
     }
 
     private List<CharacterConfig> GetCharacters()
@@ -66,6 +65,14 @@ public class DataManager : Singleton<DataManager>
     private string GetCharacterListJson()
     {
         return /*ConfigManager.appConfig.GetJson(RemoteConfigKeys.HERO_LIST_KEY) ?? */ fallbackCharacters.text;
+    }
+
+    private void GetAbilitiesFromCharacters()
+    {
+        foreach (var characterConfig in Characters)
+        {
+            Abilities.AddRange(characterConfig.abilities);
+        }
     }
     
     private List<DungeonConfig> GetDungeons()

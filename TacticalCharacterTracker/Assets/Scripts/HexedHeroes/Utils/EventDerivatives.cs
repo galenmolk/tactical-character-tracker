@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using HexedHeroes.Creator;
 using UnityEngine.Events;
 
 namespace HexedHeroes.Utils
@@ -12,6 +13,10 @@ namespace HexedHeroes.Utils
     public class CharacterConfigEvent : UnityEvent<CharacterConfig> { }
 
     public class EnemyOptionCardEvent : UnityEvent<EnemyOptionCard>
+    {
+    }
+
+    public class AbilityOptionCardEvent : UnityEvent<AbilityOptionCard>
     {
     }
 }

@@ -15,13 +15,11 @@ namespace HexedHeroes.Creator
         [SerializeField] private TMP_InputField healthText;
         [SerializeField] private TMP_InputField speedText;
 
-        [SerializeField] private AbilityButton abilityButtonPrefab;
+        [SerializeField] private AbilityCard abilityCardPrefab;
         [SerializeField] private Transform abilityParent;
 
         private CharacterCard characterCard;
         private readonly List<AbilityCard> abilityCards = new();
-
-        private AbilityButton activeButton;
 
         public override void Open()
         {
@@ -48,28 +46,20 @@ namespace HexedHeroes.Creator
 
         public void AddAbilityButtonClicked()
         {
-            AbilityConfig abilityConfig = new AbilityConfig();
-            characterCard.Config.abilities.Add(abilityConfig);
-            AbilityCreator.Instance.Open(abilityConfig);
+            AbilitySelector.Instance.Initialize(characterCard);
+            AbilitySelector.Instance.Open();
+            
+            // AbilityConfig abilityConfig = new AbilityConfig();
+            // characterCard.Config.abilities.Add(abilityConfig);
+            // AbilityCreator.Instance.Open(abilityConfig);
         }
-    
-        private void AbilityButtonClicked(AbilityButton abilityButton)
+        
+        public void DeleteAbilityCard(AbilityCard abilityCard)
         {
-            activeButton = abilityButton;
-            AbilityCreator.Instance.Open(abilityButton.AbilityConfig);
-        }
-
-        public void UpdateActiveAbilityButton(AbilityConfig abilityConfig)
-        {
-            if (activeButton == null || activeButton.AbilityConfig != abilityConfig)
-                CreateActiveButton(abilityConfig);
-            else
-                activeButton.Display(abilityConfig);
-        }
-    
-        public void ClearActiveAbilityButton()
-        {
-            activeButton = null;
+            characterCard.Config.abilities.Remove(abilityCard.AbilityConfig);
+            AbilitySelector.Instance.Initialize(characterCard);
+            abilityCards.Remove(abilityCard);
+            Destroy(abilityCard.gameObject);
         }
 
         public void UpdateName()
@@ -117,17 +107,11 @@ namespace HexedHeroes.Creator
             }
         }
 
-        private void CreateActiveButton(AbilityConfig config)
+        private void CreateButton(AbilityConfig config)
         {
-            activeButton = CreateButton(config);
+            AbilityCard card = Instantiate(abilityCardPrefab, abilityParent);
+            card.Initialize(config);
+            AbilitySelector.Instance.Initialize(characterCard);
         }
-
-        private AbilityButton CreateButton(AbilityConfig config)
-        {
-            AbilityButton button = Instantiate(abilityButtonPrefab, abilityParent);
-            button.Initialize(config, AbilityButtonClicked);
-            return button;
-        }
-
     }
 }
