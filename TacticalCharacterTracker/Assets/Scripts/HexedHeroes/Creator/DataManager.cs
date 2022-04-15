@@ -8,6 +8,10 @@ using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
 {
+    public delegate void AbilityListEvent(List<AbilityConfig> abilityConfigs);
+
+    public static event AbilityListEvent OnAbilitiesParsed;
+    
     public List<CharacterConfig> Characters { get; private set; }
     public List<DungeonConfig> Dungeons { get; private set; }
     public List<AbilityConfig> Abilities { get; private set; }
@@ -71,8 +75,14 @@ public class DataManager : Singleton<DataManager>
     {
         foreach (var characterConfig in Characters)
         {
-            Abilities.AddRange(characterConfig.abilities);
+            foreach (var abilityConfig in characterConfig.abilities)
+            {
+                if (!Abilities.Contains(abilityConfig))
+                    Abilities.Add(abilityConfig);
+            }
         }
+        
+        OnAbilitiesParsed?.Invoke(Abilities);
     }
     
     private List<DungeonConfig> GetDungeons()

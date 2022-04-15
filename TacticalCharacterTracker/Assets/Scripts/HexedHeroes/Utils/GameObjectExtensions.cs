@@ -13,5 +13,13 @@ namespace HexedHeroes.Utils
                 Object.Destroy(c.gameObject);
             }
         }
+
+        public static void TrySetActive(this GameObject go, bool active)
+        {
+            if (go.activeSelf == active)
+                return;
+
+            go.SetActive(active);
+        }
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine.Events;
 
 namespace HexedHeroes.Utils
 {
+    public delegate void InitializationEvent();
+    
     public class AbilityConfigEvent : UnityEvent<AbilityConfig> { }
 
     public class CooldownAbilitySlotEvent : UnityEvent<AbilitySlot> { }

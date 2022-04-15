@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using HexedHeroes.Utils;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +15,13 @@ namespace HexedHeroes.Creator
         [SerializeField] private Button addButton;
 
         private CharacterCard characterCard;
+        private string SearchInput => searchInput.text.ToUpper();
+        
+        [SerializeField] private TMP_InputField searchInput;
         
         private readonly List<AbilityOptionCard> abilityCards = new();
-        [SerializeField] private List<AbilityConfig> selectedAbilities = new();
+        private readonly List<AbilityOptionCard> ownedCards = new();
+        [SerializeField] private List<AbilityOptionCard> selectedCards = new();
         
         public override void Open()
         {
@@ -30,7 +35,12 @@ namespace HexedHeroes.Creator
         
         public void AddSelection()
         {
-            characterCard.Config.abilities.AddRange(selectedAbilities);
+            characterCard.Config.abilities.AddRange(GetAbilityConfigsFromOptionCards());
+            foreach (var card in selectedCards)
+            {
+                card.IsSelected = false;
+            }
+            selectedCards.Clear();
             CharacterEditor.Instance.Initialize(characterCard);
         }
         
@@ -41,15 +51,63 @@ namespace HexedHeroes.Creator
 
         public void Initialize(CharacterCard _characterCard)
         {
-            addButton.interactable = false;
-            DestroyAllOptions();
+            // if card is new, uncheck all abilities
             characterCard = _characterCard;
-            CreateAbilityOptions();
+            ToggleAddButton();
+            FilterContentForCharacter();
         }
 
         public void SwitchToAbilityCreator()
         {
             Debug.Log("Enemy Builder");
+        }
+
+        private List<AbilityConfig> GetAbilityConfigsFromOptionCards()
+        {
+            var list = new List<AbilityConfig>();
+            foreach (var card in selectedCards)
+            {
+                list.Add(card.Config);
+            }
+
+            return list;
+        }
+
+        private void FilterContentForCharacter()
+        {
+            ownedCards.Clear();
+            for (int i = 0, length = abilityCards.Count; i < length; i++)
+            {
+                var card = abilityCards[i];
+                bool isAbilityOwned = characterCard.Config.abilities.Contains(card.Config);
+                card.GameObject.TrySetActive(!isAbilityOwned);
+                
+                if (isAbilityOwned)
+                    ownedCards.Add(card);
+            }
+        }
+        
+        public void FilterContentForSearch()
+        {
+            var isSearchEmpty = string.IsNullOrWhiteSpace(SearchInput);
+            
+            for (int i = 0, length = abilityCards.Count; i < length; i++)
+            {
+                var card = abilityCards[i];
+                
+                if (ownedCards.Contains(card))
+                    continue;
+                
+                if (isSearchEmpty)
+                {
+                    card.GameObject.SetActive(true);
+                    continue;
+                }
+
+                var abilityNameToUpper = card.Config.name.ToUpper();
+                var isValidResult = abilityNameToUpper.Contains(SearchInput);
+                card.GameObject.TrySetActive(isValidResult);
+            }
         }
 
         protected override void OnAwake()
@@ -58,9 +116,8 @@ namespace HexedHeroes.Creator
             Close();
         }
 
-        private void CreateAbilityOptions()
+        private void CreateAbilityOptions(List<AbilityConfig> abilities)
         {
-            var abilities = DataManager.Instance.Abilities;
             var abilityCount = abilities.Count;
 
             if (abilityCount < 1)
@@ -68,13 +125,10 @@ namespace HexedHeroes.Creator
                 noAbilitiesWindow.SetActive(true);
                 return;
             }
-
-            var currentAbilities = characterCard.Config.abilities;
         
             for (int i = 0, count = abilities.Count; i < count; i++)
             {
-                if (!currentAbilities.Contains(abilities[i]))
-                    CreateAbilityOption(abilities[i]);
+                CreateAbilityOption(abilities[i]);
             }
         }
 
@@ -82,10 +136,6 @@ namespace HexedHeroes.Creator
         {
             AbilityOptionCard abilityOptionCard = Instantiate(abilityOptionCardPrefab, abilityOptionParent);
             abilityOptionCard.Initialize(ability);
-        
-            if (selectedAbilities.Contains(ability))
-                abilityOptionCard.IsSelected = true;
-            
             abilityOptionCard.onSelectionChanged.AddListener(CardSelectionChanged);
             abilityCards.Add(abilityOptionCard);
         }
@@ -96,21 +146,29 @@ namespace HexedHeroes.Creator
             switch (card.IsSelected)
             {
                 case true:
-                    selectedAbilities.Add(card.Config);
+                    selectedCards.Add(card);
                     break;
-                case false when selectedAbilities.Contains(card.Config):
-                    selectedAbilities.Remove(card.Config);
+                case false when selectedCards.Contains(card):
+                    selectedCards.Remove(card);
                     break;
             }
 
-            addButton.interactable = selectedAbilities.Count > 0;
+            ToggleAddButton();
         }
-    
-        private void DestroyAllOptions()
+
+        private void ToggleAddButton()
         {
-            abilityOptionParent.gameObject.DestroyChildrenOfType<AbilityOptionCard>();
-            abilityCards.Clear();
-            selectedAbilities.Clear();
+            addButton.interactable = selectedCards.Count > 0;
+        }
+        
+        private void OnEnable()
+        {
+            DataManager.OnAbilitiesParsed += CreateAbilityOptions;
+        }
+
+        private void OnDisable()
+        {
+            DataManager.OnAbilitiesParsed -= CreateAbilityOptions;
         }
     }
 }

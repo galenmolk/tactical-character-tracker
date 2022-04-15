@@ -13,6 +13,19 @@ namespace HexedHeroes
         public readonly AbilityOptionCardEvent onSelectionChanged = new();
 
         public AbilityConfig Config { get; private set; }
+
+        public GameObject GameObject
+        {
+            get
+            {
+                if (_gameObject == null)
+                    _gameObject = gameObject;
+
+                return _gameObject;
+            }
+        }
+
+        private GameObject _gameObject;
         
         public bool IsSelected
         {

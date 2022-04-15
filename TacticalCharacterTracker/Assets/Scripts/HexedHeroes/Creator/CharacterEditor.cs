@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using HexedHeroes.Utils;
-using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace HexedHeroes.Creator
 {
@@ -20,7 +18,8 @@ namespace HexedHeroes.Creator
 
         private CharacterCard characterCard;
         private readonly List<AbilityCard> abilityCards = new();
-
+        private readonly List<AbilityConfig> currentAbilityConfigs = new();
+        
         public override void Open()
         {
             canvasGroup.SetIsActive(true);
@@ -33,12 +32,20 @@ namespace HexedHeroes.Creator
     
         public void Back()
         {
+            AbilitySelector.Instance.Close();
             CharacterDisplay.Instance.Open();
             Close();
         }
     
         public void Initialize(CharacterCard card)
         {
+            if (characterCard != card)
+            {
+                abilityParent.gameObject.DestroyChildrenOfType<AbilityCard>();
+                abilityCards.Clear();
+                currentAbilityConfigs.Clear();
+            }
+
             characterCard = card;
             DisplayStats();
             DisplayAbilities();
@@ -48,10 +55,6 @@ namespace HexedHeroes.Creator
         {
             AbilitySelector.Instance.Initialize(characterCard);
             AbilitySelector.Instance.Open();
-            
-            // AbilityConfig abilityConfig = new AbilityConfig();
-            // characterCard.Config.abilities.Add(abilityConfig);
-            // AbilityCreator.Instance.Open(abilityConfig);
         }
         
         public void DeleteAbilityCard(AbilityCard abilityCard)
@@ -59,6 +62,7 @@ namespace HexedHeroes.Creator
             characterCard.Config.abilities.Remove(abilityCard.AbilityConfig);
             AbilitySelector.Instance.Initialize(characterCard);
             abilityCards.Remove(abilityCard);
+            currentAbilityConfigs.Remove(abilityCard.AbilityConfig);
             Destroy(abilityCard.gameObject);
         }
 
@@ -103,15 +107,21 @@ namespace HexedHeroes.Creator
         {
             foreach (var ability in characterCard.Config.abilities)
             {
+                if (currentAbilityConfigs.Contains(ability))
+                    continue;
+                
                 CreateButton(ability);
             }
+
+            AbilitySelector.Instance.Initialize(characterCard);
         }
 
         private void CreateButton(AbilityConfig config)
         {
-            AbilityCard card = Instantiate(abilityCardPrefab, abilityParent);
+            var card = Instantiate(abilityCardPrefab, abilityParent);
             card.Initialize(config);
-            AbilitySelector.Instance.Initialize(characterCard);
+            abilityCards.Add(card);
+            currentAbilityConfigs.Add(card.AbilityConfig);
         }
     }
 }
