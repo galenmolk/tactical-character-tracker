@@ -7,7 +7,7 @@ namespace HexedHeroes.DungeonRunner
     public class DungeonRunner : MonoBehaviour
     {
         [SerializeField] private TextAsset dungeonJson;
-        [SerializeField] private TMP_Text dungeonTitleText;
+        [SerializeField] private TMP_InputField dungeonTitleText;
         [SerializeField] private EnemyTypeBlock enemyTypeBlockPrefab;
         [SerializeField] private Transform enemyTypeBlockParent;
         

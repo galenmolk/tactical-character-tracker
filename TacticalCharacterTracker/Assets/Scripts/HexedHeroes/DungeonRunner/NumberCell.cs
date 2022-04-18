@@ -27,14 +27,14 @@ namespace HexedHeroes.DungeonRunner
             valueText.text = value.ToString();
         }
 
-        private int GetNumber()
+        protected int GetNumber()
         {
             if (int.TryParse(valueText.text, out int value))
                 return value;
 
             Debug.LogWarning("Integer Parsing Failed.");
-            valueText.text = startAmount.ToString();
-            return startAmount;
+            valueText.text = 0.ToString();
+            return 0;
         }
     }
 }

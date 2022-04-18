@@ -7,8 +7,8 @@
         {
             public Transform Content;
             
-            [SerializeField] private TMP_Text abilityTitleText;
-            [SerializeField] private TMP_Text cooldownText;
+            [SerializeField] private TMP_InputField abilityTitleText;
+            [SerializeField] private TMP_InputField cooldownText;
             [SerializeField] private Transform content;
             
             private AbilityConfig config;

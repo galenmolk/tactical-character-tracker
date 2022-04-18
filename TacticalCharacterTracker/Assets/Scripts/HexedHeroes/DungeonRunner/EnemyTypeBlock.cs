@@ -13,7 +13,7 @@ namespace HexedHeroes.DungeonRunner
         [SerializeField] private LabelCell labelCellPrefab;
         
         [Header("Other")]
-        [SerializeField] private TMP_Text enemyTypeTitleText;
+        [SerializeField] private TMP_InputField enemyTypeTitleText;
 
         [SerializeField] private Transform headerRow;
         [SerializeField] private Transform abilityRowParent;
@@ -26,7 +26,7 @@ namespace HexedHeroes.DungeonRunner
         public void Initialize(EnemyTypeConfig enemyTypeConfig)
         {
             config = enemyTypeConfig;
-            enemyTypeTitleText.text = config.character.name;
+            enemyTypeTitleText.text = $"{config.character.name}s";
             CreateAbilityRows();
             CreateEnemyInstances();
         }
@@ -54,7 +54,7 @@ namespace HexedHeroes.DungeonRunner
         private void CreateHeaderCell(int index)
         {
             LabelCell titleCell = Instantiate(labelCellPrefab, headerRow);
-            string title = config.character.name + ++index;
+            string title = $"{config.character.name} {++index}";
             titleCell.SetString(title);
         }
         
