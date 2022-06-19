@@ -7,13 +7,14 @@ public class AbilitySlot : MonoBehaviour
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text abilityCooldown;
     [SerializeField] private TMP_Text abilityName;
-
+    [SerializeField] private GameObject longPressArea;
+    
     private AbilityConfig ability;
     
     private int totalCooldown;
     private int currentCooldown;
     private bool isCooldownActive;
-
+    
     public void Initialize(AbilityConfig abilityConfig)
     {
         ability = abilityConfig;
@@ -24,7 +25,10 @@ public class AbilitySlot : MonoBehaviour
         UpdateCooldownText();
 
         if (abilityConfig.isPassive)
+        {
+            longPressArea.SetActive(false);
             button.enabled = false;
+        }
     }
 
     public void InfoButtonPressed()
@@ -37,8 +41,20 @@ public class AbilitySlot : MonoBehaviour
         isCooldownActive = true;
         Deactivate();
         UpdateCooldownText();
+        longPressArea.SetActive(true);
     }
-
+    
+    public void ResetAbilitySlot()
+    {
+        if (button.interactable || !isCooldownActive)
+            return;
+        
+        EndCooldown();
+        Activate();
+        UpdateCooldownText();
+        longPressArea.SetActive(false);
+    }
+    
     private void Awake()
     {
         TurnManager.Instance.SubscribeTurnStarted(OnTurnStarted);
@@ -71,10 +87,8 @@ public class AbilitySlot : MonoBehaviour
     {
         if (currentCooldown > 0)
             return;
-        
-        EndCooldown();
-        Activate();
-        UpdateCooldownText();
+
+        ResetAbilitySlot();
     }
     
     private void OnTurnEnded()
@@ -86,5 +100,8 @@ public class AbilitySlot : MonoBehaviour
             currentCooldown--;
         
         UpdateCooldownText();
+        
+        if (ability.isInterrupt && currentCooldown == 0)
+            ResetAbilitySlot();
     }
 }

@@ -13,10 +13,6 @@ public class CharacterSelect : MonoBehaviour
         
         if (ActiveSession.AvailableCharacters == null)
             return;
-        
-        Debug.Log(ActiveSession.AvailableCharacters);
-        Debug.Log(ActiveSession.AvailableCharacters.Count);
-        Debug.Log(ActiveSession.AvailableCharacters[0].name);
 
         PopulateCharacterButtons(ActiveSession.AvailableCharacters);
     }
@@ -29,7 +25,6 @@ public class CharacterSelect : MonoBehaviour
 
     private void PopulateCharacterButtons(List<CharacterConfig> characterList)
     {
-        Debug.Log("PopulateCharacterButtons");
         for (int i = 0, length = characterList.Count; i < length; i++)
         {
             CharacterButton button = Instantiate(characterButtonPrefab, characterButtonParent);

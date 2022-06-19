@@ -11,7 +11,7 @@ public class CharacterDownloader : MonoBehaviour
     [SerializeField] private bool loadLocalConfig;
     [SerializeField] private TextAsset fallbackCharacterListConfig;
     [SerializeField] private ProgressBar progressBar;
-
+    
     private Coroutine progressFill;
     
     private struct UserAttributes { }

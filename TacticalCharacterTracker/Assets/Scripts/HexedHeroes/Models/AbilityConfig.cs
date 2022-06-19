@@ -43,7 +43,7 @@ public class AbilityConfig
     {
         if (string.IsNullOrWhiteSpace(description))
             return;
-
+        
         colorCodedDescription = ColorCoder.GetColorCodedText(description);
     }
     

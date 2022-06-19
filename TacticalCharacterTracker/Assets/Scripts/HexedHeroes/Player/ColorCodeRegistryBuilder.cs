@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +16,52 @@ public static class ColorCoder
         colorCodeRegistry = _colorCodeRegistry;
     }
 
+    // public static string GetColorCodedText2(string text)
+    // {
+    //     foreach ((string word, var color) in colorCodeRegistry)
+    //     {
+    //         if (word != "moves" || word != "move")
+    //             continue;
+    //         
+    //         int occurenceCount = Regex.Matches(text, word).Count;
+    //         Debug.Log($"{word} occurenceCount: {occurenceCount}");
+    //         
+    //         if (occurenceCount == 0)
+    //             continue;
+    //
+    //         string replacement = GetRichTextWord(word, color);
+    //         int wordLength = word.Length;
+    //         
+    //         for (int i = 0; i < occurenceCount; i++)
+    //         {
+    //             int index = text.IndexOf(word, StringComparison.Ordinal);
+    //             
+    //             if (index > 0 && (IsInvalid(text[index - 1]) || IsInvalid(text[index + wordLength])))
+    //                 continue;
+    //             
+    //             text = text.Replace(word, replacement);
+    //         }
+    //     }
+    //
+    //     return text;
+    // }
+
+    private static string GetRichTextWord(string paddedWord, Color color)
+    {
+        return $"{GetOpeningColorTag(color)}{paddedWord}{CLOSING_COLOR_TAG}";
+    }
+
+    private const string ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+    
+    private static bool IsInvalid(char c)
+    {
+        if (c == '<' || c == '>')
+            return true;
+        
+        string lowerC = c.ToString().ToLower();
+        return ALPHABET.Contains(lowerC);
+    }
+    
     public static string GetColorCodedText(string text)
     {
         foreach (var code in colorCodeRegistry)
