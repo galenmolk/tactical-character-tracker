@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using HexedHeroes.Creator;
 using HexedHeroes.Utils;
+using MolkExtras;
 using UnityEngine;
 
 public class CharacterDisplay : Singleton<CharacterDisplay>

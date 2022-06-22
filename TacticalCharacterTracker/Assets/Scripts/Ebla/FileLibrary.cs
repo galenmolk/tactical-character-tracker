@@ -6,23 +6,30 @@ namespace Ebla
 {
     public static class FileLibrary
     {
-        public static event Action<IFile> OnFileAdded;
-        public static event Action<IFile> OnFileRemoved;
+        public static event Action OnPreLibraryModified;
+        public static event Action OnPostLibraryModified;
 
-        public static List<IFile> AllFiles { get; private set; } = new();
+        public static List<IFileable> AllFiles { get; private set; } = new();
 
-        public static void AddFile(IFile file)
+        public static void AddFile(IFileable file)
         {
+            OnPreLibraryModified?.Invoke();
             AllFiles.Add(file);
-            OnFileAdded?.Invoke(file);
+            OnPostLibraryModified?.Invoke();
         }
         
-        public static void RemoveFile(IFile file)
+        public static void RemoveFile(IFileable file)
         {
-            Debug.Log("RemoveFile");
-
+            OnPreLibraryModified?.Invoke();
             AllFiles.Remove(file);
-            OnFileRemoved?.Invoke(file);
+            OnPostLibraryModified?.Invoke();
+        }
+
+        public static void MoveFile(IFileable file, FolderSlot destination)
+        {
+            OnPreLibraryModified?.Invoke();
+            file.SetFolder(destination);
+            OnPostLibraryModified?.Invoke();
         }
     }
 }

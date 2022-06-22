@@ -1,23 +1,16 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ebla
 {
     public static class FileSorter
     {
-        private static readonly List<IFile> FileList = new();
-        
-        public static IEnumerable<IFile> SortByName(IFile[] files)
+        public static IEnumerable<IFileable> SortByName(IFileable[] files)
         {
-            int fileCount = files.Length;
-            
-            if (fileCount < 2)
+            if (files.Length < 2)
                 return files;
-            
-            FileList.Clear();
-            FileList.AddRange(files);
-            FileList.Sort();
-            
-            return FileList.ToArray();
+
+            return files.OrderBy(file => file.Name);
         }
     }
 }

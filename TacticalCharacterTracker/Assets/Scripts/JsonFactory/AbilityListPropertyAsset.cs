@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using HexedHeroes.Models;
 using Newtonsoft.Json;
 using UnityEngine;
 

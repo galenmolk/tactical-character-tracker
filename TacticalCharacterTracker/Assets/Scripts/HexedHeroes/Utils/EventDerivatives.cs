@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using HexedHeroes.Creator;
+using HexedHeroes.Models;
 using UnityEngine.Events;
 
 namespace HexedHeroes.Utils

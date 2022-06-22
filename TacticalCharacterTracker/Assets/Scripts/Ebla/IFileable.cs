@@ -2,11 +2,13 @@ using System;
 
 namespace Ebla
 {
-    public interface IFile : IComparable
+    public interface IFileable
     {
         public string Name { get; }
-        public string LowerCaseName { get; }
+        public string ParentFolderName { get; }
         public DateTime DateCreated { get; }
         public DateTime DateModified { get; }
+
+        public void SetFolder(FolderSlot folder);
     }
 }

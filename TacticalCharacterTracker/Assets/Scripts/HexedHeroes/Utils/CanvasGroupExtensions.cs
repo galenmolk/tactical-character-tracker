@@ -14,7 +14,7 @@ namespace HexedHeroes.Utils
     
         public static void SetIsVisible(this CanvasGroup canvasGroup, bool isVisible, float duration = 0f)
         {
-            var target = isVisible ? 1f : 0f;
+            float target = isVisible ? 1f : 0f;
         
             if (duration <= 0f)
             {

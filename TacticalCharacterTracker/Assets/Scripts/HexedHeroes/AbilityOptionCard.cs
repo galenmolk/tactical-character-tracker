@@ -1,3 +1,4 @@
+using HexedHeroes.Models;
 using HexedHeroes.Utils;
 using TMPro;
 using UnityEngine;

@@ -1,4 +1,5 @@
 using System;
+using HexedHeroes.Models;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Ebla
@@ -7,41 +5,30 @@ namespace Ebla
     public class FileBrowser : MonoBehaviour
     {
         [SerializeField] private RectTransform fileArea;
-        
-        private readonly Dictionary<IFile, File> fileRegistry = new();
 
         private void OnEnable()
         {
-            FileLibrary.OnFileAdded += HandleFileAdded;
-            FileLibrary.OnFileRemoved += HandleFileRemoved;
+            FileLibrary.OnPostLibraryModified += HandlePostLibraryModified;
         }
 
         private void OnDisable()
         {
-            FileLibrary.OnFileAdded -= HandleFileAdded;
-            FileLibrary.OnFileRemoved -= HandleFileRemoved;        
+            FileLibrary.OnPostLibraryModified -= HandlePostLibraryModified;
         }
 
-        private void HandleFileAdded(IFile file)
+        private void HandlePostLibraryModified()
         {
-            IRequestable<File>.Request(prefab =>
+            foreach (IFileable file in FileLibrary.AllFiles)
             {
-                File fileInstance = Instantiate(prefab, fileArea);
-                fileRegistry.Add(file, fileInstance);
-                fileInstance.Configure(file);
-            });
+                DisplayFile(file);
+            }
         }
-
-        private void HandleFileRemoved(IFile file)
+        
+        private void DisplayFile(IFileable file)
         {
-            Debug.Log("HandleFileRemoved");
-            if (!fileRegistry.TryGetValue(file, out File fileInstance))
-                return;
-
-            Debug.Log("HandleFileRemoved Destroy");
-
-            Destroy(fileInstance.gameObject);
-            fileRegistry.Remove(file);
+            FileSlot fileSlot = PrefabLibrary.Instance.GetFileSlot();
+            fileSlot.Configure(file);
+            fileSlot.transform.SetParent(fileArea);
         }
     }
 }
