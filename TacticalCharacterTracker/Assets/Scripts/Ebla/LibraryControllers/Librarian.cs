@@ -19,7 +19,7 @@ namespace Ebla
         private void CreateControllers()
         {
             var abilityLibraryConfig = JsonConvert.DeserializeObject<AbilityLibraryConfig>(abilitiesJson.text);
-            Abilities = new AbilityController(abilityLibraryConfig);
+            Abilities = new AbilityController(abilityLibraryConfig ?? new AbilityLibraryConfig());
         }
     }
 }

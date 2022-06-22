@@ -1,6 +1,6 @@
 using Ebla.Models;
 
-namespace Ebla.Editing.Sections
+namespace Ebla.Editing
 {
     public class AbilityControls : EditingControls<AbilityConfig>
     {
