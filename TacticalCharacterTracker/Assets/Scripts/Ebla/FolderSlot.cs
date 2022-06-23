@@ -1,10 +1,11 @@
 using System;
+using Ebla.Models;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Ebla
 {
-    public class FolderSlot : MonoBehaviour, IContextual, IDropHandler
+    public class FolderSlot : MonoBehaviour, IDropHandler
     {
         public event Action<FolderSlot> OnFolderDisabled;
         
@@ -27,7 +28,7 @@ namespace Ebla
             if (droppedObject == null)
                 return;
             
-            if (droppedObject.TryGetComponent(out IFileable file))
+            if (droppedObject.TryGetComponent(out BaseConfig file))
                 FileLibrary.MoveFile(file, this);
         }
 

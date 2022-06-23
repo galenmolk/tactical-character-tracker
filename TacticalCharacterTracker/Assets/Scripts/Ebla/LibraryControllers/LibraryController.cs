@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Ebla.Models;
 
@@ -33,23 +34,20 @@ namespace Ebla.LibraryControllers
 
         public void Add(TConfig config)
         {
+            config.UpdateName(GetUniqueName(config.BaseName));
+            config.OnConfigModified += HandleConfigModified;
             library.Contents.Add(config);
-            isNamesListDirty = true;
-        }
-
-        public void AddRange(IEnumerable<TConfig> configs)
-        {
-            library.Contents.AddRange(configs);
             isNamesListDirty = true;
         }
 
         public void Remove(TConfig config)
         {
+            config.OnConfigModified -= HandleConfigModified;
             library.Contents.Remove(config);
             isNamesListDirty = true;
         }
 
-        public string GetUniqueName(string baseName)
+        private string GetUniqueName(string baseName)
         {
             string uniqueName = baseName;
             int nameIndex = 0;

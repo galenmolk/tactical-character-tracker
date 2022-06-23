@@ -33,7 +33,7 @@ namespace Ebla
         {
             FileSlot fileSlot = Instantiate(fileSlotPrefab, transform);
             fileSlot.gameObject.SetActive(false);
-            fileSlot.OnFileDisabled += HandleFileDisabled;
+            fileSlot.OnReleaseFileSlot += HandleReleaseFileSlot;
             return fileSlot;
         }
 
@@ -57,7 +57,7 @@ namespace Ebla
 
         private void OnFileReturnedToPool(FileSlot fileSlot)
         {
-            fileSlot.ResetFile();
+            fileSlot.ApplyFileToSlot();
         }
 
         private void OnFolderReturnedToPool(FolderSlot folder)
@@ -75,10 +75,11 @@ namespace Ebla
             Destroy(folder.gameObject);
         }
 
-        private void HandleFileDisabled(FileSlot fileSlot)
+        private void HandleReleaseFileSlot(FileSlot fileSlot)
         {
             fileSlot.transform.SetParent(transform);
             filePool.Release(fileSlot);
+            fileSlot.gameObject.SetActive(false);
         }
 
         private void HandleFolderDisabled(FolderSlot folder)

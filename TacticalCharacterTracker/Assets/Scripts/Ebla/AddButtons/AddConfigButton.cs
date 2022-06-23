@@ -12,6 +12,7 @@ namespace Ebla.AddButtons
         
         public void AddConfigButtonClicked()
         {
+            Debug.Log("AddConfigButtonClicked");
             OnAddConfigButtonClicked?.Invoke(GetNewConfig());
         }
 

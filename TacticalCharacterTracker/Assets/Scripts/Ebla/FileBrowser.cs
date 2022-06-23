@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
+using Ebla.LibraryControllers;
+using Ebla.Models;
 using UnityEngine;
 
 namespace Ebla
@@ -6,29 +10,32 @@ namespace Ebla
     {
         [SerializeField] private RectTransform fileArea;
 
+
         private void OnEnable()
         {
-            FileLibrary.OnPostLibraryModified += HandlePostLibraryModified;
+            Librarian.OnConfigAdded += HandleConfigAdded;
         }
 
         private void OnDisable()
         {
-            FileLibrary.OnPostLibraryModified -= HandlePostLibraryModified;
+            Librarian.OnConfigAdded -= HandleConfigAdded;
         }
 
-        private void HandlePostLibraryModified()
+        private void HandleConfigAdded(BaseConfig config)
         {
-            foreach (IFileable file in FileLibrary.AllFiles)
-            {
-                DisplayFile(file);
-            }
+            DisplayFile(config);
         }
         
-        private void DisplayFile(IFileable file)
+        private void DisplayFile(BaseConfig file)
         {
             FileSlot fileSlot = PrefabLibrary.Instance.GetFileSlot();
+            fileSlot.OnReleaseFileSlot += HandleFileSlotReleased;
             fileSlot.Configure(file);
             fileSlot.transform.SetParent(fileArea);
+        }
+
+        private void HandleFileSlotReleased(FileSlot fileSlot)
+        {
         }
     }
 }

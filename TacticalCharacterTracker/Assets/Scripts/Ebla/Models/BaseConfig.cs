@@ -1,14 +1,13 @@
 using System;
 using System.Runtime.Serialization;
-using UnityEngine;
 
 namespace Ebla.Models
 {
     [Serializable]
-    public abstract class BaseConfig : IFileable
+    public abstract class BaseConfig
     {
         public event Action OnConfigModified;
-        
+
         public BaseConfig()
         {
             DateCreated = DateTime.Now;

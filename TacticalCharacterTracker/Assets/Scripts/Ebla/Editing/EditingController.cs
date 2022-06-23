@@ -1,12 +1,15 @@
-using System.Runtime.CompilerServices;
+using System;
 using DG.Tweening;
+using Ebla.AddButtons;
+using Ebla.LibraryControllers;
 using Ebla.Models;
 using Ebla.Utils;
+using MolkExtras;
 using UnityEngine;
 
 namespace Ebla.Editing
 {
-    public class EditingController : MonoBehaviour
+    public class EditingController : Singleton<EditingController>
     {
         [SerializeField] private Transform controlsParent;
         [SerializeField] private ControlsPrefabLibrary controlsPrefabLibrary;
@@ -15,7 +18,6 @@ namespace Ebla.Editing
         [SerializeField] private float toggleDuration;
 
         private ConfigType activeType;
-        
 
         private bool IsOpen => Mathf.Approximately(RectTransform.anchoredPosition.x, openXPos);
         
@@ -31,49 +33,33 @@ namespace Ebla.Editing
         }
 
         private RectTransform rectTransform;
-        
         private GameObject activeControls;
-
         private AbilityControls abilityControls;
-        
 
         public void Close()
         {
+            activeType = ConfigType.None;
             RectTransform.DOAnchorPosX(closeXPos, toggleDuration, true);
             ClearActiveControls();
         }
 
-        private void BeginEditingConfig<TControls, TConfig>(TConfig config)
-            where TControls : EditingControls<TConfig>
-            where TConfig : BaseConfig
-        {
-            
-        }
-
-        private TControls GetControls<TControls, TConfig>(TConfig config)
-            where TControls : EditingControls<TConfig>
-            where TConfig : BaseConfig
-        {
-            switch (config)
-            {
-                case AbilityConfig:
-                    return abilityControls as TControls;
-                
-            }
-        }
-
         private void BeginAbilityEditing(AbilityConfig abilityConfig)
         {
+            Debug.Log("BeginAbilityEditing " + abilityConfig.Name );
+
             if (activeType != ConfigType.Ability)
             {
+                Debug.Log("Resetting ");
+
                 ClearActiveControls();
                 abilityControls = Instantiate(controlsPrefabLibrary.AbilityControls, controlsParent);
+                activeControls = abilityControls.gameObject;
             }
             
             if (!IsOpen)
                 RectTransform.DOAnchorPosX(openXPos, toggleDuration, true);
-            
-            activeControls = abilityControls.gameObject;
+
+            activeType = ConfigType.Ability;
             abilityControls.Initialize(abilityConfig);
         }
         
@@ -89,11 +75,25 @@ namespace Ebla.Editing
         private void OnEnable()
         {
             AddAbilityButton.OnAddConfigButtonClicked += BeginAbilityEditing;
+            FileSlot.OnOpenFileForEditing += HandleOpenFileForEditing;
         }
 
         private void OnDisable()
         {
             AddAbilityButton.OnAddConfigButtonClicked -= BeginAbilityEditing;
+            FileSlot.OnOpenFileForEditing -= HandleOpenFileForEditing;
+        }
+
+        private void HandleOpenFileForEditing(FileSlot fileSlot)
+        {
+            switch (fileSlot.File)
+            {
+                case AbilityConfig file:
+                    BeginAbilityEditing(file);
+                    break;
+                default:
+                    return;
+            }
         }
     }
 }

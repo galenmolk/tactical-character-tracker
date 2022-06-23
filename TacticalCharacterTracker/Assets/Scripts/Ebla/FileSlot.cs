@@ -1,35 +1,46 @@
 using System;
+using Ebla.LibraryControllers;
+using Ebla.Models;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Ebla
 {
-    public class FileSlot : MonoBehaviour, IContextual, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class FileSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        public event Action<FileSlot> OnFileDisabled;
-        
+        public static event Action<FileSlot> OnOpenFileForEditing;
+        public event Action<FileSlot> OnReleaseFileSlot;
+
         [SerializeField] private CanvasGroup canvasGroup;
-        
-        private IFileable file;
-        
-        public void Configure(IFileable myFile)
+        [SerializeField] private TMP_Text nameText;
+
+        public BaseConfig File { get; private set; }
+
+        public void Configure(BaseConfig myFile)
         {
-            file = myFile;
+            File = myFile;
+            File.OnConfigModified += ApplyFileToSlot;
+            ApplyFileToSlot();
         }
 
-        public void ResetFile()
+        public void ApplyFileToSlot()
         {
-            
-        }
-        
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (eventData.button != PointerEventData.InputButton.Right)
-                return;
-            
-            FileLibrary.RemoveFile(file);
+            nameText.text = File != null ? File.Name : string.Empty;
         }
 
+        public void DeleteFile()
+        {
+            Librarian.Instance.Remove(File as AbilityConfig);
+            File = null;
+            OnReleaseFileSlot?.Invoke(this);
+        }
+
+        public void EditFile()
+        {
+            OnOpenFileForEditing?.Invoke(this);
+        }
+        
         public void OnBeginDrag(PointerEventData eventData)
         {
             canvasGroup.blocksRaycasts = false;
@@ -43,22 +54,6 @@ namespace Ebla
         public void OnEndDrag(PointerEventData eventData)
         {
             canvasGroup.blocksRaycasts = true;
-        }
-
-        private void OnEnable()
-        {
-            FileLibrary.OnPreLibraryModified += HandlePreLibraryModified;
-        }
-
-        private void OnDisable()
-        {
-            OnFileDisabled?.Invoke(this);
-            FileLibrary.OnPreLibraryModified -= HandlePreLibraryModified;
-        }
-
-        private void HandlePreLibraryModified()
-        {
-            gameObject.SetActive(false);
         }
     }
 }

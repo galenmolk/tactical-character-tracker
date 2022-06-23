@@ -1,3 +1,4 @@
+using Ebla.LibraryControllers;
 using Ebla.Models;
 
 namespace Ebla
@@ -7,8 +8,7 @@ namespace Ebla
         public static AbilityConfig NewAbility()
         {
             AbilityConfig abilityConfig = new AbilityConfig();
-            string uniqueName = Librarian.Instance.Abilities.GetUniqueName(abilityConfig.BaseName);
-            abilityConfig.UpdateName(uniqueName);
+            Librarian.Instance.Add(abilityConfig);
             return abilityConfig;
         }
     }

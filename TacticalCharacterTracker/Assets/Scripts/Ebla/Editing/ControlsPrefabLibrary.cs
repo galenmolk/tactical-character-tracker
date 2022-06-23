@@ -1,4 +1,3 @@
-using Ebla.Editing.Sections;
 using UnityEngine;
 
 namespace Ebla.Editing

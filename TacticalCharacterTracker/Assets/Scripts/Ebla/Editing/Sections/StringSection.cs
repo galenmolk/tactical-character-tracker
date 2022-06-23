@@ -13,6 +13,7 @@ namespace Ebla.Editing
             if (string.Equals(newValue, Value))
                 return;
 
+            inputField.SetTextWithoutNotify(newValue);
             ModifyValue(newValue);
         }
 

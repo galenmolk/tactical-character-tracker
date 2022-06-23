@@ -1,7 +1,7 @@
-using Ebla.AddButtons;
+using Ebla.Editing;
 using Ebla.Models;
 
-namespace Ebla
+namespace Ebla.AddButtons
 {
     public class AddAbilityButton : AddConfigButton<AbilityConfig>
     {

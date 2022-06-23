@@ -5,12 +5,13 @@ namespace Ebla
 {
     public static class FileSorter
     {
-        public static IEnumerable<IFileable> SortByName(IFileable[] files)
+        public static IEnumerable<FileSlot> SortByName(IEnumerable<FileSlot> files)
         {
-            if (files.Length < 2)
-                return files;
+            var sortByName = files.ToList();
+            if (sortByName.Count() < 2)
+                return sortByName;
 
-            return files.OrderBy(file => file.Name);
+            return sortByName.OrderBy(fileSlot => fileSlot.File.Name);
         }
     }
 }
