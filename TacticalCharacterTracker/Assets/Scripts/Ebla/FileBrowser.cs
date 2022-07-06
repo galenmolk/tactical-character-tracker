@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using Ebla.LibraryControllers;
 using Ebla.Models;
 using UnityEngine;
@@ -9,7 +7,6 @@ namespace Ebla
     public class FileBrowser : MonoBehaviour
     {
         [SerializeField] private RectTransform fileArea;
-
 
         private void OnEnable()
         {
@@ -23,19 +20,16 @@ namespace Ebla
 
         private void HandleConfigAdded(BaseConfig config)
         {
-            DisplayFile(config);
-        }
-        
-        private void DisplayFile(BaseConfig file)
-        {
-            FileSlot fileSlot = PrefabLibrary.Instance.GetFileSlot();
-            fileSlot.OnReleaseFileSlot += HandleFileSlotReleased;
-            fileSlot.Configure(file);
-            fileSlot.transform.SetParent(fileArea);
+            Debug.Log("FileBrowser.HandleConfigAdded");
+            ConfigSlot configSlot = PrefabLibrary.Instance.GetConfigSlot();
+            configSlot.OnReleaseConfigSlot += HandleConfigSlotReleased;
+            configSlot.Configure(config);
+            configSlot.transform.SetParent(fileArea);        
         }
 
-        private void HandleFileSlotReleased(FileSlot fileSlot)
+        private void HandleConfigSlotReleased(ConfigSlot fileSlot)
         {
+            
         }
     }
 }

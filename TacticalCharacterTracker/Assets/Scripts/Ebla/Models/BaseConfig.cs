@@ -27,7 +27,7 @@ namespace Ebla.Models
         public void UpdateName(string newName)
         {
             Name = newName;
-            OnConfigModified?.Invoke();
+            InvokeConfigModified();
         }
         
         public void SetFolder(FolderSlot folder)
@@ -35,6 +35,11 @@ namespace Ebla.Models
             ParentFolderName = folder.Path;
         }
 
+        protected void InvokeConfigModified()
+        {
+            OnConfigModified?.Invoke();
+        }
+        
         [OnSerialized]
         private void OnSerialized(StreamingContext context)
         {

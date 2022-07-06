@@ -17,11 +17,13 @@ namespace Ebla.LibraryControllers
 
         public void Add(BaseConfig baseConfig)
         {
+            Debug.Log("Librarian.Add");
             bool isAdding = true;
             
             switch (baseConfig)
             {
                 case AbilityConfig config:
+                    Debug.Log("Ability Added");
                     Abilities.Add(config);
                     break;
                 default:
@@ -29,6 +31,8 @@ namespace Ebla.LibraryControllers
                     break;
             }
             
+            Debug.Log("Librarian.Add" + isAdding);
+
             if (isAdding)
                 OnConfigAdded?.Invoke(baseConfig);
         }

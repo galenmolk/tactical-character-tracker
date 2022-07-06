@@ -12,10 +12,10 @@ namespace Ebla.AddButtons
         
         public void AddConfigButtonClicked()
         {
+            AddNewConfig();
             Debug.Log("AddConfigButtonClicked");
-            OnAddConfigButtonClicked?.Invoke(GetNewConfig());
         }
 
-        protected abstract TConfig GetNewConfig();
+        protected abstract TConfig AddNewConfig();
     }
 }

@@ -6,13 +6,13 @@ namespace Ebla
 {
     public class PrefabLibrary : Singleton<PrefabLibrary>
     {
-        private IObjectPool<FileSlot> filePool;
+        private IObjectPool<ConfigSlot> filePool;
         private IObjectPool<FolderSlot> folderPool;
 
-        [SerializeField] private FileSlot fileSlotPrefab;
+        [SerializeField] private ConfigSlot fileSlotPrefab;
         [SerializeField] private FolderSlot folderPrefab;
 
-        public FileSlot GetFileSlot()
+        public ConfigSlot GetConfigSlot()
         {
             return filePool.Get();
         }
@@ -24,16 +24,16 @@ namespace Ebla
         
         private void Awake()
         {
-            filePool = new ObjectPool<FileSlot>(CreateFile, OnTakeFromFilePool, OnFileReturnedToPool, OnDestroyFile, false, 5, 50);
+            filePool = new ObjectPool<ConfigSlot>(CreateFile, OnTakeFromFilePool, OnFileReturnedToPool, OnDestroyFile, false, 5, 50);
             folderPool = new ObjectPool<FolderSlot>(CreateFolder, OnTakeFromFolderPool, OnFolderReturnedToPool,
                 OnDestroyFolder, false, 5, 50);
         }
 
-        private FileSlot CreateFile()
+        private ConfigSlot CreateFile()
         {
-            FileSlot fileSlot = Instantiate(fileSlotPrefab, transform);
+            ConfigSlot fileSlot = Instantiate(fileSlotPrefab, transform);
             fileSlot.gameObject.SetActive(false);
-            fileSlot.OnReleaseFileSlot += HandleReleaseFileSlot;
+            fileSlot.OnReleaseConfigSlot += HandleReleaseConfigSlot;
             return fileSlot;
         }
 
@@ -45,7 +45,7 @@ namespace Ebla
             return folder;
         }
 
-        private void OnTakeFromFilePool(FileSlot fileSlot)
+        private void OnTakeFromFilePool(ConfigSlot fileSlot)
         {
             fileSlot.gameObject.SetActive(true);
         }
@@ -55,9 +55,9 @@ namespace Ebla
             folder.gameObject.SetActive(true);
         }
 
-        private void OnFileReturnedToPool(FileSlot fileSlot)
+        private void OnFileReturnedToPool(ConfigSlot fileSlot)
         {
-            fileSlot.ApplyFileToSlot();
+            fileSlot.ApplyConfigToSlot();
         }
 
         private void OnFolderReturnedToPool(FolderSlot folder)
@@ -65,7 +65,7 @@ namespace Ebla
             folder.ResetFolder();
         }
 
-        private void OnDestroyFile(FileSlot fileSlot)
+        private void OnDestroyFile(ConfigSlot fileSlot)
         {
             Destroy(fileSlot.gameObject);
         }
@@ -75,7 +75,7 @@ namespace Ebla
             Destroy(folder.gameObject);
         }
 
-        private void HandleReleaseFileSlot(FileSlot fileSlot)
+        private void HandleReleaseConfigSlot(ConfigSlot fileSlot)
         {
             fileSlot.transform.SetParent(transform);
             filePool.Release(fileSlot);
