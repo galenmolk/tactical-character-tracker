@@ -1,12 +1,15 @@
 using TMPro;
 using UnityEngine;
 
-public class CharacterNameUI : MonoBehaviour
+namespace HexedHeroes.Player
 {
-    [SerializeField] private TMP_Text characterName;
-
-    public void LoadCharacterName(CharacterConfig characterConfig)
+    public class CharacterNameUI : MonoBehaviour
     {
-        characterName.text = characterConfig.name;
+        [SerializeField] private TMP_Text characterName;
+
+        public void LoadCharacterName(CharacterConfig characterConfig)
+        {
+            characterName.text = characterConfig.name;
+        }
     }
 }

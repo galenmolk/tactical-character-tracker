@@ -2,27 +2,30 @@ using System;
 using HexedHeroes.Utils;
 using Newtonsoft.Json;
 
-[Serializable]
-public class EnemyTypeConfig
+namespace HexedHeroes.Creator
 {
-    // public EnemyConfig(string name = null)
-    // {
-    //     character = new CharacterConfig(name);
-    //     quantity = DEFAULT_QUANTITY;
-    // }
-    
-    public EnemyTypeConfig(CharacterConfig type)
+    [Serializable]
+    public class EnemyTypeConfig
     {
-        character = type;
-        quantity = DEFAULT_QUANTITY;
+        // public EnemyConfig(string name = null)
+        // {
+        //     character = new CharacterConfig(name);
+        //     quantity = DEFAULT_QUANTITY;
+        // }
+    
+        public EnemyTypeConfig(CharacterConfig type)
+        {
+            character = type;
+            quantity = DEFAULT_QUANTITY;
+        }
+    
+        [JsonIgnore] 
+        public const int DEFAULT_QUANTITY = 1;
+    
+        [JsonProperty(ConfigKeys.ENEMY_TYPE_CHARACTER_KEY)]
+        public CharacterConfig character;
+    
+        [JsonProperty(ConfigKeys.ENEMY_TYPE_QUANTITY_KEY)]
+        public int quantity;
     }
-    
-    [JsonIgnore] 
-    public const int DEFAULT_QUANTITY = 1;
-    
-    [JsonProperty(ConfigKeys.ENEMY_TYPE_CHARACTER_KEY)]
-    public CharacterConfig character;
-    
-    [JsonProperty(ConfigKeys.ENEMY_TYPE_QUANTITY_KEY)]
-    public int quantity;
 }

@@ -1,4 +1,8 @@
 using System;
+using System.Runtime.Serialization;
+using Ebla.Utils;
+using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Ebla.Models
 {
@@ -6,9 +10,14 @@ namespace Ebla.Models
     public class AbilityConfig : BaseConfig
     {
         public override string BaseName => "Untitled Ability";
-
+        
+        [JsonProperty(ConfigKeys.COOLDOWN_KEY)]
         public int CooldownTurns { get; private set; }
+        
+        [JsonProperty(ConfigKeys.PASSIVE_KEY)]
         public bool IsPassive { get; private set; }
+        
+        [JsonProperty(ConfigKeys.INTERRUPT_KEY)]
         public bool IsInterrupt { get; private set; }
 
         public AbilityConfig()
@@ -32,6 +41,12 @@ namespace Ebla.Models
         {
             IsInterrupt = isInterrupt;
             InvokeConfigModified();
+        }
+        
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            Debug.Log($"Ability Deserialized: {Name}, {CooldownTurns}, {IsPassive}, {IsInterrupt}, {Description}");
         }
     }
 }

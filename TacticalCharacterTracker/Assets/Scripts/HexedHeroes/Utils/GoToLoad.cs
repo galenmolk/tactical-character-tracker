@@ -1,3 +1,4 @@
+using HexedHeroes.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

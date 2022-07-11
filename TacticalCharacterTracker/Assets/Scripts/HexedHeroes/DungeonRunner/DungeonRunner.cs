@@ -1,3 +1,4 @@
+using HexedHeroes.Models;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;

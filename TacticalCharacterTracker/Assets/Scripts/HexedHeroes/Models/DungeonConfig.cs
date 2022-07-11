@@ -1,36 +1,40 @@
 using System;
 using System.Collections.Generic;
+using HexedHeroes.Creator;
 using HexedHeroes.Utils;
 using Newtonsoft.Json;
 
-[Serializable]
-public class DungeonConfig
+namespace HexedHeroes.Models
 {
-    public const string UNTITLED_NAME_PREFIX = "Untitled Dungeon #";
-    
-    [JsonProperty(ConfigKeys.DUNGEON_NAME_KEY)]
-    public string name;
-    
-    [JsonProperty(ConfigKeys.DUNGEON_ENEMY_TYPES_KEY)]
-    public List<EnemyTypeConfig> enemyTypes;
-
-    private List<CharacterConfig> enemyTypeCharacters = new List<CharacterConfig>();
-    
-    public DungeonConfig(string _name)
+    [Serializable]
+    public class DungeonConfig
     {
-        name = _name;
-        enemyTypes = new List<EnemyTypeConfig>();
-    }
+        public const string UNTITLED_NAME_PREFIX = "Untitled Dungeon #";
+    
+        [JsonProperty(ConfigKeys.DUNGEON_NAME_KEY)]
+        public string name;
+    
+        [JsonProperty(ConfigKeys.DUNGEON_ENEMY_TYPES_KEY)]
+        public List<EnemyTypeConfig> enemyTypes;
 
-    public List<CharacterConfig> GetEnemyTypes()
-    {
-        enemyTypeCharacters.Clear();
-
-        foreach (var enemyConfig in enemyTypes)
+        private List<CharacterConfig> enemyTypeCharacters = new List<CharacterConfig>();
+    
+        public DungeonConfig(string _name)
         {
-            enemyTypeCharacters.Add(enemyConfig.character);
+            name = _name;
+            enemyTypes = new List<EnemyTypeConfig>();
         }
 
-        return enemyTypeCharacters;
+        public List<CharacterConfig> GetEnemyTypes()
+        {
+            enemyTypeCharacters.Clear();
+
+            foreach (var enemyConfig in enemyTypes)
+            {
+                enemyTypeCharacters.Add(enemyConfig.character);
+            }
+
+            return enemyTypeCharacters;
+        }
     }
 }

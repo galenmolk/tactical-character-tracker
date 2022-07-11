@@ -1,88 +1,90 @@
 using System.Collections.Generic;
-using HexedHeroes.Creator;
 using HexedHeroes.Utils;
 using MolkExtras;
 using UnityEngine;
 
-public class CharacterDisplay : Singleton<CharacterDisplay>
+namespace HexedHeroes.Creator
 {
-    [SerializeField] private CharacterCard characterCardPrefab;
-    [SerializeField] private Transform characterCardParent;
-    [SerializeField] private CanvasGroup canvasGroup;
-
-    private readonly List<CharacterCard> characterCards = new();
-
-    public void Open()
+    public class CharacterDisplay : Singleton<CharacterDisplay>
     {
-        canvasGroup.SetIsActive(true);
-    }
-    
-    public void Close()
-    {
-        canvasGroup.SetIsActive(false);
-    }
+        [SerializeField] private CharacterCard characterCardPrefab;
+        [SerializeField] private Transform characterCardParent;
+        [SerializeField] private CanvasGroup canvasGroup;
 
-    public void DisplayCharacters(List<CharacterConfig> characterConfigs)
-    {
-        foreach (var characterConfig in characterConfigs)
+        private readonly List<CharacterCard> characterCards = new();
+
+        public void Open()
         {
-            CreateCharacterCard(characterConfig);
+            canvasGroup.SetIsActive(true);
         }
-    }
     
-    public void CreateNewCharacter()
-    {
-        CreateCharacterCard(GetNewCharacterConfig());
-    }
-
-    private void CreateCharacterCard(CharacterConfig config)
-    {
-        CharacterCard characterCard = Instantiate(characterCardPrefab, characterCardParent);
-        characterCard.Initialize(config);
-        characterCards.Add(characterCard);
-    }
-    
-    public void DeleteCharacter(CharacterCard card)
-    {
-        characterCards.Remove(card);
-        Destroy(card.gameObject);
-    }
-
-    protected override void OnAwake()
-    {
-        base.OnAwake();
-        Close();
-    }
-
-    private CharacterConfig GetNewCharacterConfig()
-    {
-        return new CharacterConfig(GetUniqueCharacterName());
-    }
-    
-    private string GetUniqueCharacterName()
-    {
-        List<string> names = GetAllCharacterNames();
-
-        var index = 0;
-        string uniqueName;
-
-        do
+        public void Close()
         {
-            index++;
-            uniqueName = $"{CharacterConfig.UNTITLED_NAME_PREFIX}{index}";
-        } 
-        while (names.Contains(uniqueName));
+            canvasGroup.SetIsActive(false);
+        }
 
-        return uniqueName;
-    }
+        public void DisplayCharacters(List<CharacterConfig> characterConfigs)
+        {
+            foreach (var characterConfig in characterConfigs)
+            {
+                CreateCharacterCard(characterConfig);
+            }
+        }
+    
+        public void CreateNewCharacter()
+        {
+            CreateCharacterCard(GetNewCharacterConfig());
+        }
 
-    private List<string> GetAllCharacterNames()
-    {
-        var names = new List<string>();
+        private void CreateCharacterCard(CharacterConfig config)
+        {
+            CharacterCard characterCard = Instantiate(characterCardPrefab, characterCardParent);
+            characterCard.Initialize(config);
+            characterCards.Add(characterCard);
+        }
+    
+        public void DeleteCharacter(CharacterCard card)
+        {
+            characterCards.Remove(card);
+            Destroy(card.gameObject);
+        }
+
+        protected override void OnAwake()
+        {
+            base.OnAwake();
+            Close();
+        }
+
+        private CharacterConfig GetNewCharacterConfig()
+        {
+            return new CharacterConfig(GetUniqueCharacterName());
+        }
+    
+        private string GetUniqueCharacterName()
+        {
+            List<string> names = GetAllCharacterNames();
+
+            var index = 0;
+            string uniqueName;
+
+            do
+            {
+                index++;
+                uniqueName = $"{CharacterConfig.UNTITLED_NAME_PREFIX}{index}";
+            } 
+            while (names.Contains(uniqueName));
+
+            return uniqueName;
+        }
+
+        private List<string> GetAllCharacterNames()
+        {
+            var names = new List<string>();
         
-        for (int i = 0, count = characterCards.Count; i < count; i++)
-            names.Add(characterCards[i].CharacterName);
+            for (int i = 0, count = characterCards.Count; i < count; i++)
+                names.Add(characterCards[i].CharacterName);
 
-        return names;
+            return names;
+        }
     }
 }

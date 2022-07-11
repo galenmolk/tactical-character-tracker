@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Ebla.Models;
 using MolkExtras;
 using Newtonsoft.Json;
@@ -54,7 +55,12 @@ namespace Ebla.LibraryControllers
             if (isRemoving)
                 OnConfigRemoved?.Invoke(baseConfig);
         }
-        
+
+        public List<AbilityConfig> GetAbilities()
+        {
+            return Abilities.All();
+        }
+
         private void Awake()
         {
             CreateControllers();
@@ -62,8 +68,8 @@ namespace Ebla.LibraryControllers
 
         private void CreateControllers()
         {
-            var abilityLibraryConfig = JsonConvert.DeserializeObject<AbilityLibraryConfig>(abilitiesJson.text);
-            Abilities = new AbilityLibraryController(abilityLibraryConfig ?? new AbilityLibraryConfig());
+            var abilityLibraryConfig = JsonConvert.DeserializeObject<List<AbilityConfig>>(abilitiesJson.text);
+            Abilities = new AbilityLibraryController(abilityLibraryConfig ?? new List<AbilityConfig>());
         }
 
         private static void HandleConfigAdded<TConfig>(TConfig config) where TConfig : BaseConfig

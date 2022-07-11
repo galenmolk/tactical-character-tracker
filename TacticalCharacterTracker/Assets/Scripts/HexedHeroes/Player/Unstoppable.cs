@@ -1,3 +1,4 @@
+using HexedHeroes.Player;
 using UnityEngine;
 
 public class Unstoppable : MonoBehaviour

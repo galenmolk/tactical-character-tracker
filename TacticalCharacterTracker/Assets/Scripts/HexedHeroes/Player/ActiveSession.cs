@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 
-public static class ActiveSession
+namespace HexedHeroes.Player
 {
-    public static CharacterConfig SelectedCharacter;
-    public static List<CharacterConfig> AvailableCharacters;
+    public static class ActiveSession
+    {
+        public static CharacterConfig SelectedCharacter;
+        public static List<CharacterConfig> AvailableCharacters;
+    }
 }

@@ -7,10 +7,19 @@ using UnityEngine.EventSystems;
 
 namespace Ebla
 {
-    public class ConfigSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class ConfigSlot : BaseBehaviour<ConfigSlot>, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         public static event Action<BaseConfig> OnEditConfigSlot;
-        public event Action<ConfigSlot> OnReleaseConfigSlot;
+        public override event Action<ConfigSlot> OnReleaseObject;
+        public override void ResetObject()
+        {
+            ApplyConfigToSlot();
+        }
+
+        public override void ReleaseObject()
+        {
+            OnReleaseObject?.Invoke(this);
+        }
 
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private TMP_Text nameText;
@@ -33,7 +42,7 @@ namespace Ebla
         {
             Librarian.Instance.Remove(Config as AbilityConfig);
             Config = null;
-            OnReleaseConfigSlot?.Invoke(this);
+            OnReleaseObject?.Invoke(this);
         }
 
         public void EditConfig()

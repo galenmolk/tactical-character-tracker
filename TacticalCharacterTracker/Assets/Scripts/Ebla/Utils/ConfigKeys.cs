@@ -7,5 +7,20 @@ namespace Ebla.Utils
         public const string LIBRARY_DUNGEONS_KEY = "dungeons";
         public const string LIBRARY_ENCOUNTERS_KEY = "encounters";
         public const string LIBRARY_FOLDERS_KEY = "folders";
+
+        #region Base Keys
+
+        public const string NAME_KEY = "Name";
+        public const string DESCRIPTION_KEY = "Description";
+
+        #endregion
+
+        #region Ability Keys
+
+        public const string COOLDOWN_KEY = "CooldownTurns";
+        public const string PASSIVE_KEY = "IsPassive";
+        public const string INTERRUPT_KEY = "IsInterrupt";
+
+        #endregion
     }
 }

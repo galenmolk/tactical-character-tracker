@@ -1,5 +1,7 @@
 using System;
 using System.Runtime.Serialization;
+using Ebla.Utils;
+using Newtonsoft.Json;
 
 namespace Ebla.Models
 {
@@ -16,8 +18,10 @@ namespace Ebla.Models
 
         public abstract string BaseName { get; }
 
+        [JsonProperty(ConfigKeys.NAME_KEY)]
         public string Name { get; private set; }
         
+        [JsonProperty(ConfigKeys.DESCRIPTION_KEY)]
         public string Description { get; set; }
         public string ParentFolderName { get; private set; }
         public DateTime DateCreated { get; }

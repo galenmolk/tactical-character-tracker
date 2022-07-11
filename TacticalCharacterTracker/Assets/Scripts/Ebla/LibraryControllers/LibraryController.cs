@@ -4,9 +4,8 @@ using Ebla.Models;
 
 namespace Ebla.LibraryControllers
 {
-    public abstract class LibraryController<TConfig, TLibraryConfig> 
+    public abstract class LibraryController<TConfig> 
         where TConfig : BaseConfig
-        where TLibraryConfig : BaseLibraryConfig<TConfig>
     {
         private List<string> ContentNames
         {
@@ -19,12 +18,12 @@ namespace Ebla.LibraryControllers
             }
         }
 
-        private readonly TLibraryConfig library;
+        private readonly List<TConfig> library;
         private readonly List<string> contentNames;
 
         private bool isNamesListDirty;
         
-        public LibraryController(TLibraryConfig libraryConfig)
+        public LibraryController(List<TConfig> libraryConfig)
         {
             library = libraryConfig;
             contentNames = new List<string>();
@@ -36,15 +35,20 @@ namespace Ebla.LibraryControllers
         {
             config.UpdateName(GetUniqueName(config.BaseName));
             config.OnConfigModified += HandleConfigModified;
-            library.Contents.Add(config);
+            library.Add(config);
             isNamesListDirty = true;
         }
 
         public void Remove(TConfig config)
         {
             config.OnConfigModified -= HandleConfigModified;
-            library.Contents.Remove(config);
+            library.Remove(config);
             isNamesListDirty = true;
+        }
+
+        public List<TConfig> All()
+        {
+            return library;
         }
 
         private string GetUniqueName(string baseName)
@@ -63,9 +67,9 @@ namespace Ebla.LibraryControllers
 
         private void Initialize()
         {
-            for (int i = 0, count = library.Contents.Count; i < count; i++)
+            for (int i = 0, count = library.Count; i < count; i++)
             {
-                TConfig config = library.Contents[i];
+                TConfig config = library[i];
                 contentNames.Add(config.Name);
                 config.OnConfigModified += HandleConfigModified;
             }
@@ -75,8 +79,8 @@ namespace Ebla.LibraryControllers
         {
             contentNames.Clear();
             
-            for (int i = 0, count = library.Contents.Count; i < count; i++)
-                contentNames.Add(library.Contents[i].Name);
+            for (int i = 0, count = library.Count; i < count; i++)
+                contentNames.Add(library[i].Name);
 
             isNamesListDirty = false;
         }

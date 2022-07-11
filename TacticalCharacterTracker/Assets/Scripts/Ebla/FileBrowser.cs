@@ -22,7 +22,7 @@ namespace Ebla
         {
             Debug.Log("FileBrowser.HandleConfigAdded");
             ConfigSlot configSlot = PrefabLibrary.Instance.GetConfigSlot();
-            configSlot.OnReleaseConfigSlot += HandleConfigSlotReleased;
+            configSlot.OnReleaseObject += HandleConfigSlotReleased;
             configSlot.Configure(config);
             configSlot.transform.SetParent(fileArea);        
         }

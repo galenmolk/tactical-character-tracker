@@ -353,6 +353,7 @@ RectTransform:
   - {fileID: 899870747}
   - {fileID: 751641497}
   - {fileID: 2106689217}
+  - {fileID: 682080573}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -496,6 +497,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 615260545}
   m_CullTransparentMesh: 1
+--- !u!1 &682080572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 682080573}
+  - component: {fileID: 682080576}
+  - component: {fileID: 682080577}
+  m_Layer: 5
+  m_Name: ConfigSelectorController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &682080573
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682080572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 192522660}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1920, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &682080576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682080572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bff5504309b4503b1b965673731cd0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  persistent: 0
+  selectorPrefabLibrary: {fileID: 682080577}
+  selectorParent: {fileID: 682080573}
+  openPosX: 0
+  closedPosX: -1920
+  toggleDuration: 0.35
+--- !u!114 &682080577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682080572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718d6dc90f3a45eaa4fd5357fa403395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilitySelectorPrefab: {fileID: 3555616614535914876, guid: 97a08131536a84eeb9c1b9d68938aadc, type: 3}
 --- !u!1 &751641496
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +735,8 @@ GameObject:
   m_Component:
   - component: {fileID: 958415861}
   - component: {fileID: 958415860}
+  - component: {fileID: 958415863}
+  - component: {fileID: 958415862}
   m_Layer: 0
   m_Name: PrefabLibrary
   m_TagString: Untagged
@@ -685,8 +757,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   persistent: 0
-  fileSlotPrefab: {fileID: 3243105080126764804, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
-  folderPrefab: {fileID: 8560460391850791174, guid: 4a0cca08199c945e483c1aeff601a83f, type: 3}
+  configSlotPool: {fileID: 958415863}
+  abilityOptionPool: {fileID: 958415862}
 --- !u!4 &958415861
 Transform:
   m_ObjectHideFlags: 0
@@ -702,6 +774,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &958415862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958415859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d151a9936334458d80e6e6ac0148f663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7114243795684310219, guid: ebefc497d7dcc41dc92fc16270edd0cb, type: 3}
+  collectionCheck: 1
+  defaultCapacity: 5
+  maxSize: 50
+--- !u!114 &958415863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958415859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8d5fb7a50bb4800ad8ddcba860a91d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3243105080126764804, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
+  collectionCheck: 1
+  defaultCapacity: 5
+  maxSize: 50
 --- !u!1 &1048098512
 GameObject:
   m_ObjectHideFlags: 0
