@@ -7,5 +7,6 @@ namespace Ebla.Models
         }
 
         public override string BaseName { get; }
+        public override Type ConfigType => Type.Dungeon;
     }
 }

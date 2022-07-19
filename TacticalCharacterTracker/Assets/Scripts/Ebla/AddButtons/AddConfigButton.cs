@@ -1,21 +1,19 @@
-using System;
-using Ebla.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Ebla.AddButtons
 {
     [RequireComponent(typeof(Button))]
-    public abstract class AddConfigButton<TConfig> : MonoBehaviour where TConfig : BaseConfig, new()
+    public abstract class AddConfigButton : MonoBehaviour
     {
-        public static event Action<TConfig> OnAddConfigButtonClicked;
-        
-        public void AddConfigButtonClicked()
-        {
-            AddNewConfig();
-            Debug.Log("AddConfigButtonClicked");
-        }
+        private Button button;
 
-        protected abstract TConfig AddNewConfig();
+        protected abstract void AddNewConfig();
+
+        private void Awake()
+        {
+            button = GetComponent<Button>();
+            button.onClick.AddListener(AddNewConfig);
+        }
     }
 }

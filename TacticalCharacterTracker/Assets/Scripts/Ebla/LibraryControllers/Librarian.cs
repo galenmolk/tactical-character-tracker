@@ -13,8 +13,10 @@ namespace Ebla.LibraryControllers
         public static event Action<BaseConfig> OnConfigRemoved;
         
         private AbilityLibraryController Abilities { get; set; }
-        
+        private EnemyLibraryController Enemies { get; set; }
+
         [SerializeField] private TextAsset abilitiesJson;
+        [SerializeField] private TextAsset enemiesJson;
 
         public void Add(BaseConfig baseConfig)
         {
@@ -26,6 +28,10 @@ namespace Ebla.LibraryControllers
                 case AbilityConfig config:
                     Debug.Log("Ability Added");
                     Abilities.Add(config);
+                    break;
+                case EnemyConfig config:
+                    Debug.Log("Enemy Added");
+                    Enemies.Add(config);
                     break;
                 default:
                     isAdding = false;
@@ -46,6 +52,9 @@ namespace Ebla.LibraryControllers
             {
                 case AbilityConfig config:
                     Abilities.Remove(config);
+                    break;
+                case EnemyConfig config:
+                    Enemies.Remove(config);
                     break;
                 default:
                     isRemoving = false;
@@ -70,16 +79,9 @@ namespace Ebla.LibraryControllers
         {
             var abilityLibraryConfig = JsonConvert.DeserializeObject<List<AbilityConfig>>(abilitiesJson.text);
             Abilities = new AbilityLibraryController(abilityLibraryConfig ?? new List<AbilityConfig>());
-        }
 
-        private static void HandleConfigAdded<TConfig>(TConfig config) where TConfig : BaseConfig
-        {
-            OnConfigAdded?.Invoke(config);
-        }
-        
-        private static void HandleConfigRemoved<TConfig>(TConfig config) where TConfig : BaseConfig
-        {
-            OnConfigRemoved?.Invoke(config);
+            var enemyLibraryConfig = JsonConvert.DeserializeObject<List<EnemyConfig>>(enemiesJson.text);
+            Enemies = new EnemyLibraryController(enemyLibraryConfig ?? new List<EnemyConfig>());
         }
     }
 }

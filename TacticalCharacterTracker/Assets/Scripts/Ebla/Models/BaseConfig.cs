@@ -16,6 +16,15 @@ namespace Ebla.Models
             DateModified = DateCreated;
         }
 
+        public enum Type
+        {
+            Ability = 0,
+            Enemy = 1,
+            Hero = 2,
+            Encounter = 3,
+            Dungeon = 4
+        }
+
         public abstract string BaseName { get; }
 
         [JsonProperty(ConfigKeys.NAME_KEY)]
@@ -27,6 +36,8 @@ namespace Ebla.Models
         public DateTime DateCreated { get; }
         public DateTime DateModified { get; }
         public string Id { get; private set; }
+
+        public abstract Type ConfigType { get; }
 
         public void UpdateName(string newName)
         {
@@ -43,7 +54,7 @@ namespace Ebla.Models
         {
             OnConfigModified?.Invoke();
         }
-        
+
         [OnSerialized]
         private void OnSerialized(StreamingContext context)
         {

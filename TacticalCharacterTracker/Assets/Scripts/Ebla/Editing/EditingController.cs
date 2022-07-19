@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Ebla.Models;
+using Ebla.UI;
 using Ebla.Utils;
 using MolkExtras;
 using UnityEngine;
