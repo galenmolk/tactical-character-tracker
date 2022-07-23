@@ -1,15 +1,13 @@
-using System;
 using System.Collections.Generic;
 using Ebla.Models;
 using MolkExtras;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Ebla.UI
 {
     public static class ConfigParamsRegistry
     {
-        private const string ASSET_PATH = "ConfigParams";
+        private const string ASSET_PATH = "ConfigParams/";
         
         private static Dictionary<BaseConfig.Type, ConfigParams> paramsRegistry;
 
