@@ -4,7 +4,7 @@ namespace Ebla.AddButtons
 {
     public class AddAbilityButton : AddConfigButton
     {
-        protected override void AddNewConfig()
+        public override void AddNewConfig()
         {
             Debug.Log("GetNewConfig");
             ConfigFactory.Ability();

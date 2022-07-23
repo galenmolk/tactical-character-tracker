@@ -32,19 +32,11 @@ namespace Ebla.Editing
         {
             base.ApplyConfig(config);
 
-            config.OnConfigModified += HandleConfigModified;
-            
             passiveSection.TrySetValue(config.IsPassive);
             cooldownSection.TrySetValue(config.CooldownTurns);
             interruptSection.TrySetValue(config.IsInterrupt);
-            
-            if (config.IsPassive)
-                cooldownSection.gameObject.SetActive(false);
-        }
 
-        private void HandleConfigModified()
-        {
-            cooldownSection.gameObject.SetActive(!ActiveConfig.IsPassive);
+            cooldownSection.gameObject.SetActive(!config.IsPassive);
         }
     }
 }

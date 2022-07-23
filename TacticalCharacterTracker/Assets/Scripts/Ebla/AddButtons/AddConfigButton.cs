@@ -8,7 +8,7 @@ namespace Ebla.AddButtons
     {
         private Button button;
 
-        protected abstract void AddNewConfig();
+        public abstract void AddNewConfig();
 
         private void Awake()
         {

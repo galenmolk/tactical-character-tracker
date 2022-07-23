@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 8634004191957867595}
   - component: {fileID: 8634004191957867592}
   - component: {fileID: 8634004191957867593}
+  - component: {fileID: 7416059830627356976}
   m_Layer: 5
   m_Name: ContextMenu
   m_TagString: Untagged
@@ -191,3 +192,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionPrefab: {fileID: 8920302674000799871, guid: 7a3ee5d512abd45079b72dce377879fc, type: 3}
   optionParent: {fileID: 8634004191957867594}
+--- !u!114 &7416059830627356976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8634004191957867589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745e82a9a82fb48faa07113f6adde2b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuClose:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8634004191957867593}
+        m_TargetAssemblyTypeName: Ebla.UI.ContextMenu, Assembly-CSharp
+        m_MethodName: Close
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

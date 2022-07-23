@@ -7,11 +7,24 @@ using UnityEngine.UI;
 
 namespace Ebla.UI
 {
-    [RequireComponent(typeof(Button))]
+    [RequireComponent(typeof(Button), typeof(RectTransform))]
     public class ContextMenuOption : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public event Action<UnityEvent> OnOptionSelected;
 
+        public RectTransform RectTransform
+        {
+            get
+            {
+                if (rectTransform == null)
+                    rectTransform = transform as RectTransform;
+
+                return rectTransform;
+            }
+        }
+
+        private RectTransform rectTransform;
+        
         [SerializeField] private TMP_Text text;
 
         private Button button;

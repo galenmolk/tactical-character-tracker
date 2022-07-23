@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,6 +41,16 @@ namespace Ebla.Editing.Sections
         {
             bool isValid = int.TryParse(inputField.text, out int value);
             return !isValid ? 0 : value;
+        }
+
+        private void OnDisable()
+        {
+            Debug.Log("Ticker Section DISABLE");
+        }
+
+        private void OnDestroy()
+        {
+            Debug.Log("Ticker Section DESTROY");
         }
     }
 }

@@ -47,7 +47,6 @@ namespace Ebla.Editing
         {
             if (activeConfig == config)
             {
-                Close();
                 return;
             }
             

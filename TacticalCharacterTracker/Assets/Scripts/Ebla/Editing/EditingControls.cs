@@ -15,6 +15,7 @@ namespace Ebla.Editing
             Debug.Log("Initialize " + config.Name);
 
             ActiveConfig = config;
+            config.OnConfigModified += Refresh;
             ApplyConfig(config);
         }
 
@@ -31,6 +32,11 @@ namespace Ebla.Editing
             nameSection.TrySetValue(config.Name);
         }
 
+        private void Refresh()
+        {
+            ApplyConfig(ActiveConfig);
+        }
+
         private void OnEnable()
         {
             Librarian.OnConfigRemoved += HandleConfigRemoved;
@@ -38,6 +44,7 @@ namespace Ebla.Editing
 
         private void OnDisable()
         {
+            ActiveConfig.OnConfigModified -= Refresh;
             Librarian.OnConfigRemoved -= HandleConfigRemoved;
         }
 
