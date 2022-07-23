@@ -5,80 +5,85 @@ using UnityEngine.Pool;
 
 namespace Ebla.Pooling
 {
+    public interface IReleasable
+    {
+        
+    }
+
     public abstract class Pool<TObject> : MonoBehaviour
         where TObject : BaseBehaviour<TObject>
     {
-        private Transform Transform
+    private Transform Transform
+    {
+        get
         {
-            get
-            {
-                if (myTransform == null)
-                    myTransform = transform;
+            if (myTransform == null)
+                myTransform = transform;
 
-                return myTransform;
-            }
+            return myTransform;
         }
+    }
 
-        private Transform myTransform;
-        
-        private IObjectPool<TObject> pool;
+    private Transform myTransform;
 
-        [SerializeField] private TObject prefab;
-        [SerializeField] private bool collectionCheck = false;
-        [SerializeField] private int defaultCapacity = 5;
-        [SerializeField] private int maxSize = 50;
-        
-        public TObject Get()
-        {
-            return pool.Get();
-        }
+    private IObjectPool<TObject> pool;
 
-        private void Awake()
-        {
-            pool = new ObjectPool<TObject>(
-                CreateObject,
-                OnTakeObjectFromPool,
-                OnObjectReturnedToPool,
-                OnDestroyObject,
-                collectionCheck,
-                defaultCapacity,
-                maxSize);
-        }
+    [SerializeField] private TObject prefab;
+    [SerializeField] private bool collectionCheck = false;
+    [SerializeField] private int defaultCapacity = 5;
+    [SerializeField] private int maxSize = 50;
 
-        private TObject CreateObject()
-        {
-            TObject obj = Instantiate(prefab, transform);
-            obj.gameObject.SetActive(false);
-            obj.OnReleaseObject += HandleReleaseObject;
-            return obj;
-        }
+    public TObject Get()
+    {
+        return pool.Get();
+    }
 
-        private void OnTakeObjectFromPool(TObject obj)
-        {
-            obj.gameObject.SetActive(true);
-        }
+    private void Awake()
+    {
+        pool = new ObjectPool<TObject>(
+            CreateObject,
+            OnTakeObjectFromPool,
+            OnObjectReturnedToPool,
+            OnDestroyObject,
+            collectionCheck,
+            defaultCapacity,
+            maxSize);
+    }
 
-        private void OnObjectReturnedToPool(TObject obj)
-        {
-            obj.ResetObject();
-        }
+    private TObject CreateObject()
+    {
+        TObject obj = Instantiate(prefab, transform);
+        obj.gameObject.SetActive(false);
+        obj.OnReleaseObject += HandleReleaseObject;
+        return obj;
+    }
 
-        private void OnDestroyObject(TObject obj)
-        {
-            Debug.Log("OnDestroyObject");
-            Destroy(obj.gameObject);
-        }
+    private void OnTakeObjectFromPool(TObject obj)
+    {
+        obj.gameObject.SetActive(true);
+    }
 
-        private void HandleReleaseObject(TObject obj)
-        {
-            if (obj == null)
-                return;
-            
-            Debug.Log("HandleReleaseObject");
+    private void OnObjectReturnedToPool(TObject obj)
+    {
+        obj.ResetObject();
+    }
 
-            obj.Transform.SetParent(Transform);
-            pool.Release(obj);
-            obj.gameObject.SetActive(false);
-        }
+    private void OnDestroyObject(TObject obj)
+    {
+        Debug.Log("OnDestroyObject");
+        Destroy(obj.gameObject);
+    }
+
+    private void HandleReleaseObject(TObject obj)
+    {
+        if (obj == null)
+            return;
+
+        Debug.Log("HandleReleaseObject");
+
+        obj.Transform.SetParent(Transform);
+        pool.Release(obj);
+        obj.gameObject.SetActive(false);
+    }
     }
 }

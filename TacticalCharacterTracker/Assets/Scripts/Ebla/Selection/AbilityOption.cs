@@ -13,8 +13,8 @@ namespace Ebla.Selection
         [SerializeField] private TMP_Text interruptText;
 
         public override event Action<AbilityOption> OnReleaseObject;
-        
-        public override void ReleaseObject()
+
+        protected override void InvokeReleaseObject()
         {
             OnReleaseObject?.Invoke(this);
         }

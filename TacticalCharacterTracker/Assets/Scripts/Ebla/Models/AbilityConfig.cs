@@ -21,7 +21,7 @@ namespace Ebla.Models
         public bool IsInterrupt { get; private set; }
 
         public override Type ConfigType => Type.Ability;
-        
+
         public AbilityConfig()
         {
 

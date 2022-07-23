@@ -19,7 +19,6 @@ namespace Ebla
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log($"Clicked on folder {path}");
         }
 
         public void OnDrop(PointerEventData eventData)

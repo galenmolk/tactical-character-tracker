@@ -3,38 +3,32 @@ using Ebla.LibraryControllers;
 using Ebla.Models;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Ebla.UI
 {
-    public class ConfigSlot : BaseBehaviour<ConfigSlot>, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public abstract class ConfigSlot<TSlot, TConfig> : BaseBehaviour<TSlot>
+    where TConfig : BaseConfig
+    where TSlot : MonoBehaviour
     {
-        public static event Action<BaseConfig> OnEditConfigSlot;
-        public override event Action<ConfigSlot> OnReleaseObject;
+        public static event Action<TConfig> OnEditConfigSlot;
 
-        [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private TMP_Text nameText;
         [SerializeField] private Image backgroundImage;
         
-        public BaseConfig Config { get; private set; }
+        public TConfig Config { get; private set; }
 
-        public void Configure(BaseConfig myConfig)
+        public void Configure(TConfig myConfig)
         {
             Config = myConfig;
             Config.OnConfigModified += ApplyConfigToSlot;
             ApplyConfigToSlot();
             backgroundImage.color = ConfigParamsRegistry.Get(myConfig).Color;
         }
-        
+
         public override void ResetObject()
         {
             ApplyConfigToSlot();
-        }
-
-        public override void ReleaseObject()
-        {
-            OnReleaseObject?.Invoke(this);
         }
 
         public void ApplyConfigToSlot()
@@ -44,29 +38,16 @@ namespace Ebla.UI
 
         public void DeleteConfig()
         {
-            Librarian.Instance.Remove(Config as AbilityConfig);
+            RemoveConfig();
             Config = null;
-            OnReleaseObject?.Invoke(this);
+            ReleaseObject();
         }
 
         public void EditConfig()
         {
             OnEditConfigSlot?.Invoke(Config);
         }
-        
-        public void OnBeginDrag(PointerEventData eventData)
-        {
-            canvasGroup.blocksRaycasts = false;
-        }
-        
-        public void OnDrag(PointerEventData eventData)
-        {
-            transform.position = Input.mousePosition;
-        }
 
-        public void OnEndDrag(PointerEventData eventData)
-        {
-            canvasGroup.blocksRaycasts = true;
-        }
+        protected abstract void RemoveConfig();
     }
 }

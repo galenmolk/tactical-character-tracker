@@ -3,106 +3,109 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AbilitySlot : MonoBehaviour
+namespace HexedHeroes.Player
 {
-    [SerializeField] private Button button;
-    [SerializeField] private TMP_Text abilityCooldown;
-    [SerializeField] private TMP_Text abilityName;
-    [SerializeField] private GameObject longPressArea;
-    
-    private AbilityConfig ability;
-    
-    private int totalCooldown;
-    private int currentCooldown;
-    private bool isCooldownActive;
-    
-    public void Initialize(AbilityConfig abilityConfig)
+    public class AbilitySlot : MonoBehaviour
     {
-        ability = abilityConfig;
-        abilityName.text = ability.name;
-        CustomAbilityLibrary.TryAddCustomAbility(gameObject, ability.name);
-        totalCooldown = abilityConfig.cooldown;
-        currentCooldown = totalCooldown;
-        UpdateCooldownText();
-
-        if (abilityConfig.isPassive)
+        [SerializeField] private Button button;
+        [SerializeField] private TMP_Text abilityCooldown;
+        [SerializeField] private TMP_Text abilityName;
+        [SerializeField] private GameObject longPressArea;
+    
+        private AbilityConfig ability;
+    
+        private int totalCooldown;
+        private int currentCooldown;
+        private bool isCooldownActive;
+    
+        public void Initialize(AbilityConfig abilityConfig)
         {
-            longPressArea.SetActive(false);
-            button.enabled = false;
+            ability = abilityConfig;
+            abilityName.text = ability.name;
+            CustomAbilityLibrary.TryAddCustomAbility(gameObject, ability.name);
+            totalCooldown = abilityConfig.cooldown;
+            currentCooldown = totalCooldown;
+            UpdateCooldownText();
+
+            if (abilityConfig.isPassive)
+            {
+                longPressArea.SetActive(false);
+                button.enabled = false;
+            }
         }
-    }
 
-    public void InfoButtonPressed()
-    {
-        AbilityInfoBox.Instance.DisplayAbilityInfo(ability);
-    }
+        public void InfoButtonPressed()
+        {
+            AbilityInfoBox.Instance.DisplayAbilityInfo(ability);
+        }
     
-    public void TriggerAbility()
-    {
-        isCooldownActive = true;
-        Deactivate();
-        UpdateCooldownText();
-        longPressArea.SetActive(true);
-    }
+        public void TriggerAbility()
+        {
+            isCooldownActive = true;
+            Deactivate();
+            UpdateCooldownText();
+            longPressArea.SetActive(true);
+        }
     
-    public void ResetAbilitySlot()
-    {
-        if (button.interactable || !isCooldownActive)
-            return;
+        public void ResetAbilitySlot()
+        {
+            if (button.interactable || !isCooldownActive)
+                return;
         
-        EndCooldown();
-        Activate();
-        UpdateCooldownText();
-        longPressArea.SetActive(false);
-    }
+            EndCooldown();
+            Activate();
+            UpdateCooldownText();
+            longPressArea.SetActive(false);
+        }
     
-    private void Awake()
-    {
-        TurnManager.Instance.SubscribeTurnStarted(OnTurnStarted);
-        TurnManager.Instance.SubscribeTurnEnded(OnTurnEnded);
-    }
+        private void Awake()
+        {
+            TurnManager.Instance.SubscribeTurnStarted(OnTurnStarted);
+            TurnManager.Instance.SubscribeTurnEnded(OnTurnEnded);
+        }
 
-    private void Deactivate()
-    {
-        button.interactable = false;
-    }
+        private void Deactivate()
+        {
+            button.interactable = false;
+        }
 
-    private void Activate()
-    {
-        button.interactable = true;
-    }
+        private void Activate()
+        {
+            button.interactable = true;
+        }
 
-    private void UpdateCooldownText()
-    {
-        string text = isCooldownActive ? ability.GetCurrentCooldownDescription(currentCooldown) : ability.GetCooldownDescription();
-        abilityCooldown.text = text;
-    }
+        private void UpdateCooldownText()
+        {
+            string text = isCooldownActive ? ability.GetCurrentCooldownDescription(currentCooldown) : ability.GetCooldownDescription();
+            abilityCooldown.text = text;
+        }
 
-    private void EndCooldown()
-    {
-        isCooldownActive = false;
-        currentCooldown = totalCooldown;
-    }
+        private void EndCooldown()
+        {
+            isCooldownActive = false;
+            currentCooldown = totalCooldown;
+        }
 
-    private void OnTurnStarted()
-    {
-        if (currentCooldown > 0)
-            return;
+        private void OnTurnStarted()
+        {
+            if (currentCooldown > 0)
+                return;
 
-        ResetAbilitySlot();
-    }
-    
-    private void OnTurnEnded()
-    {
-        if (!isCooldownActive)
-            return;
-        
-        if (currentCooldown > 0)
-            currentCooldown--;
-        
-        UpdateCooldownText();
-        
-        if (ability.isInterrupt && currentCooldown == 0)
             ResetAbilitySlot();
+        }
+    
+        private void OnTurnEnded()
+        {
+            if (!isCooldownActive)
+                return;
+        
+            if (currentCooldown > 0)
+                currentCooldown--;
+        
+            UpdateCooldownText();
+        
+            if (ability.isInterrupt && currentCooldown == 0)
+                ResetAbilitySlot();
+        }
     }
 }

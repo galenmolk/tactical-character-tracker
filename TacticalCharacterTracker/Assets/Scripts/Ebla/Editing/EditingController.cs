@@ -41,7 +41,11 @@ namespace Ebla.Editing
             ClearActiveControls();
         }
 
-        private void OpenEditingControls<TConfig, TControls>(TConfig config, ref TControls controlsInstance, TControls controlsPrefab, ConfigType type) 
+        private void OpenEditingControls<TConfig, TControls>(
+            TConfig config, 
+            ref TControls controlsInstance, 
+            TControls controlsPrefab, 
+            ConfigType type) 
             where TConfig : BaseConfig
             where TControls : EditingControls<TConfig>
         {
@@ -80,24 +84,29 @@ namespace Ebla.Editing
         
         private void OnEnable()
         {
-            ConfigSlot.OnEditConfigSlot += HandleEditConfigSlot;
+            EnemySlot.OnEditConfigSlot += HandleEditEnemySlot;
+            AbilitySlot.OnEditConfigSlot += HandleEditAbilitySlot;
         }
 
         private void OnDisable()
         {
-            ConfigSlot.OnEditConfigSlot -= HandleEditConfigSlot;
+            EnemySlot.OnEditConfigSlot -= HandleEditEnemySlot;
+            AbilitySlot.OnEditConfigSlot -= HandleEditAbilitySlot;
         }
 
-        private void HandleEditConfigSlot(BaseConfig baseConfig)
+        private void HandleEditAbilitySlot(AbilityConfig abilityConfig)
         {
-            switch (baseConfig)
-            {
-                case AbilityConfig config:
-                    OpenEditingControls(config, ref abilityControls, controlsPrefabLibrary.AbilityControls, ConfigType.Ability);
-                    break;
-                default:
-                    return;
-            }
+            OpenEditingControls(
+                abilityConfig, 
+                ref abilityControls, 
+                controlsPrefabLibrary.AbilityControls, 
+                ConfigType.Ability);
+
+        }
+
+        private void HandleEditEnemySlot(EnemyConfig enemyConfig)
+        {
+            
         }
     }
 }

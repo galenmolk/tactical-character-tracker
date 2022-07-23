@@ -6,10 +6,19 @@ namespace Ebla
 {
     public static class FileSorter
     {
-        public static IEnumerable<ConfigSlot> SortByName(IEnumerable<ConfigSlot> files)
+        public static IEnumerable<AbilitySlot> SortByName(IEnumerable<AbilitySlot> abilitySlots)
         {
-            var sortByName = files.ToList();
-            if (sortByName.Count() < 2)
+            List<AbilitySlot> sortByName = abilitySlots.ToList();
+            if (sortByName.Count < 2)
+                return sortByName;
+
+            return sortByName.OrderBy(fileSlot => fileSlot.Config.Name);
+        }
+        
+        public static IEnumerable<EnemySlot> SortByName(IEnumerable<EnemySlot> enemySlots)
+        {
+            List<EnemySlot> sortByName = enemySlots.ToList();
+            if (sortByName.Count < 2)
                 return sortByName;
 
             return sortByName.OrderBy(fileSlot => fileSlot.Config.Name);

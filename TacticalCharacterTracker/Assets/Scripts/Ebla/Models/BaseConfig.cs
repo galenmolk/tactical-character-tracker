@@ -9,7 +9,8 @@ namespace Ebla.Models
     public abstract class BaseConfig
     {
         public event Action OnConfigModified;
-
+        public event Action OnConfigRemoved;
+        
         public BaseConfig()
         {
             DateCreated = DateTime.Now;
@@ -38,7 +39,7 @@ namespace Ebla.Models
         public string Id { get; private set; }
 
         public abstract Type ConfigType { get; }
-
+        
         public void UpdateName(string newName)
         {
             Name = newName;
@@ -53,6 +54,11 @@ namespace Ebla.Models
         protected void InvokeConfigModified()
         {
             OnConfigModified?.Invoke();
+        }
+
+        public void InvokeConfigRemoved()
+        {
+            OnConfigRemoved?.Invoke();
         }
 
         [OnSerialized]

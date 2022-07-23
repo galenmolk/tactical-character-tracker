@@ -1,4 +1,3 @@
-using Ebla.LibraryControllers;
 using Ebla.Models;
 using UnityEngine;
 
@@ -12,9 +11,8 @@ namespace Ebla.Editing
 
         public void Initialize(TConfig config)
         {
-            Debug.Log("Initialize " + config.Name);
-
             ActiveConfig = config;
+            config.OnConfigRemoved += HandleConfigRemoved;
             config.OnConfigModified += Refresh;
             ApplyConfig(config);
         }
@@ -37,21 +35,15 @@ namespace Ebla.Editing
             ApplyConfig(ActiveConfig);
         }
 
-        private void OnEnable()
-        {
-            Librarian.OnConfigRemoved += HandleConfigRemoved;
-        }
-
         private void OnDisable()
         {
             ActiveConfig.OnConfigModified -= Refresh;
-            Librarian.OnConfigRemoved -= HandleConfigRemoved;
+            ActiveConfig.OnConfigRemoved -= HandleConfigRemoved;
         }
 
-        private void HandleConfigRemoved(BaseConfig config)
+        private static void HandleConfigRemoved()
         {
-            if (config == ActiveConfig)
-                EditingController.Instance.Close();
+            EditingController.Instance.Close();
         }
     }
 }

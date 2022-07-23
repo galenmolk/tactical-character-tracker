@@ -184,8 +184,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ability
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
+  m_sharedMaterial: {fileID: 9034587130385221864, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -437,8 +437,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Close
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
+  m_sharedMaterial: {fileID: 9034587130385221864, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -766,6 +766,7 @@ GameObject:
   - component: {fileID: 958415860}
   - component: {fileID: 958415863}
   - component: {fileID: 958415862}
+  - component: {fileID: 958415864}
   m_Layer: 0
   m_Name: PrefabLibrary
   m_TagString: Untagged
@@ -786,7 +787,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   persistent: 0
-  configSlotPool: {fileID: 958415863}
+  abilitySlotPool: {fileID: 958415864}
+  enemySlotPool: {fileID: 958415863}
   abilityOptionPool: {fileID: 958415862}
 --- !u!4 &958415861
 Transform:
@@ -831,8 +833,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d5fb7a50bb4800ad8ddcba860a91d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3243105080126764804, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
+  prefab: {fileID: 5425226581563068609, guid: 47e20ce4c29d1455ea5b9930e59f51bb, type: 3}
   collectionCheck: 1
+  defaultCapacity: 5
+  maxSize: 50
+--- !u!114 &958415864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958415859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9873a7442854ae191ebbd73f0dc7761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1432215462322722028, guid: 4dbcc9d9f5c4544fa9f25a10e08f7623, type: 3}
+  collectionCheck: 0
   defaultCapacity: 5
   maxSize: 50
 --- !u!1 &1048098512
@@ -1480,8 +1498,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enemy
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
+  m_sharedMaterial: {fileID: 9034587130385221864, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

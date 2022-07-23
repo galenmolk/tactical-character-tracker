@@ -1,4 +1,3 @@
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -42,7 +41,6 @@ namespace Ebla.UI
             Rect menuRect = menuRectTransform.rect;
             
             Vector2 mousePos = Input.mousePosition;
-            Debug.Log($"mousePos {mousePos}");
 
             Vector2 screenSize = new Vector2(Screen.width, Screen.height);
             
@@ -77,8 +75,6 @@ namespace Ebla.UI
                 }
             }
             
-            Debug.Log($"menuHeight {menuHeight}");
-
             return yPos - menuHeight < 0 ? 0f : 1f;
         }
 

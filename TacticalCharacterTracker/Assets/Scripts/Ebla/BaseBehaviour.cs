@@ -23,6 +23,11 @@ namespace Ebla
         
         public abstract void ResetObject();
 
-        public abstract void ReleaseObject();
+        public void ReleaseObject()
+        {
+            InvokeReleaseObject();
+        }
+        protected abstract void InvokeReleaseObject();
+
     }
 }

@@ -8,12 +8,18 @@ namespace Ebla
 {
     public class PrefabLibrary : Singleton<PrefabLibrary>
     {
-        [SerializeField] private ConfigSlotPool configSlotPool;
+        [SerializeField] private AbilitySlotPool abilitySlotPool;
+        [SerializeField] private EnemySlotPool enemySlotPool;
         [SerializeField] private AbilityOptionPool abilityOptionPool;
-        
-        public ConfigSlot GetConfigSlot()
+
+        public AbilitySlot GetAbilitySlot()
         {
-            return configSlotPool.Get();
+            return abilitySlotPool.Get();
+        }
+        
+        public EnemySlot GetEnemySlot()
+        {
+            return enemySlotPool.Get();
         }
 
         public AbilityOption GetAbilityOption()

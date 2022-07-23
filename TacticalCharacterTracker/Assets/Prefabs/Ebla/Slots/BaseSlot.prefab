@@ -181,14 +181,13 @@ GameObject:
   - component: {fileID: 4763037680869666184}
   - component: {fileID: 4763037680869666186}
   - component: {fileID: 4763037680869666185}
-  - component: {fileID: 3243105080126764804}
   - component: {fileID: 2492226750873577406}
   - component: {fileID: 8624024255307033952}
   - component: {fileID: 915605327362891233}
   - component: {fileID: 6266805987495670442}
   - component: {fileID: 4607337143601026718}
   m_Layer: 5
-  m_Name: ConfigSlot
+  m_Name: BaseSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,21 +252,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3243105080126764804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4763037680869666191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f92f0f62dd7243829f94f930606409db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 2492226750873577406}
-  nameText: {fileID: 2450190265999354514}
-  backgroundImage: {fileID: 4763037680869666185}
 --- !u!225 &2492226750873577406
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -295,7 +279,7 @@ MonoBehaviour:
   onDoubleClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3243105080126764804}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Ebla.FileSlot, Assembly-CSharp
         m_MethodName: EditConfig
         m_Mode: 1
@@ -351,7 +335,7 @@ MonoBehaviour:
     action:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3243105080126764804}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Ebla.UI.ConfigSlot, Assembly-CSharp
           m_MethodName: EditConfig
           m_Mode: 1
@@ -367,7 +351,7 @@ MonoBehaviour:
     action:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3243105080126764804}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Ebla.UI.ConfigSlot, Assembly-CSharp
           m_MethodName: DeleteConfig
           m_Mode: 1
@@ -594,8 +578,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Goblin Commander
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
+  m_sharedMaterial: {fileID: 9034587130385221864, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

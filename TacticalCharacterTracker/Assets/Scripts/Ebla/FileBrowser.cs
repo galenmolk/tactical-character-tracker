@@ -11,26 +11,34 @@ namespace Ebla
 
         private void OnEnable()
         {
-            Librarian.OnConfigAdded += HandleConfigAdded;
+            Librarian.OnAbilityAdded += HandleAbilityAdded;
+            Librarian.OnEnemyAdded += HandleEnemyAdded;
         }
 
         private void OnDisable()
         {
-            Librarian.OnConfigAdded -= HandleConfigAdded;
+            Librarian.OnAbilityAdded -= HandleAbilityAdded;
+            Librarian.OnEnemyAdded -= HandleEnemyAdded;
         }
 
-        private void HandleConfigAdded(BaseConfig config)
+        private void HandleAbilityAdded(AbilityConfig abilityConfig)
         {
-            Debug.Log("FileBrowser.HandleConfigAdded");
-            ConfigSlot configSlot = PrefabLibrary.Instance.GetConfigSlot();
-            configSlot.OnReleaseObject += HandleConfigSlotReleased;
-            configSlot.Configure(config);
-            configSlot.transform.SetParent(fileArea);        
+            AbilitySlot slot = PrefabLibrary.Instance.GetAbilitySlot();
+            InitializeSlot(slot, abilityConfig);
         }
 
-        private void HandleConfigSlotReleased(ConfigSlot fileSlot)
+        private void HandleEnemyAdded(EnemyConfig enemyConfig)
         {
-            
+            EnemySlot slot = PrefabLibrary.Instance.GetEnemySlot();
+            InitializeSlot(slot, enemyConfig);
+        }
+
+        private void InitializeSlot<TSlot, TConfig>(TSlot slot, TConfig config)
+            where TSlot : ConfigSlot<TSlot, TConfig>
+            where TConfig : BaseConfig
+        {
+            slot.Configure(config);
+            slot.transform.SetParent(fileArea);
         }
     }
 }

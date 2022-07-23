@@ -9,60 +9,37 @@ namespace Ebla.LibraryControllers
 {
     public class Librarian : Singleton<Librarian>
     {
-        public static event Action<BaseConfig> OnConfigAdded;
-        public static event Action<BaseConfig> OnConfigRemoved;
+        public static event Action<AbilityConfig> OnAbilityAdded;
+        public static event Action<EnemyConfig> OnEnemyAdded;
         
         private AbilityLibraryController Abilities { get; set; }
         private EnemyLibraryController Enemies { get; set; }
 
         [SerializeField] private TextAsset abilitiesJson;
         [SerializeField] private TextAsset enemiesJson;
-
-        public void Add(BaseConfig baseConfig)
+        
+        public void Add(AbilityConfig abilityConfig)
         {
-            Debug.Log("Librarian.Add");
-            bool isAdding = true;
-            
-            switch (baseConfig)
-            {
-                case AbilityConfig config:
-                    Debug.Log("Ability Added");
-                    Abilities.Add(config);
-                    break;
-                case EnemyConfig config:
-                    Debug.Log("Enemy Added");
-                    Enemies.Add(config);
-                    break;
-                default:
-                    isAdding = false;
-                    break;
-            }
-            
-            Debug.Log("Librarian.Add" + isAdding);
+            Abilities.Add(abilityConfig);
+            OnAbilityAdded?.Invoke(abilityConfig);
+        }
 
-            if (isAdding)
-                OnConfigAdded?.Invoke(baseConfig);
+        public void Add(EnemyConfig enemyConfig)
+        {
+            Enemies.Add(enemyConfig);
+            OnEnemyAdded?.Invoke(enemyConfig);
         }
         
-        public void Remove(BaseConfig baseConfig)
+        public void Remove(AbilityConfig abilityConfig)
         {
-            bool isRemoving = true;
-            
-            switch (baseConfig)
-            {
-                case AbilityConfig config:
-                    Abilities.Remove(config);
-                    break;
-                case EnemyConfig config:
-                    Enemies.Remove(config);
-                    break;
-                default:
-                    isRemoving = false;
-                    break;
-            }
-            
-            if (isRemoving)
-                OnConfigRemoved?.Invoke(baseConfig);
+            Abilities.Remove(abilityConfig);
+            abilityConfig.InvokeConfigRemoved();
+        }
+
+        public void Remove(EnemyConfig enemyConfig)
+        {
+            Enemies.Remove(enemyConfig);
+            enemyConfig.InvokeConfigRemoved();
         }
 
         public List<AbilityConfig> GetAbilities()
