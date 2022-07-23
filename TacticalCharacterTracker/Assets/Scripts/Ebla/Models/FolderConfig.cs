@@ -7,6 +7,9 @@ namespace Ebla.Models
     {
         public string colorHex;
         public override string BaseName => "Untitled Folder";
-        public override Type ConfigType { get; }
+        protected override void RemoveConfigFromLibrary()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

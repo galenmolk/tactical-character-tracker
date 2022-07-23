@@ -1,5 +1,4 @@
 using System;
-using Ebla.LibraryControllers;
 using Ebla.Models;
 using TMPro;
 using UnityEngine;
@@ -15,6 +14,7 @@ namespace Ebla.UI
 
         [SerializeField] private TMP_Text nameText;
         [SerializeField] private Image backgroundImage;
+        [SerializeField] private SlotParams slotParams;
         
         public TConfig Config { get; private set; }
 
@@ -22,8 +22,8 @@ namespace Ebla.UI
         {
             Config = myConfig;
             Config.OnConfigModified += ApplyConfigToSlot;
+            Config.OnConfigRemoved += HandleConfigRemoved;
             ApplyConfigToSlot();
-            backgroundImage.color = ConfigParamsRegistry.Get(myConfig).Color;
         }
 
         public override void ResetObject()
@@ -38,9 +38,7 @@ namespace Ebla.UI
 
         public void DeleteConfig()
         {
-            RemoveConfig();
-            Config = null;
-            ReleaseObject();
+            Config.TryDeleteConfig();
         }
 
         public void EditConfig()
@@ -48,6 +46,17 @@ namespace Ebla.UI
             OnEditConfigSlot?.Invoke(Config);
         }
 
-        protected abstract void RemoveConfig();
+        private void HandleConfigRemoved()
+        {
+            Config.OnConfigModified -= ApplyConfigToSlot;
+            Config.OnConfigRemoved -= HandleConfigRemoved;
+            Config = null;
+            ReleaseObject();
+        }
+
+        private void Awake()
+        {
+            backgroundImage.color = slotParams.Color;
+        }
     }
 }

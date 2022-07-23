@@ -1,4 +1,5 @@
 using Ebla.Editing.Sections;
+using Ebla.LibraryControllers;
 using Ebla.Models;
 using UnityEngine;
 
@@ -27,7 +28,20 @@ namespace Ebla.Editing
             if (isInterrupt != ActiveConfig.IsInterrupt)
                 ActiveConfig.UpdateIsInterrupt(isInterrupt);
         }
-        
+
+        protected override void SubscribeToSectionModifiedEvents()
+        {
+            base.SubscribeToSectionModifiedEvents();
+            cooldownSection.SubscribeToModifiedEvent(TryUpdateCooldownTurns);
+            passiveSection.SubscribeToModifiedEvent(TryUpdateIsPassive);
+            interruptSection.SubscribeToModifiedEvent(TryUpdateIsInterrupt);
+        }
+
+        protected override void RemoveConfig()
+        {
+            AbilityLibrarian.Instance.Remove(ActiveConfig);
+        }
+
         protected override void ApplyConfig(AbilityConfig config)
         {
             base.ApplyConfig(config);

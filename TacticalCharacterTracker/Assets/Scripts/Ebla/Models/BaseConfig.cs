@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Serialization;
+using Ebla.UI;
 using Ebla.Utils;
 using Newtonsoft.Json;
 
@@ -17,15 +18,6 @@ namespace Ebla.Models
             DateModified = DateCreated;
         }
 
-        public enum Type
-        {
-            Ability = 0,
-            Enemy = 1,
-            Hero = 2,
-            Encounter = 3,
-            Dungeon = 4
-        }
-
         public abstract string BaseName { get; }
 
         [JsonProperty(ConfigKeys.NAME_KEY)]
@@ -38,8 +30,6 @@ namespace Ebla.Models
         public DateTime DateModified { get; }
         public string Id { get; private set; }
 
-        public abstract Type ConfigType { get; }
-        
         public void UpdateName(string newName)
         {
             Name = newName;
@@ -51,14 +41,22 @@ namespace Ebla.Models
             ParentFolderName = folder.Path;
         }
 
+        public void TryDeleteConfig()
+        {
+            ConfirmationController.Instance.DeleteConfig(this);
+        }
+        
+        public void DeleteConfig()
+        {
+            RemoveConfigFromLibrary();
+            OnConfigRemoved?.Invoke();
+        }
+
+        protected abstract void RemoveConfigFromLibrary();
+
         protected void InvokeConfigModified()
         {
             OnConfigModified?.Invoke();
-        }
-
-        public void InvokeConfigRemoved()
-        {
-            OnConfigRemoved?.Invoke();
         }
 
         [OnSerialized]

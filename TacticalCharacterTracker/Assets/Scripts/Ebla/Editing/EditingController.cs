@@ -1,112 +1,109 @@
 using DG.Tweening;
 using Ebla.Models;
-using Ebla.UI;
-using Ebla.Utils;
-using MolkExtras;
 using UnityEngine;
 
 namespace Ebla.Editing
 {
-    public class EditingController : Singleton<EditingController>
+    public abstract class EditingController<TControls, TConfig> : MonoBehaviour
+        where TControls : EditingControls<TConfig>
+        where TConfig : BaseConfig
     {
         [SerializeField] private Transform controlsParent;
-        [SerializeField] private ControlsPrefabLibrary controlsPrefabLibrary;
+
+        [SerializeField] private TControls controlsPrefab;
+        
         [SerializeField] private float openXPos;
         [SerializeField] private float closeXPos;
         [SerializeField] private float toggleDuration;
 
-        private ConfigType activeType;
-        private BaseConfig activeConfig;
+        private TConfig activeConfig;
         
         private RectTransform RectTransform
         {
             get
             {
                 if (rectTransform == null)
+                {
                     rectTransform = transform as RectTransform;
+                }
 
                 return rectTransform;
             }
         }
 
         private RectTransform rectTransform;
-        private GameObject activeControls;
-        private AbilityControls abilityControls;
-
+        private TControls controlsInstance;
+        
         public void Close()
         {
-            activeType = ConfigType.None;
+            if (activeConfig == null)
+            {
+                return;
+            }
+            
             activeConfig = null;
             RectTransform.DOAnchorPosX(closeXPos, toggleDuration, true);
             ClearActiveControls();
         }
 
-        private void OpenEditingControls<TConfig, TControls>(
-            TConfig config, 
-            ref TControls controlsInstance, 
-            TControls controlsPrefab, 
-            ConfigType type) 
-            where TConfig : BaseConfig
-            where TControls : EditingControls<TConfig>
+        public void DeleteConfig()
+        {
+            activeConfig?.TryDeleteConfig();
+        }
+
+        private void OpenControls(TConfig config)
         {
             if (activeConfig == config)
             {
                 return;
             }
             
-            if (activeType != type)
-                controlsInstance = GetNewControlsInstance<TConfig, TControls>(controlsPrefab);
-            
-            activeType = type;
+            if (controlsInstance == null)
+            {
+                controlsInstance = GetNewControlsInstance();
+            }
+
             activeConfig = config;
             controlsInstance.Initialize(config);
+            RectTransform.DOAnchorPosX(openXPos, toggleDuration, true);
         }
 
-        private TControls GetNewControlsInstance<TConfig, TControls>(TControls controlsPrefab)
-            where TConfig : BaseConfig
-            where TControls : EditingControls<TConfig>
+        private TControls GetNewControlsInstance()
         {
             ClearActiveControls();
             TControls instance = Instantiate(controlsPrefab, controlsParent);
-            activeControls = instance.gameObject;
-            RectTransform.DOAnchorPosX(openXPos, toggleDuration, true);
+            instance.OnConfigRemoved += Close;
+            controlsInstance = instance;
             return instance;
         }
         
         private void ClearActiveControls()
         {
-            if (activeControls == null)
+            if (controlsInstance == null)
+            {
                 return;
-         
-            Destroy(activeControls);
-            activeControls = null;
+            }
+
+            Destroy(controlsInstance.gameObject);
+            controlsInstance = null;
         }
         
         private void OnEnable()
         {
-            EnemySlot.OnEditConfigSlot += HandleEditEnemySlot;
-            AbilitySlot.OnEditConfigSlot += HandleEditAbilitySlot;
+            SubscribeEditSlot();
         }
 
         private void OnDisable()
         {
-            EnemySlot.OnEditConfigSlot -= HandleEditEnemySlot;
-            AbilitySlot.OnEditConfigSlot -= HandleEditAbilitySlot;
+            UnsubscribeEditSlot();
         }
 
-        private void HandleEditAbilitySlot(AbilityConfig abilityConfig)
-        {
-            OpenEditingControls(
-                abilityConfig, 
-                ref abilityControls, 
-                controlsPrefabLibrary.AbilityControls, 
-                ConfigType.Ability);
+        protected abstract void SubscribeEditSlot();
+        protected abstract void UnsubscribeEditSlot();
 
-        }
-
-        private void HandleEditEnemySlot(EnemyConfig enemyConfig)
+        protected void HandleEditSlot(TConfig config)
         {
-            
+            OpenControls(config);
         }
     }
 }

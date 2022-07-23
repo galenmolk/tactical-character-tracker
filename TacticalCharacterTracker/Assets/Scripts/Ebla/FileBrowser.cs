@@ -11,14 +11,8 @@ namespace Ebla
 
         private void OnEnable()
         {
-            Librarian.OnAbilityAdded += HandleAbilityAdded;
-            Librarian.OnEnemyAdded += HandleEnemyAdded;
-        }
-
-        private void OnDisable()
-        {
-            Librarian.OnAbilityAdded -= HandleAbilityAdded;
-            Librarian.OnEnemyAdded -= HandleEnemyAdded;
+            AbilityLibrarian.Instance.OnConfigAdded += HandleAbilityAdded;
+            EnemyLibrarian.Instance.OnConfigAdded += HandleEnemyAdded;
         }
 
         private void HandleAbilityAdded(AbilityConfig abilityConfig)

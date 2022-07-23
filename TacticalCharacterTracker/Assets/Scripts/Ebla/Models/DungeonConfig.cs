@@ -7,6 +7,9 @@ namespace Ebla.Models
         }
 
         public override string BaseName { get; }
-        public override Type ConfigType => Type.Dungeon;
+        protected override void RemoveConfigFromLibrary()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

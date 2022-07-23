@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,8 @@ namespace Ebla.AddButtons
     {
         private Button button;
 
+        // Called by ContextMenuBehaviour.
+        [UsedImplicitly]
         public abstract void AddNewConfig();
 
         private void Awake()

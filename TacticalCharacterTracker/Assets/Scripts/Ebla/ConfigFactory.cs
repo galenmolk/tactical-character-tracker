@@ -6,19 +6,19 @@ namespace Ebla
 {
     public static class ConfigFactory
     {
-        public static AbilityConfig Ability()
+        public static void Ability()
         {
-            Debug.Log("NewAbility");
+            Debug.Log("Ability");
             AbilityConfig abilityConfig = new AbilityConfig();
-            Librarian.Instance.Add(abilityConfig);
-            return abilityConfig;
+            AbilityLibrarian.Instance.Add(abilityConfig);
         }
 
-        public static EnemyConfig Enemy()
+        public static void Enemy()
         {
+            Debug.Log("Enemy");
+
             EnemyConfig enemyConfig = new EnemyConfig();
-            Librarian.Instance.Add(enemyConfig);
-            return enemyConfig;
+            EnemyLibrarian.Instance.Add(enemyConfig);
         }
     }
 }

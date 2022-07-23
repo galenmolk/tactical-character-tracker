@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Ebla.LibraryControllers;
 using Ebla.Models;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Ebla.Selection
         
         protected override void CreateOptions()
         {
-            var abilities = Librarian.Instance.GetAbilities();
+            List<AbilityConfig> abilities = AbilityLibrarian.Instance.GetAbilities();
 
             Debug.Log("CreateOptions: " + abilities.Count);
             foreach (var abilityConfig in abilities)

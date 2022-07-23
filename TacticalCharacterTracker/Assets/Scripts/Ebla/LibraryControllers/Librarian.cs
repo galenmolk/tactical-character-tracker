@@ -7,44 +7,31 @@ using UnityEngine;
 
 namespace Ebla.LibraryControllers
 {
-    public class Librarian : Singleton<Librarian>
+    public abstract class Librarian<TLibrarian, TConfig, TController> : Singleton<TLibrarian>
+        where TConfig : BaseConfig
+        where TLibrarian : Librarian<TLibrarian, TConfig, TController>
+        where TController : LibraryController<TConfig>
     {
-        public static event Action<AbilityConfig> OnAbilityAdded;
-        public static event Action<EnemyConfig> OnEnemyAdded;
-        
-        private AbilityLibraryController Abilities { get; set; }
-        private EnemyLibraryController Enemies { get; set; }
+        public event Action<TConfig> OnConfigAdded;
 
-        [SerializeField] private TextAsset abilitiesJson;
-        [SerializeField] private TextAsset enemiesJson;
-        
-        public void Add(AbilityConfig abilityConfig)
-        {
-            Abilities.Add(abilityConfig);
-            OnAbilityAdded?.Invoke(abilityConfig);
-        }
+        private TController Configs { get; set; }
 
-        public void Add(EnemyConfig enemyConfig)
+        [SerializeField] protected TextAsset libraryJson;
+        
+        public void Add(TConfig config)
         {
-            Enemies.Add(enemyConfig);
-            OnEnemyAdded?.Invoke(enemyConfig);
+            Configs.Add(config);
+            OnConfigAdded?.Invoke(config);
         }
         
-        public void Remove(AbilityConfig abilityConfig)
+        public void Remove(TConfig config)
         {
-            Abilities.Remove(abilityConfig);
-            abilityConfig.InvokeConfigRemoved();
+            Configs.Remove(config);
         }
 
-        public void Remove(EnemyConfig enemyConfig)
+        public List<TConfig> GetAbilities()
         {
-            Enemies.Remove(enemyConfig);
-            enemyConfig.InvokeConfigRemoved();
-        }
-
-        public List<AbilityConfig> GetAbilities()
-        {
-            return Abilities.All();
+            return Configs.All();
         }
 
         private void Awake()
@@ -54,11 +41,13 @@ namespace Ebla.LibraryControllers
 
         private void CreateControllers()
         {
-            var abilityLibraryConfig = JsonConvert.DeserializeObject<List<AbilityConfig>>(abilitiesJson.text);
-            Abilities = new AbilityLibraryController(abilityLibraryConfig ?? new List<AbilityConfig>());
+            var libraryConfig = JsonConvert.DeserializeObject<List<TConfig>>(libraryJson.text);
+            Configs = Activator.CreateInstance(typeof(TController), libraryConfig ?? new List<TConfig>()) as TController;
+        }
 
-            var enemyLibraryConfig = JsonConvert.DeserializeObject<List<EnemyConfig>>(enemiesJson.text);
-            Enemies = new EnemyLibraryController(enemyLibraryConfig ?? new List<EnemyConfig>());
+        private void OnDisable()
+        {
+            OnConfigAdded = null;
         }
     }
 }

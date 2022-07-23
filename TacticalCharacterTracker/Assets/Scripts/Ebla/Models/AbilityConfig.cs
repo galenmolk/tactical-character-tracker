@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Serialization;
+using Ebla.LibraryControllers;
 using Ebla.Utils;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -19,8 +20,6 @@ namespace Ebla.Models
         
         [JsonProperty(ConfigKeys.INTERRUPT_KEY)]
         public bool IsInterrupt { get; private set; }
-
-        public override Type ConfigType => Type.Ability;
 
         public AbilityConfig()
         {
@@ -44,7 +43,12 @@ namespace Ebla.Models
             IsInterrupt = isInterrupt;
             InvokeConfigModified();
         }
-        
+
+        protected override void RemoveConfigFromLibrary()
+        {
+            AbilityLibrarian.Instance.Remove(this);
+        }
+
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
