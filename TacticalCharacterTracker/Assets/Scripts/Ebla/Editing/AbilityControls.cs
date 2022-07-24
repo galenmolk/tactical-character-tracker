@@ -1,5 +1,5 @@
 using Ebla.Editing.Sections;
-using Ebla.LibraryControllers;
+using Ebla.Libraries;
 using Ebla.Models;
 using UnityEngine;
 
@@ -35,11 +35,6 @@ namespace Ebla.Editing
             cooldownSection.SubscribeToModifiedEvent(TryUpdateCooldownTurns);
             passiveSection.SubscribeToModifiedEvent(TryUpdateIsPassive);
             interruptSection.SubscribeToModifiedEvent(TryUpdateIsInterrupt);
-        }
-
-        protected override void RemoveConfig()
-        {
-            AbilityLibrarian.Instance.Remove(ActiveConfig);
         }
 
         protected override void ApplyConfig(AbilityConfig config)

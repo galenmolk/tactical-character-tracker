@@ -35,6 +35,12 @@ namespace Ebla.Models
             Name = newName;
             InvokeConfigModified();
         }
+
+        public void UpdateDescription(string newDescription)
+        {
+            Description = newDescription;
+            InvokeConfigModified();
+        }
         
         public void SetFolder(FolderSlot folder)
         {

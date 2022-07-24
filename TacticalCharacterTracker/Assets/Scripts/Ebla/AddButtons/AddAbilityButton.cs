@@ -1,3 +1,5 @@
+using Ebla.Utils;
+
 namespace Ebla.AddButtons
 {
     public class AddAbilityButton : AddConfigButton

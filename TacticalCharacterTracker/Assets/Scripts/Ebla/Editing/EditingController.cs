@@ -8,30 +8,11 @@ namespace Ebla.Editing
         where TControls : EditingControls<TConfig>
         where TConfig : BaseConfig
     {
-        [SerializeField] private Transform controlsParent;
-
         [SerializeField] private TControls controlsPrefab;
-        
-        [SerializeField] private float openXPos;
-        [SerializeField] private float closeXPos;
-        [SerializeField] private float toggleDuration;
+        [SerializeField] private EditingControllerSettings settings;
 
         private TConfig activeConfig;
-        
-        private RectTransform RectTransform
-        {
-            get
-            {
-                if (rectTransform == null)
-                {
-                    rectTransform = transform as RectTransform;
-                }
 
-                return rectTransform;
-            }
-        }
-
-        private RectTransform rectTransform;
         private TControls controlsInstance;
         
         public void Close()
@@ -42,8 +23,9 @@ namespace Ebla.Editing
             }
             
             activeConfig = null;
-            RectTransform.DOAnchorPosX(closeXPos, toggleDuration, true);
+            settings.ControlsArea.DOAnchorPosX(settings.CloseXPos, settings.ToggleDuration, true);
             ClearActiveControls();
+            settings.Overlay.SetActive(false);
         }
 
         public void DeleteConfig()
@@ -51,6 +33,14 @@ namespace Ebla.Editing
             activeConfig?.TryDeleteConfig();
         }
 
+        protected abstract void SubscribeEditSlot();
+        protected abstract void UnsubscribeEditSlot();
+
+        protected void HandleEditSlot(TConfig config)
+        {
+            OpenControls(config);
+        }
+        
         private void OpenControls(TConfig config)
         {
             if (activeConfig == config)
@@ -65,14 +55,15 @@ namespace Ebla.Editing
 
             activeConfig = config;
             controlsInstance.Initialize(config);
-            RectTransform.DOAnchorPosX(openXPos, toggleDuration, true);
+            settings.ControlsArea.DOAnchorPosX(settings.OpenXPos, settings.ToggleDuration, true);
+            settings.Overlay.SetActive(true);
         }
 
         private TControls GetNewControlsInstance()
         {
             ClearActiveControls();
-            TControls instance = Instantiate(controlsPrefab, controlsParent);
-            instance.OnConfigRemoved += Close;
+            TControls instance = Instantiate(controlsPrefab, settings.ControlsParent);
+            instance.OnClose += Close;
             controlsInstance = instance;
             return instance;
         }
@@ -96,14 +87,6 @@ namespace Ebla.Editing
         private void OnDisable()
         {
             UnsubscribeEditSlot();
-        }
-
-        protected abstract void SubscribeEditSlot();
-        protected abstract void UnsubscribeEditSlot();
-
-        protected void HandleEditSlot(TConfig config)
-        {
-            OpenControls(config);
         }
     }
 }

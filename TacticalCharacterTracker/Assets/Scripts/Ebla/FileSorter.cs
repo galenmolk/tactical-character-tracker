@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ebla.UI;
+using Ebla.UI.Slots;
 
 namespace Ebla
 {

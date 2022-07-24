@@ -1,5 +1,5 @@
 using System;
-using Ebla.LibraryControllers;
+using Ebla.Libraries;
 
 namespace Ebla.Models
 {

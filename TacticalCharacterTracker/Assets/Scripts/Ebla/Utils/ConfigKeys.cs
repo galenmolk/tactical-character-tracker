@@ -2,16 +2,33 @@ namespace Ebla.Utils
 {
     public static class ConfigKeys
     {
-        public const string LIBRARY_ABILITIES_KEY = "abilities";
-        public const string LIBRARY_CHARACTERS_KEY = "characters";
-        public const string LIBRARY_DUNGEONS_KEY = "dungeons";
-        public const string LIBRARY_ENCOUNTERS_KEY = "encounters";
-        public const string LIBRARY_FOLDERS_KEY = "folders";
-
         #region Base Keys
 
         public const string NAME_KEY = "Name";
         public const string DESCRIPTION_KEY = "Description";
+
+        #endregion
+        
+        #region Dungeon Keys
+
+        public const string ENCOUNTERS_KEY = "Encounters";
+
+        #endregion
+
+        #region Encounter Keys
+
+        public const string ENEMY_TYPES_KEY = "EnemyTypes";
+        public const string ENEMY_KEY = "Enemy";
+        public const string QUANTITY_KEY = "Quantity";
+        
+        #endregion
+
+        #region Character Keys
+
+        public const string HEALTH_KEY = "Health";
+        public const string DEFENSE_KEY = "Defense";
+        public const string SPEED_KEY = "Speed";
+        public const string ABILITIES_KEY = "Abilities";
 
         #endregion
 

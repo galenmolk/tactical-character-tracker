@@ -1,4 +1,5 @@
 using System;
+using Ebla.Libraries;
 
 namespace Ebla.Models
 {
@@ -8,7 +9,7 @@ namespace Ebla.Models
         public override string BaseName => "Untitled Hero";
         protected override void RemoveConfigFromLibrary()
         {
-            throw new NotImplementedException();
+            HeroLibrarian.Instance.Remove(this);
         }
     }
 }

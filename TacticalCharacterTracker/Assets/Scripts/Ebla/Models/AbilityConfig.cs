@@ -1,6 +1,6 @@
 using System;
 using System.Runtime.Serialization;
-using Ebla.LibraryControllers;
+using Ebla.Libraries;
 using Ebla.Utils;
 using Newtonsoft.Json;
 using UnityEngine;

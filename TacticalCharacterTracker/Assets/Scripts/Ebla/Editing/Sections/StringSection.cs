@@ -1,8 +1,7 @@
-using Ebla.Editing.Sections;
 using TMPro;
 using UnityEngine;
 
-namespace Ebla.Editing
+namespace Ebla.Editing.Sections
 {
     public class StringSection : ControlsSection<string>
     {
