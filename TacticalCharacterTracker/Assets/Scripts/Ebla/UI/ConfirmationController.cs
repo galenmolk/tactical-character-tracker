@@ -28,15 +28,9 @@ namespace Ebla.UI
             overlayInstance.OnClose += ClearActiveInstance;
             overlayInstance.Configure(confirmationParams);
         }
-
+        
         private void ClearActiveInstance()
         {
-            if (overlayInstance == null)
-            {
-                return;
-            }
-
-            Destroy(overlayInstance.gameObject);
             overlayInstance = null;
         }
     }

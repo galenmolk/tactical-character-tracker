@@ -1,10 +1,11 @@
 using DG.Tweening;
 using Ebla.Models;
+using Ebla.UI;
 using UnityEngine;
 
 namespace Ebla.Editing
 {
-    public abstract class EditingController<TControls, TConfig> : MonoBehaviour
+    public abstract class EditingController<TControls, TConfig> : Window
         where TControls : EditingControls<TConfig>
         where TConfig : BaseConfig
     {
@@ -15,13 +16,19 @@ namespace Ebla.Editing
 
         private TControls controlsInstance;
         
-        public void Close()
+        public override void Close()
         {
             if (activeConfig == null)
             {
                 return;
             }
-            
+
+            BackController.Instance.UnregisterWindow(this);
+            ClearWindow();
+        }
+
+        public override void ClearWindow()
+        {
             activeConfig = null;
             settings.ControlsArea.DOAnchorPosX(settings.CloseXPos, settings.ToggleDuration, true);
             ClearActiveControls();
@@ -40,7 +47,7 @@ namespace Ebla.Editing
         {
             OpenControls(config);
         }
-        
+
         private void OpenControls(TConfig config)
         {
             if (activeConfig == config)
@@ -53,6 +60,8 @@ namespace Ebla.Editing
                 controlsInstance = GetNewControlsInstance();
             }
 
+            BackController.Instance.RegisterWindow(this);
+            controlsInstance.OnClose += Close;
             activeConfig = config;
             controlsInstance.Initialize(config);
             settings.ControlsArea.DOAnchorPosX(settings.OpenXPos, settings.ToggleDuration, true);

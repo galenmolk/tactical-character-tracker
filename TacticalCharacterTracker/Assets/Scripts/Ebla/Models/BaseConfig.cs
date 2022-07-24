@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using Ebla.UI;
 using Ebla.Utils;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Ebla.Models
 {

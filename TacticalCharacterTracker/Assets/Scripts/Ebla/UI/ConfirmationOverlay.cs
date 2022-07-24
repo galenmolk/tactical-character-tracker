@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Ebla.UI
 {
-    public class ConfirmationOverlay : MonoBehaviour
+    public class ConfirmationOverlay : Window
     {
         public event Action OnClose;
 
@@ -20,6 +20,7 @@ namespace Ebla.UI
         
         public void Configure(ConfirmationParams confirmationParams)
         {
+            Open();
             parameters = confirmationParams;
             title.text = confirmationParams.Title;
             confirmButtonImage.color = confirmationParams.ConfirmButtonColor;
@@ -34,17 +35,30 @@ namespace Ebla.UI
         public void Confirm()
         {
             parameters.InvokeAction();
-            OnClose?.Invoke();
+            Close();
         }
 
         public void Deny()
         {
             parameters.ClearAction();
+            Close();
+        }
+
+        public override void Close()
+        {
+            base.Close();
+            ClearWindow();
+        }
+
+        public override void ClearWindow()
+        {
             OnClose?.Invoke();
+            Destroy(gameObject);
         }
 
         private void OnDisable()
         {
+            parameters.ClearAction();
             OnClose = null;
         }
     }

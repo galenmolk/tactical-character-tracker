@@ -1,17 +1,19 @@
 using Ebla.UI;
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Ebla.AddButtons
 {
-    [RequireComponent(typeof(Button), typeof(Image))]
+    [RequireComponent(typeof(Button))]
     public abstract class AddConfigButton : MonoBehaviour
     {
         [SerializeField] private ConfigParams configParams;
+        [SerializeField] private Image image;
+        [SerializeField] private TMP_Text text;
         
         private Button button;
-        private Image image;
         
         // Called by ContextMenuBehaviour.
         [UsedImplicitly]
@@ -19,7 +21,7 @@ namespace Ebla.AddButtons
 
         private void Awake()
         {
-            image = GetComponent<Image>();
+            text.text = configParams.ConfigName;
             image.color = configParams.Color;
             button = GetComponent<Button>();
             button.onClick.AddListener(AddNewConfig);

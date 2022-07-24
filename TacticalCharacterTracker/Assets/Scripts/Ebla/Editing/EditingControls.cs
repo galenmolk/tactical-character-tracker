@@ -1,25 +1,32 @@
 using System;
 using Ebla.Editing.Sections;
 using Ebla.Models;
-using Ebla.Utils;
+using Ebla.UI;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ebla.Editing
 {
-    public abstract class EditingControls<TConfig> : MonoBehaviour, IUpdatable
+    public abstract class EditingControls<TConfig> : MonoBehaviour
         where TConfig : BaseConfig
     {
         public event Action OnClose;
-        
+
+        [SerializeField] private Image headerImage;
+        [SerializeField] private TMP_Text headerText;
         [SerializeField] private StringSection nameSection;
         [SerializeField] private StringSection descriptionSection;
+        [SerializeField] private ConfigParams configParams;
         
         protected TConfig ActiveConfig { get; private set; }
 
         public void Initialize(TConfig config)
         {
+            headerImage.color = configParams.Color;
+            headerText.text = configParams.ConfigName;
             ActiveConfig = config;
-            config.OnConfigRemoved += HandleConfigRemoved;
+            config.OnConfigRemoved += Close;
             config.OnConfigModified += Refresh;
             ApplyConfig(config);
         }
@@ -40,10 +47,15 @@ namespace Ebla.Editing
             {
                 return;
             }
-            
+
             ActiveConfig.UpdateDescription(newDescription);
         }
-        
+
+        private void Close()
+        {
+            OnClose?.Invoke();
+        }
+
         protected virtual void ApplyConfig(TConfig config)
         {
             nameSection.TrySetValue(config.Name);
@@ -55,7 +67,7 @@ namespace Ebla.Editing
             nameSection.SubscribeToModifiedEvent(TryUpdateName);
             descriptionSection.SubscribeToModifiedEvent(TryUpdateDescription);
         }
-        
+
         private void Awake()
         {
             SubscribeToSectionModifiedEvents();
@@ -66,41 +78,11 @@ namespace Ebla.Editing
             ApplyConfig(ActiveConfig);
         }
 
-        private void OnEnable()
-        {
-            SubscribeToUpdates();
-        }
-
         private void OnDisable()
         {
-            UnsubscribeToUpdates();
             OnClose = null;
             ActiveConfig.OnConfigModified -= Refresh;
-            ActiveConfig.OnConfigRemoved -= HandleConfigRemoved;
-        }
-
-        private void HandleConfigRemoved()
-        {
-            OnClose?.Invoke();
-        }
-
-        public void ExecuteUpdate()
-        {
-            if (Input.GetKeyDown(HotKeys.Back))
-            {
-                OnClose?.Invoke();
-            }
-        }
-
-        private void SubscribeToUpdates()
-        {
-            UpdateController.Instance.Subscribe(this);
-        }
-
-        private void UnsubscribeToUpdates()
-        {
-            if (UpdateController.Instance)
-                UpdateController.Instance.Unsubscribe(this);
+            ActiveConfig.OnConfigRemoved -= Close;
         }
     }
 }
