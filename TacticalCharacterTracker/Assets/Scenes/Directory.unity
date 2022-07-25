@@ -1317,10 +1317,10 @@ RectTransform:
   m_Father: {fileID: 2106689217}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 640, y: 0}
-  m_SizeDelta: {x: 640, y: 1080}
+  m_SizeDelta: {x: 640, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1284792517
 MonoBehaviour:
@@ -1383,6 +1383,7 @@ GameObject:
   - component: {fileID: 1437035848}
   - component: {fileID: 1437035847}
   - component: {fileID: 1437035850}
+  - component: {fileID: 1437035851}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -1492,9 +1493,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 30e389a25b312483d8414fa77da6d061, type: 2}
-        m_TargetAssemblyTypeName: Ebla.Utils.AppEvent, Assembly-CSharp
-        m_MethodName: TriggerEvent
+      - m_Target: {fileID: 1437035851}
+        m_TargetAssemblyTypeName: Ebla.Utils.AppEventTrigger, Assembly-CSharp
+        m_MethodName: Trigger
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1504,6 +1505,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1437035851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437035845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b63331ac455d4fe69e46a5fa1bbe2ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appEvent: {fileID: 11400000, guid: 30e389a25b312483d8414fa77da6d061, type: 2}
 --- !u!1 &1526374025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2492,6 +2506,7 @@ GameObject:
   - component: {fileID: 1913636199}
   - component: {fileID: 1913636198}
   - component: {fileID: 1913636197}
+  - component: {fileID: 1913636200}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -2564,9 +2579,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 30e389a25b312483d8414fa77da6d061, type: 2}
-        m_TargetAssemblyTypeName: Ebla.Utils.AppEvent, Assembly-CSharp
-        m_MethodName: TriggerEvent
+      - m_Target: {fileID: 1913636200}
+        m_TargetAssemblyTypeName: Ebla.Utils.AppEventTrigger, Assembly-CSharp
+        m_MethodName: Trigger
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2614,6 +2629,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913636195}
   m_CullTransparentMesh: 1
+--- !u!114 &1913636200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913636195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b63331ac455d4fe69e46a5fa1bbe2ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appEvent: {fileID: 11400000, guid: 30e389a25b312483d8414fa77da6d061, type: 2}
 --- !u!1 &2106689216
 GameObject:
   m_ObjectHideFlags: 0
@@ -2646,7 +2674,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106689216}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2931,6 +2959,7 @@ GameObject:
   - component: {fileID: 2139107692}
   - component: {fileID: 2139107691}
   - component: {fileID: 2139107690}
+  - component: {fileID: 2139107693}
   m_Layer: 5
   m_Name: DeleteButton
   m_TagString: Untagged
@@ -3003,9 +3032,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 245ce677a7d3a4408bf3b5cafa2d60f5, type: 2}
-        m_TargetAssemblyTypeName: Ebla.Utils.AppEvent, Assembly-CSharp
-        m_MethodName: TriggerEvent
+      - m_Target: {fileID: 2139107693}
+        m_TargetAssemblyTypeName: Ebla.Utils.AppEventTrigger, Assembly-CSharp
+        m_MethodName: Trigger
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3053,6 +3082,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139107687}
   m_CullTransparentMesh: 1
+--- !u!114 &2139107693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139107687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b63331ac455d4fe69e46a5fa1bbe2ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appEvent: {fileID: 11400000, guid: 245ce677a7d3a4408bf3b5cafa2d60f5, type: 2}
 --- !u!1001 &6545714578202478644
 PrefabInstance:
   m_ObjectHideFlags: 0

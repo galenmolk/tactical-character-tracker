@@ -19,7 +19,7 @@ namespace Ebla.UI
         public string DenyButtonText => denyButtonText;
         public Sprite Icon => icon;
 
-        private UnityEvent actionToConfirm;
+        private readonly UnityEvent actionToConfirm = new();
         
         [Header("Title")]
         [SerializeField] private string title;

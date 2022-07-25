@@ -23,24 +23,24 @@ namespace Ebla
 
         public void OnDrop(PointerEventData eventData)
         {
-            GameObject droppedObject = eventData.pointerDrag;
-            if (droppedObject == null)
-                return;
-            
-            if (droppedObject.TryGetComponent(out BaseConfig file))
-                FileLibrary.MoveFile(file, this);
+            // GameObject droppedObject = eventData.pointerDrag;
+            // if (droppedObject == null)
+            //     return;
+            //
+            // if (droppedObject.TryGetComponent(out BaseConfig file))
+            //     FileLibrary.MoveFile(file, this);
         }
-
-        private void OnEnable()
-        {
-            FileLibrary.OnPreLibraryModified += HandlePreLibraryModified;
-        }
-
-        private void OnDisable()
-        {
-            OnFolderDisabled?.Invoke(this);
-            FileLibrary.OnPreLibraryModified -= HandlePreLibraryModified;
-        }
+        //
+        // private void OnEnable()
+        // {
+        //     FileLibrary.OnPreLibraryModified += HandlePreLibraryModified;
+        // }
+        //
+        // private void OnDisable()
+        // {
+        //     OnFolderDisabled?.Invoke(this);
+        //     FileLibrary.OnPreLibraryModified -= HandlePreLibraryModified;
+        // }
         
         private void HandlePreLibraryModified()
         {

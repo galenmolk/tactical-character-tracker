@@ -3,7 +3,6 @@ using System.Runtime.Serialization;
 using Ebla.UI;
 using Ebla.Utils;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace Ebla.Models
 {
@@ -26,11 +25,16 @@ namespace Ebla.Models
         
         [JsonProperty(ConfigKeys.DESCRIPTION_KEY)]
         public string Description { get; set; }
-        public string ParentFolderName { get; private set; }
-        public DateTime DateCreated { get; }
-        public DateTime DateModified { get; }
+        
+        [JsonProperty(ConfigKeys.ID_KEY)]
         public string Id { get; private set; }
 
+        [JsonProperty(ConfigKeys.PATH_KEY)]
+        public string Path { get; private set; }
+
+        public DateTime DateCreated { get; }
+        public DateTime DateModified { get; }
+        
         public void UpdateName(string newName)
         {
             Name = newName;
@@ -41,11 +45,6 @@ namespace Ebla.Models
         {
             Description = newDescription;
             InvokeConfigModified();
-        }
-        
-        public void SetFolder(FolderSlot folder)
-        {
-            ParentFolderName = folder.Path;
         }
 
         public void TryDeleteConfig()
@@ -81,7 +80,9 @@ namespace Ebla.Models
         private void Identify()
         {
             if (string.IsNullOrWhiteSpace(Id))
+            {
                 Id = NCuid.Cuid.Generate();
+            }
         }
     }
 }

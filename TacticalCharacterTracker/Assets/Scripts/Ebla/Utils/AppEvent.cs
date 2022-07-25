@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Ebla.Utils
 {
@@ -9,17 +9,24 @@ namespace Ebla.Utils
         private const string NAME = nameof(AppEvent);
         private const string MENU = EblaConsts.MENU_PATH + NAME;
 
-        private UnityEvent appEvent;
-
-        public void ListenForEvent(UnityAction action)
-        {
-            appEvent.RemoveListener(action);
-            appEvent.AddListener(action);
-        }
+        private readonly HashSet<AppEventListener> listeners = new();
 
         public void TriggerEvent()
         {
-            appEvent?.Invoke();
+            foreach (AppEventListener listener in listeners)
+            {
+                listener.RaiseEvent();
+            }
+        }
+
+        public void Subscribe(AppEventListener listener)
+        {
+            listeners.Add(listener);
+        }
+
+        public void Unsubscribe(AppEventListener listener)
+        {
+            listeners.Add(listener);
         }
     }
 }

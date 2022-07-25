@@ -6,7 +6,9 @@ namespace Ebla.Utils
 
         public const string NAME_KEY = "Name";
         public const string DESCRIPTION_KEY = "Description";
-
+        public const string ID_KEY = "Id";
+        public const string PATH_KEY = "Path";
+        
         #endregion
         
         #region Dungeon Keys

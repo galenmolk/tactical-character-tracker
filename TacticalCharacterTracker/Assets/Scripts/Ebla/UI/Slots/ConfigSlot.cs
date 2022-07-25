@@ -31,11 +31,6 @@ namespace Ebla.UI.Slots
             ApplyConfigToSlot();
         }
 
-        public void ApplyConfigToSlot()
-        {
-            nameText.text = Config != null ? Config.Name : string.Empty;
-        }
-
         public void DeleteConfig()
         {
             Config.TryDeleteConfig();
@@ -45,7 +40,12 @@ namespace Ebla.UI.Slots
         {
             OnEditConfigSlot?.Invoke(Config);
         }
-
+        
+        private void ApplyConfigToSlot()
+        {
+            nameText.text = Config != null ? Config.Name : string.Empty;
+        }
+        
         private void HandleConfigRemoved()
         {
             Config.OnConfigModified -= ApplyConfigToSlot;

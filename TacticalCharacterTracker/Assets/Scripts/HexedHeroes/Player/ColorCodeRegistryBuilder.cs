@@ -7,7 +7,7 @@ using UnityEngine;
 
 public static class ColorCoder
 {
-    private static Dictionary<string, Color> colorCodeRegistry;
+    private static Dictionary<string, Color> colorCodeRegistry = new();
 
     private const string CLOSING_COLOR_TAG = "</color>";
     
@@ -104,12 +104,12 @@ public class ColorCodeRegistryBuilder : MonoBehaviour
 {
     [SerializeField] private ColorCode[] colorCodes;
     
-    private static Dictionary<string, Color> colorCodeRegistry = new Dictionary<string, Color>();
+    private static readonly Dictionary<string, Color> ColorCodeRegistry = new();
     
     private void Awake()
     {
         BuildColorCodeRegistry();
-        ColorCoder.SetColorCodeRegistry(colorCodeRegistry);
+        ColorCoder.SetColorCodeRegistry(ColorCodeRegistry);
     }
 
     private void BuildColorCodeRegistry()
@@ -127,7 +127,7 @@ public class ColorCodeRegistryBuilder : MonoBehaviour
         
         foreach (var stringToCode in strings)
         {
-            colorCodeRegistry.Add(stringToCode, color);
+            ColorCodeRegistry.Add(stringToCode, color);
         }
     }
 }
