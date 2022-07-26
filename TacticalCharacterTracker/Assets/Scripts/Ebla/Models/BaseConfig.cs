@@ -9,14 +9,19 @@ namespace Ebla.Models
     [Serializable]
     public abstract class BaseConfig
     {
-        public event Action OnConfigModified;
-        public event Action OnConfigRemoved;
-        
         public BaseConfig()
         {
-            DateCreated = DateTime.Now;
-            DateModified = DateCreated;
+            Initialize();
         }
+
+        public BaseConfig(string name)
+        {
+            Initialize();
+            Name = name;
+        }
+
+        public event Action OnConfigModified;
+        public event Action OnConfigRemoved;
 
         public abstract string BaseName { get; }
 
@@ -32,8 +37,14 @@ namespace Ebla.Models
         [JsonProperty(ConfigKeys.PATH_KEY)]
         public string Path { get; private set; }
 
-        public DateTime DateCreated { get; }
-        public DateTime DateModified { get; }
+        public DateTime DateCreated { get; private set; }
+        public DateTime DateModified { get; private set; }
+
+        public void UpdatePath(string path)
+        {
+            Path = path;
+            InvokeConfigModified();
+        }
         
         public void UpdateName(string newName)
         {
@@ -83,6 +94,12 @@ namespace Ebla.Models
             {
                 Id = NCuid.Cuid.Generate();
             }
+        }
+
+        private void Initialize()
+        {
+            DateCreated = DateTime.Now;
+            DateModified = DateCreated;
         }
     }
 }

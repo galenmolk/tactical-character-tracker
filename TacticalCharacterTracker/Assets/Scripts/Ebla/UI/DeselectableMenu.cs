@@ -10,11 +10,16 @@ namespace Ebla.UI
         [SerializeField] private UnityEvent menuClose;
     
         private bool pointerInRect;
-    
+
+        public void Focus()
+        {
+            EventSystem.current.SetSelectedGameObject(gameObject);
+        }
+        
         public void OnPointerEnter(PointerEventData eventData)
         {
             pointerInRect = true;
-            EventSystem.current.SetSelectedGameObject(gameObject);
+            Focus();
         }
 
         public void OnPointerExit(PointerEventData eventData)

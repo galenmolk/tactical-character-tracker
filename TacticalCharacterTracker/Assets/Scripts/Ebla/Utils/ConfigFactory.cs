@@ -7,32 +7,34 @@ namespace Ebla.Utils
     {
         public static void Dungeon()
         {
-            DungeonConfig dungeonConfig = new DungeonConfig();
-            DungeonLibrarian.Instance.Add(dungeonConfig);
+            DungeonLibrarian.Instance.Add(CreateNewConfig<DungeonConfig>());
         }
         
         public static void Encounter()
         {
-            EncounterConfig encounterConfig = new EncounterConfig();
-            EncounterLibrarian.Instance.Add(encounterConfig);
+            EncounterLibrarian.Instance.Add(CreateNewConfig<EncounterConfig>());
         }
         
         public static void Enemy()
         {
-            EnemyConfig enemyConfig = new EnemyConfig();
-            EnemyLibrarian.Instance.Add(enemyConfig);
+            EnemyLibrarian.Instance.Add(CreateNewConfig<EnemyConfig>());
         }
 
         public static void Hero()
         {
-            HeroConfig heroConfig = new HeroConfig();
-            HeroLibrarian.Instance.Add(heroConfig);
+            HeroLibrarian.Instance.Add(CreateNewConfig<HeroConfig>());
         }
         
         public static void Ability()
         {
-            AbilityConfig abilityConfig = new AbilityConfig();
-            AbilityLibrarian.Instance.Add(abilityConfig);
+            AbilityLibrarian.Instance.Add(CreateNewConfig<AbilityConfig>());
+        }
+
+        private static TConfig CreateNewConfig<TConfig>() where TConfig : BaseConfig, new()
+        {
+            TConfig config = new TConfig();
+            config.UpdatePath(ScopeController.Instance.GetPathForCurrentScope());
+            return config;
         }
     }
 }
