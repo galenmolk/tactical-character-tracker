@@ -55,12 +55,12 @@ namespace Ebla.UI
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            text.color = new(1f, 1f, 1f);
+            text.color = Color.white;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            text.color = new(0f, 0f, 0f);
+            text.color = Color.black;
         }
     }
 }

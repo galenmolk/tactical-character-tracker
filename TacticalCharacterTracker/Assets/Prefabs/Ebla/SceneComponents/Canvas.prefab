@@ -1771,7 +1771,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   options:
-  - label: New Dungeon
+  - label: New <b>Folder</b>
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    addDividerAbove: 0
+    addDividerBelow: 1
+  - label: New <b>Dungeon</b>
     action:
       m_PersistentCalls:
         m_Calls:
@@ -1787,7 +1793,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - label: New Encounter
+    addDividerAbove: 0
+    addDividerBelow: 0
+  - label: New <b>Encounter</b>
     action:
       m_PersistentCalls:
         m_Calls:
@@ -1803,7 +1811,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - label: New Hero
+    addDividerAbove: 0
+    addDividerBelow: 0
+  - label: New <b>Hero</b>
     action:
       m_PersistentCalls:
         m_Calls:
@@ -1819,7 +1829,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - label: New Enemy
+    addDividerAbove: 0
+    addDividerBelow: 0
+  - label: New <b>Enemy</b>
     action:
       m_PersistentCalls:
         m_Calls:
@@ -1835,7 +1847,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - label: New Ability
+    addDividerAbove: 0
+    addDividerBelow: 0
+  - label: New <b>Ability</b>
     action:
       m_PersistentCalls:
         m_Calls:
@@ -1851,6 +1865,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    addDividerAbove: 0
+    addDividerBelow: 0
 --- !u!114 &9153687518789938336
 MonoBehaviour:
   m_ObjectHideFlags: 0

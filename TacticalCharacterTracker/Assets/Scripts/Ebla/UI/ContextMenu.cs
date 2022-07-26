@@ -13,6 +13,9 @@ namespace Ebla.UI
 
         public ContextMenuOption OptionPrefab => optionPrefab;
         [SerializeField] private ContextMenuOption optionPrefab;
+
+        public GameObject DividerPrefab => dividerPrefab;
+        [SerializeField] private GameObject dividerPrefab;
         
         [SerializeField] private Transform optionParent;
 
@@ -61,11 +64,26 @@ namespace Ebla.UI
 
         private void CreateOption(ContextMenuBehaviour.Option option)
         {
+            if (option.AddDividerAbove)
+            {
+                AddDivider();
+            }
+            
             ContextMenuOption newOption = Instantiate(optionPrefab, optionParent);
             newOption.OnOptionSelected += HandleOptionSelected;
             newOption.Configure(option);
+            
+            if (option.AddDividerBelow)
+            {
+                AddDivider();
+            }
         }
 
+        private void AddDivider()
+        {
+            Instantiate(DividerPrefab, optionParent);
+        }
+        
         private void HandleOptionSelected(UnityEvent action)
         {
             OnOptionSelected?.Invoke(action);

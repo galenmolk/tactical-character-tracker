@@ -15,6 +15,12 @@ namespace Ebla.UI
             
             public UnityEvent Action => action;
             [SerializeField] private UnityEvent action;
+
+            public bool AddDividerAbove => addDividerAbove;
+            [SerializeField] private bool addDividerAbove;
+
+            public bool AddDividerBelow => addDividerBelow;
+            [SerializeField] private bool addDividerBelow;
         }
 
         public static event Action<ContextMenuBehaviour> OnContextMenuRequested;
