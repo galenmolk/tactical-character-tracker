@@ -8,6 +8,7 @@ namespace Ebla.Utils
         public const string DESCRIPTION_KEY = "Description";
         public const string ID_KEY = "Id";
         public const string PATH_KEY = "Path";
+        public const string FULL_PATH_KEY = "FullPath";
         
         #endregion
         

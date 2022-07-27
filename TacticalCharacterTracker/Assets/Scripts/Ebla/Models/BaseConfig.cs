@@ -20,6 +20,7 @@ namespace Ebla.Models
             Name = name;
         }
 
+        public static event Action<BaseConfig> OnDeserialized;
         public event Action OnConfigModified;
         public event Action OnConfigRemoved;
 
@@ -35,10 +36,15 @@ namespace Ebla.Models
         public string Id { get; private set; }
 
         [JsonProperty(ConfigKeys.PATH_KEY)]
-        public string Path { get; private set; }
+        public string Path { get; protected set; }
+
+        [JsonProperty(ConfigKeys.FULL_PATH_KEY)]
+        public string FullPath { get; private set; }
 
         public DateTime DateCreated { get; private set; }
         public DateTime DateModified { get; private set; }
+
+        public FolderConfig Parent { get; private set; }
 
         public void UpdatePath(string path)
         {
@@ -55,6 +61,12 @@ namespace Ebla.Models
         public void UpdateDescription(string newDescription)
         {
             Description = newDescription;
+            InvokeConfigModified();
+        }
+
+        public void UpdateParent(FolderConfig folderConfig)
+        {
+            Parent = folderConfig;
             InvokeConfigModified();
         }
 
@@ -77,15 +89,16 @@ namespace Ebla.Models
         }
 
         [OnSerialized]
-        private void OnSerialized(StreamingContext context)
+        private void SerializedCallback(StreamingContext context)
         {
             Identify();
         }
         
         [OnDeserialized]
-        private void OnDeserialized(StreamingContext context)
+        private void DeserializedCallback(StreamingContext context)
         {
             Identify();
+            OnDeserialized?.Invoke(this);
         }
 
         private void Identify()

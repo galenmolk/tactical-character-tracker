@@ -13,6 +13,7 @@ namespace Ebla.UI.Slots
         public static event Action<TConfig> OnEditConfigSlot;
 
         [SerializeField] private TMP_Text nameText;
+        [SerializeField] private TMP_Text pathText;
         [SerializeField] private Image borderImage;
         [SerializeField] private ConfigParams configParams;
         
@@ -44,6 +45,7 @@ namespace Ebla.UI.Slots
         private void ApplyConfigToSlot()
         {
             nameText.text = Config != null ? Config.Name : string.Empty;
+            pathText.text = Config != null ? Config.Path : string.Empty;
         }
         
         private void HandleConfigRemoved()
