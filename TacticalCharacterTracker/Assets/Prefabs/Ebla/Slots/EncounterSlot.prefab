@@ -108,6 +108,10 @@ PrefabInstance:
       value: EncounterSlot
       objectReference: {fileID: 0}
     - target: {fileID: 6266805987495670442, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
+      propertyPath: options.Array.data[0].addDividerBelow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266805987495670442, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
       propertyPath: options.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5178196799783233227}
@@ -163,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 7498220659223498060}
+  pathText: {fileID: 2442171070089940829}
   borderImage: {fileID: 582760327159515735}
   configParams: {fileID: 11400000, guid: 2000537e6b0bc4b2baa5228719ce0617, type: 2}
 --- !u!114 &582760327159515735 stripped
@@ -174,6 +179,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2442171070089940829 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7776451296767486083, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
+  m_PrefabInstance: {fileID: 5336718171749607390}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7498220659223498060 stripped

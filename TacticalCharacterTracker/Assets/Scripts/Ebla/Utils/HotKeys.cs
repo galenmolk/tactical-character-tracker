@@ -7,6 +7,7 @@ namespace Ebla.Utils
         private const string MAP_ASSET = "Ebla/HotKeyMap";
 
         public static KeyCode Back => Map.Back;
+        public static KeyCode ForceExecute => Map.ForceExecute;
         
         private static HotKeyMap Map
         {

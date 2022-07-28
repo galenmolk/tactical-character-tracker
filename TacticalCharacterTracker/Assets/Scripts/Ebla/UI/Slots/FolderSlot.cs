@@ -9,7 +9,7 @@ namespace Ebla.UI.Slots
         
         protected override void InvokeReleaseObject()
         {
-            throw new NotImplementedException();
+            OnReleaseObject?.Invoke(this);
         }
     }
 }

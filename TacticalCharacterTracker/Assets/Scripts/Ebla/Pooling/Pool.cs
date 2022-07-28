@@ -48,6 +48,7 @@ namespace Ebla.Pooling
         private TObject CreateObject()
         {
             var obj = Instantiate(prefab, transform);
+            Debug.Log("Pool Create Obj Scale: " + obj.transform.localScale);
             obj.gameObject.SetActive(false);
             obj.OnReleaseObject += HandleReleaseObject;
             return obj;

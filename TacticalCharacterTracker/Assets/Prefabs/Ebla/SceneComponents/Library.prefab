@@ -9,13 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1531868499061132208}
+  - component: {fileID: 7884283333878329497}
   - component: {fileID: 1531868499061132221}
   - component: {fileID: 1531868499061132220}
   - component: {fileID: 1531868499061132211}
   - component: {fileID: 1531868499061132210}
   - component: {fileID: 1531868499061132209}
   m_Layer: 0
-  m_Name: LibraryControllers
+  m_Name: Library
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,6 +37,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7884283333878329497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531868499061132214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556c56ee5a0c483d979ae9cf5e008ba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  persistent: 0
+  libraryJson: {fileID: 4900000, guid: fc46f811d7af640f5bdbd0ae326773c3, type: 3}
 --- !u!114 &1531868499061132221
 MonoBehaviour:
   m_ObjectHideFlags: 0

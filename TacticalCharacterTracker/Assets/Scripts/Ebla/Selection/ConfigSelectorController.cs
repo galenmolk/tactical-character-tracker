@@ -14,7 +14,7 @@ namespace Ebla.Selection
         [SerializeField] private float closedPosX;
         [SerializeField] private float toggleDuration;
         
-        [SerializeField] private EnemyConfig enemyConfig = new();
+        [SerializeField] private EnemyConfig enemyConfig;
 
         private RectTransform RectTransform
         {

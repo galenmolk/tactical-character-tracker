@@ -1,31 +1,38 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
+using Ebla.Libraries;
+using Newtonsoft.Json;
 
 namespace Ebla.Models
 {
     [Serializable]
     public class FolderConfig : BaseConfig
     {
-        public FolderConfig(string path) : base(ScopeController.GetLastNameFromPath(path))
+        public FolderConfig()
         {
-            Path = path;
+            
+        }
+        
+        public FolderConfig(FolderConfig parent) : base(parent)
+        {
+            
         }
         
         public override string BaseName => "untitled folder";
 
-        public List<BaseConfig> Files { get; private set; } = new();
+        [JsonIgnore]
+        public List<BaseConfig> Configs { get; private set; } = new();
 
-        public void AddFile(BaseConfig config)
+        public void AddConfigToFolder(BaseConfig config)
         {
-            Files.Add(config);
+            Configs.Add(config);
             config.UpdateParent(this);
             InvokeConfigModified();
         }
         
         protected override void RemoveConfigFromLibrary()
         {
-            throw new NotImplementedException();
+            FolderLibrarian.Instance.Remove(this);
         }
     }
 }

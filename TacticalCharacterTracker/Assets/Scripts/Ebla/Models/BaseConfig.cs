@@ -11,23 +11,24 @@ namespace Ebla.Models
     {
         public BaseConfig()
         {
-            Initialize();
+            
         }
-
-        public BaseConfig(string name)
+        
+        protected BaseConfig(FolderConfig parent)
         {
-            Initialize();
-            Name = name;
+            AssignDates();
+            Path = PathUtils.GetPathToFolder(parent);
+            parent.AddConfigToFolder(this);
+            this.AssignUniqueName();
         }
 
-        public static event Action<BaseConfig> OnDeserialized;
         public event Action OnConfigModified;
         public event Action OnConfigRemoved;
 
         public abstract string BaseName { get; }
 
         [JsonProperty(ConfigKeys.NAME_KEY)]
-        public string Name { get; private set; }
+        public string Name { get; protected set; }
         
         [JsonProperty(ConfigKeys.DESCRIPTION_KEY)]
         public string Description { get; set; }
@@ -44,6 +45,7 @@ namespace Ebla.Models
         public DateTime DateCreated { get; private set; }
         public DateTime DateModified { get; private set; }
 
+        [JsonIgnore]
         public FolderConfig Parent { get; private set; }
 
         public void UpdatePath(string path)
@@ -98,7 +100,6 @@ namespace Ebla.Models
         private void DeserializedCallback(StreamingContext context)
         {
             Identify();
-            OnDeserialized?.Invoke(this);
         }
 
         private void Identify()
@@ -109,10 +110,16 @@ namespace Ebla.Models
             }
         }
 
-        private void Initialize()
+        private void AssignDates()
         {
             DateCreated = DateTime.Now;
             DateModified = DateCreated;
+            OnConfigModified += HandleConfigModified;
+        }
+
+        private void HandleConfigModified()
+        {
+            DateModified = DateTime.Now;
         }
     }
 }

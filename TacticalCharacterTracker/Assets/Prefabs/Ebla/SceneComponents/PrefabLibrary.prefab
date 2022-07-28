@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2586188309863093023}
   - component: {fileID: 2586188309863093022}
+  - component: {fileID: 6891184265218731531}
   - component: {fileID: 2586188309863093009}
   - component: {fileID: 2586188309863093008}
   - component: {fileID: 2586188309863093011}
@@ -51,12 +52,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   persistent: 0
+  folderSlotPool: {fileID: 6891184265218731531}
   dungeonSlotPool: {fileID: 2586188309863093009}
   encounterSlotPool: {fileID: 2586188309863093008}
   heroSlotPool: {fileID: 2586188309863093011}
   abilitySlotPool: {fileID: 2586188309863093010}
   enemySlotPool: {fileID: 2586188309863093021}
   abilityOptionPool: {fileID: 2586188309863093020}
+--- !u!114 &6891184265218731531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2586188309863093017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64af829ab185434d9ed27cf0d9a1ca82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6123811569071526354, guid: 3b66e68165ce947c5b0ddd527ffef20b, type: 3}
+  collectionCheck: 0
+  defaultCapacity: 5
+  maxSize: 50
 --- !u!114 &2586188309863093009
 MonoBehaviour:
   m_ObjectHideFlags: 0

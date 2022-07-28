@@ -19,9 +19,14 @@ namespace Ebla.AddButtons
         [UsedImplicitly]
         public abstract void AddNewConfig();
 
+        protected virtual string GetButtonName()
+        {
+            return configParams.ConfigName;
+        }
+        
         private void Awake()
         {
-            text.text = configParams.ConfigName;
+            text.text = GetButtonName();
             image.color = configParams.Color;
             button = GetComponent<Button>();
             button.onClick.AddListener(AddNewConfig);

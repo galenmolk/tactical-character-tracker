@@ -1,15 +1,18 @@
 using System;
-using System.Runtime.Serialization;
 using Ebla.Libraries;
 using Ebla.Utils;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace Ebla.Models
 {
     [Serializable]
     public class AbilityConfig : BaseConfig
     {
+        public AbilityConfig(FolderConfig parent) : base(parent)
+        {
+            
+        }
+        
         public override string BaseName => "Untitled Ability";
         
         [JsonProperty(ConfigKeys.COOLDOWN_KEY)]
@@ -20,11 +23,6 @@ namespace Ebla.Models
         
         [JsonProperty(ConfigKeys.INTERRUPT_KEY)]
         public bool IsInterrupt { get; private set; }
-
-        public AbilityConfig()
-        {
-
-        }
 
         public void UpdateCooldownTurns(int cooldownTurns)
         {
@@ -47,12 +45,6 @@ namespace Ebla.Models
         protected override void RemoveConfigFromLibrary()
         {
             AbilityLibrarian.Instance.Remove(this);
-        }
-
-        [OnDeserialized]
-        private void OnDeserialized(StreamingContext context)
-        {
-            Debug.Log($"Ability Deserialized: {Name}, {CooldownTurns}, {IsPassive}, {IsInterrupt}, {Description}");
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Ebla
 {
     public class PrefabLibrary : Singleton<PrefabLibrary>
     {
-        [Header("Slot Pools")]
+        [Header("Slot Pools")] 
+        [SerializeField] private FolderSlotPool folderSlotPool;
         [SerializeField] private DungeonSlotPool dungeonSlotPool;
         [SerializeField] private EncounterSlotPool encounterSlotPool;
         [SerializeField] private HeroSlotPool heroSlotPool;
@@ -18,32 +19,37 @@ namespace Ebla
         [Header("Option Pools")]
         [SerializeField] private AbilityOptionPool abilityOptionPool;
 
-        public DungeonSlot GetDungeonSlot()
+        public FolderSlot FolderSlot()
+        {
+            return folderSlotPool.Get();
+        }
+        
+        public DungeonSlot DungeonSlot()
         {
             return dungeonSlotPool.Get();
         }
 
-        public EncounterSlot GetEncounterSlot()
+        public EncounterSlot EncounterSlot()
         {
             return encounterSlotPool.Get();
         }
 
-        public HeroSlot GetHeroSlot()
+        public HeroSlot HeroSlot()
         {
             return heroSlotPool.Get();
         }
               
-        public EnemySlot GetEnemySlot()
+        public EnemySlot EnemySlot()
         {
             return enemySlotPool.Get();
         }
         
-        public AbilitySlot GetAbilitySlot()
+        public AbilitySlot AbilitySlot()
         {
             return abilitySlotPool.Get();
         }
 
-        public AbilityOption GetAbilityOption()
+        public AbilityOption AbilityOption()
         {
             return abilityOptionPool.Get();
         }

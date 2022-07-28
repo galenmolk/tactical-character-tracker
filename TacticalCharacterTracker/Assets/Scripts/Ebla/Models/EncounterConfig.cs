@@ -19,8 +19,9 @@ namespace Ebla.Models
             public int Quantity { get; private set; }
         }
         
-        public EncounterConfig()
+        public EncounterConfig(FolderConfig parent) : base(parent)
         {
+            
         }
 
         public override string BaseName => "Untitled Encounter";

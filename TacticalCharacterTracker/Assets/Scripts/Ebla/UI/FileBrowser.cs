@@ -1,6 +1,8 @@
+using System;
 using Ebla.Libraries;
 using Ebla.Models;
 using Ebla.UI.Slots;
+using MolkExtras;
 using UnityEngine;
 
 namespace Ebla.UI
@@ -11,6 +13,7 @@ namespace Ebla.UI
 
         private void OnEnable()
         {
+            FolderLibrarian.Instance.OnConfigAdded += HandleFolderAdded;
             DungeonLibrarian.Instance.OnConfigAdded += HandleDungeonAdded;
             EncounterLibrarian.Instance.OnConfigAdded += HandleEncounterAdded;
             HeroLibrarian.Instance.OnConfigAdded += HandleHeroAdded;
@@ -18,42 +21,52 @@ namespace Ebla.UI
             AbilityLibrarian.Instance.OnConfigAdded += HandleAbilityAdded;
         }
 
+        private void HandleFolderAdded(FolderConfig folderConfig)
+        {
+            InitializeSlot(() => PrefabLibrary.Instance.FolderSlot(), folderConfig);
+        }
+        
         private void HandleDungeonAdded(DungeonConfig dungeonConfig)
         {
-            DungeonSlot slot = PrefabLibrary.Instance.GetDungeonSlot();
-            InitializeSlot(slot, dungeonConfig);
+            InitializeSlot(() => PrefabLibrary.Instance.DungeonSlot(), dungeonConfig);
         }
 
         private void HandleEncounterAdded(EncounterConfig encounterConfig)
         {
-            EncounterSlot encounterSlot = PrefabLibrary.Instance.GetEncounterSlot();
-            InitializeSlot(encounterSlot, encounterConfig);
+            InitializeSlot(() => PrefabLibrary.Instance.EncounterSlot(), encounterConfig);
         }
 
         private void HandleHeroAdded(HeroConfig heroConfig)
         {
-            HeroSlot heroSlot = PrefabLibrary.Instance.GetHeroSlot();
-            InitializeSlot(heroSlot, heroConfig);
+            InitializeSlot(() => PrefabLibrary.Instance.HeroSlot(), heroConfig);
         }
         
         private void HandleEnemyAdded(EnemyConfig enemyConfig)
         {
-            EnemySlot slot = PrefabLibrary.Instance.GetEnemySlot();
-            InitializeSlot(slot, enemyConfig);
+            InitializeSlot(() => PrefabLibrary.Instance.EnemySlot(), enemyConfig);
         }
         
         private void HandleAbilityAdded(AbilityConfig abilityConfig)
         {
-            AbilitySlot slot = PrefabLibrary.Instance.GetAbilitySlot();
-            InitializeSlot(slot, abilityConfig);
+            InitializeSlot(() => PrefabLibrary.Instance.AbilitySlot(), abilityConfig);
         }
 
-        private void InitializeSlot<TSlot, TConfig>(TSlot slot, TConfig config)
+        private void InitializeSlot<TSlot, TConfig>(Func<TSlot> getInstance, TConfig config)
             where TSlot : ConfigSlot<TSlot, TConfig>
             where TConfig : BaseConfig
         {
+            if (config.Parent != ScopeController.Instance.CurrentFolder)
+            {
+                return;
+            }
+            
+            Debug.Log("init slot");
+            TSlot slot = getInstance();
             slot.Configure(config);
-            slot.transform.SetParent(fileArea);
+            Debug.Log("InitializeSlot Scale: " + slot.transform.localScale);
+
+            slot.Transform.SetParent(fileArea);
+            slot.Transform.localScale = Vector3.one;
         }
     }
 }

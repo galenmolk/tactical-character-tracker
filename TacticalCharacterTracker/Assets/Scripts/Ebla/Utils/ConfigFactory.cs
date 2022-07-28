@@ -5,36 +5,40 @@ namespace Ebla.Utils
 {
     public static class ConfigFactory
     {
+        public static void Folder()
+        {
+            FolderConfig folderConfig = new(ScopeController.Instance.CurrentFolder);
+            FolderLibrarian.Instance.Add(folderConfig);
+        }
+        
         public static void Dungeon()
         {
-            DungeonLibrarian.Instance.Add(CreateNewConfig<DungeonConfig>());
+            DungeonConfig dungeonConfig = new(ScopeController.Instance.CurrentFolder);
+            DungeonLibrarian.Instance.Add(dungeonConfig);
         }
         
         public static void Encounter()
         {
-            EncounterLibrarian.Instance.Add(CreateNewConfig<EncounterConfig>());
+            EncounterConfig encounterConfig = new(ScopeController.Instance.CurrentFolder);
+            EncounterLibrarian.Instance.Add(encounterConfig);
         }
         
         public static void Enemy()
         {
-            EnemyLibrarian.Instance.Add(CreateNewConfig<EnemyConfig>());
+            EnemyConfig enemyConfig = new(ScopeController.Instance.CurrentFolder);
+            EnemyLibrarian.Instance.Add(enemyConfig);
         }
 
         public static void Hero()
         {
-            HeroLibrarian.Instance.Add(CreateNewConfig<HeroConfig>());
+            HeroConfig heroConfig = new(ScopeController.Instance.CurrentFolder);
+            HeroLibrarian.Instance.Add(heroConfig);
         }
         
         public static void Ability()
         {
-            AbilityLibrarian.Instance.Add(CreateNewConfig<AbilityConfig>());
-        }
-
-        private static TConfig CreateNewConfig<TConfig>() where TConfig : BaseConfig, new()
-        {
-            TConfig config = new TConfig();
-            config.UpdatePath(ScopeController.Instance.GetPathForCurrentScope());
-            return config;
+            AbilityConfig abilityConfig = new(ScopeController.Instance.CurrentFolder);
+            AbilityLibrarian.Instance.Add(abilityConfig);
         }
     }
 }

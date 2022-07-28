@@ -1,5 +1,6 @@
 using System;
 using Ebla.Models;
+using Ebla.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,21 @@ namespace Ebla.UI.Slots
         [SerializeField] private TMP_Text pathText;
         [SerializeField] private Image borderImage;
         [SerializeField] private ConfigParams configParams;
+
+        private Transform Transform
+        {
+            get
+            {
+                if (myTransform == null)
+                {
+                    myTransform = transform;
+                }
+
+                return myTransform;
+            }
+        }
+
+        private Transform myTransform;
         
         public TConfig Config { get; private set; }
 
@@ -34,7 +50,14 @@ namespace Ebla.UI.Slots
 
         public void DeleteConfig()
         {
-            Config.TryDeleteConfig();
+            if (Input.GetKey(HotKeys.ForceExecute))
+            {
+                Config.DeleteConfig();
+            }
+            else
+            {
+                Config.TryDeleteConfig();
+            }
         }
 
         public void EditConfig()

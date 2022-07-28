@@ -20,7 +20,7 @@ namespace Ebla.Selection
                 if (!abilityFilterControl.IsValid(abilityConfig))
                     continue;
                     
-                AbilityOption option = PrefabLibrary.Instance.GetAbilityOption();
+                AbilityOption option = PrefabLibrary.Instance.AbilityOption();
                 option.Transform.SetParent(optionParent);
                 option.Initialize(abilityConfig, onFiltersUpdated);
                 //options.Add(option);

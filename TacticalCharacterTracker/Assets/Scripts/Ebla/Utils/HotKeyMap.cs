@@ -10,5 +10,8 @@ namespace Ebla.Utils
 
         public KeyCode Back => back;
         [SerializeField] private KeyCode back;
+
+        public KeyCode ForceExecute => forceExecute;
+        [SerializeField] private KeyCode forceExecute;
     }
 }
