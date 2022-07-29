@@ -30,6 +30,7 @@ namespace Ebla.Pooling
 
         public TObject Get()
         {
+            Debug.Log("Pool Get");
             return pool.Get();
         }
 
@@ -56,6 +57,7 @@ namespace Ebla.Pooling
 
         private void OnTakeObjectFromPool(TObject obj)
         {
+            Debug.Log("Pool OnTakeObjectFromPool");
             obj.gameObject.SetActive(true);
         }
 

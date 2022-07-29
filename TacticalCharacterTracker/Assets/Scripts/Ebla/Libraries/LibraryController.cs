@@ -50,6 +50,12 @@ namespace Ebla.Libraries
             return library;
         }
 
+        public void LoadInConfigs(List<TConfig> configs)
+        {
+            library = configs;
+        }
+        
+
         // private string GetUniqueName(string baseName)
         // {
         //     string uniqueName = baseName;

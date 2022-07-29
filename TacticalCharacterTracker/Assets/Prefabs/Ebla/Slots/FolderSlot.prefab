@@ -100,7 +100,15 @@ PrefabInstance:
       value: FolderSlot
       objectReference: {fileID: 0}
     - target: {fileID: 6266805987495670442, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
+      propertyPath: options.Array.data[0].label
+      value: Open
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266805987495670442, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
       propertyPath: options.Array.data[0].addDividerBelow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266805987495670442, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
+      propertyPath: options.Array.data[0].action.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6266805987495670442, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
@@ -113,7 +121,7 @@ PrefabInstance:
       objectReference: {fileID: 6123811569071526354}
     - target: {fileID: 6266805987495670442, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
       propertyPath: options.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EditConfig
+      value: OpenFolder
       objectReference: {fileID: 0}
     - target: {fileID: 6266805987495670442, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
       propertyPath: options.Array.data[1].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -121,15 +129,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6266805987495670442, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
       propertyPath: options.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Ebla.UI.Slots.ConfigSlot`2[[Ebla.UI.Slots.FolderSlot, Assembly-CSharp
+      value: Ebla.UI.Slots.FolderSlot, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6266805987495670442, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
       propertyPath: options.Array.data[1].action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Ebla.UI.Slots.ConfigSlot`2[[Ebla.UI.Slots.FolderSlot, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6266805987495670442, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
+      propertyPath: options.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971530316106279701, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7776451296767486083, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
       propertyPath: m_text
       value: <Path>
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624024255307033952, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
+      propertyPath: onDoubleClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6123811569071526354}
+    - target: {fileID: 8624024255307033952, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
+      propertyPath: onDoubleClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenFolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624024255307033952, guid: e533c67b171c04b6995b259f1d97154c, type: 3}
+      propertyPath: onDoubleClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ebla.UI.Slots.FolderSlot, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e533c67b171c04b6995b259f1d97154c, type: 3}

@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Ebla.Models;
+using Ebla.UI;
+using Ebla.UI.Slots;
 using Ebla.Utils;
 using MolkExtras;
 using UnityEngine;
@@ -8,15 +11,21 @@ namespace Ebla
 {
     public class ScopeController : Singleton<ScopeController>
     {
+        public static event Action OnScopeChanged;
+        
         public FolderConfig CurrentFolder { get; private set; }
-        public FolderConfig RootFolder { get; private set; }
+        public FolderConfig LastFolder { get; private set; }
+
+        [SerializeField] private ConfigBrowser configBrowser;
+        
+        private FolderConfig RootFolder { get; set; }
 
         // private Dictionary<string, FolderConfig> folderRegistry = new();
 
         private List<BaseConfig> configs;
         private List<FolderConfig> folders;
 
-        private Dictionary<string, FolderConfig> folderRegistry = new();
+        private readonly Dictionary<string, FolderConfig> folderRegistry = new();
 
         // [ContextMenu("Create Folder System")]
         // public void CreateFolderSystem()
@@ -46,8 +55,6 @@ namespace Ebla
         //     }
         //     Debug.Log(configLog);
         // }
-        
-
 
         // private void TryCreateAllFoldersForConfig(BaseConfig config)
         // {
@@ -102,17 +109,13 @@ namespace Ebla
 
         public bool TryGetFolderForPath(string path, out FolderConfig folderConfig)
         {
-            foreach (var entry in folderRegistry)
-            {
-                Debug.Log($"entry: {entry.Key}, {entry.Value}");
-            }
-            
             return folderRegistry.TryGetValue(path, out folderConfig);
         }
         
         protected override void OnAwake()
         {
             base.OnAwake();
+            FolderSlot.OnOpenFolder += HandleOpenFolder;
             CreateRootFolder();
         }
         
@@ -122,6 +125,49 @@ namespace Ebla
             RootFolder.UpdateName(PathUtils.ROOT_NAME);
             RegisterFolder(RootFolder);
             CurrentFolder = RootFolder;
+        }
+
+        [UnityEngine.ContextMenu("Open Root Folder")]
+        public void OpenRootFolder()
+        {
+            LoadScope(RootFolder);
+        }
+
+        [UnityEngine.ContextMenu("GoBack")]
+        public void GoBack()
+        {
+            if (LastFolder != null)
+            {
+                LoadScope(LastFolder);
+            }
+        }
+        
+        private void HandleOpenFolder(FolderSlot folderSlot)
+        {
+            if (folderSlot.Config == CurrentFolder)
+            {
+                Debug.Log("Opening folder that's already open. returning");
+                return;
+            }
+
+            LoadScope(folderSlot.Config);
+        }
+
+        private void LoadScope(FolderConfig folderConfig)
+        {
+            OnScopeChanged?.Invoke();
+
+            LastFolder = CurrentFolder;
+            CurrentFolder = folderConfig;
+            
+            Debug.Log($"LoadScopt: {CurrentFolder.Name}");
+
+            
+            Debug.Log($"config count {CurrentFolder.Configs.Count}");
+            foreach (BaseConfig config in CurrentFolder.Configs)
+            {
+                config.InvokeLoadIntoFolder();
+            }
         }
     }
 }

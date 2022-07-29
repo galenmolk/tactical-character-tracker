@@ -22,6 +22,7 @@ namespace Ebla.UI.Slots
 
         public void Configure(TConfig myConfig)
         {
+            ScopeController.OnScopeChanged += HandleScopeChanged;
             Config = myConfig;
             Config.OnConfigModified += ApplyConfigToSlot;
             Config.OnConfigRemoved += HandleConfigRemoved;
@@ -48,6 +49,13 @@ namespace Ebla.UI.Slots
         public void EditConfig()
         {
             OnEditConfigSlot?.Invoke(Config);
+        }
+
+        private void HandleScopeChanged()
+        {
+            Debug.Log($"{Config.Name} handle scope changed");
+            ScopeController.OnScopeChanged -= HandleScopeChanged;
+            ReleaseObject();
         }
         
         private void ApplyConfigToSlot()

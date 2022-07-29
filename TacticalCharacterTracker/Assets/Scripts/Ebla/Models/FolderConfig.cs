@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Ebla.Libraries;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -9,11 +8,18 @@ namespace Ebla.Models
 {
     public class FolderConfig : BaseConfig
     {
+        public static event Action<FolderConfig> OnLoadIntoFolder;
+        
         public override string BaseName => "untitled folder";
 
         [JsonIgnore]
         public List<BaseConfig> Configs { get; } = new();
 
+        public override void InvokeLoadIntoFolder()
+        {
+            OnLoadIntoFolder?.Invoke(this);
+        }
+        
         public void AddConfigToFolder(BaseConfig config)
         {
             Configs.Add(config);

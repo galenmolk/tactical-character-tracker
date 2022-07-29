@@ -46,6 +46,7 @@ namespace Ebla
         
         public AbilitySlot AbilitySlot()
         {
+            Debug.Log("Get AbilitySlot");
             return abilitySlotPool.Get();
         }
 

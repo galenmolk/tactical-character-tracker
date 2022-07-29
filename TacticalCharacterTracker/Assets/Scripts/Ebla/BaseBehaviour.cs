@@ -27,7 +27,7 @@ namespace Ebla
         {
             InvokeReleaseObject();
         }
+        
         protected abstract void InvokeReleaseObject();
-
     }
 }

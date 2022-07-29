@@ -38,16 +38,22 @@ namespace Ebla.Libraries
 
         public void LoadIntoController()
         {
-            foreach (TConfig config in configs)
+            Controller.LoadInConfigs(configs);
+        }
+
+        public void InitializeFolders()
+        {
+            foreach (TConfig baseConfig in Controller.All())
             {
-                Add(config);
+                baseConfig.GetParentFromPath();
             }
         }
 
-        protected virtual void Start()
+        protected override void OnAwake()
         {
-            CreateController();
             DeserializeJson();
+            CreateController();
+            LoadIntoController();
         }
 
         private void CreateController()

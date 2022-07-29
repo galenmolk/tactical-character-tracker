@@ -49,40 +49,32 @@ namespace Ebla.Models
         public DateTime DateModified { get; private set; }
 
         [JsonIgnore]
-        public FolderConfig Parent
+        public FolderConfig Parent { get; private set; }
+
+        public virtual void InvokeLoadIntoFolder()
         {
-            get
-            {
-                if (parent == null)
-                {
-                    GetParentFromPath();
-                }
-
-                return parent;
-            }
-            private set => parent = value;
+            Debug.LogWarning("InvokeLoadIntoFolder Not implemented for this config type");
         }
-
-        private FolderConfig parent;
-
+        
         public void Initialize()
         {
-            FolderConfig currentFolder = ScopeController.Instance.CurrentFolder;
+            ScopeController.Instance.CurrentFolder.AddConfigToFolder(this);
             AssignDates();
-            Path = PathUtils.GetPathToFolder(currentFolder);
-            currentFolder.AddConfigToFolder(this);
+            Path = PathUtils.GetPathToFolder(Parent);
             this.AssignUniqueName();
         }
 
         public void GetParentFromPath()
         {
-       
-            Debug.Log($"GetParentFromPath {Path}");
+            Debug.Log($"{Name} GetParentFromPath {Path}");
             if (ScopeController.Instance.TryGetFolderForPath(Path, out FolderConfig folderConfig))
             {
-                Debug.Log("GetParentFromPath success");
-
-                Parent = folderConfig;
+                Debug.Log($"{Name} Parent Found: {folderConfig.Name}");
+                folderConfig.AddConfigToFolder(this);
+            }
+            else
+            {
+                Debug.Log($"{Name} Parent NOT FOUND FOR PATH : {Path}");
             }
         }
         

@@ -10,50 +10,45 @@ namespace Ebla.UI
     {
         [SerializeField] private RectTransform fileArea;
 
-        [UnityEngine.ContextMenu("Load")]
-        public void Load()
-        {
-            Debug.Log("Load");
-            FolderLibrarian.Instance.LoadIntoController();
-            AbilityLibrarian.Instance.LoadIntoController();
-        }
-        
         private void Awake()
         {
-            FolderLibrarian.Instance.OnConfigAdded += HandleFolderAdded;
-            DungeonLibrarian.Instance.OnConfigAdded += HandleDungeonAdded;
-            EncounterLibrarian.Instance.OnConfigAdded += HandleEncounterAdded;
-            HeroLibrarian.Instance.OnConfigAdded += HandleHeroAdded;
-            EnemyLibrarian.Instance.OnConfigAdded += HandleEnemyAdded;
-            AbilityLibrarian.Instance.OnConfigAdded += HandleAbilityAdded;
+            FolderLibrarian.Instance.OnConfigAdded += CreateFolderSlot;
+            DungeonLibrarian.Instance.OnConfigAdded += CreateDungeonSlot;
+            EncounterLibrarian.Instance.OnConfigAdded += CreateEncounterSlot;
+            HeroLibrarian.Instance.OnConfigAdded += CreateHeroSlot;
+            EnemyLibrarian.Instance.OnConfigAdded += CreateEnemySlot;
+            AbilityLibrarian.Instance.OnConfigAdded += CreateAbilitySlot;
+
+            FolderConfig.OnLoadIntoFolder += CreateFolderSlot;
+            AbilityConfig.OnLoadIntoFolder += CreateAbilitySlot;
         }
         
-        private void HandleFolderAdded(FolderConfig folderConfig)
+        private void CreateFolderSlot(FolderConfig folderConfig)
         {
             InitializeSlot(PrefabLibrary.Instance.FolderSlot, folderConfig);
         }
         
-        private void HandleDungeonAdded(DungeonConfig dungeonConfig)
+        private void CreateDungeonSlot(DungeonConfig dungeonConfig)
         {
             InitializeSlot(PrefabLibrary.Instance.DungeonSlot, dungeonConfig);
         }
 
-        private void HandleEncounterAdded(EncounterConfig encounterConfig)
+        private void CreateEncounterSlot(EncounterConfig encounterConfig)
         {
             InitializeSlot(PrefabLibrary.Instance.EncounterSlot, encounterConfig);
         }
 
-        private void HandleHeroAdded(HeroConfig heroConfig)
+        private void CreateHeroSlot(HeroConfig heroConfig)
         {
             InitializeSlot(PrefabLibrary.Instance.HeroSlot, heroConfig);
         }
         
-        private void HandleEnemyAdded(EnemyConfig enemyConfig)
+        private void CreateEnemySlot(EnemyConfig enemyConfig)
         {
             InitializeSlot(PrefabLibrary.Instance.EnemySlot, enemyConfig);
         }
         
-        private void HandleAbilityAdded(AbilityConfig abilityConfig)
+        private void CreateAbilitySlot(AbilityConfig abilityConfig)
         {
             Debug.Log($"HandleAbilityAdded {abilityConfig.Name}");
             InitializeSlot(PrefabLibrary.Instance.AbilitySlot, abilityConfig);
@@ -63,10 +58,9 @@ namespace Ebla.UI
             where TSlot : ConfigSlot<TSlot, TConfig>
             where TConfig : BaseConfig
         {
-            Debug.Log($"InitializeSlot name {config.Name}");
-            Debug.Log($"InitializeSlot path {config.Path}");
+            Debug.Log($"InitializeSlot {config.Name}");
             Debug.Log($"InitializeSlot parent {config.Parent}");
-            Debug.Log($"InitializeSlot parent name {config.Parent.Name}");
+            Debug.Log($"InitializeSlot current folder {ScopeController.Instance.CurrentFolder.Name}");
             if (config.Parent != ScopeController.Instance.CurrentFolder)
             {
                 return;

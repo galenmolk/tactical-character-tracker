@@ -7,6 +7,8 @@ namespace Ebla.Models
 {
     public class AbilityConfig : BaseConfig
     {
+        public static event Action<AbilityConfig> OnLoadIntoFolder;
+
         public AbilityConfig()
         {
             
@@ -22,6 +24,11 @@ namespace Ebla.Models
         
         [JsonProperty(ConfigKeys.INTERRUPT_KEY)]
         public bool IsInterrupt { get; private set; }
+
+        public override void InvokeLoadIntoFolder()
+        {
+            OnLoadIntoFolder?.Invoke(this);
+        }
 
         public void UpdateCooldownTurns(int cooldownTurns)
         {
