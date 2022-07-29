@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 
 namespace Ebla.Models
 {
-    [Serializable]
     public class EncounterConfig : BaseConfig
     {
         [Serializable]
@@ -17,11 +16,6 @@ namespace Ebla.Models
             
             [JsonProperty(ConfigKeys.QUANTITY_KEY)]
             public int Quantity { get; private set; }
-        }
-        
-        public EncounterConfig(FolderConfig parent) : base(parent)
-        {
-            
         }
 
         public override string BaseName => "Untitled Encounter";

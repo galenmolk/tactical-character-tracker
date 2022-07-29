@@ -10,39 +10,54 @@ namespace Ebla.Libraries
     public abstract class Librarian<TLibrarian, TConfig, TController> : Singleton<TLibrarian>
         where TConfig : BaseConfig
         where TLibrarian : Librarian<TLibrarian, TConfig, TController>
-        where TController : LibraryController<TConfig>
+        where TController : LibraryController<TConfig>, new()
     {
         public event Action<TConfig> OnConfigAdded;
-
-        private TController Configs { get; set; }
+        
+        protected TController Controller { get; set; }
 
         [SerializeField] protected TextAsset libraryJson;
-        
+
+        private List<TConfig> configs;
+
         public void Add(TConfig config)
         {
-            Configs.Add(config);
+            Controller.Add(config);
             OnConfigAdded?.Invoke(config);
         }
         
         public void Remove(TConfig config)
         {
-            Configs.Remove(config);
+            Controller.Remove(config);
         }
 
         public List<TConfig> GetAbilities()
         {
-            return Configs.All();
+            return Controller.All();
         }
 
-        private void Awake()
+        public void LoadIntoController()
         {
-            CreateControllers();
+            foreach (TConfig config in configs)
+            {
+                Add(config);
+            }
         }
 
-        private void CreateControllers()
+        protected virtual void Start()
         {
-            var libraryConfig = JsonConvert.DeserializeObject<List<TConfig>>(libraryJson.text);
-            Configs = Activator.CreateInstance(typeof(TController), libraryConfig ?? new List<TConfig>()) as TController;
+            CreateController();
+            DeserializeJson();
+        }
+
+        private void CreateController()
+        {
+            Controller = new TController();
+        }
+
+        private void DeserializeJson()
+        {
+            configs = JsonConvert.DeserializeObject<List<TConfig>>(libraryJson.text);
         }
 
         private void OnDisable()

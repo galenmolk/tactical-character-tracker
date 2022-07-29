@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Ebla.Models;
 using Ebla.Utils;
 using MolkExtras;
+using UnityEngine;
 
 namespace Ebla
 {
@@ -14,6 +15,8 @@ namespace Ebla
 
         private List<BaseConfig> configs;
         private List<FolderConfig> folders;
+
+        private Dictionary<string, FolderConfig> folderRegistry = new();
 
         // [ContextMenu("Create Folder System")]
         // public void CreateFolderSystem()
@@ -90,6 +93,22 @@ namespace Ebla
         //         }
         //     }
         // }
+
+        public void RegisterFolder(FolderConfig folderConfig)
+        {
+            Debug.Log($"Registering folder {folderConfig.Path}");
+            folderRegistry.TryAdd(folderConfig.FullPath, folderConfig);
+        }
+
+        public bool TryGetFolderForPath(string path, out FolderConfig folderConfig)
+        {
+            foreach (var entry in folderRegistry)
+            {
+                Debug.Log($"entry: {entry.Key}, {entry.Value}");
+            }
+            
+            return folderRegistry.TryGetValue(path, out folderConfig);
+        }
         
         protected override void OnAwake()
         {
@@ -101,6 +120,7 @@ namespace Ebla
         {
             RootFolder = new FolderConfig();
             RootFolder.UpdateName(PathUtils.ROOT_NAME);
+            RegisterFolder(RootFolder);
             CurrentFolder = RootFolder;
         }
     }

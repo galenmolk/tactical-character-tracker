@@ -17,21 +17,6 @@ namespace Ebla.UI.Slots
         [SerializeField] private TMP_Text pathText;
         [SerializeField] private Image borderImage;
         [SerializeField] private ConfigParams configParams;
-
-        private Transform Transform
-        {
-            get
-            {
-                if (myTransform == null)
-                {
-                    myTransform = transform;
-                }
-
-                return myTransform;
-            }
-        }
-
-        private Transform myTransform;
         
         public TConfig Config { get; private set; }
 

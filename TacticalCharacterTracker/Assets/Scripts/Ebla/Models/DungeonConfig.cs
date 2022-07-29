@@ -6,14 +6,8 @@ using Newtonsoft.Json;
 
 namespace Ebla.Models
 {
-    [Serializable]
     public class DungeonConfig : BaseConfig
     {
-        public DungeonConfig(FolderConfig parent) : base(parent)
-        {
-            
-        }
-
         public override string BaseName => "Untitled Dungeon";
 
         [JsonProperty(ConfigKeys.ENCOUNTERS_KEY)]

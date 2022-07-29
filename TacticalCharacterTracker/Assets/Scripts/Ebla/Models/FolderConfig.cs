@@ -1,27 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Ebla.Libraries;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Ebla.Models
 {
-    [Serializable]
     public class FolderConfig : BaseConfig
     {
-        public FolderConfig()
-        {
-            
-        }
-        
-        public FolderConfig(FolderConfig parent) : base(parent)
-        {
-            
-        }
-        
         public override string BaseName => "untitled folder";
 
         [JsonIgnore]
-        public List<BaseConfig> Configs { get; private set; } = new();
+        public List<BaseConfig> Configs { get; } = new();
 
         public void AddConfigToFolder(BaseConfig config)
         {
@@ -33,6 +24,13 @@ namespace Ebla.Models
         protected override void RemoveConfigFromLibrary()
         {
             FolderLibrarian.Instance.Remove(this);
+        }
+
+        protected override void HandleDeserialization()
+        {
+            base.HandleDeserialization();
+            Debug.Log("Deserializing folder, registering");
+            ScopeController.Instance.RegisterFolder(this);
         }
     }
 }

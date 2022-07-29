@@ -6,11 +6,6 @@ namespace Ebla.Models
 {
     public abstract class CharacterConfig : BaseConfig
     {
-        public CharacterConfig(FolderConfig parent) : base(parent)
-        {
-            
-        }
-        
         [JsonProperty(ConfigKeys.HEALTH_KEY)]
         public int Health { get; private set; }
         

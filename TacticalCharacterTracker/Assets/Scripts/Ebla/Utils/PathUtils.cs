@@ -44,7 +44,7 @@ namespace Ebla.Utils
             FolderConfig folder = folderConfig;
             string path = folderConfig.Name;
                 
-            while (folder.Parent != null && folder.Parent != ScopeController.Instance.RootFolder)
+            while (folder.Parent != null)
             {
                 string parentName =  folder.Parent.Name + PATH_DELIMITER;
                 path = path.Insert(0, parentName);
@@ -53,7 +53,7 @@ namespace Ebla.Utils
 
             return path;
         }
-        
+
         private static List<string> GetAllConfigNamesInFolder(FolderConfig folderConfig)
         {
             List<string> configNames = new();

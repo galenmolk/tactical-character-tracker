@@ -7,38 +7,49 @@ namespace Ebla.Utils
     {
         public static void Folder()
         {
-            FolderConfig folderConfig = new(ScopeController.Instance.CurrentFolder);
+            FolderConfig folderConfig = new();
+            Initialize(folderConfig);
             FolderLibrarian.Instance.Add(folderConfig);
         }
         
         public static void Dungeon()
         {
-            DungeonConfig dungeonConfig = new(ScopeController.Instance.CurrentFolder);
+            DungeonConfig dungeonConfig = new();
+            Initialize(dungeonConfig);
             DungeonLibrarian.Instance.Add(dungeonConfig);
         }
         
         public static void Encounter()
         {
-            EncounterConfig encounterConfig = new(ScopeController.Instance.CurrentFolder);
+            EncounterConfig encounterConfig = new();
+            Initialize(encounterConfig);
             EncounterLibrarian.Instance.Add(encounterConfig);
         }
         
         public static void Enemy()
         {
-            EnemyConfig enemyConfig = new(ScopeController.Instance.CurrentFolder);
+            EnemyConfig enemyConfig = new();
+            Initialize(enemyConfig);
             EnemyLibrarian.Instance.Add(enemyConfig);
         }
 
         public static void Hero()
         {
-            HeroConfig heroConfig = new(ScopeController.Instance.CurrentFolder);
+            HeroConfig heroConfig = new();
+            Initialize(heroConfig);
             HeroLibrarian.Instance.Add(heroConfig);
         }
         
         public static void Ability()
         {
-            AbilityConfig abilityConfig = new(ScopeController.Instance.CurrentFolder);
+            AbilityConfig abilityConfig = new();
+            Initialize(abilityConfig);
             AbilityLibrarian.Instance.Add(abilityConfig);
+        }
+
+        private static void Initialize(BaseConfig config)
+        {
+            config.Initialize();
         }
     }
 }

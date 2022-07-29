@@ -3,27 +3,20 @@ using System.Runtime.Serialization;
 using Ebla.UI;
 using Ebla.Utils;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Ebla.Models
 {
-    [Serializable]
     public abstract class BaseConfig
     {
         public BaseConfig()
         {
             
         }
-        
-        protected BaseConfig(FolderConfig parent)
-        {
-            AssignDates();
-            Path = PathUtils.GetPathToFolder(parent);
-            parent.AddConfigToFolder(this);
-            this.AssignUniqueName();
-        }
 
         public event Action OnConfigModified;
         public event Action OnConfigRemoved;
+        public static event Action<BaseConfig> OnDeserialized;
 
         public abstract string BaseName { get; }
 
@@ -39,15 +32,60 @@ namespace Ebla.Models
         [JsonProperty(ConfigKeys.PATH_KEY)]
         public string Path { get; protected set; }
 
-        [JsonProperty(ConfigKeys.FULL_PATH_KEY)]
-        public string FullPath { get; private set; }
-
+        [JsonIgnore]
+        public string FullPath
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Path))
+                {
+                    return Name;
+                }
+                
+                return Path + PathUtils.PATH_DELIMITER + Name;
+            }
+        }
         public DateTime DateCreated { get; private set; }
         public DateTime DateModified { get; private set; }
 
         [JsonIgnore]
-        public FolderConfig Parent { get; private set; }
+        public FolderConfig Parent
+        {
+            get
+            {
+                if (parent == null)
+                {
+                    GetParentFromPath();
+                }
 
+                return parent;
+            }
+            private set => parent = value;
+        }
+
+        private FolderConfig parent;
+
+        public void Initialize()
+        {
+            FolderConfig currentFolder = ScopeController.Instance.CurrentFolder;
+            AssignDates();
+            Path = PathUtils.GetPathToFolder(currentFolder);
+            currentFolder.AddConfigToFolder(this);
+            this.AssignUniqueName();
+        }
+
+        public void GetParentFromPath()
+        {
+       
+            Debug.Log($"GetParentFromPath {Path}");
+            if (ScopeController.Instance.TryGetFolderForPath(Path, out FolderConfig folderConfig))
+            {
+                Debug.Log("GetParentFromPath success");
+
+                Parent = folderConfig;
+            }
+        }
+        
         public void UpdatePath(string path)
         {
             Path = path;
@@ -100,6 +138,12 @@ namespace Ebla.Models
         private void DeserializedCallback(StreamingContext context)
         {
             Identify();
+            HandleDeserialization();
+        }
+
+        protected virtual void HandleDeserialization()
+        {
+            
         }
 
         private void Identify()

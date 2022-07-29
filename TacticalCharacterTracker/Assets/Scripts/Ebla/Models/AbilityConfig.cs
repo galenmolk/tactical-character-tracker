@@ -5,14 +5,13 @@ using Newtonsoft.Json;
 
 namespace Ebla.Models
 {
-    [Serializable]
     public class AbilityConfig : BaseConfig
     {
-        public AbilityConfig(FolderConfig parent) : base(parent)
+        public AbilityConfig()
         {
             
         }
-        
+
         public override string BaseName => "Untitled Ability";
         
         [JsonProperty(ConfigKeys.COOLDOWN_KEY)]

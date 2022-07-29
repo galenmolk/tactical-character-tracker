@@ -6,43 +6,43 @@ namespace Ebla.Libraries
     public abstract class LibraryController<TConfig> 
         where TConfig : BaseConfig
     {
-        private List<string> ContentNames
-        {
-            get
-            {
-                if (isNamesListDirty)
-                    RefreshNamesList();
+        // private List<string> ContentNames
+        // {
+        //     get
+        //     {
+        //         if (isNamesListDirty)
+        //             RefreshNamesList();
+        //
+        //         return contentNames;
+        //     }
+        // }
 
-                return contentNames;
-            }
-        }
+        private List<TConfig> library = new();
+        // private readonly List<string> contentNames;
 
-        private readonly List<TConfig> library;
-        private readonly List<string> contentNames;
-
-        private bool isNamesListDirty;
+        // private bool isNamesListDirty;
         
-        public LibraryController(List<TConfig> libraryConfig)
-        {
-            library = libraryConfig;
-            contentNames = new List<string>();
-
-            Initialize();
-        }
+        // public LibraryController(List<TConfig> libraryConfig)
+        // {
+        //     library = libraryConfig;
+        //     contentNames = new List<string>();
+        //
+        //     Initialize();
+        // }
 
         public void Add(TConfig config)
         {
-            config.UpdateName(GetUniqueName(config.BaseName));
-            config.OnConfigModified += HandleConfigModified;
+            // config.UpdateName(GetUniqueName(config.BaseName));
+            // config.OnConfigModified += HandleConfigModified;
             library.Add(config);
-            isNamesListDirty = true;
+            // isNamesListDirty = true;
         }
 
         public void Remove(TConfig config)
         {
-            config.OnConfigModified -= HandleConfigModified;
+            // config.OnConfigModified -= HandleConfigModified;
             library.Remove(config);
-            isNamesListDirty = true;
+            // isNamesListDirty = true;
         }
 
         public List<TConfig> All()
@@ -50,43 +50,43 @@ namespace Ebla.Libraries
             return library;
         }
 
-        private string GetUniqueName(string baseName)
-        {
-            string uniqueName = baseName;
-            int nameIndex = 0;
-            
-            while (ContentNames.Contains(uniqueName))
-            {
-                nameIndex++;
-                uniqueName = $"{baseName} {nameIndex}";
-            }
+        // private string GetUniqueName(string baseName)
+        // {
+        //     string uniqueName = baseName;
+        //     int nameIndex = 0;
+        //     
+        //     while (ContentNames.Contains(uniqueName))
+        //     {
+        //         nameIndex++;
+        //         uniqueName = $"{baseName} {nameIndex}";
+        //     }
+        //
+        //     return uniqueName;
+        // }
 
-            return uniqueName;
-        }
-
-        private void Initialize()
-        {
-            for (int i = 0, count = library.Count; i < count; i++)
-            {
-                TConfig config = library[i];
-                contentNames.Add(config.Name);
-                config.OnConfigModified += HandleConfigModified;
-            }
-        }
+        // private void Initialize()
+        // {
+        //     for (int i = 0, count = library.Count; i < count; i++)
+        //     {
+        //         TConfig config = library[i];
+        //         contentNames.Add(config.Name);
+        //         // config.OnConfigModified += HandleConfigModified;
+        //     }
+        // }
         
-        private void RefreshNamesList()
-        {
-            contentNames.Clear();
-            
-            for (int i = 0, count = library.Count; i < count; i++)
-                contentNames.Add(library[i].Name);
+        // private void RefreshNamesList()
+        // {
+        //     contentNames.Clear();
+        //     
+        //     for (int i = 0, count = library.Count; i < count; i++)
+        //         contentNames.Add(library[i].Name);
+        //
+        //     isNamesListDirty = false;
+        // }
 
-            isNamesListDirty = false;
-        }
-
-        private void HandleConfigModified()
-        {
-            isNamesListDirty = true;
-        }
+        // private void HandleConfigModified()
+        // {
+        //     isNamesListDirty = true;
+        // }
     }
 }
