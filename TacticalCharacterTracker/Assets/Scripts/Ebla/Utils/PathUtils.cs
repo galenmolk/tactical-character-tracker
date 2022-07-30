@@ -54,6 +54,21 @@ namespace Ebla.Utils
             return path;
         }
 
+        public static List<FolderConfig> GetFolderConfigsInPath(FolderConfig folderConfig)
+        {
+            List<FolderConfig> folders = new() { folderConfig };
+            
+            FolderConfig folder = folderConfig;
+                
+            while (folder.Parent != null)
+            {
+                folders.Insert(0, folder.Parent);
+                folder = folder.Parent;
+            }
+
+            return folders;
+        }
+
         private static List<string> GetAllConfigNamesInFolder(FolderConfig folderConfig)
         {
             List<string> configNames = new();

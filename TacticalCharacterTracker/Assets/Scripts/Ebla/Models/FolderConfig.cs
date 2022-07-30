@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Ebla.Models
 {
+    [Serializable]
     public class FolderConfig : BaseConfig
     {
         public static event Action<FolderConfig> OnLoadIntoFolder;

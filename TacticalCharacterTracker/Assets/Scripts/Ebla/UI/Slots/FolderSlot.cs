@@ -5,13 +5,11 @@ namespace Ebla.UI.Slots
 {
     public class FolderSlot : ConfigSlot<FolderSlot, FolderConfig>
     {
-        public static event Action<FolderSlot> OnOpenFolder;
-        
         public override event Action<FolderSlot> OnReleaseObject;
 
         public void OpenFolder()
         {
-            OnOpenFolder?.Invoke(this);
+            ScopeController.Instance.LoadScope(Config);
         }
         
         protected override void InvokeReleaseObject()

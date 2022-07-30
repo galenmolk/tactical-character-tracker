@@ -66,6 +66,7 @@ namespace Ebla.UI.Slots
         
         private void HandleConfigRemoved()
         {
+            // TODO THIS IS THROWING AN ERROR ON DELETING SLOT
             Config.OnConfigModified -= ApplyConfigToSlot;
             Config.OnConfigRemoved -= HandleConfigRemoved;
             Config = null;

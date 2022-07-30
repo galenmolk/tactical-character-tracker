@@ -30,7 +30,6 @@ namespace Ebla.Pooling
 
         public TObject Get()
         {
-            Debug.Log("Pool Get");
             return pool.Get();
         }
 
@@ -49,7 +48,6 @@ namespace Ebla.Pooling
         private TObject CreateObject()
         {
             var obj = Instantiate(prefab, transform);
-            Debug.Log("Pool Create Obj Scale: " + obj.transform.localScale);
             obj.gameObject.SetActive(false);
             obj.OnReleaseObject += HandleReleaseObject;
             return obj;
@@ -57,11 +55,10 @@ namespace Ebla.Pooling
 
         private void OnTakeObjectFromPool(TObject obj)
         {
-            Debug.Log("Pool OnTakeObjectFromPool");
             obj.gameObject.SetActive(true);
         }
 
-        private void OnObjectReturnedToPool(TObject obj)
+        private static void OnObjectReturnedToPool(TObject obj)
         {
             obj.ResetObject();
         }

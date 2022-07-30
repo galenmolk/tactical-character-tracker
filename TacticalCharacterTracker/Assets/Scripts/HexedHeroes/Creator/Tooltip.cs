@@ -1,4 +1,5 @@
 using HexedHeroes.Utils;
+using MolkExtras;
 using TMPro;
 using UnityEngine;
 
@@ -33,9 +34,8 @@ namespace HexedHeroes.Creator
         
             currentArgs = eventArgs;
             tooltipText.text = eventArgs.Element.Text;
-            this.DelayExecutionUntilEndOfFrame(() =>
+            this.ExecuteAtEndOfFrame(() =>
             {
-            
                 var size = RectTransform.sizeDelta * CanvasController.Instance.ScaleFactor;
 
                 var tooltipPosition = (Vector2)Input.mousePosition + size * 0.5f;
