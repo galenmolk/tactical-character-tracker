@@ -18,6 +18,7 @@ namespace Ebla.Editing
         [SerializeField] private StringSection nameSection;
         [SerializeField] private StringSection descriptionSection;
         [SerializeField] private ConfigParams configParams;
+        [SerializeField] private Image icon;
         
         protected TConfig ActiveConfig { get; private set; }
 
@@ -25,6 +26,7 @@ namespace Ebla.Editing
         {
             headerImage.color = configParams.Color;
             headerText.text = configParams.ConfigName;
+            icon.sprite = configParams.Icon;
             ActiveConfig = config;
             config.OnConfigRemoved += Close;
             config.OnConfigModified += Refresh;

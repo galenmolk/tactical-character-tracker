@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Ebla.Libraries;
+using Ebla.UI;
+using MolkExtras;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -28,7 +30,35 @@ namespace Ebla.Models
             config.UpdateParent(this);
             InvokeConfigModified();
         }
-        
+
+        public override void TryDeleteConfig()
+        {
+            ConfirmationController.Instance.DeleteFolder(this);
+        }
+
+        public override string GetDeletionText()
+        {
+            int configCount = 0;
+            int folderCount = 0;
+
+            for (int i = 0, count = Configs.Count; i < count; i++)
+            {
+                if (Configs[i] is FolderConfig)
+                {
+                    folderCount++;
+                }
+                else
+                {
+                    configCount++;
+                }
+            }
+
+            string configKeyword = StringUtils.GetCountDistinction("file", configCount);
+            string folderKeyword = StringUtils.GetCountDistinction("folder", folderCount);
+            string contentsString = $"({folderCount} {folderKeyword}, {configCount} {configKeyword})";
+            return $"{base.GetDeletionText()} \n{contentsString}";
+        }
+
         protected override void RemoveConfigFromLibrary()
         {
             FolderLibrarian.Instance.Remove(this);

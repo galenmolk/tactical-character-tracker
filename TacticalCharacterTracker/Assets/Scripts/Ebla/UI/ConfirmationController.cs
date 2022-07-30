@@ -21,6 +21,14 @@ namespace Ebla.UI
             CreateOverlay(deleteConfigParams);
         }
 
+        public void DeleteFolder(FolderConfig folderConfig)
+        {
+            string keyWord = StringUtils.GetCountDistinction("file", folderConfig.Configs.Count);
+            deleteConfigParams.SetTitle(folderConfig.GetDeletionText());
+            deleteConfigParams.LoadAction(folderConfig.DeleteConfig);
+            CreateOverlay(deleteConfigParams);
+        }
+
         private void CreateOverlay(ConfirmationParams confirmationParams)
         {
             ClearActiveInstance();

@@ -101,7 +101,7 @@ namespace Ebla.Models
             InvokeConfigModified();
         }
 
-        public void TryDeleteConfig()
+        public virtual void TryDeleteConfig()
         {
             ConfirmationController.Instance.DeleteConfig(this);
         }
@@ -112,6 +112,11 @@ namespace Ebla.Models
 
             RemoveConfigFromLibrary();
             OnConfigRemoved?.Invoke(this);
+        }
+
+        public virtual string GetDeletionText()
+        {
+            return $"Delete {Name}?";
         }
 
         protected abstract void RemoveConfigFromLibrary();

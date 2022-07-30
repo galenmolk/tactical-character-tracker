@@ -8,6 +8,8 @@ namespace Ebla.Models
 {
     public class DungeonConfig : BaseConfig
     {
+        public static event Action<DungeonConfig> OnLoadIntoFolder;
+        
         public override string BaseName => "Untitled Dungeon";
 
         [JsonProperty(ConfigKeys.ENCOUNTERS_KEY)]

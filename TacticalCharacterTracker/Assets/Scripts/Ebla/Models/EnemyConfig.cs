@@ -5,6 +5,8 @@ namespace Ebla.Models
 {
     public class EnemyConfig : CharacterConfig
     {
+        public static event Action<EnemyConfig> OnLoadIntoFolder;
+
         public override string BaseName => "Untitled Enemy";
         protected override void RemoveConfigFromLibrary()
         {

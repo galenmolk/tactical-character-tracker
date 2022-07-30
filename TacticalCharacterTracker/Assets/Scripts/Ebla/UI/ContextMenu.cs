@@ -18,7 +18,8 @@ namespace Ebla.UI
         [SerializeField] private GameObject dividerPrefab;
         
         [SerializeField] private Transform optionParent;
-
+        [SerializeField] private DeselectableMenu deselectableMenu;
+        
         public RectTransform RectTransform
         {
             get
@@ -46,6 +47,7 @@ namespace Ebla.UI
         
         public void Configure(ContextMenuBehaviour behaviour)
         {
+            deselectableMenu.Focus();
             CreateOptions(behaviour.Options);
         }
 

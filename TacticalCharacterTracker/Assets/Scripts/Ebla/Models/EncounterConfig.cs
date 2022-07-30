@@ -8,6 +8,8 @@ namespace Ebla.Models
 {
     public class EncounterConfig : BaseConfig
     {
+        public static event Action<EncounterConfig> OnLoadIntoFolder;
+        
         [Serializable]
         public class EnemyTypeConfig
         {

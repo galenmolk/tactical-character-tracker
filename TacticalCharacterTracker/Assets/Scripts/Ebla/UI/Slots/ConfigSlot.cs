@@ -18,7 +18,8 @@ namespace Ebla.UI.Slots
         [SerializeField] private TMP_Text pathText;
         [SerializeField] private Image borderImage;
         [SerializeField] private ConfigParams configParams;
-
+        [SerializeField] private Image icon;
+        
         private ConfigDragIcon dragInstance;
         
         public TConfig Config { get; private set; }
@@ -26,6 +27,7 @@ namespace Ebla.UI.Slots
         public void Configure(TConfig myConfig)
         {
             Config = myConfig;
+            icon.sprite = configParams.Icon;
             ScopeController.OnScopeChanged += ReleaseObject;
             Config.OnConfigModified += ApplyConfigToSlot;
             Config.OnConfigRemoved += HandleConfigRemoved;

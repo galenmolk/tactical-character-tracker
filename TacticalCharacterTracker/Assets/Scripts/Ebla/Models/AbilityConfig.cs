@@ -10,11 +10,6 @@ namespace Ebla.Models
     {
         public static event Action<AbilityConfig> OnLoadIntoFolder;
 
-        public AbilityConfig()
-        {
-            
-        }
-
         public override string BaseName => "Untitled Ability";
         
         [JsonProperty(ConfigKeys.COOLDOWN_KEY)]

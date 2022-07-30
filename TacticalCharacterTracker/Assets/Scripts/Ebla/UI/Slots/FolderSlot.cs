@@ -26,9 +26,10 @@ namespace Ebla.UI.Slots
 
         private void RemoveAllConfigs()
         {
-            for (int i = 0, count = Config.Configs.Count; i < count; i++)
+            // TODO THIS IS BREAKING WHY IS CONFIGS BEING MODIFIEd
+            foreach (BaseConfig baseConfig in Config.Configs)
             {
-                Config.Configs[i].DeleteConfig();
+                baseConfig.DeleteConfig();
             }
         }
     }

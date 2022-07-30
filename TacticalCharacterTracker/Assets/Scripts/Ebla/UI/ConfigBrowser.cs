@@ -21,6 +21,10 @@ namespace Ebla.UI
             AbilityLibrarian.OnConfigAdded += CreateAbilitySlot;
 
             FolderConfig.OnLoadIntoFolder += CreateFolderSlot;
+            DungeonConfig.OnLoadIntoFolder += CreateDungeonSlot;
+            EncounterConfig.OnLoadIntoFolder += CreateEncounterSlot;
+            EnemyConfig.OnLoadIntoFolder += CreateEnemySlot;
+            HeroConfig.OnLoadIntoFolder += CreateHeroSlot;
             AbilityConfig.OnLoadIntoFolder += CreateAbilitySlot;
         }
         
@@ -51,7 +55,6 @@ namespace Ebla.UI
         
         private void CreateAbilitySlot(AbilityConfig abilityConfig)
         {
-            Debug.Log($"HandleAbilityAdded {abilityConfig.Name}");
             InitializeSlot(PrefabLibrary.Instance.AbilitySlot, abilityConfig);
         }
 
@@ -59,9 +62,6 @@ namespace Ebla.UI
             where TSlot : ConfigSlot<TSlot, TConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler
             where TConfig : BaseConfig
         {
-            Debug.Log($"InitializeSlot {config.Name}");
-            Debug.Log($"InitializeSlot parent {config.Parent}");
-            Debug.Log($"InitializeSlot current folder {ScopeController.Instance.CurrentFolder.Name}");
             if (config.Parent != ScopeController.Instance.CurrentFolder)
             {
                 return;
