@@ -2,6 +2,7 @@ using System;
 using Ebla.Libraries;
 using Ebla.Utils;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Ebla.Models
 {
@@ -50,6 +51,7 @@ namespace Ebla.Models
 
         protected override void RemoveConfigFromLibrary()
         {
+            Debug.Log($"Ability COnfig RemoveConfigFromLibrary {Name}");
             AbilityLibrarian.Instance.Remove(this);
         }
     }

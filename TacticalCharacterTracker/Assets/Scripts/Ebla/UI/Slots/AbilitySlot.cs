@@ -1,9 +1,10 @@
 using System;
 using Ebla.Models;
+using UnityEngine.EventSystems;
 
 namespace Ebla.UI.Slots
 {
-    public class AbilitySlot : ConfigSlot<AbilitySlot, AbilityConfig>
+    public class AbilitySlot : ConfigSlot<AbilitySlot, AbilityConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         public override event Action<AbilitySlot> OnReleaseObject;
         

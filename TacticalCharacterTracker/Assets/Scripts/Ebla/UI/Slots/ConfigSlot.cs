@@ -3,13 +3,14 @@ using Ebla.Models;
 using Ebla.Utils;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Ebla.UI.Slots
 {
     public abstract class ConfigSlot<TSlot, TConfig> : BaseBehaviour<TSlot>
     where TConfig : BaseConfig
-    where TSlot : MonoBehaviour
+    where TSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         public static event Action<TConfig> OnEditConfigSlot;
 
@@ -17,13 +18,15 @@ namespace Ebla.UI.Slots
         [SerializeField] private TMP_Text pathText;
         [SerializeField] private Image borderImage;
         [SerializeField] private ConfigParams configParams;
+
+        private ConfigDragIcon dragInstance;
         
         public TConfig Config { get; private set; }
 
         public void Configure(TConfig myConfig)
         {
-            ScopeController.OnScopeChanged += HandleScopeChanged;
             Config = myConfig;
+            ScopeController.OnScopeChanged += ReleaseObject;
             Config.OnConfigModified += ApplyConfigToSlot;
             Config.OnConfigRemoved += HandleConfigRemoved;
             ApplyConfigToSlot();
@@ -31,11 +34,15 @@ namespace Ebla.UI.Slots
 
         public override void ResetObject()
         {
-            ApplyConfigToSlot();
+            ScopeController.OnScopeChanged -= ReleaseObject;
+            Config.OnConfigModified -= ApplyConfigToSlot;
+            Config.OnConfigRemoved -= HandleConfigRemoved;
+            Config = null;
         }
 
         public void DeleteConfig()
         {
+            Debug.Log($"Delete Config {Config.Name}");
             if (Input.GetKey(HotKeys.ForceExecute))
             {
                 Config.DeleteConfig();
@@ -51,26 +58,41 @@ namespace Ebla.UI.Slots
             OnEditConfigSlot?.Invoke(Config);
         }
 
-        private void HandleScopeChanged()
+        public void OnBeginDrag(PointerEventData eventData)
         {
-            Debug.Log($"{Config.Name} handle scope changed");
-            ScopeController.OnScopeChanged -= HandleScopeChanged;
+            dragInstance = Instantiate(PrefabLibrary.Instance.ConfigDragIcon, Transform.parent);
+            dragInstance.Configure(Config, configParams);
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            if (dragInstance == null)
+            {
+                return;
+            }
+            
+            dragInstance.Move();
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            if (dragInstance == null)
+            {
+                return;
+            }
+            
+            Destroy(dragInstance.gameObject);
+        }
+
+        protected virtual void HandleConfigRemoved(BaseConfig baseConfig)
+        {
             ReleaseObject();
         }
-        
+
         private void ApplyConfigToSlot()
         {
             nameText.text = Config != null ? Config.Name : string.Empty;
             pathText.text = Config != null ? Config.Path : string.Empty;
-        }
-        
-        private void HandleConfigRemoved()
-        {
-            // TODO THIS IS THROWING AN ERROR ON DELETING SLOT
-            Config.OnConfigModified -= ApplyConfigToSlot;
-            Config.OnConfigRemoved -= HandleConfigRemoved;
-            Config = null;
-            ReleaseObject();
         }
 
         private void Awake()

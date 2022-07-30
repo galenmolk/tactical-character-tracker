@@ -1,9 +1,10 @@
 using System;
 using Ebla.Models;
+using UnityEngine.EventSystems;
 
 namespace Ebla.UI.Slots
 {
-    public class EnemySlot : ConfigSlot<EnemySlot, EnemyConfig>
+    public class EnemySlot : ConfigSlot<EnemySlot, EnemyConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         public override event Action<EnemySlot> OnReleaseObject;
         

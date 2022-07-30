@@ -24,6 +24,7 @@ namespace Ebla.Models
         public void AddConfigToFolder(BaseConfig config)
         {
             Configs.Add(config);
+            config.OnConfigRemoved += HandleConfigRemoved;
             config.UpdateParent(this);
             InvokeConfigModified();
         }
@@ -38,6 +39,12 @@ namespace Ebla.Models
             base.HandleDeserialization();
             Debug.Log("Deserializing folder, registering");
             ScopeController.Instance.RegisterFolder(this);
+        }
+
+        private void HandleConfigRemoved(BaseConfig baseConfig)
+        {
+            baseConfig.OnConfigRemoved -= HandleConfigRemoved;
+            Configs.Remove(baseConfig);
         }
     }
 }

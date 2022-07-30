@@ -15,8 +15,7 @@ namespace Ebla.Models
         }
 
         public event Action OnConfigModified;
-        public event Action OnConfigRemoved;
-        public static event Action<BaseConfig> OnDeserialized;
+        public event Action<BaseConfig> OnConfigRemoved;
 
         public abstract string BaseName { get; }
 
@@ -109,8 +108,10 @@ namespace Ebla.Models
         
         public void DeleteConfig()
         {
+            Debug.Log($"Base Config Delete Config {Name}");
+
             RemoveConfigFromLibrary();
-            OnConfigRemoved?.Invoke();
+            OnConfigRemoved?.Invoke(this);
         }
 
         protected abstract void RemoveConfigFromLibrary();

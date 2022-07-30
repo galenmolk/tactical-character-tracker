@@ -10,9 +10,10 @@ namespace Ebla.UI
 
         public string ConfigName => configName;
         public Color Color => color;
-
+        public Sprite Icon => icon;
+        
         [SerializeField] private string configName;
         [SerializeField] private Color color;
-        
+        [SerializeField] private Sprite icon;
     }
 }

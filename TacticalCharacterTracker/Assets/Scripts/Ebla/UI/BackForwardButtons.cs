@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ebla.Libraries;
 using Ebla.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -54,18 +55,35 @@ namespace Ebla.UI
             folderIndex++;
 
             currentFolder = ScopeController.Instance.CurrentFolder;
-            
-            if (folderHistory.Count > folderIndex)
-            {
-                folderHistory.RemoveRange(folderIndex, folderHistory.Count - folderIndex);
-            }
+
+            TryTrimFolderHistory();
 
             folderHistory.Add(currentFolder);
             UpdateButtonStates();
         }
+
+        private void HandleFolderRemoved(FolderConfig folderConfig)
+        {
+            if (!folderHistory.Remove(folderConfig))
+            {
+                return;
+            }
+
+            TryTrimFolderHistory();
+            UpdateButtonStates();
+        }
+
+        private void TryTrimFolderHistory()
+        {
+            if (folderHistory.Count > folderIndex)
+            {
+                folderHistory.RemoveRange(folderIndex, folderHistory.Count - folderIndex);
+            }
+        }
         
         private void Start()
         {
+            FolderLibrarian.OnConfigRemoved += HandleFolderRemoved;
             ScopeController.OnScopeChanged += HandleScopeChanged;
             forwardButton.onClick.AddListener(GoForward);
             backButton.onClick.AddListener(GoBack);

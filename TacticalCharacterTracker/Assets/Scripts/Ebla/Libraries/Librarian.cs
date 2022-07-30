@@ -12,8 +12,8 @@ namespace Ebla.Libraries
         where TLibrarian : Librarian<TLibrarian, TConfig, TController>
         where TController : LibraryController<TConfig>, new()
     {
-        public event Action<TConfig> OnConfigAdded;
-        
+        public static event Action<TConfig> OnConfigAdded;
+        public static event Action<TConfig> OnConfigRemoved; 
         protected TController Controller { get; set; }
 
         [SerializeField] protected TextAsset libraryJson;
@@ -28,7 +28,9 @@ namespace Ebla.Libraries
         
         public void Remove(TConfig config)
         {
+            Debug.Log($"Librarian Remove {config.Name}");
             Controller.Remove(config);
+            OnConfigRemoved?.Invoke(config);
         }
 
         public List<TConfig> GetAbilities()

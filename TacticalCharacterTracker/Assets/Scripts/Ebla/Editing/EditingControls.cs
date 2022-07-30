@@ -51,7 +51,7 @@ namespace Ebla.Editing
             ActiveConfig.UpdateDescription(newDescription);
         }
 
-        private void Close()
+        private void Close(BaseConfig baseConfig)
         {
             OnClose?.Invoke();
         }

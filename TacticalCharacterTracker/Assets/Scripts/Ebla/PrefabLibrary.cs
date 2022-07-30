@@ -1,5 +1,6 @@
 using Ebla.Pooling;
 using Ebla.Selection;
+using Ebla.UI;
 using Ebla.UI.Slots;
 using MolkExtras;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Ebla
 {
     public class PrefabLibrary : Singleton<PrefabLibrary>
     {
+        public ConfigDragIcon ConfigDragIcon => configDragIcon;
+        
         [Header("Slot Pools")] 
         [SerializeField] private FolderSlotPool folderSlotPool;
         [SerializeField] private DungeonSlotPool dungeonSlotPool;
@@ -19,6 +22,8 @@ namespace Ebla
         [Header("Option Pools")]
         [SerializeField] private AbilityOptionPool abilityOptionPool;
 
+        [SerializeField] private ConfigDragIcon configDragIcon;
+        
         public FolderSlot FolderSlot()
         {
             return folderSlotPool.Get();

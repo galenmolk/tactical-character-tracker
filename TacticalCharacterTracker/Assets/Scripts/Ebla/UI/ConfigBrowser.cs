@@ -3,6 +3,7 @@ using Ebla.Libraries;
 using Ebla.Models;
 using Ebla.UI.Slots;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Ebla.UI
 {
@@ -12,12 +13,12 @@ namespace Ebla.UI
 
         private void Awake()
         {
-            FolderLibrarian.Instance.OnConfigAdded += CreateFolderSlot;
-            DungeonLibrarian.Instance.OnConfigAdded += CreateDungeonSlot;
-            EncounterLibrarian.Instance.OnConfigAdded += CreateEncounterSlot;
-            HeroLibrarian.Instance.OnConfigAdded += CreateHeroSlot;
-            EnemyLibrarian.Instance.OnConfigAdded += CreateEnemySlot;
-            AbilityLibrarian.Instance.OnConfigAdded += CreateAbilitySlot;
+            FolderLibrarian.OnConfigAdded += CreateFolderSlot;
+            DungeonLibrarian.OnConfigAdded += CreateDungeonSlot;
+            EncounterLibrarian.OnConfigAdded += CreateEncounterSlot;
+            HeroLibrarian.OnConfigAdded += CreateHeroSlot;
+            EnemyLibrarian.OnConfigAdded += CreateEnemySlot;
+            AbilityLibrarian.OnConfigAdded += CreateAbilitySlot;
 
             FolderConfig.OnLoadIntoFolder += CreateFolderSlot;
             AbilityConfig.OnLoadIntoFolder += CreateAbilitySlot;
@@ -55,7 +56,7 @@ namespace Ebla.UI
         }
 
         private void InitializeSlot<TSlot, TConfig>(Func<TSlot> getInstance, TConfig config)
-            where TSlot : ConfigSlot<TSlot, TConfig>
+            where TSlot : ConfigSlot<TSlot, TConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler
             where TConfig : BaseConfig
         {
             Debug.Log($"InitializeSlot {config.Name}");
