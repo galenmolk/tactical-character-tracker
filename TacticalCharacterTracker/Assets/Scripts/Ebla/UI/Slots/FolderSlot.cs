@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Ebla.UI.Slots
 {
-    public class FolderSlot : ConfigSlot<FolderSlot, FolderConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class FolderSlot : ConfigSlot<FolderSlot, FolderConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
         public override event Action<FolderSlot> OnReleaseObject;
 
@@ -26,10 +26,9 @@ namespace Ebla.UI.Slots
 
         private void RemoveAllConfigs()
         {
-            // TODO THIS IS BREAKING WHY IS CONFIGS BEING MODIFIEd
-            foreach (BaseConfig baseConfig in Config.Configs)
+            for (int i = Config.Configs.Count - 1; i >= 0; i--)
             {
-                baseConfig.DeleteConfig();
+                Config.Configs[i].DeleteConfig();
             }
         }
     }

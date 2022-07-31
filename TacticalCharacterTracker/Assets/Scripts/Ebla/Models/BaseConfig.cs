@@ -9,11 +9,6 @@ namespace Ebla.Models
 {
     public abstract class BaseConfig
     {
-        public BaseConfig()
-        {
-            
-        }
-
         public event Action OnConfigModified;
         public event Action<BaseConfig> OnConfigRemoved;
 

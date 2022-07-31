@@ -59,7 +59,7 @@ namespace Ebla.UI
         }
 
         private void InitializeSlot<TSlot, TConfig>(Func<TSlot> getInstance, TConfig config)
-            where TSlot : ConfigSlot<TSlot, TConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler
+            where TSlot : ConfigSlot<TSlot, TConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
             where TConfig : BaseConfig
         {
             if (config.Parent != ScopeController.Instance.CurrentFolder)

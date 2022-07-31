@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Ebla.Models;
 using Ebla.Utils;
 using TMPro;
@@ -10,7 +11,7 @@ namespace Ebla.UI.Slots
 {
     public abstract class ConfigSlot<TSlot, TConfig> : BaseBehaviour<TSlot>
     where TConfig : BaseConfig
-    where TSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    where TSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
         public static event Action<TConfig> OnEditConfigSlot;
 
@@ -21,6 +22,7 @@ namespace Ebla.UI.Slots
         [SerializeField] private Image icon;
         
         private ConfigDragIcon dragInstance;
+        private Vector2 dragOrigin;
         
         public TConfig Config { get; private set; }
 
@@ -62,7 +64,9 @@ namespace Ebla.UI.Slots
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            dragOrigin = Input.mousePosition;
             dragInstance = Instantiate(PrefabLibrary.Instance.ConfigDragIcon, Transform.parent);
+            dragInstance.OnDroppedOnFolder += HandleDroppedOnFolder;
             dragInstance.Configure(Config, configParams);
         }
 
@@ -82,8 +86,18 @@ namespace Ebla.UI.Slots
             {
                 return;
             }
-            
-            Destroy(dragInstance.gameObject);
+
+            dragInstance.Transform.DOMove(dragOrigin, 0.5f).OnComplete(() =>
+            {
+                dragInstance.OnDroppedOnFolder -= HandleDroppedOnFolder;
+                Destroy(dragInstance.gameObject);
+                dragInstance = null;
+            });
+        }
+
+        public void OnDrop(PointerEventData eventData)
+        {
+            Debug.Log($"Config Slot On Drop {eventData.pointerDrag.name}");
         }
 
         protected virtual void HandleConfigRemoved(BaseConfig baseConfig)
@@ -91,6 +105,11 @@ namespace Ebla.UI.Slots
             ReleaseObject();
         }
 
+        private void HandleDroppedOnFolder(FolderSlot folderSlot)
+        {
+            Debug.Log($"Config Slot dropped on {folderSlot.Config.Name}");
+        }
+        
         private void ApplyConfigToSlot()
         {
             nameText.text = Config != null ? Config.Name : string.Empty;

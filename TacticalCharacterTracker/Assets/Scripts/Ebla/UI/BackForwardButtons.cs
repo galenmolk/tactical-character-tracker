@@ -11,7 +11,7 @@ namespace Ebla.UI
         [SerializeField] private Button backButton;
         [SerializeField] private Button forwardButton;
 
-        [SerializeField] private List<FolderConfig> folderHistory = new();
+        private List<FolderConfig> folderHistory = new();
         private int folderIndex = -1;
         private FolderConfig currentFolder;
         
@@ -62,7 +62,7 @@ namespace Ebla.UI
             UpdateButtonStates();
         }
 
-        private void HandleFolderRemoved(FolderConfig folderConfig)
+        private void HandleFolderRemovedFromLibrary(FolderConfig folderConfig)
         {
             if (!folderHistory.Remove(folderConfig))
             {
@@ -83,7 +83,7 @@ namespace Ebla.UI
         
         private void Start()
         {
-            FolderLibrarian.OnConfigRemoved += HandleFolderRemoved;
+            FolderLibrarian.OnConfigRemovedFromLibrary += HandleFolderRemovedFromLibrary;
             ScopeController.OnScopeChanged += HandleScopeChanged;
             forwardButton.onClick.AddListener(GoForward);
             backButton.onClick.AddListener(GoBack);

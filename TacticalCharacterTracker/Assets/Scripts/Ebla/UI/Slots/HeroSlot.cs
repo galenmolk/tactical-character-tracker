@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Ebla.UI.Slots
 {
-    public class HeroSlot : ConfigSlot<HeroSlot, HeroConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class HeroSlot : ConfigSlot<HeroSlot, HeroConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
         public override event Action<HeroSlot> OnReleaseObject;
         
