@@ -13,59 +13,49 @@ namespace Ebla.Libraries
         where TController : LibraryController<TConfig>, new()
     {
         public static event Action<TConfig> OnConfigAdded;
-        public static event Action<TConfig> OnConfigRemovedFromLibrary; 
-        protected TController Controller { get; set; }
+        public static event Action<TConfig> OnConfigRemovedFromLibrary;
+
+        private readonly TController controller = new();
 
         [SerializeField] protected TextAsset libraryJson;
 
-        private List<TConfig> configs;
+        private Dictionary<string, TConfig> configs;
 
         public void Add(TConfig config)
         {
-            Controller.Add(config);
+            controller.Add(config);
             OnConfigAdded?.Invoke(config);
         }
         
         public void Remove(TConfig config)
         {
             Debug.Log($"Librarian Remove {config.Name}");
-            Controller.Remove(config);
+            controller.Remove(config);
             OnConfigRemovedFromLibrary?.Invoke(config);
         }
 
-        public List<TConfig> GetAbilities()
+        public void LoadInConfigs(Dictionary<string, TConfig> configs)
         {
-            return Controller.All();
+            controller.LoadInConfigs(configs);
         }
-
-        public void LoadIntoController()
-        {
-            Controller.LoadInConfigs(configs);
-        }
-
+        
         public void InitializeFolders()
         {
-            foreach (TConfig baseConfig in Controller.All())
+            foreach (KeyValuePair<string,TConfig> config in controller.All())
             {
-                baseConfig.GetParentFromPath();
+                config.Value.GetParentFromPath();
             }
         }
 
         protected override void OnAwake()
         {
-            DeserializeJson();
-            CreateController();
-            LoadIntoController();
-        }
-
-        private void CreateController()
-        {
-            Controller = new TController();
+            // DeserializeJson();
+            // LoadIntoController();
         }
 
         private void DeserializeJson()
         {
-            configs = JsonConvert.DeserializeObject<List<TConfig>>(libraryJson.text);
+            configs = JsonConvert.DeserializeObject<Dictionary<string, TConfig>>(libraryJson.text);
         }
 
         private void OnDisable()

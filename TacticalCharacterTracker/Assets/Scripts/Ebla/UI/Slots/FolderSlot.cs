@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Ebla.UI.Slots
 {
-    public class FolderSlot : ConfigSlot<FolderSlot, FolderConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+    public class FolderSlot : ConfigSlot<FolderSlot, FolderConfig>, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerDownHandler
     {
         public override event Action<FolderSlot> OnReleaseObject;
 

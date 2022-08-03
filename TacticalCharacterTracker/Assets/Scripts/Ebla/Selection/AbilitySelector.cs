@@ -12,19 +12,19 @@ namespace Ebla.Selection
         
         protected override void CreateOptions()
         {
-            List<AbilityConfig> abilities = AbilityLibrarian.Instance.GetAbilities();
+            // List<AbilityConfig> abilities = AbilityLibrarian.Instance.GetAbilities();
 
-            Debug.Log("CreateOptions: " + abilities.Count);
-            foreach (var abilityConfig in abilities)
-            {
-                if (!abilityFilterControl.IsValid(abilityConfig))
-                    continue;
-                    
-                AbilityOption option = PrefabLibrary.Instance.AbilityOption();
-                option.Transform.SetParent(optionParent);
-                option.Initialize(abilityConfig, onFiltersUpdated);
-                //options.Add(option);
-            }
+            // Debug.Log("CreateOptions: " + abilities.Count);
+            // foreach (var abilityConfig in abilities)
+            // {
+            //     if (!abilityFilterControl.IsValid(abilityConfig))
+            //         continue;
+            //         
+            //     AbilityOption option = PrefabLibrary.Instance.AbilityOption();
+            //     option.Transform.SetParent(optionParent);
+            //     option.Initialize(abilityConfig, onFiltersUpdated);
+            //     //options.Add(option);
+            // }
         }
 
         private void HandleFiltersModified()

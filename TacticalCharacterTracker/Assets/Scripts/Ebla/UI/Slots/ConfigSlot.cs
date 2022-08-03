@@ -11,7 +11,7 @@ namespace Ebla.UI.Slots
 {
     public abstract class ConfigSlot<TSlot, TConfig> : BaseBehaviour<TSlot>
     where TConfig : BaseConfig
-    where TSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+    where TSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
         public static event Action<TConfig> OnEditConfigSlot;
 
@@ -20,7 +20,8 @@ namespace Ebla.UI.Slots
         [SerializeField] private Image borderImage;
         [SerializeField] private ConfigParams configParams;
         [SerializeField] private Image icon;
-        
+
+        [SerializeField] private SlotSettings settings;
         private ConfigDragIcon dragInstance;
         private Vector2 dragOrigin;
         
@@ -46,7 +47,6 @@ namespace Ebla.UI.Slots
 
         public void DeleteConfig()
         {
-            Debug.Log($"Delete Config {Config.Name}");
             if (Input.GetKey(HotKeys.ForceExecute))
             {
                 Config.DeleteConfig();
@@ -62,9 +62,13 @@ namespace Ebla.UI.Slots
             OnEditConfigSlot?.Invoke(Config);
         }
 
-        public void OnBeginDrag(PointerEventData eventData)
+        public void OnPointerDown(PointerEventData eventData)
         {
             dragOrigin = Input.mousePosition;
+        }
+        
+        public void OnBeginDrag(PointerEventData eventData)
+        {
             dragInstance = Instantiate(PrefabLibrary.Instance.ConfigDragIcon, Transform.parent);
             dragInstance.OnDroppedOnFolder += HandleDroppedOnFolder;
             dragInstance.Configure(Config, configParams);
@@ -87,7 +91,7 @@ namespace Ebla.UI.Slots
                 return;
             }
 
-            dragInstance.Transform.DOMove(dragOrigin, 0.5f).OnComplete(() =>
+            dragInstance.Transform.DOMove(dragOrigin, settings.DragIconReturnDuration).OnComplete(() =>
             {
                 dragInstance.OnDroppedOnFolder -= HandleDroppedOnFolder;
                 Destroy(dragInstance.gameObject);

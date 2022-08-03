@@ -52,7 +52,7 @@ namespace Ebla.Models
         
         public void Initialize()
         {
-            ScopeController.Instance.CurrentFolder.AddConfigToFolder(this);
+            ScopeController.Instance.CurrentFolder.AddConfig(this);
             AssignDates();
             Path = PathUtils.GetPathToFolder(Parent);
             this.AssignUniqueName();
@@ -64,18 +64,12 @@ namespace Ebla.Models
             if (ScopeController.Instance.TryGetFolderForPath(Path, out FolderConfig folderConfig))
             {
                 Debug.Log($"{Name} Parent Found: {folderConfig.Name}");
-                folderConfig.AddConfigToFolder(this);
+                folderConfig.AddConfig(this);
             }
             else
             {
                 Debug.Log($"{Name} Parent NOT FOUND FOR PATH : {Path}");
             }
-        }
-        
-        public void UpdatePath(string path)
-        {
-            Path = path;
-            InvokeConfigModified();
         }
         
         public void UpdateName(string newName)

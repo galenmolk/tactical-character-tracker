@@ -1,3 +1,4 @@
+using Ebla.Utils;
 using UnityEngine;
 
 namespace Ebla.UI
@@ -6,7 +7,7 @@ namespace Ebla.UI
     public class ConfigParams : ScriptableObject
     {
         private const string NAME = "Config Params";
-        private const string MENU = "Ebla/" + NAME;
+        private const string MENU = EblaConsts.MENU_PATH + NAME;
 
         public string ConfigName => configName;
         public Color Color => color;

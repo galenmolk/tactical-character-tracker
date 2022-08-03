@@ -12,9 +12,22 @@ namespace Ebla.Models
     public class FolderConfig : BaseConfig
     {
         public static event Action<FolderConfig> OnLoadIntoFolder;
+
+        public FolderConfig()
+        {
+            
+        }
+        
+        // For Root Folder.
+        public FolderConfig(string name)
+        {
+            Name = name;
+        }
         
         public override string BaseName => "untitled folder";
 
+        
+        
         [JsonIgnore]
         public List<BaseConfig> Configs
         {
@@ -37,7 +50,7 @@ namespace Ebla.Models
             OnLoadIntoFolder?.Invoke(this);
         }
         
-        public void AddConfigToFolder(BaseConfig config)
+        public void AddConfig(BaseConfig config)
         {
             Configs.Add(config);
             config.OnConfigRemoved += HandleConfigRemoved;

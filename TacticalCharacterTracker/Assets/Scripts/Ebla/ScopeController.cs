@@ -32,20 +32,24 @@ namespace Ebla
         {
             base.OnAwake();
             CreateRootFolder();
-            this.ExecuteAfterDelay(1f, () =>
-            {
-                LoadScope(RootFolder);
-            });
+            // this.ExecuteAfterDelay(1f, () =>
+            // {
+            //     LoadScope(RootFolder);
+            // });
         }
         
         private void CreateRootFolder()
         {
-            RootFolder = new FolderConfig();
-            RootFolder.UpdateName(PathUtils.ROOT_NAME);
+            RootFolder = new FolderConfig(PathUtils.ROOT_NAME);
             RegisterFolder(RootFolder);
             CurrentFolder = RootFolder;
         }
 
+        public void LoadRoot()
+        {
+            LoadScope(RootFolder);
+        }
+        
         public void LoadScope(FolderConfig folderConfig)
         {
             CurrentFolder = folderConfig;
