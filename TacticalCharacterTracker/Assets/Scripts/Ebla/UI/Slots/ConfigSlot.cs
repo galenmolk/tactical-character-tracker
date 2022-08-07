@@ -34,7 +34,7 @@ namespace Ebla.UI.Slots
             ScopeController.OnScopeChanged += ReleaseObject;
             Config.OnConfigModified += ApplyConfigToSlot;
             Config.OnConfigRemoved += HandleConfigRemoved;
-            ApplyConfigToSlot();
+            ApplyConfigToSlot(Config);
         }
 
         public override void ResetObject()
@@ -114,7 +114,7 @@ namespace Ebla.UI.Slots
             Debug.Log($"Config Slot dropped on {folderSlot.Config.Name}");
         }
         
-        private void ApplyConfigToSlot()
+        private void ApplyConfigToSlot(BaseConfig baseConfig)
         {
             nameText.text = Config != null ? Config.Name : string.Empty;
             pathText.text = Config != null ? Config.Path : string.Empty;

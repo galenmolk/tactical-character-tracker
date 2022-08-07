@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Ebla.API;
 using Ebla.Models;
 using MolkExtras;
-using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Ebla.Libraries
@@ -15,27 +15,32 @@ namespace Ebla.Libraries
         public static event Action<TConfig> OnConfigAdded;
         public static event Action<TConfig> OnConfigRemovedFromLibrary;
 
+        protected virtual string ApiRoute => string.Empty;
+
         private readonly TController controller = new();
-
-        [SerializeField] protected TextAsset libraryJson;
-
-        private Dictionary<string, TConfig> configs;
 
         public void Add(TConfig config)
         {
             controller.Add(config);
+            config.OnConfigModified += HandleConfigModified;
             OnConfigAdded?.Invoke(config);
+            StartCoroutine(ApiUtils.PostConfig(ApiRoute, config));
         }
         
         public void Remove(TConfig config)
         {
-            Debug.Log($"Librarian Remove {config.Name}");
             controller.Remove(config);
+            config.OnConfigModified -= HandleConfigModified;
             OnConfigRemovedFromLibrary?.Invoke(config);
         }
 
         public void LoadInConfigs(Dictionary<string, TConfig> configs)
         {
+            foreach (KeyValuePair<string,TConfig> config in configs)
+            {
+                config.Value.OnConfigModified += HandleConfigModified;
+            }
+            
             controller.LoadInConfigs(configs);
         }
         
@@ -47,15 +52,10 @@ namespace Ebla.Libraries
             }
         }
 
-        protected override void OnAwake()
+        private void HandleConfigModified(BaseConfig baseConfig)
         {
-            // DeserializeJson();
-            // LoadIntoController();
-        }
-
-        private void DeserializeJson()
-        {
-            configs = JsonConvert.DeserializeObject<Dictionary<string, TConfig>>(libraryJson.text);
+            Debug.Log($"HandleConfigModified {baseConfig.Name}");
+            StartCoroutine(ApiUtils.UpdateConfig(ApiRoute, baseConfig));
         }
 
         private void OnDisable()

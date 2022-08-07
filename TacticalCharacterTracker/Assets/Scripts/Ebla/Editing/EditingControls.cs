@@ -45,6 +45,8 @@ namespace Ebla.Editing
 
         private void TryUpdateDescription(string newDescription)
         {
+            Debug.Log($"TryUpdateDescription {newDescription}, current desc {ActiveConfig.Description}");
+
             if (string.Equals(newDescription, ActiveConfig.Description))
             {
                 return;
@@ -75,7 +77,7 @@ namespace Ebla.Editing
             SubscribeToSectionModifiedEvents();
         }
 
-        private void Refresh()
+        private void Refresh(BaseConfig baseConfig)
         {
             ApplyConfig(ActiveConfig);
         }

@@ -25,22 +25,13 @@ namespace Ebla.Models
         }
         
         public override string BaseName => "untitled folder";
-
-        
         
         [JsonIgnore]
         public List<BaseConfig> Configs
         {
-            get
-            {
-                Debug.Log($"Configs.Get called for {Name}");
-                return configs;
-            }
+            get => configs;
 
-            set
-            {
-                configs = value;
-            }
+            set => configs = value;
         }
 
         private List<BaseConfig> configs = new();

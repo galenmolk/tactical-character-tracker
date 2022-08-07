@@ -1,11 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Ebla.API;
 using Ebla.Models;
-using Newtonsoft.Json;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace Ebla.Libraries
 {
@@ -19,8 +15,14 @@ namespace Ebla.Libraries
         private IEnumerator LoadSequence()
         {
             yield return StartCoroutine(ApiUtils.DownloadConfigs<AbilityConfig>(ApiUtils.ABILITY_ROUTE, 
-                configs => {
-                AbilityLibrarian.Instance.LoadInConfigs(configs);
+                configs => 
+                {
+                    foreach (var config in configs)
+                    {
+                        Debug.Log($"Config Downloaded {config.Value.Name}");
+                    }
+                    
+                    AbilityLibrarian.Instance.LoadInConfigs(configs);
             }));
             
             AbilityLibrarian.Instance.InitializeFolders();
@@ -36,7 +38,5 @@ namespace Ebla.Libraries
             // HeroLibrarian.Instance.InitializeFolders();
             // AbilityLibrarian.Instance.InitializeFolders();
         }
-
-        
     }
 }

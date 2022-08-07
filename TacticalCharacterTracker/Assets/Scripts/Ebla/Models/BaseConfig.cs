@@ -9,16 +9,17 @@ namespace Ebla.Models
 {
     public abstract class BaseConfig
     {
-        public event Action OnConfigModified;
+        public event Action<BaseConfig> OnConfigModified;
         public event Action<BaseConfig> OnConfigRemoved;
 
+        [JsonIgnore]
         public abstract string BaseName { get; }
 
         [JsonProperty(ConfigKeys.NAME_KEY)]
         public string Name { get; protected set; }
         
         [JsonProperty(ConfigKeys.DESCRIPTION_KEY)]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
         
         [JsonProperty(ConfigKeys.ID_KEY)]
         public string Id { get; private set; }
@@ -52,6 +53,7 @@ namespace Ebla.Models
         
         public void Initialize()
         {
+            Identify();
             ScopeController.Instance.CurrentFolder.AddConfig(this);
             AssignDates();
             Path = PathUtils.GetPathToFolder(Parent);
@@ -60,15 +62,9 @@ namespace Ebla.Models
 
         public void GetParentFromPath()
         {
-            Debug.Log($"{Name} GetParentFromPath {Path}");
             if (ScopeController.Instance.TryGetFolderForPath(Path, out FolderConfig folderConfig))
             {
-                Debug.Log($"{Name} Parent Found: {folderConfig.Name}");
                 folderConfig.AddConfig(this);
-            }
-            else
-            {
-                Debug.Log($"{Name} Parent NOT FOUND FOR PATH : {Path}");
             }
         }
         
@@ -80,6 +76,7 @@ namespace Ebla.Models
 
         public void UpdateDescription(string newDescription)
         {
+            Debug.Log($"UpdateDescription {newDescription}");
             Description = newDescription;
             InvokeConfigModified();
         }
@@ -97,8 +94,6 @@ namespace Ebla.Models
         
         public void DeleteConfig()
         {
-            Debug.Log($"Base Config Delete Config {Name}");
-
             RemoveConfigFromLibrary();
             OnConfigRemoved?.Invoke(this);
         }
@@ -112,7 +107,8 @@ namespace Ebla.Models
 
         protected void InvokeConfigModified()
         {
-            OnConfigModified?.Invoke();
+            MarkAsDirty();
+            OnConfigModified?.Invoke(this);
         }
 
         [OnSerialized]
@@ -145,10 +141,9 @@ namespace Ebla.Models
         {
             DateCreated = DateTime.Now;
             DateModified = DateCreated;
-            OnConfigModified += HandleConfigModified;
         }
 
-        private void HandleConfigModified()
+        private void MarkAsDirty()
         {
             DateModified = DateTime.Now;
         }

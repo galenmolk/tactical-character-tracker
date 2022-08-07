@@ -44,8 +44,6 @@ namespace Ebla.UI
         
         private void HandleScopeChanged()
         {
-            Debug.Log($"HandleScopeChanged : {currentFolder?.Name}");
-            Debug.Log($"HandleScopeChanged scope : {ScopeController.Instance.CurrentFolder?.Name}");
             // Only act on this event if it wasn't triggered by this script.
             if (ScopeController.Instance.CurrentFolder == currentFolder)
             {
