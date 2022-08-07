@@ -16,10 +16,45 @@ namespace Ebla.API
         private const string ACCEPT_HEADER_KEY = "Accept";
         private const string CONTENT_TYPE_HEADER_KEY = "Content-Type";
         private const string JSON_HEADER_VALUE = "application/json";
-
-        public static IEnumerator CreateConfig(string route, BaseConfig baseConfig)
+                
+        public static IEnumerator DownloadConfigs<TConfig>(string route, Action<Dictionary<string, TConfig>> callback)
+            where TConfig : BaseConfig
         {
-            Debug.Log($"Post Config called for route {route}, config {baseConfig.Name}. Is Ability? {baseConfig is AbilityConfig}");
+            using UnityWebRequest request = NewGetRequest(route);
+            SetDefaultHeaders(request);
+
+            yield return request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"DownloadConfigs Error: {request.error}");
+                yield break;
+            }
+
+            var configs = JsonConvert.DeserializeObject<Dictionary<string, TConfig>>(request.downloadHandler.text);
+            if (configs != null)
+            {
+                callback?.Invoke(configs);
+            }
+        }
+        
+        public static void CreateConfig(string route, BaseConfig baseConfig)
+        {
+            RequestManager.Instance.AddToQueue(CreateConfigCoroutine(route, baseConfig));
+        }
+
+        public static void UpdateConfig(string route, BaseConfig baseConfig)
+        {
+            RequestManager.Instance.AddToQueue(UpdateConfigCoroutine(route, baseConfig));
+        }
+
+        public static void DeleteConfig(string route, BaseConfig baseConfig)
+        {
+            RequestManager.Instance.AddToQueue(DeleteConfigCoroutine(route, baseConfig));
+        }
+
+        private static IEnumerator CreateConfigCoroutine(string route, BaseConfig baseConfig)
+        {
             using UnityWebRequest request = NewPostRequest(route, baseConfig);
 
             SetDefaultHeaders(request);
@@ -35,33 +70,10 @@ namespace Ebla.API
 
             Debug.Log($"PostConfig Success: {request.downloadHandler.text} {request.responseCode}");
         }
-        
-        public static IEnumerator DownloadConfigs<TConfig>(string route, Action<Dictionary<string, TConfig>> callback)
-            where TConfig : BaseConfig
-        {
-            using UnityWebRequest request = NewGetRequest(route);
-            SetDefaultHeaders(request);
 
-            yield return request.SendWebRequest();
-
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError($"DownloadConfigs Error: {request.error}");
-                yield break;
-            }
-
-            Dictionary<string, TConfig> configs =
-                JsonConvert.DeserializeObject<Dictionary<string, TConfig>>(request.downloadHandler.text);
-            if (configs != null)
-            {
-                callback?.Invoke(configs);
-            }
-        }
-
-        public static IEnumerator UpdateConfig(string route, BaseConfig baseConfig)
+        private static IEnumerator UpdateConfigCoroutine(string route, BaseConfig baseConfig)
         {
             route = IdentifyRoute(route, baseConfig);
-            Debug.Log($"UpdateConfig called for route {route}, config {baseConfig.Name}. Is Ability? {baseConfig is AbilityConfig}");
 
             using UnityWebRequest request = NewPutRequest(route, baseConfig);
             
@@ -79,10 +91,9 @@ namespace Ebla.API
             Debug.Log($"UpdateConfig Success: {request.downloadHandler.text} {request.responseCode}");
         }
 
-        public static IEnumerator DeleteConfig(string route, BaseConfig baseConfig)
+        private static IEnumerator DeleteConfigCoroutine(string route, BaseConfig baseConfig)
         {
             route = IdentifyRoute(route, baseConfig);
-            Debug.Log($"DeleteConfig called for route {route}, config {baseConfig.Name}. Is Ability? {baseConfig is AbilityConfig}");
 
             using UnityWebRequest request = NewDeleteRequest(route);
             
@@ -151,7 +162,6 @@ namespace Ebla.API
         private static UploadHandlerRaw GetUploadHandlerForConfig(BaseConfig baseConfig)
         {
             string json = JsonConvert.SerializeObject(baseConfig);
-            Debug.Log($"json: {json}");
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(json);
             return new UploadHandlerRaw(bytes);
         }

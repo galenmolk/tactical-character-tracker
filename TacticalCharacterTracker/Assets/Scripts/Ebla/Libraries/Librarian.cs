@@ -24,7 +24,7 @@ namespace Ebla.Libraries
             controller.Add(config);
             config.OnConfigModified += HandleConfigModified;
             OnConfigAdded?.Invoke(config);
-            RequestManager.Instance.CreateConfig(ApiRoute, config);
+            ApiUtils.CreateConfig(ApiRoute, config);
         }
         
         public void Remove(TConfig config)
@@ -32,7 +32,7 @@ namespace Ebla.Libraries
             controller.Remove(config);
             config.OnConfigModified -= HandleConfigModified;
             OnConfigRemovedFromLibrary?.Invoke(config);
-            StartCoroutine(ApiUtils.DeleteConfig(ApiRoute, config));
+            ApiUtils.DeleteConfig(ApiRoute, config);
         }
 
         public void LoadInConfigs(Dictionary<string, TConfig> configs)
@@ -56,7 +56,7 @@ namespace Ebla.Libraries
         private void HandleConfigModified(BaseConfig baseConfig)
         {
             Debug.Log($"HandleConfigModified {baseConfig.Name}");
-            StartCoroutine(ApiUtils.UpdateConfig(ApiRoute, baseConfig));
+            ApiUtils.UpdateConfig(ApiRoute, baseConfig);
         }
 
         private void OnDisable()
