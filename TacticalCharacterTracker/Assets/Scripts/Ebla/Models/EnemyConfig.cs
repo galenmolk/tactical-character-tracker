@@ -8,6 +8,7 @@ namespace Ebla.Models
         public static event Action<EnemyConfig> OnLoadIntoFolder;
 
         public override string BaseName => "Untitled Enemy";
+        
         protected override void RemoveConfigFromLibrary()
         {
             EnemyLibrarian.Instance.Remove(this);

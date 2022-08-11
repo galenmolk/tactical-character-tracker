@@ -1,15 +1,14 @@
-using TMPro;
 using UnityEngine;
 
-namespace HexedHeroes.DungeonRunner
+namespace HexedHeroes.EncounterRunner
 {
     public class NumberCell : Cell
     {
-        protected int startAmount;
+        private int startAmount;
         
-        public void SetInt(int statAmount)
+        public void SetInt(int amount)
         {
-            startAmount = statAmount;
+            startAmount = amount;
             valueText.text = startAmount.ToString();
         }
 
@@ -30,7 +29,9 @@ namespace HexedHeroes.DungeonRunner
         protected int GetNumber()
         {
             if (int.TryParse(valueText.text, out int value))
+            {
                 return value;
+            }
 
             Debug.LogWarning("Integer Parsing Failed.");
             valueText.text = 0.ToString();

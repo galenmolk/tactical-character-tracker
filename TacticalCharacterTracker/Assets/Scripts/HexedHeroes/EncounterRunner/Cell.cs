@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace HexedHeroes.DungeonRunner
+namespace HexedHeroes.EncounterRunner
 {
     public class Cell : MonoBehaviour
     {

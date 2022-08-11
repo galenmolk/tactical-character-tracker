@@ -18,6 +18,17 @@ namespace Ebla.Models
         [JsonProperty(ConfigKeys.ABILITIES_KEY)]
         public List<AbilityConfig> Abilities { get; private set; }
 
+        public CharacterConfig()
+        {
+            Abilities = new List<AbilityConfig>();
+        }
+
+        public void AddAbility(AbilityConfig abilityConfig)
+        {
+            Abilities.Add(abilityConfig);
+            InvokeConfigModified();
+        }
+        
         public void UpdateHealth(int health)
         {
             Health = health;

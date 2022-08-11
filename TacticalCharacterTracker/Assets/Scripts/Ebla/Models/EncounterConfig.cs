@@ -10,21 +10,28 @@ namespace Ebla.Models
     {
         public static event Action<EncounterConfig> OnLoadIntoFolder;
         
-        [Serializable]
-        public class EnemyTypeConfig
-        {
-            [JsonProperty(ConfigKeys.ENEMY_KEY)]
-            public EnemyConfig Enemy { get; private set; }
-            
-            [JsonProperty(ConfigKeys.QUANTITY_KEY)]
-            public int Quantity { get; private set; }
-        }
-
+        
         public override string BaseName => "Untitled Encounter";
 
+        public EncounterConfig()
+        {
+            EnemyTypes = new List<EnemyTypeConfig>();
+        }
+        
         [JsonProperty(ConfigKeys.ENEMY_TYPES_KEY)]
-        public List<EnemyTypeConfig> EnemyTypes { get; private set; }
+        private List<EnemyTypeConfig> EnemyTypes { get; set; }
 
+        public void AddEnemyType(EnemyTypeConfig enemyTypeConfig)
+        {
+            EnemyTypes.Add(enemyTypeConfig);
+            InvokeConfigModified();
+        }
+
+        public IReadOnlyList<EnemyTypeConfig> GetEnemyTypes()
+        {
+            return EnemyTypes;
+        }
+        
         protected override void RemoveConfigFromLibrary()
         {
             EncounterLibrarian.Instance.Remove(this);

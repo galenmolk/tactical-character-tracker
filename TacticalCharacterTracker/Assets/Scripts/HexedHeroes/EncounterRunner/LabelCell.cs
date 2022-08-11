@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HexedHeroes.DungeonRunner
+namespace HexedHeroes.EncounterRunner
 {
     public class LabelCell : Cell
     {
