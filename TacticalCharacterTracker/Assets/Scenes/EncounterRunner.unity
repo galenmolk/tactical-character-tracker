@@ -290,7 +290,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1633375510}
   m_HandleRect: {fileID: 1633375509}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2062,6 +2062,7 @@ GameObject:
   - component: {fileID: 1950153989}
   - component: {fileID: 1950153988}
   - component: {fileID: 1950153992}
+  - component: {fileID: 1950153993}
   m_Layer: 5
   m_Name: EncounterRunner
   m_TagString: Untagged
@@ -2166,10 +2167,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b6479dfeb9444e9bec070663bd14d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  persistent: 1
   encounterJson: {fileID: 4900000, guid: b49a0851095ae4b78966adf4e500591b, type: 3}
   encounterTitleText: {fileID: 1152455767}
   enemyTypeBlockPrefab: {fileID: 3686105406675442196, guid: f8a22b2b6bbb641c2af227c7ef48e3e4, type: 3}
   enemyTypeBlockParent: {fileID: 875671982}
+--- !u!114 &1950153993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950153987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f66818f5ebc4dbbaa03ed80d4f6bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2062185932
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,6 @@ namespace Ebla.Models
     {
         public static event Action<EncounterConfig> OnLoadIntoFolder;
         
-        
         public override string BaseName => "Untitled Encounter";
 
         public EncounterConfig()

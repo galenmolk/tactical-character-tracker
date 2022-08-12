@@ -9,6 +9,8 @@ namespace Ebla.Models
 {
     public abstract class BaseConfig
     {
+        public static event Action OnConfigModifiedStatic;
+        
         public event Action<BaseConfig> OnConfigModified;
         public event Action<BaseConfig> OnConfigRemoved;
 
@@ -108,6 +110,7 @@ namespace Ebla.Models
         protected void InvokeConfigModified()
         {
             MarkAsDirty();
+            OnConfigModifiedStatic?.Invoke();
             OnConfigModified?.Invoke(this);
         }
 

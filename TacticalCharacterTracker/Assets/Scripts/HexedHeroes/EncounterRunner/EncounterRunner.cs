@@ -1,17 +1,20 @@
 using Ebla.Models;
+using MolkExtras;
 using TMPro;
 using UnityEngine;
 
 namespace HexedHeroes.EncounterRunner
 {
-    public class EncounterRunner : MonoBehaviour
+    public class EncounterRunner : Singleton<EncounterRunner>
     {
+        public EncounterConfig ActiveConfig => encounterConfig;
+        
         [SerializeField] private TextAsset encounterJson;
         [SerializeField] private TMP_InputField encounterTitleText;
         [SerializeField] private EnemyTypeBlock enemyTypeBlockPrefab;
         [SerializeField] private Transform enemyTypeBlockParent;
 
-        private EncounterConfig encounterConfig;
+        private EncounterConfig encounterConfig = new();
 
         public void UpdateName(string newName)
         {
@@ -24,14 +27,14 @@ namespace HexedHeroes.EncounterRunner
             encounterConfig.AddEnemyType(enemyType);
             CreateBlockForEnemyType(enemyType);
         }
-        
-        private void Awake()
-        {
-            encounterConfig = new EncounterConfig();
-            // encounterTitleText.text = encounterConfig.Name;
-            // CreateEnemyTypes();
-        }
 
+        public void SpinUpEncounter(EncounterConfig encounter)
+        {
+            encounterConfig = encounter;
+            encounterTitleText.text = encounterConfig.Name;
+            CreateEnemyTypes();
+        }
+        
         private void CreateEnemyTypes()
         {
             foreach (var enemyTypeConfig in encounterConfig.GetEnemyTypes())
