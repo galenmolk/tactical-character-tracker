@@ -47,6 +47,11 @@ namespace Ebla.Models
 
         [JsonIgnore] public FolderConfig Parent { get; private set; }
         
+        public void SetNameSilent(string newName)
+        {
+            Name = newName;
+        }
+        
         public virtual void InvokeLoadIntoFolder()
         {
             Debug.LogWarning("InvokeLoadIntoFolder Not implemented for this config type");

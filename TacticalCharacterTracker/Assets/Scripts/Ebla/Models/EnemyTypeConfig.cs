@@ -24,7 +24,7 @@ namespace Ebla.Models
             InvokeConfigModified();
         }
 
-        public override string BaseName { get; }
+        public override string BaseName => "Untitled Enemy Type";
         
         protected override void RemoveConfigFromLibrary()
         {

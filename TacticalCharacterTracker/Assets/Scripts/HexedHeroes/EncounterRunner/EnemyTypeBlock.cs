@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Ebla.Models;
 using TMPro;
@@ -7,6 +8,10 @@ namespace HexedHeroes.EncounterRunner
 {
     public class EnemyTypeBlock : MonoBehaviour
     {
+        public event Action<EnemyTypeBlock> OnDelete;
+
+        public EnemyTypeConfig Config { get; private set; }
+
         [Header("Prefabs")]
         [SerializeField] private AbilityRow abilityRowPrefab;
         [SerializeField] private NumberCell statCellPrefab;
@@ -23,52 +28,56 @@ namespace HexedHeroes.EncounterRunner
         [SerializeField] private Transform abilityRowParent;
         [SerializeField] private Transform healthRow;
         [SerializeField] private Transform defenseRow;
-        
-        private EnemyTypeConfig config;
+
         private readonly List<AbilityRow> abilityRows = new();
 
-        public void UpdateName(string newName)
+        public void DeleteButtonClicked()
         {
-            Debug.Log($"New Name {newName}");
-            config.Enemy.UpdateName(newName);
+            Config.TryDeleteConfig();
         }
         
-        public void UpdateHealth(string health)
+        public void UpdateName(string newName)
         {
-            if (!int.TryParse(health, out int value))
+            Config.UpdateName(newName);
+            Config.Enemy.UpdateName(newName);
+        }
+        
+        public void UpdateHealth(string newHealth)
+        {
+            if (!int.TryParse(newHealth, out int value))
             {
                 return;
             }
             
-            config.Enemy.UpdateHealth(value);
+            Config.Enemy.UpdateHealth(value);
         }
 
-        public void UpdateDefense(string defense)
+        public void UpdateDefense(string newDefense)
         {
-            if (!int.TryParse(defense, out int value))
+            if (!int.TryParse(newDefense, out int value))
             {
                 return;
             }
             
-            config.Enemy.UpdateDefense(value);
+            Config.Enemy.UpdateDefense(value);
         }
         
         public void IncreaseEnemyQuantity()
         {
-            int newQuantity = config.Quantity + 1;
-            config.UpdateQuantity(newQuantity);
+            int newQuantity = Config.Quantity + 1;
+            Config.UpdateQuantity(newQuantity);
             CreateEnemy(newQuantity - 1);
         }
 
         public void AddAbility()
         {
             AbilityConfig abilityConfig = new();
-            config.Enemy.AddAbility(abilityConfig);
+            Config.Enemy.AddAbility(abilityConfig);
             CreateAbility(abilityConfig);
             
-            int abilityIndex = config.Enemy.Abilities.Count - 1;
+            int abilityIndex = Config.Enemy.Abilities.Count - 1;
             
-            for (int i = 0; i < config.Quantity; i++)
+            for (int i = 0; i < Config.Quantity; i++)
             {
                 CreateAbilityCell(abilityIndex);
             }
@@ -76,17 +85,23 @@ namespace HexedHeroes.EncounterRunner
         
         public void Initialize(EnemyTypeConfig enemyTypeConfig)
         {
-            config = enemyTypeConfig;
-            enemyTypeTitleText.text = $"{config.Enemy.Name}";
+            enemyTypeConfig.OnConfigRemoved += HandleConfigDeleted;
+            Config = enemyTypeConfig;
+            enemyTypeTitleText.text = $"{Config.Enemy.Name}";
             health.text = enemyTypeConfig.Enemy.Health.ToString();
             defense.text = enemyTypeConfig.Enemy.Defense.ToString();
             CreateAbilityRows();
             CreateEnemyInstances();
         }
 
+        private void HandleConfigDeleted(BaseConfig baseConfig)
+        {
+            OnDelete?.Invoke(this);
+        }
+
         private void CreateAbilityRows()
         {
-            foreach (var abilityConfig in config.Enemy.Abilities)
+            foreach (var abilityConfig in Config.Enemy.Abilities)
             {
                 CreateAbility(abilityConfig);
             }   
@@ -101,7 +116,7 @@ namespace HexedHeroes.EncounterRunner
         
         private void CreateEnemyInstances()
         {
-            for (int i = 0; i < config.Quantity; i++)
+            for (int i = 0; i < Config.Quantity; i++)
             {
                 CreateEnemy(i);
             }
@@ -116,24 +131,23 @@ namespace HexedHeroes.EncounterRunner
 
         private void CreateHeaderCell(int index)
         {
-            Debug.Log($"Create Header Cell {config.Enemy.Name}");
             LabelCell titleCell = Instantiate(labelCellPrefab, headerRow);
-            string title = $"{config.Enemy.Name} {++index}";
+            string title = $"{Config.Enemy.Name} {++index}";
             titleCell.SetString(title);
         }
         
         private void CreateStatCells()
         {
             NumberCell healthCell = Instantiate(statCellPrefab, healthRow);
-            healthCell.SetInt(config.Enemy.Health);
+            healthCell.SetInt(Config.Enemy.Health);
             
             NumberCell defenseCell = Instantiate(statCellPrefab, defenseRow);
-            defenseCell.SetInt(config.Enemy.Defense);
+            defenseCell.SetInt(Config.Enemy.Defense);
         }
 
         private void CreateAbilityCells()
         {
-            for (int i = 0; i < config.Enemy.Abilities.Count; i++)
+            for (int i = 0; i < Config.Enemy.Abilities.Count; i++)
             {
                 CreateAbilityCell(i);
             }
@@ -142,7 +156,16 @@ namespace HexedHeroes.EncounterRunner
         private void CreateAbilityCell(int index)
         {
             AbilityCell abilityCell = Instantiate(abilityCellPrefab, abilityRows[index].Content);
-            abilityCell.SetAbility(config.Enemy.Abilities[index]);
+            abilityCell.SetAbility(Config.Enemy.Abilities[index]);
+        }
+
+        private void OnDisable()
+        {
+            OnDelete = null;
+            if (Config != null)
+            {
+                Config.OnConfigRemoved -= HandleConfigDeleted;
+            }
         }
     }
 }

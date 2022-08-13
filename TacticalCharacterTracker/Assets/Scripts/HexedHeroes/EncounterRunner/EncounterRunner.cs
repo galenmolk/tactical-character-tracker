@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Ebla.Models;
+using Ebla.Utils;
 using MolkExtras;
 using TMPro;
 using UnityEngine;
@@ -24,6 +25,7 @@ namespace HexedHeroes.EncounterRunner
         public void AddEnemyType()
         {
             EnemyTypeConfig enemyType = new EnemyTypeConfig();
+            enemyType.SetNameSilent(PathUtils.GetUniqueName(enemyType.BaseName, blocks, block => block.Config.Name));
             ActiveConfig.AddEnemyType(enemyType);
             CreateBlockForEnemyType(enemyType);
         }
@@ -60,7 +62,15 @@ namespace HexedHeroes.EncounterRunner
         {
             EnemyTypeBlock block = Instantiate(enemyTypeBlockPrefab, enemyTypeBlockParent);
             block.Initialize(enemyTypeConfig);
+            block.OnDelete += HandleBlockDelete;
             blocks.Add(block);
+        }
+
+        private void HandleBlockDelete(EnemyTypeBlock block)
+        {
+            ActiveConfig.RemoveEnemyType(block.Config);
+            blocks.Remove(block);
+            Destroy(block.gameObject);
         }
     }
 }

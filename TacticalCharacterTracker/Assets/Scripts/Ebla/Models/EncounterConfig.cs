@@ -28,16 +28,23 @@ namespace Ebla.Models
             InvokeConfigModified();
         }
 
+        public bool RemoveEnemyType(EnemyTypeConfig enemyTypeConfig)
+        {
+            bool wasRemoved = EnemyTypes.Remove(enemyTypeConfig);
+
+            if (wasRemoved)
+            {
+                InvokeConfigModified();
+            }
+
+            return wasRemoved;
+        }
+
         public IEnumerable<EnemyTypeConfig> GetEnemyTypes()
         {
             return EnemyTypes;
         }
 
-        public void SetNameSilent(string newName)
-        {
-            Name = newName;
-        }
-        
         protected override void RemoveConfigFromLibrary()
         {
             EncounterLibrarian.Instance.Remove(this);
