@@ -16,6 +16,9 @@ namespace HexedHeroes.EncounterRunner
         [Header("Other")]
         [SerializeField] private TMP_InputField enemyTypeTitleText;
 
+        [SerializeField] private TMP_InputField defense;
+        [SerializeField] private TMP_InputField health;
+        
         [SerializeField] private Transform headerRow;
         [SerializeField] private Transform abilityRowParent;
         [SerializeField] private Transform healthRow;
@@ -75,6 +78,8 @@ namespace HexedHeroes.EncounterRunner
         {
             config = enemyTypeConfig;
             enemyTypeTitleText.text = $"{config.Enemy.Name}";
+            health.text = enemyTypeConfig.Enemy.Health.ToString();
+            defense.text = enemyTypeConfig.Enemy.Defense.ToString();
             CreateAbilityRows();
             CreateEnemyInstances();
         }

@@ -28,13 +28,20 @@ namespace HexedHeroes.EncounterRunner
 
         protected int GetNumber()
         {
-            if (int.TryParse(valueText.text, out int value))
+            string text = valueText.text;
+            
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return 0;
+            }
+            
+            if (int.TryParse(text, out int value))
             {
                 return value;
             }
 
             Debug.LogWarning("Integer Parsing Failed.");
-            valueText.text = 0.ToString();
+            valueText.text = string.Empty;
             return 0;
         }
     }

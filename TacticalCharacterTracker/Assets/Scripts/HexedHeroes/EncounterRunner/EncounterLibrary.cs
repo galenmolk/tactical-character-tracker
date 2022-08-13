@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using DG.Tweening;
 using Ebla.Models;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -12,39 +13,79 @@ namespace HexedHeroes.EncounterRunner
         public static event Action OnEncountersDeserialized;
         
         private const string CUSTOM_DATA_PATH = "/Configs/Encounters/";
-        private const string JSON_SUFFIX = ".json";
-
+        private const string JSON_EXTENSION = ".json";
+        private const string JSON_SEARCH_PATTERN = "*.json";
+        
         public IReadOnlyList<EncounterConfig> Encounters => encounters;
 
         private static string SavePath => Application.persistentDataPath + CUSTOM_DATA_PATH;
 
+        [SerializeField] private float onPositionY;
+        [SerializeField] private float offPositionY;
+        [SerializeField] private float tweenDuration;
+        
+        private RectTransform RectTransform
+        {
+            get
+            {
+                if (rectTransform == null)
+                {
+                    rectTransform = transform as RectTransform;
+                }
+
+                return rectTransform;
+            }
+        }
+
+        private RectTransform rectTransform;
+        
         private readonly List<EncounterConfig> encounters = new();
+        private List<EncounterListItem> items = new();
+
+        [SerializeField] private Transform itemParent;
+        [SerializeField] private EncounterListItem itemPrefab;
         
         private void Start()
         {
+            RectTransform.anchoredPosition = new Vector2(RectTransform.anchoredPosition.x, onPositionY);
             TryCreateFolder();
             
-            LoadEncounters();
-            
-            OnEncountersDeserialized?.Invoke();
-            
-            if (encounters.Count > 0)
-            {
-                EncounterRunner.Instance.SpinUpEncounter(encounters[0]);
-            }
+            LoadEncounterItemsIntoList();
         }
 
-        private void LoadEncounters()
+        private void LoadEncounterItemsIntoList()
         {
             DirectoryInfo saveFolder = new(SavePath);
-            FileInfo[] files = saveFolder.GetFiles();
+            FileSystemInfo[] files = saveFolder.GetFileSystemInfos(JSON_SEARCH_PATTERN);
             
-            foreach (FileInfo file in files)
+            foreach (FileSystemInfo file in files)
             {
-                GetEncounterFromFile(file);
+                if (!TryGetEncounterFromFile(file, out EncounterConfig encounterConfig))
+                {
+                    continue;
+                }
+                    
+                EncounterListItem item = Instantiate(itemPrefab, itemParent);
+                item.Configure(encounterConfig);
+                
+                item.OnRun += HandleEncounterRun;
+                item.OnDelete += HandleEncounterDelete;
+                
+                items.Add(item);
             }
         }
 
+        private void HandleEncounterRun(EncounterConfig encounterConfig)
+        {
+            EncounterRunner.Instance.SpinUpEncounter(encounterConfig);
+            RectTransform.DOAnchorPosY(offPositionY, tweenDuration);
+        }
+
+        private void HandleEncounterDelete(EncounterConfig encounterConfig)
+        {
+            
+        }
+        
         private static void TryCreateFolder()
         {
             if (!Directory.Exists(SavePath))
@@ -53,11 +94,20 @@ namespace HexedHeroes.EncounterRunner
             }
         }
 
-        private void GetEncounterFromFile(FileInfo fileInfo)
+        private bool TryGetEncounterFromFile(FileSystemInfo fileInfo, out EncounterConfig encounterConfig)
         {
-            string json = File.ReadAllText(fileInfo.FullName);
-            EncounterConfig config = JsonConvert.DeserializeObject<EncounterConfig>(json);
-            encounters.Add(config);
+            using StreamReader sr = new StreamReader(fileInfo.FullName);
+            string json = sr.ReadToEnd();
+            encounterConfig = JsonConvert.DeserializeObject<EncounterConfig>(json);
+
+            bool isValid = encounterConfig != null;
+            
+            if (isValid)
+            {
+                encounters.Add(encounterConfig);
+            }
+
+            return isValid;
         }
         
         private void OnEnable()
@@ -70,16 +120,16 @@ namespace HexedHeroes.EncounterRunner
             BaseConfig.OnConfigModifiedStatic -= HandleConfigModified;
         }
 
-        private void HandleConfigModified()
+        private static void HandleConfigModified()
         {
             EncounterConfig config = EncounterRunner.Instance.ActiveConfig;
             string encounterJson = JsonConvert.SerializeObject(config);
             File.WriteAllText(GetFullSavePath(config), encounterJson);
         }
 
-        private string GetFullSavePath(BaseConfig encounterConfig)
+        private static string GetFullSavePath(BaseConfig encounterConfig)
         {
-            return SavePath + encounterConfig.Id + JSON_SUFFIX;
+            return SavePath + encounterConfig.Id + JSON_EXTENSION;
         }
     }
 }

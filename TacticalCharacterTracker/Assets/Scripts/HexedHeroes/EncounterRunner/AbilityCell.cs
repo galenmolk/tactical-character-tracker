@@ -35,27 +35,15 @@ namespace HexedHeroes.EncounterRunner
 
         private void ResetValue()
         {
-            if (config.CooldownTurns > 0)
-            {
-                SetInt(0);
-            }
-            else
-            {
-                SetString(string.Empty);
-            }
+            image.color = Color.white;
+            SetString(string.Empty);
         }
         
         private void ReduceCooldown()
         {
-            if (config.CooldownTurns <= 0)
-            {
-                image.color = Color.white;
-                ResetValue();
-                return;
-            }
-            
             if (GetNumber() <= 0)
             {
+                ResetValue();
                 return;
             }
 
@@ -63,7 +51,7 @@ namespace HexedHeroes.EncounterRunner
             
             if (GetNumber() <= 0)
             {
-                image.color = Color.white;
+                ResetValue();
             }
         }
 
