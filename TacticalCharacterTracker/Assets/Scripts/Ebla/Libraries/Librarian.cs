@@ -53,14 +53,23 @@ namespace Ebla.Libraries
             }
         }
 
+        protected abstract void SubscribeToDeleteEvents();
+        protected abstract void UnsubscribeToDeleteEvents();
+        
         private void HandleConfigModified(BaseConfig baseConfig)
         {
             Debug.Log($"HandleConfigModified {baseConfig.Name}");
             ApiUtils.UpdateConfig(ApiRoute, baseConfig);
         }
 
+        private void OnEnable()
+        {
+            SubscribeToDeleteEvents();
+        }
+        
         private void OnDisable()
         {
+            UnsubscribeToDeleteEvents();
             OnConfigAdded = null;
         }
     }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Ebla.Models;
 using MolkExtras;
 using TMPro;
@@ -7,37 +8,49 @@ namespace HexedHeroes.EncounterRunner
 {
     public class EncounterRunner : Singleton<EncounterRunner>
     {
-        public EncounterConfig ActiveConfig => encounterConfig;
-        
-        [SerializeField] private TextAsset encounterJson;
+        public EncounterConfig ActiveConfig { get; private set; }
+
         [SerializeField] private TMP_InputField encounterTitleText;
         [SerializeField] private EnemyTypeBlock enemyTypeBlockPrefab;
         [SerializeField] private Transform enemyTypeBlockParent;
 
-        private EncounterConfig encounterConfig = new();
+        private readonly List<EnemyTypeBlock> blocks = new();
 
         public void UpdateName(string newName)
         {
-            encounterConfig.UpdateName(newName);
+            ActiveConfig.UpdateName(newName);
         }
         
         public void AddEnemyType()
         {
-            var enemyType = new EnemyTypeConfig();
-            encounterConfig.AddEnemyType(enemyType);
+            EnemyTypeConfig enemyType = new EnemyTypeConfig();
+            ActiveConfig.AddEnemyType(enemyType);
             CreateBlockForEnemyType(enemyType);
         }
 
         public void SpinUpEncounter(EncounterConfig encounter)
         {
-            encounterConfig = encounter;
-            encounterTitleText.text = encounterConfig.Name;
+            Clear();
+            ActiveConfig = encounter;
+            encounterTitleText.text = ActiveConfig.Name;
             CreateEnemyTypes();
+        }
+
+        public void ClearEncounter()
+        {
+            Clear();
+            ActiveConfig = null;
+            encounterTitleText.text = string.Empty;
+        }
+
+        private void Clear()
+        {
+            blocks.DestroyAndClear(block => block.gameObject);
         }
         
         private void CreateEnemyTypes()
         {
-            foreach (var enemyTypeConfig in encounterConfig.GetEnemyTypes())
+            foreach (var enemyTypeConfig in ActiveConfig.GetEnemyTypes())
             {
                 CreateBlockForEnemyType(enemyTypeConfig);
             }
@@ -47,6 +60,7 @@ namespace HexedHeroes.EncounterRunner
         {
             EnemyTypeBlock block = Instantiate(enemyTypeBlockPrefab, enemyTypeBlockParent);
             block.Initialize(enemyTypeConfig);
+            blocks.Add(block);
         }
     }
 }

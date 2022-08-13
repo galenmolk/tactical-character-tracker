@@ -8,12 +8,14 @@ namespace Ebla.Models
 {
     public class EncounterConfig : BaseConfig
     {
+        public static event Action<EncounterConfig> OnEncounterDeleted; 
         public static event Action<EncounterConfig> OnLoadIntoFolder;
         
         public override string BaseName => "Untitled Encounter";
 
         public EncounterConfig()
         {
+            Identify();
             EnemyTypes = new List<EnemyTypeConfig>();
         }
         
@@ -26,14 +28,24 @@ namespace Ebla.Models
             InvokeConfigModified();
         }
 
-        public IReadOnlyList<EnemyTypeConfig> GetEnemyTypes()
+        public IEnumerable<EnemyTypeConfig> GetEnemyTypes()
         {
             return EnemyTypes;
+        }
+
+        public void SetNameSilent(string newName)
+        {
+            Name = newName;
         }
         
         protected override void RemoveConfigFromLibrary()
         {
             EncounterLibrarian.Instance.Remove(this);
+        }
+
+        protected override void InvokeTypedOnConfigRemoved()
+        {
+            OnEncounterDeleted?.Invoke(this);
         }
     }
 }

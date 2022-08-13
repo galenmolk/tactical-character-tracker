@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Ebla.Models;
 using MolkExtras;
@@ -28,10 +29,21 @@ namespace Ebla.Utils
         public static string GetUniqueNameForScope(string baseName)
         {
             FolderConfig currentScope = ScopeController.Instance.CurrentFolder;
+            return GetUniqueName(baseName, currentScope.Configs, config => config.Name);
+        }
 
-            List<string> configNames = GetAllConfigNamesInFolder(currentScope);
+        public static string GetUniqueName<T>(string baseName, IEnumerable<T> collection, Func<T, string> getName)
+        {
+            List<string> names = new();
+            
+            foreach (T t in collection)
+            {
+                names.Add(getName(t));
+            }
+                
             string name = baseName;
-            for (int i = 0; configNames.Contains(name); i++)
+            
+            for (int i = 0; names.Contains(name); i++)
             {
                 name = $"{baseName} {i}";
             }

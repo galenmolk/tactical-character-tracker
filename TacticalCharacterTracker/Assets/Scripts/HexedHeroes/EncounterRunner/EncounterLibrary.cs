@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using DG.Tweening;
 using Ebla.Models;
+using Ebla.Utils;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -10,14 +10,10 @@ namespace HexedHeroes.EncounterRunner
 {
     public class EncounterLibrary : MonoBehaviour
     {
-        public static event Action OnEncountersDeserialized;
-        
         private const string CUSTOM_DATA_PATH = "/Configs/Encounters/";
         private const string JSON_EXTENSION = ".json";
         private const string JSON_SEARCH_PATTERN = "*.json";
         
-        public IReadOnlyList<EncounterConfig> Encounters => encounters;
-
         private static string SavePath => Application.persistentDataPath + CUSTOM_DATA_PATH;
 
         [SerializeField] private float onPositionY;
@@ -39,17 +35,36 @@ namespace HexedHeroes.EncounterRunner
 
         private RectTransform rectTransform;
         
-        private readonly List<EncounterConfig> encounters = new();
-        private List<EncounterListItem> items = new();
+        private readonly Dictionary<EncounterConfig, EncounterListItem> items = new();
 
         [SerializeField] private Transform itemParent;
         [SerializeField] private EncounterListItem itemPrefab;
+
+        public void Open()
+        {
+            RectTransform.DOAnchorPosY(onPositionY, tweenDuration);
+        }
+
+        public void Close()
+        {
+            RectTransform.DOAnchorPosY(offPositionY, tweenDuration);
+        }
+
+        public void NewEncounter()
+        {
+            EncounterConfig encounterConfig = new();
+            encounterConfig.SetNameSilent(PathUtils.GetUniqueName(encounterConfig.BaseName, items, pair => pair.Key.Name));
+            EncounterRunner.Instance.SpinUpEncounter(encounterConfig);
+            Close();
+            CreateEncounterListItem(encounterConfig);
+            SaveConfigToDisk(encounterConfig);
+        }
         
         private void Start()
         {
             RectTransform.anchoredPosition = new Vector2(RectTransform.anchoredPosition.x, onPositionY);
-            TryCreateFolder();
             
+            TryCreateSaveFolder();
             LoadEncounterItemsIntoList();
         }
 
@@ -57,36 +72,58 @@ namespace HexedHeroes.EncounterRunner
         {
             DirectoryInfo saveFolder = new(SavePath);
             FileSystemInfo[] files = saveFolder.GetFileSystemInfos(JSON_SEARCH_PATTERN);
-            
+
             foreach (FileSystemInfo file in files)
             {
                 if (!TryGetEncounterFromFile(file, out EncounterConfig encounterConfig))
                 {
                     continue;
                 }
-                    
-                EncounterListItem item = Instantiate(itemPrefab, itemParent);
-                item.Configure(encounterConfig);
                 
-                item.OnRun += HandleEncounterRun;
-                item.OnDelete += HandleEncounterDelete;
-                
-                items.Add(item);
+                CreateEncounterListItem(encounterConfig);
             }
         }
 
+        private void CreateEncounterListItem(EncounterConfig encounterConfig)
+        {
+            EncounterListItem item = Instantiate(itemPrefab, itemParent);
+            item.Configure(encounterConfig);
+                
+            item.OnRun += HandleEncounterRun;
+            item.OnDelete += HandleEncounterDeleteButtonClicked;
+                
+            items.Add(encounterConfig, item);
+        }
+        
+        private void HandleDeleteEncounter(EncounterConfig encounter)
+        {
+            if (!items.TryGetValue(encounter, out EncounterListItem item))
+            {
+                return;
+            }
+
+            if (EncounterRunner.Instance.ActiveConfig == encounter)
+            {
+                EncounterRunner.Instance.ClearEncounter();
+            }
+            
+            items.Remove(encounter);
+            Destroy(item.gameObject);
+            File.Delete(GetFullSavePath(encounter));
+        }
+        
         private void HandleEncounterRun(EncounterConfig encounterConfig)
         {
             EncounterRunner.Instance.SpinUpEncounter(encounterConfig);
-            RectTransform.DOAnchorPosY(offPositionY, tweenDuration);
+            Close();
         }
 
-        private void HandleEncounterDelete(EncounterConfig encounterConfig)
+        private static void HandleEncounterDeleteButtonClicked(EncounterConfig encounterConfig)
         {
-            
+            encounterConfig.TryDeleteConfig();
         }
         
-        private static void TryCreateFolder()
+        private static void TryCreateSaveFolder()
         {
             if (!Directory.Exists(SavePath))
             {
@@ -94,42 +131,45 @@ namespace HexedHeroes.EncounterRunner
             }
         }
 
-        private bool TryGetEncounterFromFile(FileSystemInfo fileInfo, out EncounterConfig encounterConfig)
+        private static bool TryGetEncounterFromFile(FileSystemInfo fileInfo, out EncounterConfig encounterConfig)
         {
             using StreamReader sr = new StreamReader(fileInfo.FullName);
             string json = sr.ReadToEnd();
             encounterConfig = JsonConvert.DeserializeObject<EncounterConfig>(json);
-
-            bool isValid = encounterConfig != null;
-            
-            if (isValid)
-            {
-                encounters.Add(encounterConfig);
-            }
-
-            return isValid;
+            return encounterConfig != null;
         }
         
         private void OnEnable()
         {
-            BaseConfig.OnConfigModifiedStatic += HandleConfigModified;
+            BaseConfig.OnAnyConfigModified += HandleAnyConfigModified;
+            EncounterConfig.OnEncounterDeleted += HandleDeleteEncounter;
         }
 
         private void OnDisable()
         {
-            BaseConfig.OnConfigModifiedStatic -= HandleConfigModified;
+            BaseConfig.OnAnyConfigModified -= HandleAnyConfigModified;
+            EncounterConfig.OnEncounterDeleted -= HandleDeleteEncounter;
         }
 
-        private static void HandleConfigModified()
+        private static void HandleAnyConfigModified()
         {
             EncounterConfig config = EncounterRunner.Instance.ActiveConfig;
+            SaveConfigToDisk(config);
+        }
+
+        private static void SaveConfigToDisk(BaseConfig config)
+        {
             string encounterJson = JsonConvert.SerializeObject(config);
             File.WriteAllText(GetFullSavePath(config), encounterJson);
         }
 
-        private static string GetFullSavePath(BaseConfig encounterConfig)
+        private static string GetFullSavePath(BaseConfig config)
         {
-            return SavePath + encounterConfig.Id + JSON_EXTENSION;
+            Debug.Log($"config: {config}");
+            Debug.Log($"SavePath: {SavePath}");
+            Debug.Log($"config.Id: {config.Id}");
+            Debug.Log($"JSON_EXTENSION: {JSON_EXTENSION}");
+            return SavePath + config.Id + JSON_EXTENSION;
         }
     }
 }

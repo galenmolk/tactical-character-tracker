@@ -9,7 +9,7 @@ namespace Ebla.Models
 {
     public abstract class BaseConfig
     {
-        public static event Action OnConfigModifiedStatic;
+        public static event Action OnAnyConfigModified;
         
         public event Action<BaseConfig> OnConfigModified;
         public event Action<BaseConfig> OnConfigRemoved;
@@ -45,12 +45,16 @@ namespace Ebla.Models
         public DateTime DateCreated { get; private set; }
         public DateTime DateModified { get; private set; }
 
-        [JsonIgnore]
-        public FolderConfig Parent { get; private set; }
-
+        [JsonIgnore] public FolderConfig Parent { get; private set; }
+        
         public virtual void InvokeLoadIntoFolder()
         {
             Debug.LogWarning("InvokeLoadIntoFolder Not implemented for this config type");
+        }
+
+        public string GetBaseName(int index)
+        {
+            return $"{BaseName} {index}";
         }
         
         public void Initialize()
@@ -96,8 +100,8 @@ namespace Ebla.Models
         
         public void DeleteConfig()
         {
-            RemoveConfigFromLibrary();
             OnConfigRemoved?.Invoke(this);
+            InvokeTypedOnConfigRemoved();
         }
 
         public virtual string GetDeletionText()
@@ -105,12 +109,17 @@ namespace Ebla.Models
             return $"Delete {Name}?";
         }
 
+        protected virtual void InvokeTypedOnConfigRemoved()
+        {
+            
+        }
+        
         protected abstract void RemoveConfigFromLibrary();
 
         protected void InvokeConfigModified()
         {
             MarkAsDirty();
-            OnConfigModifiedStatic?.Invoke();
+            OnAnyConfigModified?.Invoke();
             OnConfigModified?.Invoke(this);
         }
 
@@ -132,7 +141,7 @@ namespace Ebla.Models
             
         }
 
-        private void Identify()
+        protected void Identify()
         {
             if (string.IsNullOrWhiteSpace(Id))
             {

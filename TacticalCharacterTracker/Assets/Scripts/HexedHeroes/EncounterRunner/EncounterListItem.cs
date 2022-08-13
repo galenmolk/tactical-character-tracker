@@ -17,9 +17,15 @@ namespace HexedHeroes.EncounterRunner
         public void Configure(EncounterConfig encounter)
         {
             encounterConfig = encounter;
-            nameText.text = encounterConfig.Name;
+            encounter.OnConfigModified += Display;
+            Display(encounterConfig);
         }
 
+        private void Display(BaseConfig baseConfig)
+        {
+            nameText.text = encounterConfig.Name;
+        }
+        
         public void Delete()
         {
             OnDelete?.Invoke(encounterConfig);
@@ -28,6 +34,17 @@ namespace HexedHeroes.EncounterRunner
         public void Run()
         {
             OnRun?.Invoke(encounterConfig);
+        }
+
+        private void OnDisable()
+        {
+            if (encounterConfig != null)
+            {
+                encounterConfig.OnConfigModified -= Display;
+            }
+            
+            OnDelete = null;
+            OnRun = null;
         }
     }
 }
