@@ -28,6 +28,12 @@ namespace Ebla.Models
             Abilities.Add(abilityConfig);
             InvokeConfigModified();
         }
+
+        public void RemoveAbility(AbilityConfig abilityConfig)
+        {
+            Abilities.Remove(abilityConfig);
+            InvokeConfigModified();
+        }
         
         public void UpdateHealth(int health)
         {

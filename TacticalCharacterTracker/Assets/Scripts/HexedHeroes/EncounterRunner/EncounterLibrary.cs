@@ -3,6 +3,7 @@ using System.IO;
 using DG.Tweening;
 using Ebla.Models;
 using Ebla.Utils;
+using MolkExtras;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -16,8 +17,9 @@ namespace HexedHeroes.EncounterRunner
         
         private static string SavePath => Application.persistentDataPath + CUSTOM_DATA_PATH;
 
-        [SerializeField] private float onPositionY;
-        [SerializeField] private float offPositionY;
+        private const float ON_POSITION_Y = 0f;
+        private float OffPositionY => Screen.height;
+        
         [SerializeField] private float tweenDuration;
         
         private RectTransform RectTransform
@@ -42,12 +44,12 @@ namespace HexedHeroes.EncounterRunner
 
         public void Open()
         {
-            RectTransform.DOAnchorPosY(onPositionY, tweenDuration);
+            RectTransform.DOAnchorPosY(ON_POSITION_Y, tweenDuration);
         }
 
         public void Close()
         {
-            RectTransform.DOAnchorPosY(offPositionY, tweenDuration);
+            RectTransform.DOAnchorPosY(OffPositionY, tweenDuration);
         }
 
         public void NewEncounter()
@@ -56,13 +58,17 @@ namespace HexedHeroes.EncounterRunner
             encounterConfig.SetNameSilent(PathUtils.GetUniqueName(encounterConfig.BaseName, items, pair => pair.Key.Name));
             EncounterRunner.Instance.SpinUpEncounter(encounterConfig);
             Close();
-            CreateEncounterListItem(encounterConfig);
-            SaveConfigToDisk(encounterConfig);
+            
+            this.ExecuteAfterDelay(tweenDuration, () =>
+            {
+                CreateEncounterListItem(encounterConfig);
+                SaveConfigToDisk(encounterConfig);
+            });
         }
         
         private void Start()
         {
-            RectTransform.anchoredPosition = new Vector2(RectTransform.anchoredPosition.x, onPositionY);
+            RectTransform.anchoredPosition = new Vector2(RectTransform.anchoredPosition.x, ON_POSITION_Y);
             
             TryCreateSaveFolder();
             LoadEncounterItemsIntoList();
@@ -153,7 +159,20 @@ namespace HexedHeroes.EncounterRunner
 
         private static void HandleAnyConfigModified()
         {
+            EncounterRunner runner = EncounterRunner.Instance;
+
+            if (runner == null)
+            {
+                return;
+            }
+            
             EncounterConfig config = EncounterRunner.Instance.ActiveConfig;
+
+            if (config == null)
+            {
+                return;
+            }
+            
             SaveConfigToDisk(config);
         }
 
@@ -165,10 +184,6 @@ namespace HexedHeroes.EncounterRunner
 
         private static string GetFullSavePath(BaseConfig config)
         {
-            Debug.Log($"config: {config}");
-            Debug.Log($"SavePath: {SavePath}");
-            Debug.Log($"config.Id: {config.Id}");
-            Debug.Log($"JSON_EXTENSION: {JSON_EXTENSION}");
             return SavePath + config.Id + JSON_EXTENSION;
         }
     }

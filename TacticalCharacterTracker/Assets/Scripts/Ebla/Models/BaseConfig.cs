@@ -111,7 +111,7 @@ namespace Ebla.Models
 
         public virtual string GetDeletionText()
         {
-            return $"Delete {Name}?";
+            return $"Delete {(string.IsNullOrWhiteSpace(Name) ? BaseName : Name)}?";
         }
 
         protected virtual void InvokeTypedOnConfigRemoved()

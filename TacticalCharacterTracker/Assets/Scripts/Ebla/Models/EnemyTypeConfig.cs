@@ -25,7 +25,12 @@ namespace Ebla.Models
         }
 
         public override string BaseName => "Untitled Enemy Type";
-        
+
+        public override string GetDeletionText()
+        {
+            return $"Delete all enemy instances of type \"{Enemy.Name}\"?";
+        }
+
         protected override void RemoveConfigFromLibrary()
         {
             throw new NotImplementedException();

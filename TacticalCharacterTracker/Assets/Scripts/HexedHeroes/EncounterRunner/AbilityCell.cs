@@ -1,3 +1,4 @@
+using System;
 using Ebla.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,8 @@ namespace HexedHeroes.EncounterRunner
 {
     public class AbilityCell : NumberCell
     {
+        public event Action<AbilityCell> OnDelete; 
+
         [SerializeField] private Image image;
 
         private readonly Color activatedColor = new(0.75f, 0.75f, 0.75f, 1f);
@@ -14,6 +17,7 @@ namespace HexedHeroes.EncounterRunner
         public void SetAbility(AbilityConfig abilityConfig)
         {
             config = abilityConfig;
+            config.OnConfigRemoved += HandleDeleteAbility;
             ResetValue();
         }
 
@@ -33,6 +37,11 @@ namespace HexedHeroes.EncounterRunner
             }
         }
 
+        private void HandleDeleteAbility(BaseConfig baseConfig)
+        {
+            OnDelete?.Invoke(this);
+        }
+        
         private void ResetValue()
         {
             image.color = Color.white;

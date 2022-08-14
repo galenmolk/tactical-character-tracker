@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4100221839902248050}
   - component: {fileID: 4100221839902248055}
   - component: {fileID: 4100221839902248044}
+  - component: {fileID: 7174011837510429962}
   m_Layer: 5
   m_Name: AbilityRow
   m_TagString: Untagged
@@ -107,10 +108,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68036d997f643338adc11356457a45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Content: {fileID: 4100221839902248054}
   abilityTitleText: {fileID: 8450665433393071369}
   cooldownText: {fileID: 588976514370163139}
-  content: {fileID: 4100221839902248054}
+--- !u!114 &7174011837510429962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100221839902248053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45e52970ff6406c9df478fbcdc7e86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options:
+  - label: Delete Ability
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4100221839902248044}
+          m_TargetAssemblyTypeName: HexedHeroes.EncounterRunner.AbilityRow, Assembly-CSharp
+          m_MethodName: TryDelete
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    addDividerAbove: 0
+    addDividerBelow: 0
 --- !u!1 &4100221840768275698
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +153,7 @@ GameObject:
   - component: {fileID: 4100221840768275694}
   - component: {fileID: 4100221840768275693}
   - component: {fileID: 4100221840768275692}
+  - component: {fileID: 7940552993605015640}
   m_Layer: 5
   m_Name: FirstCell
   m_TagString: Untagged
@@ -210,6 +241,33 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7940552993605015640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100221840768275698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e468a4e5f24538bf805485d50c5c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onRightClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7174011837510429962}
+        m_TargetAssemblyTypeName: Ebla.UI.ContextMenuBehaviour, Assembly-CSharp
+        m_MethodName: OpenContextMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8450665433029194718
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +334,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Powerful laser blast\u200B"
+  m_text: "\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
   m_sharedMaterial: {fileID: 9034587130385221864, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
@@ -357,6 +415,7 @@ GameObject:
   - component: {fileID: 8450665433393071367}
   - component: {fileID: 8450665433393071369}
   - component: {fileID: 5083413267869378711}
+  - component: {fileID: 6701119138860268569}
   m_Layer: 5
   m_Name: AbilityNameInput
   m_TagString: Untagged
@@ -491,7 +550,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: Powerful laser blast
+  m_Text: 
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -516,6 +575,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontOption: {fileID: 11400000, guid: 59053cc9e2160429fb6c6cf64cb89773, type: 2}
+--- !u!114 &6701119138860268569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450665433393071371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e468a4e5f24538bf805485d50c5c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onRightClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7174011837510429962}
+        m_TargetAssemblyTypeName: Ebla.UI.ContextMenuBehaviour, Assembly-CSharp
+        m_MethodName: OpenContextMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8450665433432952514
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +709,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8450665433719293278}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -636,7 +722,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: Ability Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
   m_sharedMaterial: {fileID: 9034587130385221864, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
@@ -839,6 +925,53 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6029610830073732684, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}
+--- !u!1 &588976514370163137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2838032700149919686, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}
+  m_PrefabInstance: {fileID: 3408873833224224263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2392015455581149275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588976514370163137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1592e2fdc314b3894a522e5c625e491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: Cooldown Turns
+  useAppearDelayOverride: 1
+  appearDelayOverride: 2
+--- !u!114 &6128240187469935750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588976514370163137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e468a4e5f24538bf805485d50c5c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onRightClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7174011837510429962}
+        m_TargetAssemblyTypeName: Ebla.UI.ContextMenuBehaviour, Assembly-CSharp
+        m_MethodName: OpenContextMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &588976514370163138 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2838032700149919685, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}
@@ -849,7 +982,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2838032700149919684, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}
   m_PrefabInstance: {fileID: 3408873833224224263}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 588976514370163137}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}

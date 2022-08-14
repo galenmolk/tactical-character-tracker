@@ -1,40 +1,55 @@
-    using HexedHeroes.Models;
-    using TMPro;
-    using UnityEngine;
-    using AbilityConfig = Ebla.Models.AbilityConfig;
+using System;
+using TMPro;
+using UnityEngine;
+using  Ebla.Models;
 
-    namespace HexedHeroes.EncounterRunner
+namespace HexedHeroes.EncounterRunner
+{
+    public class AbilityRow : MonoBehaviour
     {
-        public class AbilityRow : MonoBehaviour
-        {
-            public Transform Content;
-            
-            [SerializeField] private TMP_InputField abilityTitleText;
-            [SerializeField] private TMP_InputField cooldownText;
-            [SerializeField] private Transform content;
-            
-            private AbilityConfig config;
+        public event Action<AbilityRow> OnDelete; 
 
-            public void UpdateName(string newName)
+        [SerializeField] private TMP_InputField abilityTitleText;
+        [SerializeField] private TMP_InputField cooldownText;
+
+        public AbilityConfig Config { get; private set; }
+
+        public void TryDelete()
+        {
+            Config.TryDeleteConfig();
+        }
+        
+        public void UpdateName(string newName)
+        {
+            Config.UpdateName(newName);
+        }
+        
+        public void UpdateCooldown(string cooldown)
+        {
+            if (!int.TryParse(cooldown, out int value))
             {
-                config.UpdateName(newName);
+                return;
             }
             
-            public void UpdateCooldown(string cooldown)
-            {
-                if (!int.TryParse(cooldown, out int value))
-                {
-                    return;
-                }
-                
-                config.UpdateCooldownTurns(value);
-            }
-            
-            public void Initialize(AbilityConfig abilityConfig)
-            {
-                config = abilityConfig;
-                abilityTitleText.text = config.Name;
-                cooldownText.text = config.CooldownTurns.ToString();
-            }
+            Config.UpdateCooldownTurns(value);
+        }
+        
+        public void Initialize(AbilityConfig abilityConfig)
+        {
+            Config = abilityConfig;
+            Config.OnConfigRemoved += HandleConfigRemoved;
+            abilityTitleText.text = Config.Name;
+            cooldownText.text = Config.CooldownTurns.ToString();
+        }
+
+        private void HandleConfigRemoved(BaseConfig baseConfig)
+        {
+            OnDelete?.Invoke(this);
+        }
+
+        private void OnDisable()
+        {
+            OnDelete = null;
         }
     }
+}

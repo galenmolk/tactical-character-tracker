@@ -46,7 +46,6 @@ namespace Ebla.Models
 
         protected override void RemoveConfigFromLibrary()
         {
-            Debug.Log($"Ability COnfig RemoveConfigFromLibrary {Name}");
             AbilityLibrarian.Instance.Remove(this);
         }
     }

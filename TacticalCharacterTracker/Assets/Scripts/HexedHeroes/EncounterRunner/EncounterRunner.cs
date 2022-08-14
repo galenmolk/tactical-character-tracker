@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Ebla.Models;
+using Ebla.UI;
 using Ebla.Utils;
 using MolkExtras;
 using TMPro;
@@ -17,6 +18,16 @@ namespace HexedHeroes.EncounterRunner
 
         private readonly List<EnemyTypeBlock> blocks = new();
 
+        public void TryQuitApp()
+        {
+            ConfirmationController.Instance.QuitApp(Quit);
+        }
+
+        private void Quit()
+        {
+            Application.Quit();
+        }
+        
         public void UpdateName(string newName)
         {
             ActiveConfig.UpdateName(newName);

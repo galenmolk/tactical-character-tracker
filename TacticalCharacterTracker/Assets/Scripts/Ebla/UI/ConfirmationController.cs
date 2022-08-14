@@ -1,6 +1,7 @@
 using Ebla.Models;
 using MolkExtras;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Ebla.UI
 {
@@ -11,12 +12,21 @@ namespace Ebla.UI
 
         [Space(5), Header("Confirmation Parameter Assets")]
         [SerializeField] private ConfirmationParams deleteConfigParams;
+
+        [SerializeField] private ConfirmationParams quitAppParams;
+        
         
         private ConfirmationOverlay overlayInstance;
 
+        public void QuitApp(UnityAction quitAction)
+        {
+            quitAppParams.LoadAction(quitAction);
+            CreateOverlay(quitAppParams);
+        }
+        
         public void DeleteConfig(BaseConfig baseConfig)
         {
-            deleteConfigParams.SetTitle($"Delete {baseConfig.Name}?");
+            deleteConfigParams.SetTitle(baseConfig.GetDeletionText());
             deleteConfigParams.LoadAction(baseConfig.DeleteConfig);
             CreateOverlay(deleteConfigParams);
         }

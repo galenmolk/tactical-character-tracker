@@ -14,22 +14,20 @@ namespace HexedHeroes.EncounterRunner
 
         [Header("Prefabs")]
         [SerializeField] private AbilityRow abilityRowPrefab;
-        [SerializeField] private NumberCell statCellPrefab;
-        [SerializeField] private AbilityCell abilityCellPrefab;
-        [SerializeField] private LabelCell labelCellPrefab;
-        
-        [Header("Other")]
+        [SerializeField] private EnemyInstance enemyInstancePrefab;
+
+        [Header("Other")] 
+        [SerializeField] private Transform instanceParent;
         [SerializeField] private TMP_InputField enemyTypeTitleText;
 
         [SerializeField] private TMP_InputField defense;
         [SerializeField] private TMP_InputField health;
         
-        [SerializeField] private Transform headerRow;
         [SerializeField] private Transform abilityRowParent;
-        [SerializeField] private Transform healthRow;
-        [SerializeField] private Transform defenseRow;
 
         private readonly List<AbilityRow> abilityRows = new();
+
+        private readonly List<EnemyInstance> enemyInstances = new();
 
         public void DeleteButtonClicked()
         {
@@ -73,13 +71,11 @@ namespace HexedHeroes.EncounterRunner
         {
             AbilityConfig abilityConfig = new();
             Config.Enemy.AddAbility(abilityConfig);
-            CreateAbility(abilityConfig);
+            CreateAbilityRow(abilityConfig);
             
-            int abilityIndex = Config.Enemy.Abilities.Count - 1;
-            
-            for (int i = 0; i < Config.Quantity; i++)
+            foreach (EnemyInstance instance in enemyInstances)
             {
-                CreateAbilityCell(abilityIndex);
+                instance.CreateAbilityCell(abilityConfig);
             }
         }
         
@@ -101,17 +97,26 @@ namespace HexedHeroes.EncounterRunner
 
         private void CreateAbilityRows()
         {
-            foreach (var abilityConfig in Config.Enemy.Abilities)
+            foreach (AbilityConfig abilityConfig in Config.Enemy.Abilities)
             {
-                CreateAbility(abilityConfig);
+                CreateAbilityRow(abilityConfig);
             }   
         }
 
-        private void CreateAbility(AbilityConfig abilityConfig)
+        private void CreateAbilityRow(AbilityConfig abilityConfig)
         {
             AbilityRow row = Instantiate(abilityRowPrefab, abilityRowParent);
+            row.OnDelete += HandleDeleteAbility;
             abilityRows.Add(row);
             row.Initialize(abilityConfig);
+        }
+
+        private void HandleDeleteAbility(AbilityRow row)
+        {
+            row.OnDelete -= HandleDeleteAbility;
+            Config.Enemy.RemoveAbility(row.Config);
+            abilityRows.Remove(row);
+            Destroy(row.gameObject);
         }
         
         private void CreateEnemyInstances()
@@ -124,44 +129,23 @@ namespace HexedHeroes.EncounterRunner
         
         private void CreateEnemy(int index)
         {
-            CreateHeaderCell(index);
-            CreateStatCells();
-            CreateAbilityCells();
+            EnemyInstance instance = Instantiate(enemyInstancePrefab, instanceParent);
+            enemyInstances.Add(instance);
+            instance.OnDelete += HandleDeleteInstance;
+            instance.Configure(Config.Enemy, index);
         }
 
-        private void CreateHeaderCell(int index)
+        private void HandleDeleteInstance(EnemyInstance enemyInstance)
         {
-            LabelCell titleCell = Instantiate(labelCellPrefab, headerRow);
-            string title = $"{Config.Enemy.Name} {++index}";
-            titleCell.SetString(title);
-        }
-        
-        private void CreateStatCells()
-        {
-            NumberCell healthCell = Instantiate(statCellPrefab, healthRow);
-            healthCell.SetInt(Config.Enemy.Health);
-            
-            NumberCell defenseCell = Instantiate(statCellPrefab, defenseRow);
-            defenseCell.SetInt(Config.Enemy.Defense);
-        }
-
-        private void CreateAbilityCells()
-        {
-            for (int i = 0; i < Config.Enemy.Abilities.Count; i++)
-            {
-                CreateAbilityCell(i);
-            }
-        }
-
-        private void CreateAbilityCell(int index)
-        {
-            AbilityCell abilityCell = Instantiate(abilityCellPrefab, abilityRows[index].Content);
-            abilityCell.SetAbility(Config.Enemy.Abilities[index]);
+            enemyInstances.Remove(enemyInstance);
+            Destroy(enemyInstance.gameObject);
+            Config.UpdateQuantity(Config.Quantity - 1);
         }
 
         private void OnDisable()
         {
             OnDelete = null;
+            
             if (Config != null)
             {
                 Config.OnConfigRemoved -= HandleConfigDeleted;

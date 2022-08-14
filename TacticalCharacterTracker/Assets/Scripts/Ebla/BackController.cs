@@ -24,19 +24,18 @@ namespace Ebla
 
         public void UnregisterWindow(Window window)
         {
-            Debug.Log($"UnregisterWindow: {window.gameObject.name}");
             if (!windows.Remove(window))
             {
-                Debug.Log($"UnregisterWindow: {window.gameObject.name} failure");
                 return;
             }
-            
-            if (windows.Count == 0)
+
+            if (windows.Count != 0)
             {
-                Debug.Log($"UnregisterWindow: {window.gameObject.name} disabling");
-                enabled = false;
-                didGoBackThisPress = false;
+                return;
             }
+
+            enabled = false;
+            didGoBackThisPress = false;
         }
         
         protected override void OnAwake()

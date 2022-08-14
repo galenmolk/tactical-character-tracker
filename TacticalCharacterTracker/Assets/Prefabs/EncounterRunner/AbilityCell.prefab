@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 300
+  m_MinWidth: 150
   m_MinHeight: 50
   m_PreferredWidth: -1
   m_PreferredHeight: -1
@@ -151,8 +151,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 61.38038, y: 0}
-  m_SizeDelta: {x: -122.7617, y: 0}
+  m_AnchoredPosition: {x: 44.046, y: 0}
+  m_SizeDelta: {x: -88.093, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2929360051363457875
 CanvasRenderer:
@@ -210,14 +210,14 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
+  m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 4
   m_LineType: 0
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 2
   m_RegexValue: 
   m_GlobalPointSize: 20
   m_CharacterLimit: 0
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 000
+  m_Text: 
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2929360051706456842}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -560,7 +560,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "000\u200B"
+  m_text: "\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
   m_sharedMaterial: {fileID: 9034587130385221864, guid: 5b6d911f3108b4530827dd8c862c93c4, type: 2}
@@ -605,7 +605,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 1
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -646,15 +646,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6545714577065889155, guid: a15b7ba88dc7443c483d869799338da7, type: 3}
       propertyPath: m_text
-      value: Activate
+      value: Use
       objectReference: {fileID: 0}
     - target: {fileID: 6545714577065889155, guid: a15b7ba88dc7443c483d869799338da7, type: 3}
       propertyPath: m_fontSize
-      value: 14
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545714577065889155, guid: a15b7ba88dc7443c483d869799338da7, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6545714577065889155, guid: a15b7ba88dc7443c483d869799338da7, type: 3}
       propertyPath: m_fontSizeBase
-      value: 14
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6545714577065889155, guid: a15b7ba88dc7443c483d869799338da7, type: 3}
       propertyPath: m_HorizontalAlignment
@@ -694,7 +698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6545714578380361228, guid: a15b7ba88dc7443c483d869799338da7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 78.092
       objectReference: {fileID: 0}
     - target: {fileID: 6545714578380361228, guid: a15b7ba88dc7443c483d869799338da7, type: 3}
       propertyPath: m_SizeDelta.y
