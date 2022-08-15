@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Ebla.Utils;
 using Newtonsoft.Json;
 
@@ -17,6 +18,9 @@ namespace Ebla.Models
             
         [JsonProperty(ConfigKeys.QUANTITY_KEY)]
         public int Quantity { get; private set; }
+        
+        [JsonProperty(ConfigKeys.ENEMY_INSTANCES_KEY)]
+        public List<EnemyInstanceConfig> EnemyInstances { get; private set; }
 
         public void UpdateQuantity(int quantity)
         {
