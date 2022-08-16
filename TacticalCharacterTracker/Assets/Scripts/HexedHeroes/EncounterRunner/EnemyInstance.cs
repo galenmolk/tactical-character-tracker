@@ -9,13 +9,16 @@ namespace HexedHeroes.EncounterRunner
     {
         public event Action<EnemyInstance> OnDelete;
 
-        public EnemyConfig Config { get; private set; }
+        public EnemyInstanceConfig Config { get; private set; }
 
+        [Header("Components")]
         [SerializeField] private LabelCell nameCell;
-        [SerializeField] private AbilityCell abilityCellPrefab;
         [SerializeField] private Transform abilityCellParent;
         [SerializeField] private NumberCell healthCell;
         [SerializeField] private NumberCell defenseCell;
+        
+        [Header("Prefabs")]
+        [SerializeField] private AbilityCell abilityCellPrefab;
 
         private readonly List<AbilityCell> abilityCells = new();
 
@@ -24,21 +27,21 @@ namespace HexedHeroes.EncounterRunner
             OnDelete?.Invoke(this);
         }
         
-        public void Configure(EnemyConfig enemyConfig, int index)
+        public void Configure(EnemyInstanceConfig instanceConfig, int index)
         {
-            Config = enemyConfig;
+            Config = instanceConfig;
             nameCell.SetString($"{Config.Name} {++index}");   
-            healthCell.SetInt(Config.Health);
-            defenseCell.SetInt(Config.Defense);
+            healthCell.SetInt(Config.CurrentHealth);
+            defenseCell.SetInt(Config.CurrentDefense);
             CreateAbilityCells();
         }
         
-        public void CreateAbilityCell(AbilityConfig abilityConfig)
+        public void CreateAbilityCell(AbilityInstanceConfig instance)
         {
             AbilityCell abilityCell = Instantiate(abilityCellPrefab, abilityCellParent);
             abilityCell.OnDelete += HandleDeleteAbilityCell;
             abilityCells.Add(abilityCell);
-            abilityCell.SetAbility(abilityConfig);
+            abilityCell.SetAbility(instance);
         }
 
         private void HandleDeleteAbilityCell(AbilityCell cell)
@@ -49,9 +52,9 @@ namespace HexedHeroes.EncounterRunner
         
         private void CreateAbilityCells()
         {
-            for (int i = 0, count = Config.Abilities.Count; i < count; i++)
+            for (int i = 0, count = Config.Enemy.Abilities.Count; i < count; i++)
             {
-                CreateAbilityCell(Config.Abilities[i]);
+                CreateAbilityCell(Config.Enemy.Abilities[i].AbilityInstances[i]);
             }
         }
         

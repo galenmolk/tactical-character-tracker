@@ -62,9 +62,9 @@ namespace HexedHeroes.EncounterRunner
         
         public void IncreaseEnemyQuantity()
         {
-            int newQuantity = Config.Quantity + 1;
-            Config.UpdateQuantity(newQuantity);
-            CreateEnemy(newQuantity - 1);
+            EnemyInstanceConfig enemyInstanceConfig = new(Config.Enemy);
+            Config.Enemy.AddInstance(enemyInstanceConfig);
+            CreateEnemy(Config.Enemy.EnemyInstances.Count - 1);
         }
 
         public void AddAbility()
@@ -73,9 +73,11 @@ namespace HexedHeroes.EncounterRunner
             Config.Enemy.AddAbility(abilityConfig);
             CreateAbilityRow(abilityConfig);
             
-            foreach (EnemyInstance instance in enemyInstances)
+            foreach (EnemyInstance enemyInstance in enemyInstances)
             {
-                instance.CreateAbilityCell(abilityConfig);
+                AbilityInstanceConfig instanceConfig = new(abilityConfig);
+                abilityConfig.AddInstance(instanceConfig);
+                enemyInstance.CreateAbilityCell(instanceConfig);
             }
         }
         
@@ -121,7 +123,7 @@ namespace HexedHeroes.EncounterRunner
         
         private void CreateEnemyInstances()
         {
-            for (int i = 0; i < Config.Quantity; i++)
+            for (int i = 0, count = Config.Enemy.EnemyInstances.Count; i < count; i++)
             {
                 CreateEnemy(i);
             }
@@ -132,14 +134,20 @@ namespace HexedHeroes.EncounterRunner
             EnemyInstance instance = Instantiate(enemyInstancePrefab, instanceParent);
             enemyInstances.Add(instance);
             instance.OnDelete += HandleDeleteInstance;
-            instance.Configure(Config.Enemy, index);
+            instance.Configure(Config.Enemy.EnemyInstances[index], index);
         }
 
         private void HandleDeleteInstance(EnemyInstance enemyInstance)
         {
             enemyInstances.Remove(enemyInstance);
             Destroy(enemyInstance.gameObject);
-            Config.UpdateQuantity(Config.Quantity - 1);
+            Config.Enemy.RemoveInstance(enemyInstance.Config);
+
+            foreach (var abilityConfig in Config.Enemy.Abilities)
+            {
+                AbilityInstanceConfig instance = abilityConfig.AbilityInstances[]
+                abilityConfig.RemoveInstance();
+            }
         }
 
         private void OnDisable()

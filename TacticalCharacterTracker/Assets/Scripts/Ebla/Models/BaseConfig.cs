@@ -14,8 +14,7 @@ namespace Ebla.Models
         public event Action<BaseConfig> OnConfigModified;
         public event Action<BaseConfig> OnConfigRemoved;
 
-        [JsonIgnore]
-        public abstract string BaseName { get; }
+        [JsonIgnore] public virtual string BaseName => string.Empty;
 
         [JsonProperty(ConfigKeys.NAME_KEY)]
         public string Name { get; protected set; }
@@ -57,7 +56,7 @@ namespace Ebla.Models
             Debug.LogWarning("InvokeLoadIntoFolder Not implemented for this config type");
         }
 
-        public string GetBaseName(int index)
+        public string GetIndexedBaseName(int index)
         {
             return $"{BaseName} {index}";
         }
@@ -118,8 +117,11 @@ namespace Ebla.Models
         {
             
         }
-        
-        protected abstract void RemoveConfigFromLibrary();
+
+        protected virtual void RemoveConfigFromLibrary()
+        {
+            Debug.LogWarning("RemoveConfigFromLibrary not implemented.");
+        }
 
         protected void InvokeConfigModified()
         {

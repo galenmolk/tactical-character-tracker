@@ -12,11 +12,11 @@ namespace HexedHeroes.EncounterRunner
         [SerializeField] private Image image;
 
         private readonly Color activatedColor = new(0.75f, 0.75f, 0.75f, 1f);
-        private AbilityConfig config;
+        private AbilityInstanceConfig config;
         
-        public void SetAbility(AbilityConfig abilityConfig)
+        public void SetAbility(AbilityInstanceConfig abilityInstance)
         {
-            config = abilityConfig;
+            config = abilityInstance;
             config.OnConfigRemoved += HandleDeleteAbility;
             ResetValue();
         }
@@ -31,9 +31,9 @@ namespace HexedHeroes.EncounterRunner
         {
             image.color = activatedColor;
             
-            if (config.CooldownTurns > 0)
+            if (config.Ability.CooldownTurns > 0)
             {
-                SetInt(config.CooldownTurns);
+                SetInt(config.Ability.CooldownTurns);
             }
         }
 
