@@ -9,7 +9,7 @@ namespace HexedHeroes.EncounterRunner
     {
         public event Action<EnemyInstance> OnDelete;
 
-        public EnemyInstanceConfig Config { get; private set; }
+        public CharacterInstanceConfig Config { get; private set; }
 
         [Header("Components")]
         [SerializeField] private LabelCell nameCell;
@@ -27,7 +27,7 @@ namespace HexedHeroes.EncounterRunner
             OnDelete?.Invoke(this);
         }
         
-        public void Configure(EnemyInstanceConfig instanceConfig, int index)
+        public void Configure(CharacterInstanceConfig instanceConfig, int index)
         {
             Config = instanceConfig;
             nameCell.SetString($"{Config.Name} {++index}");   
@@ -35,8 +35,14 @@ namespace HexedHeroes.EncounterRunner
             defenseCell.SetInt(Config.CurrentDefense);
             CreateAbilityCells();
         }
-        
-        public void CreateAbilityCell(AbilityInstanceConfig instance)
+
+        public void AddAbility(AbilityConfig abilityConfig)
+        {
+            AbilityInstanceConfig config = Config.AddAbility(abilityConfig);
+            CreateAbilityCell(config);
+        }
+
+        private void CreateAbilityCell(AbilityInstanceConfig instance)
         {
             AbilityCell abilityCell = Instantiate(abilityCellPrefab, abilityCellParent);
             abilityCell.OnDelete += HandleDeleteAbilityCell;
@@ -52,9 +58,9 @@ namespace HexedHeroes.EncounterRunner
         
         private void CreateAbilityCells()
         {
-            for (int i = 0, count = Config.Enemy.Abilities.Count; i < count; i++)
+            for (int i = 0, count = Config.AbilityInstances.Count; i < count; i++)
             {
-                CreateAbilityCell(Config.Enemy.Abilities[i].AbilityInstances[i]);
+                CreateAbilityCell(Config.AbilityInstances[i]);
             }
         }
         

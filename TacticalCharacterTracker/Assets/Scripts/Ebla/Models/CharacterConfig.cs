@@ -17,21 +17,37 @@ namespace Ebla.Models
         
         [JsonProperty(ConfigKeys.ABILITIES_KEY)]
         public List<AbilityConfig> Abilities { get; private set; }
+                
+        [JsonProperty(ConfigKeys.CHARACTER_INSTANCES_KEY)]
+        public List<CharacterInstanceConfig> CharacterInstances { get; private set; }
 
-        public CharacterConfig()
+        protected CharacterConfig()
         {
             Abilities = new List<AbilityConfig>();
+            CharacterInstances = new List<CharacterInstanceConfig>();
         }
 
         public void AddAbility(AbilityConfig abilityConfig)
         {
             Abilities.Add(abilityConfig);
+            
+            foreach (CharacterInstanceConfig characterInstanceConfig in CharacterInstances)
+            {
+                characterInstanceConfig.AddAbility(abilityConfig);
+            }
+            
             InvokeConfigModified();
         }
 
         public void RemoveAbility(AbilityConfig abilityConfig)
         {
             Abilities.Remove(abilityConfig);
+            
+            foreach (CharacterInstanceConfig characterInstanceConfig in CharacterInstances)
+            {
+                characterInstanceConfig.RemoveAbility(abilityConfig);
+            }
+            
             InvokeConfigModified();
         }
         
@@ -53,10 +69,6 @@ namespace Ebla.Models
             InvokeConfigModified();
         }
 
-        public void UpdateAbilities(List<AbilityConfig> abilityConfigs)
-        {
-            Abilities = abilityConfigs;
-            InvokeConfigModified();
-        }
+        
     }
 }

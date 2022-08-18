@@ -28,7 +28,6 @@ namespace Ebla.Utils
 
         public const string ENEMY_KEY = "Enemy";
         public const string QUANTITY_KEY = "Quantity";
-        public const string ENEMY_INSTANCES_KEY = "EnemyInstances";
         
         #endregion
 
@@ -38,6 +37,7 @@ namespace Ebla.Utils
         public const string DEFENSE_KEY = "Defense";
         public const string SPEED_KEY = "Speed";
         public const string ABILITIES_KEY = "Abilities";
+        public const string CHARACTER_INSTANCES_KEY = "CharacterInstances";
 
         #endregion
 

@@ -21,23 +21,9 @@ namespace Ebla.Models
         
         [JsonProperty(ConfigKeys.INTERRUPT_KEY)]
         public bool IsInterrupt { get; private set; }
-        
-        [JsonProperty(ConfigKeys.ABILITY_INSTANCES_KEY)]
-        public List<AbilityInstanceConfig> AbilityInstances { get; private set; }
 
-        public void AddInstance(AbilityInstanceConfig instance)
-        {
-            AbilityInstances.Add(instance);
-            InvokeConfigModified();
-        }
 
-        public void RemoveInstance(AbilityInstanceConfig instance)
-        {
-            AbilityInstances.Remove(instance);
-            InvokeConfigModified();
-        }
-
-        public void RemoveAllInstancesForEnemyInstance(EnemyInstanceConfig enemyInstanceConfig)
+        public void RemoveAllInstancesForEnemyInstance(CharacterInstanceConfig characterInstanceConfig)
         {
             
         }

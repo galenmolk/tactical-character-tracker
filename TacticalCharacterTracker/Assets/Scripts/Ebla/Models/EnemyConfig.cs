@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Ebla.Libraries;
-using Ebla.Utils;
-using Newtonsoft.Json;
 
 namespace Ebla.Models
 {
@@ -11,20 +9,16 @@ namespace Ebla.Models
         public static event Action<EnemyConfig> OnLoadIntoFolder;
 
         public override string BaseName => "Untitled Enemy";
-        
-                
-        [JsonProperty(ConfigKeys.ENEMY_INSTANCES_KEY)]
-        public List<EnemyInstanceConfig> EnemyInstances { get; private set; }
 
-        public void AddInstance(EnemyInstanceConfig instanceConfig)
+        public void AddInstance(CharacterInstanceConfig instanceConfig)
         {
-            EnemyInstances.Add(instanceConfig);
+            CharacterInstances.Add(instanceConfig);
             InvokeConfigModified();
         }
 
-        public void RemoveInstance(EnemyInstanceConfig instanceConfig)
+        public void RemoveInstance(CharacterInstanceConfig instanceConfig)
         {
-            EnemyInstances.Remove(instanceConfig);
+            CharacterInstances.Remove(instanceConfig);
             InvokeConfigModified();
         }
         
