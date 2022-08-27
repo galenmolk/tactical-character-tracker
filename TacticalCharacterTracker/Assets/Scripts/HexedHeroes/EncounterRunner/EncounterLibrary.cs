@@ -18,7 +18,7 @@ namespace HexedHeroes.EncounterRunner
         private static string SavePath => Application.persistentDataPath + CUSTOM_DATA_PATH;
 
         private const float ON_POSITION_Y = 0f;
-        private float OffPositionY => Screen.height;
+        private static float OffPositionY => Screen.height / EncounterRunner.Instance.CanvasScaleFactor;
         
         [SerializeField] private float tweenDuration;
         

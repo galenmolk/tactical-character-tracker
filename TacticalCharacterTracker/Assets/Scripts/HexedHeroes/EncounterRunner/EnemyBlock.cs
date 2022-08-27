@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace HexedHeroes.EncounterRunner
 {
-    public class EnemyTypeBlock : MonoBehaviour
+    public class EnemyBlock : MonoBehaviour
     {
-        public event Action<EnemyTypeBlock> OnDelete;
+        public event Action<EnemyBlock> OnDelete;
 
-        public EnemyTypeConfig Config { get; private set; }
+        public EnemyConfig Config { get; private set; }
 
         [Header("Prefabs")]
         [SerializeField] private AbilityRow abilityRowPrefab;
@@ -22,7 +22,7 @@ namespace HexedHeroes.EncounterRunner
 
         [SerializeField] private TMP_InputField defense;
         [SerializeField] private TMP_InputField health;
-        
+        [SerializeField] private TMP_InputField notes;
         [SerializeField] private Transform abilityRowParent;
 
         private readonly List<AbilityRow> abilityRows = new();
@@ -37,9 +37,13 @@ namespace HexedHeroes.EncounterRunner
         public void UpdateName(string newName)
         {
             Config.UpdateName(newName);
-            Config.Enemy.UpdateName(newName);
         }
-        
+
+        public void OnEndEditNotes(string newNotes)
+        {
+            Config.UpdateDescription(newNotes);
+        }
+
         public void UpdateHealth(string newHealth)
         {
             if (!int.TryParse(newHealth, out int value))
@@ -47,7 +51,7 @@ namespace HexedHeroes.EncounterRunner
                 return;
             }
             
-            Config.Enemy.UpdateHealth(value);
+            Config.UpdateHealth(value);
         }
 
         public void UpdateDefense(string newDefense)
@@ -57,20 +61,20 @@ namespace HexedHeroes.EncounterRunner
                 return;
             }
             
-            Config.Enemy.UpdateDefense(value);
+            Config.UpdateDefense(value);
         }
         
         public void IncreaseEnemyQuantity()
         {
-            CharacterInstanceConfig characterInstanceConfig = new(Config.Enemy);
-            Config.Enemy.AddInstance(characterInstanceConfig);
-            CreateEnemy(Config.Enemy.CharacterInstances.Count - 1);
+            CharacterInstanceConfig characterInstanceConfig = new(Config);
+            Config.AddInstance(characterInstanceConfig);
+            CreateEnemy(Config.CharacterInstances.Count - 1);
         }
 
         public void AddAbility()
         {
             AbilityConfig abilityConfig = new();
-            Config.Enemy.AddAbility(abilityConfig);
+            Config.AddAbility(abilityConfig);
             CreateAbilityRow(abilityConfig);
             
             foreach (EnemyInstance enemyInstance in enemyInstances)
@@ -79,13 +83,14 @@ namespace HexedHeroes.EncounterRunner
             }
         }
         
-        public void Initialize(EnemyTypeConfig enemyTypeConfig)
+        public void Initialize(EnemyConfig enemyConfig)
         {
-            enemyTypeConfig.OnConfigRemoved += HandleConfigDeleted;
-            Config = enemyTypeConfig;
-            enemyTypeTitleText.text = $"{Config.Enemy.Name}";
-            health.text = enemyTypeConfig.Enemy.Health.ToString();
-            defense.text = enemyTypeConfig.Enemy.Defense.ToString();
+            enemyConfig.OnConfigRemoved += HandleConfigDeleted;
+            Config = enemyConfig;
+            enemyTypeTitleText.text = Config.Name;
+            notes.text = Config.Description;
+            health.text = enemyConfig.Health.ToString();
+            defense.text = enemyConfig.Defense.ToString();
             CreateAbilityRows();
             CreateEnemyInstances();
         }
@@ -97,7 +102,7 @@ namespace HexedHeroes.EncounterRunner
 
         private void CreateAbilityRows()
         {
-            foreach (AbilityConfig abilityConfig in Config.Enemy.Abilities)
+            foreach (AbilityConfig abilityConfig in Config.Abilities)
             {
                 CreateAbilityRow(abilityConfig);
             }   
@@ -114,14 +119,14 @@ namespace HexedHeroes.EncounterRunner
         private void HandleDeleteAbility(AbilityRow row)
         {
             row.OnDelete -= HandleDeleteAbility;
-            Config.Enemy.RemoveAbility(row.Config);
+            Config.RemoveAbility(row.Config);
             abilityRows.Remove(row);
             Destroy(row.gameObject);
         }
         
         private void CreateEnemyInstances()
         {
-            for (int i = 0, count = Config.Enemy.CharacterInstances.Count; i < count; i++)
+            for (int i = 0, count = Config.CharacterInstances.Count; i < count; i++)
             {
                 CreateEnemy(i);
             }
@@ -132,14 +137,14 @@ namespace HexedHeroes.EncounterRunner
             EnemyInstance instance = Instantiate(enemyInstancePrefab, instanceParent);
             enemyInstances.Add(instance);
             instance.OnDelete += HandleDeleteInstance;
-            instance.Configure(Config.Enemy.CharacterInstances[index], index);
+            instance.Configure(Config.CharacterInstances[index], index);
         }
 
         private void HandleDeleteInstance(EnemyInstance enemyInstance)
         {
             enemyInstances.Remove(enemyInstance);
             Destroy(enemyInstance.gameObject);
-            Config.Enemy.RemoveInstance(enemyInstance.Config);
+            Config.RemoveInstance(enemyInstance.Config);
         }
 
         private void OnDisable()

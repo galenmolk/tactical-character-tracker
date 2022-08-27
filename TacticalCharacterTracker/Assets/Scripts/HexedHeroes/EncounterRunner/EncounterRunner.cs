@@ -10,13 +10,17 @@ namespace HexedHeroes.EncounterRunner
 {
     public class EncounterRunner : Singleton<EncounterRunner>
     {
+        public float CanvasScaleFactor => canvas.scaleFactor;
+        
         public EncounterConfig ActiveConfig { get; private set; }
 
         [SerializeField] private TMP_InputField encounterTitleText;
-        [SerializeField] private EnemyTypeBlock enemyTypeBlockPrefab;
+        [SerializeField] private EnemyBlock enemyBlockPrefab;
         [SerializeField] private Transform enemyTypeBlockParent;
 
-        private readonly List<EnemyTypeBlock> blocks = new();
+        [SerializeField] private Canvas canvas;
+        
+        private readonly List<EnemyBlock> blocks = new();
 
         public void TryQuitApp()
         {
@@ -33,12 +37,12 @@ namespace HexedHeroes.EncounterRunner
             ActiveConfig.UpdateName(newName);
         }
         
-        public void AddEnemyType()
+        public void AddEnemy()
         {
-            EnemyTypeConfig enemyType = new EnemyTypeConfig();
-            enemyType.SetNameSilent(PathUtils.GetUniqueName(enemyType.BaseName, blocks, block => block.Config.Name));
-            ActiveConfig.AddEnemyType(enemyType);
-            CreateBlockForEnemyType(enemyType);
+            EnemyConfig enemy = new EnemyConfig();
+            enemy.SetNameSilent(PathUtils.GetUniqueName(enemy.BaseName, blocks, block => block.Config.Name));
+            ActiveConfig.AddEnemy(enemy);
+            CreateBlockForEnemyType(enemy);
         }
 
         public void SpinUpEncounter(EncounterConfig encounter)
@@ -63,23 +67,23 @@ namespace HexedHeroes.EncounterRunner
         
         private void CreateEnemyTypes()
         {
-            foreach (var enemyTypeConfig in ActiveConfig.GetEnemyTypes())
+            foreach (var enemyTypeConfig in ActiveConfig.GetEnemies())
             {
                 CreateBlockForEnemyType(enemyTypeConfig);
             }
         }
 
-        private void CreateBlockForEnemyType(EnemyTypeConfig enemyTypeConfig)
+        private void CreateBlockForEnemyType(EnemyConfig enemyConfig)
         {
-            EnemyTypeBlock block = Instantiate(enemyTypeBlockPrefab, enemyTypeBlockParent);
-            block.Initialize(enemyTypeConfig);
+            EnemyBlock block = Instantiate(enemyBlockPrefab, enemyTypeBlockParent);
+            block.Initialize(enemyConfig);
             block.OnDelete += HandleBlockDelete;
             blocks.Add(block);
         }
 
-        private void HandleBlockDelete(EnemyTypeBlock block)
+        private void HandleBlockDelete(EnemyBlock block)
         {
-            ActiveConfig.RemoveEnemyType(block.Config);
+            ActiveConfig.RemoveEnemy(block.Config);
             blocks.Remove(block);
             Destroy(block.gameObject);
         }

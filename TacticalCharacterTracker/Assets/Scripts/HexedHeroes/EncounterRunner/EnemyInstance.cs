@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Ebla.Models;
+using TMPro;
 using UnityEngine;
 
 namespace HexedHeroes.EncounterRunner
@@ -16,6 +17,7 @@ namespace HexedHeroes.EncounterRunner
         [SerializeField] private Transform abilityCellParent;
         [SerializeField] private NumberCell healthCell;
         [SerializeField] private NumberCell defenseCell;
+        [SerializeField] private TMP_InputField notesCell;
         
         [Header("Prefabs")]
         [SerializeField] private AbilityCell abilityCellPrefab;
@@ -26,11 +28,48 @@ namespace HexedHeroes.EncounterRunner
         {
             OnDelete?.Invoke(this);
         }
+
+        public void OnEndEditName(string newName)
+        {
+            Config.UpdateName(newName);
+        }
+
+        public void OnEndEditNotes(string newNotes)
+        {
+            Config.UpdateDescription(newNotes);
+        }
+
+        public void OnEndEditHealth(string newHealth)
+        {
+            if (int.TryParse(newHealth, out int health))
+            {
+                HealthModified(health);
+            }
+        }
+
+        public void OnEndEditDefense(string newDefense)
+        {
+            if (int.TryParse(newDefense, out int defense))
+            {
+                DefenseModified(defense);
+            }
+        }
         
+        public void HealthModified(int health)
+        {
+            Config.UpdateHealth(health);
+        }
+
+        public void DefenseModified(int defense)
+        {
+            Config.UpdateDefense(defense);   
+        }
+
         public void Configure(CharacterInstanceConfig instanceConfig, int index)
         {
             Config = instanceConfig;
-            nameCell.SetString($"{Config.Name} {++index}");   
+            nameCell.SetString(instanceConfig.GetOrUpdateName(index));  
+            notesCell.text = instanceConfig.Description;
             healthCell.SetInt(Config.CurrentHealth);
             defenseCell.SetInt(Config.CurrentDefense);
             CreateAbilityCells();
@@ -41,7 +80,15 @@ namespace HexedHeroes.EncounterRunner
             AbilityInstanceConfig config = Config.AddAbility(abilityConfig);
             CreateAbilityCell(config);
         }
-
+                
+        private void CreateAbilityCells()
+        {
+            for (int i = 0, count = Config.AbilityInstances.Count; i < count; i++)
+            {
+                CreateAbilityCell(Config.AbilityInstances[i]);
+            }
+        }
+        
         private void CreateAbilityCell(AbilityInstanceConfig instance)
         {
             AbilityCell abilityCell = Instantiate(abilityCellPrefab, abilityCellParent);
@@ -55,15 +102,7 @@ namespace HexedHeroes.EncounterRunner
             abilityCells.Remove(cell);
             Destroy(cell.gameObject);
         }
-        
-        private void CreateAbilityCells()
-        {
-            for (int i = 0, count = Config.AbilityInstances.Count; i < count; i++)
-            {
-                CreateAbilityCell(Config.AbilityInstances[i]);
-            }
-        }
-        
+
         private void OnDisable()
         {
             OnDelete = null;

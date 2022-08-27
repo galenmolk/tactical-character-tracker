@@ -1,11 +1,17 @@
+using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Ebla.Utils;
+using MolkExtras;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Ebla.Models
 {
     public abstract class CharacterConfig : BaseConfig
     {
+        public event Action<AbilityConfig> OnAbilityDeleted; 
+
         [JsonProperty(ConfigKeys.HEALTH_KEY)]
         public int Health { get; private set; }
         
@@ -27,15 +33,21 @@ namespace Ebla.Models
             CharacterInstances = new List<CharacterInstanceConfig>();
         }
 
+        public void AddInstance(CharacterInstanceConfig instanceConfig)
+        {
+            CharacterInstances.Add(instanceConfig);
+            InvokeConfigModified();
+        }
+
+        public void RemoveInstance(CharacterInstanceConfig instanceConfig)
+        {
+            CharacterInstances.Remove(instanceConfig);
+            InvokeConfigModified();
+        }
+        
         public void AddAbility(AbilityConfig abilityConfig)
         {
             Abilities.Add(abilityConfig);
-            
-            foreach (CharacterInstanceConfig characterInstanceConfig in CharacterInstances)
-            {
-                characterInstanceConfig.AddAbility(abilityConfig);
-            }
-            
             InvokeConfigModified();
         }
 
@@ -69,6 +81,29 @@ namespace Ebla.Models
             InvokeConfigModified();
         }
 
-        
+        [OnDeserialized]
+        private void OnDeserializedCallback(StreamingContext context)
+        {
+            if (!CharacterInstances.HasItems() || !Abilities.HasItems())
+            {
+                return;
+            }
+            
+            for (int abilityIndex = 0, abilityCount = Abilities.Count; abilityIndex < abilityCount; abilityIndex++)
+            {
+                foreach (CharacterInstanceConfig instance in CharacterInstances)
+                {
+                    List<AbilityInstanceConfig> abilityInstances = instance.AbilityInstances;
+                    
+                    if (abilityInstances.Count != abilityCount)
+                    {
+                        Debug.LogError($"{Name}: Mismatch between Character Instance Abilities and Character Abilities.");
+                        return;
+                    }
+
+                    abilityInstances[abilityIndex].Ability = Abilities[abilityIndex];
+                }
+            }
+        }
     }
 }

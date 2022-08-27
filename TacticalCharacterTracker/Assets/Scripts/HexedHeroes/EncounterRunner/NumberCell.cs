@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace HexedHeroes.EncounterRunner
 {
     public class NumberCell : Cell
     {
+        [SerializeField] private UnityEvent<int> onValueChanged;
+
         private int startAmount;
         
         public void SetInt(int amount)
@@ -17,6 +20,7 @@ namespace HexedHeroes.EncounterRunner
             int value = GetNumber();
             value++;
             valueText.text = value.ToString();
+            onValueChanged?.Invoke(value);
         }
 
         public void Decrement()
@@ -24,6 +28,16 @@ namespace HexedHeroes.EncounterRunner
             int value = GetNumber();
             value--;
             valueText.text = value.ToString();
+            onValueChanged?.Invoke(value);
+        }
+
+        protected int DecrementAndReturnValue()
+        {
+            int value = GetNumber();
+            value--;
+            valueText.text = value.ToString();
+            onValueChanged?.Invoke(value);
+            return value;
         }
 
         protected int GetNumber()

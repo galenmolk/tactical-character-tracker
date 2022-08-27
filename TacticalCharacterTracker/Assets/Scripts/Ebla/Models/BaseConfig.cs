@@ -80,13 +80,22 @@ namespace Ebla.Models
         
         public void UpdateName(string newName)
         {
+            if (string.Equals(newName, Name))
+            {
+                return;
+            }
+            
             Name = newName;
             InvokeConfigModified();
         }
 
         public void UpdateDescription(string newDescription)
         {
-            Debug.Log($"UpdateDescription {newDescription}");
+            if (string.Equals(newDescription, Description))
+            {
+                return;
+            }
+            
             Description = newDescription;
             InvokeConfigModified();
         }

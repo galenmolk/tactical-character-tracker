@@ -17,26 +17,48 @@ namespace HexedHeroes.EncounterRunner
         public void SetAbility(AbilityInstanceConfig abilityInstance)
         {
             config = abilityInstance;
-            config.OnConfigRemoved += HandleDeleteAbility;
-            ResetValue();
+            abilityInstance.Ability.OnConfigRemoved += HandleDeleteAbility;
+
+            if (config.CurrentCooldownTurns != 0)
+            {
+                SetInt(config.CurrentCooldownTurns);
+            }
+            else
+            {
+                SetString(string.Empty);
+            }
+
+            image.color = config.IsActivated ? activatedColor : Color.white;
         }
 
         public void OnEndEdit()
         {
-            bool isCoolingDown = GetNumber() > 0;
-            image.color = isCoolingDown ? activatedColor : Color.white;
+            int value = GetNumber();
+            SetColorBasedOnCooldown(value);
+            ChangeCurrentCooldown(value);
         }
 
         public void Activate()
         {
             image.color = activatedColor;
+            config.UpdateIsActivated(true);
             
-            if (config.Ability.CooldownTurns > 0)
+            int cooldown = config.Ability.CooldownTurns;
+            
+            if (cooldown <= 0)
             {
-                SetInt(config.Ability.CooldownTurns);
+                return;
             }
+
+            ChangeCurrentCooldown(cooldown);
+            SetInt(cooldown);
         }
 
+        private void SetColorBasedOnCooldown(int value)
+        {
+            image.color = value > 0 ? activatedColor : Color.white;
+        }
+        
         private void HandleDeleteAbility(BaseConfig baseConfig)
         {
             OnDelete?.Invoke(this);
@@ -46,24 +68,33 @@ namespace HexedHeroes.EncounterRunner
         {
             image.color = Color.white;
             SetString(string.Empty);
+            ChangeCurrentCooldown(0);
         }
         
         private void ReduceCooldown()
         {
-            if (GetNumber() <= 0)
+            int currentNumber = GetNumber();
+
+            if (currentNumber <= 0)
             {
                 ResetValue();
                 return;
             }
-
-            Decrement();
             
-            if (GetNumber() <= 0)
+            int newValue = DecrementAndReturnValue();
+            ChangeCurrentCooldown(newValue);
+
+            if (newValue <= 0)
             {
                 ResetValue();
             }
         }
 
+        private void ChangeCurrentCooldown(int newCooldown)
+        {
+            config.UpdateCurrentCooldownTurns(newCooldown);
+        }
+        
         private void OnEnable()
         {
             CooldownController.ReduceActive += ReduceCooldown;

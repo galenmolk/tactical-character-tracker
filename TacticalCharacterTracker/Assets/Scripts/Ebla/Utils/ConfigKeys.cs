@@ -20,7 +20,7 @@ namespace Ebla.Utils
 
         #region Encounter Keys
 
-        public const string ENEMY_TYPES_KEY = "EnemyTypes";
+        public const string ENEMIES = "Enemies";
         
         #endregion
 
@@ -59,7 +59,8 @@ namespace Ebla.Utils
 
         #region Ability Instance Keys
 
-        public const string CURRENT_COOLDOWN_TURNS = "CurrentCooldownTurns";
+        public const string CURRENT_COOLDOWN_TURNS_KEY = "CurrentCooldownTurns";
+        public const string IS_ACTIVATED_KEY = "IsActivated";
 
         #endregion
     }

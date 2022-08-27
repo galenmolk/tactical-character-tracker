@@ -1047,10 +1047,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameCell: {fileID: 755620109383016873}
-  abilityCellPrefab: {fileID: 1063184934425975704, guid: 1e8bf4c8fb1b64ab686ba7a6028501ce, type: 3}
   abilityCellParent: {fileID: 6890915036753781859}
   healthCell: {fileID: 762776112688279427}
   defenseCell: {fileID: 5261938033011131864}
+  notesCell: {fileID: 3898174496448326939}
+  abilityCellPrefab: {fileID: 1063184934425975704, guid: 1e8bf4c8fb1b64ab686ba7a6028501ce, type: 3}
 --- !u!1 &7759618871447697839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,7 +1343,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 538588752377793955}
+        m_TargetAssemblyTypeName: HexedHeroes.EncounterRunner.EnemyInstance, Assembly-CSharp
+        m_MethodName: OnEndEditNotes
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -1399,6 +1412,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4467668348129577901}
     m_Modifications:
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 538588752377793955}
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DefenseModified
+      objectReference: {fileID: 0}
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HexedHeroes.EncounterRunner.EnemyInstance, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1659504702052896266, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1498,6 +1539,34 @@ PrefabInstance:
     - target: {fileID: 1659504702052896277, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
       propertyPath: m_Name
       value: NumberCell
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 538588752377793955}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnEndEditDefense
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HexedHeroes.EncounterRunner.EnemyInstance, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
@@ -1628,6 +1697,34 @@ PrefabInstance:
       propertyPath: m_Text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5001398548766376000, guid: 21ada805844064bb798b76041aa7a23d, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5001398548766376000, guid: 21ada805844064bb798b76041aa7a23d, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5001398548766376000, guid: 21ada805844064bb798b76041aa7a23d, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 538588752377793955}
+    - target: {fileID: 5001398548766376000, guid: 21ada805844064bb798b76041aa7a23d, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5001398548766376000, guid: 21ada805844064bb798b76041aa7a23d, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnEndEditName
+      objectReference: {fileID: 0}
+    - target: {fileID: 5001398548766376000, guid: 21ada805844064bb798b76041aa7a23d, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HexedHeroes.EncounterRunner.EnemyInstance, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5001398548766376000, guid: 21ada805844064bb798b76041aa7a23d, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5001398548958019604, guid: 21ada805844064bb798b76041aa7a23d, type: 3}
       propertyPath: m_text
       value: Name
@@ -1670,6 +1767,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4467668347816225984}
     m_Modifications:
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 538588752377793955}
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HealthModified
+      objectReference: {fileID: 0}
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HexedHeroes.EncounterRunner.EnemyInstance, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: -3763632774758903072, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1659504702052896266, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1773,6 +1898,34 @@ PrefabInstance:
     - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
       propertyPath: m_Text
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 538588752377793955}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnEndEditHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HexedHeroes.EncounterRunner.EnemyInstance, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799970301244011592, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4799970301603558428, guid: 7ffc9c5b46b71460785d1477cb6faa62, type: 3}
       propertyPath: m_Enabled

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Ebla.Utils;
+using MolkExtras;
 using Newtonsoft.Json;
 
 namespace Ebla.Models
@@ -17,8 +18,22 @@ namespace Ebla.Models
         [JsonProperty(ConfigKeys.ABILITY_INSTANCES_KEY)]
         public List<AbilityInstanceConfig> AbilityInstances { get; private set; }
 
-        private readonly Dictionary<AbilityConfig, AbilityInstanceConfig> abilityInstanceRegistry = new();
+        public string GetOrUpdateName(int index)
+        {
+            if (!string.IsNullOrWhiteSpace(Name))
+            {
+                return Name;
+            }
 
+            int adjustedIndex = ++index;
+            string newName = string.IsNullOrWhiteSpace(Character.Name)
+                ? $"{adjustedIndex}"
+                : $"{Character.Name} {adjustedIndex}";
+            
+            UpdateName(newName);
+            return newName;
+        }
+        
         public CharacterInstanceConfig(CharacterConfig character)
         {
             Character = character;
@@ -39,10 +54,31 @@ namespace Ebla.Models
             
         }
 
+        public void UpdateHealth(int newHealth)
+        {
+            if (newHealth == CurrentHealth)
+            {
+                return;
+            }
+
+            CurrentHealth = newHealth;
+            InvokeConfigModified();
+        }
+
+        public void UpdateDefense(int newDefense)
+        {
+            if (newDefense == CurrentDefense)
+            {
+                return;
+            }
+
+            CurrentDefense = newDefense;
+            InvokeConfigModified();
+        }
+        
         public AbilityInstanceConfig AddAbility(AbilityConfig abilityConfig)
         {
             AbilityInstanceConfig abilityInstanceConfig = new(abilityConfig);
-            abilityInstanceRegistry.Add(abilityConfig, abilityInstanceConfig);
             AbilityInstances.Add(abilityInstanceConfig);
             InvokeConfigModified();
             return abilityInstanceConfig;
@@ -50,13 +86,7 @@ namespace Ebla.Models
         
         public void RemoveAbility(AbilityConfig abilityConfig)
         {
-            if (!abilityInstanceRegistry.TryGetValue(abilityConfig, out AbilityInstanceConfig config))
-            {
-                return;
-            }
-
-            abilityInstanceRegistry.Remove(abilityConfig);
-            AbilityInstances.Remove(config);
+            AbilityInstances.RemoveFirstMatch(instance => instance.Ability == abilityConfig);
             InvokeConfigModified();
         }
     }

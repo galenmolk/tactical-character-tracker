@@ -16,21 +16,21 @@ namespace Ebla.Models
         public EncounterConfig()
         {
             Identify();
-            EnemyTypes = new List<EnemyTypeConfig>();
+            Enemies = new List<EnemyConfig>();
         }
         
-        [JsonProperty(ConfigKeys.ENEMY_TYPES_KEY)]
-        private List<EnemyTypeConfig> EnemyTypes { get; set; }
+        [JsonProperty(ConfigKeys.ENEMIES)]
+        private List<EnemyConfig> Enemies { get; set; }
 
-        public void AddEnemyType(EnemyTypeConfig enemyTypeConfig)
+        public void AddEnemy(EnemyConfig enemyConfig)
         {
-            EnemyTypes.Add(enemyTypeConfig);
+            Enemies.Add(enemyConfig);
             InvokeConfigModified();
         }
 
-        public bool RemoveEnemyType(EnemyTypeConfig enemyTypeConfig)
+        public bool RemoveEnemy(EnemyConfig enemyConfig)
         {
-            bool wasRemoved = EnemyTypes.Remove(enemyTypeConfig);
+            bool wasRemoved = Enemies.Remove(enemyConfig);
 
             if (wasRemoved)
             {
@@ -40,9 +40,9 @@ namespace Ebla.Models
             return wasRemoved;
         }
 
-        public IEnumerable<EnemyTypeConfig> GetEnemyTypes()
+        public IEnumerable<EnemyConfig> GetEnemies()
         {
-            return EnemyTypes;
+            return Enemies;
         }
 
         protected override void RemoveConfigFromLibrary()

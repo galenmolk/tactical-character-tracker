@@ -606,7 +606,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_TextViewport: {fileID: 1476077282422258146}
   m_TextComponent: {fileID: 1476077281483703549}
@@ -1306,7 +1306,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_TextViewport: {fileID: 3154059498335911953}
   m_TextComponent: {fileID: 3154059498471259406}
@@ -2004,7 +2004,7 @@ GameObject:
   - component: {fileID: 3686105406675442196}
   - component: {fileID: 2795149314560268950}
   m_Layer: 5
-  m_Name: EnemyTypeBlock
+  m_Name: EnemyBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2050,6 +2050,7 @@ MonoBehaviour:
   enemyTypeTitleText: {fileID: 7564980173999159915}
   defense: {fileID: 2260562404830643180}
   health: {fileID: 3785837540927268777}
+  notes: {fileID: 4269109987858003563}
   abilityRowParent: {fileID: 5946589135774449427}
 --- !u!114 &2795149314560268950
 MonoBehaviour:
@@ -3288,7 +3289,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3686105406675442196}
+        m_TargetAssemblyTypeName: HexedHeroes.EncounterRunner.EnemyBlock, Assembly-CSharp
+        m_MethodName: OnEndEditNotes
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -3537,15 +3550,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5756074665472910062, guid: e07469acf99c740b8a276a7099918ced, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5756074665472910062, guid: e07469acf99c740b8a276a7099918ced, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5756074665472910062, guid: e07469acf99c740b8a276a7099918ced, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 86.43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5756074665472910062, guid: e07469acf99c740b8a276a7099918ced, type: 3}
       propertyPath: m_SizeDelta.y
@@ -3553,11 +3566,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5756074665472910062, guid: e07469acf99c740b8a276a7099918ced, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5756074665472910062, guid: e07469acf99c740b8a276a7099918ced, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -17.5
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e07469acf99c740b8a276a7099918ced, type: 3}
