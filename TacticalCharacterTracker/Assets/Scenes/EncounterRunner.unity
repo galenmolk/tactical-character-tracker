@@ -1374,10 +1374,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 668844380}
     m_Modifications:
-    - target: {fileID: 7218887696381154640, guid: c375e6c8e6f0d46c7a67bf343284fb9e, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7218887696732632636, guid: c375e6c8e6f0d46c7a67bf343284fb9e, type: 3}
       propertyPath: m_Name
       value: FullscreenToggle
@@ -3796,16 +3792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a8c45012de42af892ec40c3f218f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolutionChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  allowFullscreen: 1
-  aspectRatioWidth: 16
-  aspectRatioHeight: 9
-  minWidthPixel: 512
-  minHeightPixel: 512
-  maxWidthPixel: 2048
-  maxHeightPixel: 2048
   onFullscreenWillChange:
     m_PersistentCalls:
       m_Calls:
@@ -3822,6 +3808,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  resolutionChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  allowFullscreen: 1
+  aspectRatioWidth: 16
+  aspectRatioHeight: 9
+  minWidthPixel: 512
+  minHeightPixel: 512
+  maxWidthPixel: 2048
+  maxHeightPixel: 2048
 --- !u!114 &1950153998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4052,7 +4048,7 @@ PrefabInstance:
     - target: {fileID: 6545714578380361230, guid: a15b7ba88dc7443c483d869799338da7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2113207179}
+      objectReference: {fileID: 2113207182}
     - target: {fileID: 6545714578380361230, guid: a15b7ba88dc7443c483d869799338da7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -4063,7 +4059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6545714578380361230, guid: a15b7ba88dc7443c483d869799338da7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Ebla.Utils.AppEventTrigger, Assembly-CSharp
+      value: MolkExtras.AppEventTrigger, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6545714578380361230, guid: a15b7ba88dc7443c483d869799338da7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -4093,7 +4089,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6545714578380361219, guid: a15b7ba88dc7443c483d869799338da7, type: 3}
   m_PrefabInstance: {fileID: 2113207176}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2113207179
+--- !u!114 &2113207182
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4102,9 +4098,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2113207178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b63331ac455d4fe69e46a5fa1bbe2ab3, type: 3}
+  m_Script: {fileID: 11500000, guid: c2ab3013781044885a85e2b2969fd042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appEvent: {fileID: 11400000, guid: b9defacf78dac4190b746ca7f794d0ea, type: 2}
 --- !u!1 &2126553728
 GameObject:
   m_ObjectHideFlags: 0
