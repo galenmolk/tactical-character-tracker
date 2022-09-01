@@ -6,7 +6,6 @@ namespace HexedHeroes.EncounterRunner
     {
         public void ToggleFullscreen()
         {
-            Debug.Log("Toggle Fullscreen");
             Screen.fullScreen = !Screen.fullScreen;
         }
     }
