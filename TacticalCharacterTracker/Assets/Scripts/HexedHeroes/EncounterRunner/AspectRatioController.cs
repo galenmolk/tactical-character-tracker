@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
+
+#if UNITY_STANDALONE_WIN
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 using System.Text;
-using UnityEngine.Events;
+#endif
 
 namespace HexedHeroes.EncounterRunner
 {
@@ -27,6 +30,9 @@ namespace HexedHeroes.EncounterRunner
     /// </summary>
     public class AspectRatioController : MonoBehaviour
     {
+        [SerializeField] private UnityEvent<bool> onFullscreenWillChange;
+        
+        #if UNITY_STANDALONE_WIN
         /// <summary>
         /// This event gets triggered every time the window resolution changes or the user toggles fullscreen.
         /// The parameters are the new width, height and fullscreen state (true means fullscreen).
@@ -174,9 +180,11 @@ namespace HexedHeroes.EncounterRunner
                 return;
             }
     
+            #if UNITY_STANDALONE_WIN
             // Register callback for then application wants to quit.
             Application.wantsToQuit += ApplicationWantsToQuit;
-    
+            #endif
+
             // Find window handle of main Unity window.
             EnumThreadWindows(GetCurrentThreadId(), (hWnd, lParam) =>
             {
@@ -313,8 +321,8 @@ namespace HexedHeroes.EncounterRunner
                 rc.Bottom += borderHeight;
     
                 // Trigger resolution change event.
-                resolutionChangedEvent.Invoke(setWidth, setHeight, Screen.fullScreen);
-    
+                InvokeResolutionChanged(setWidth, setHeight, Screen.fullScreen);
+                
                 // Write back changed window parameters.
                 Marshal.StructureToPtr(rc, lParam, true);
             }
@@ -322,7 +330,13 @@ namespace HexedHeroes.EncounterRunner
             // Call original WindowProc function.
             return CallWindowProc(oldWndProcPtr, hWnd, msg, wParam, lParam);
         }
-    
+
+        private void InvokeResolutionChanged(int w, int h, bool full)
+        {
+            resolutionChangedEvent.Invoke(w, h, full);
+            onFullscreenWillChange?.Invoke(full);
+        }
+
         /// <summary>
         /// Called by Unity.
         /// </summary>
@@ -356,13 +370,13 @@ namespace HexedHeroes.EncounterRunner
                 }
     
                 Screen.SetResolution(width, height, true);
-                resolutionChangedEvent.Invoke(width, height, true);
+                InvokeResolutionChanged(width, height, true);
             }
             else if (!Screen.fullScreen && wasFullscreenLastFrame)
             {
                 // Switch from fullscreen to window detected. Set previous window resolution.
                 Screen.SetResolution(setWidth, setHeight, false);
-                resolutionChangedEvent.Invoke(setWidth, setHeight, false);
+                InvokeResolutionChanged(setWidth, setHeight, false);
             }
             else if (!Screen.fullScreen && setWidth != -1 && setHeight != -1 && (Screen.width != setWidth || Screen.height != setHeight))
             {
@@ -372,7 +386,7 @@ namespace HexedHeroes.EncounterRunner
                 setWidth = Mathf.RoundToInt(Screen.height * aspect);
     
                 Screen.SetResolution(setWidth, setHeight, Screen.fullScreen);
-                resolutionChangedEvent.Invoke(setWidth, setHeight, Screen.fullScreen);
+                InvokeResolutionChanged(setWidth, setHeight, Screen.fullScreen);
             }
             else if (!Screen.fullScreen)
             {
@@ -393,7 +407,7 @@ namespace HexedHeroes.EncounterRunner
             {
                 setWidth = Screen.width;
                 setHeight = Screen.height;
-                resolutionChangedEvent.Invoke(setWidth, setHeight, Screen.fullScreen);           
+                InvokeResolutionChanged(setWidth, setHeight, Screen.fullScreen);
             }
             #endif
         }
@@ -416,6 +430,7 @@ namespace HexedHeroes.EncounterRunner
             return SetWindowLongPtr64(hWnd, nIndex, dwNewLong);
         }
     
+        #if UNITY_STANDALONE_WIN
         /// <summary>
         /// Called by Unity once application wants to quit.
         /// Returning false will abort and keep application alive. True will allow it to quit.
@@ -435,6 +450,7 @@ namespace HexedHeroes.EncounterRunner
     
             return true;
         }
+        #endif
     
         /// <summary>
         /// Restores old WindowProc callback, then quits.
@@ -454,5 +470,6 @@ namespace HexedHeroes.EncounterRunner
             quitStarted = true;
             Application.Quit();
         }
+    #endif
     }
 }

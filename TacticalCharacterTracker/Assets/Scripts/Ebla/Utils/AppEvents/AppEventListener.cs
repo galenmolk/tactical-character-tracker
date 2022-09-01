@@ -1,14 +1,15 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Ebla.Utils
+namespace MolkExtras
 {
     public class AppEventListener : MonoBehaviour
     {
+        #pragma warning disable CS0649
         [SerializeField] private AppEvent appEvent;
         [SerializeField] private UnityEvent onAppEventInvoked;
-
+        #pragma warning restore CS0649
+        
         public void RaiseEvent()
         {
             onAppEventInvoked?.Invoke();

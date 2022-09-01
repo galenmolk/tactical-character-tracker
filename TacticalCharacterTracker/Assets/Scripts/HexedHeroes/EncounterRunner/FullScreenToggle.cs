@@ -7,16 +7,14 @@ namespace HexedHeroes.EncounterRunner
     {
         [SerializeField] private Toggle toggle;
 
-        public void HandleFullscreenToggled()
+        public void HandleFullscreenChanged(bool value)
         {
-            bool isFullscreen = Screen.fullScreen;
-            
-            if (isFullscreen != toggle.isOn)
+            if (toggle.isOn != value)
             {
-                SetToggleWithState(isFullscreen);
+                SetToggleWithState(value);
             }
         }
-        
+
         private void Start()
         {
             SetToggleWithState(Screen.fullScreen);

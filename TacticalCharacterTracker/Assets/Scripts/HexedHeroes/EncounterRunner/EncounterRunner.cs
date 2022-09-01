@@ -27,7 +27,7 @@ namespace HexedHeroes.EncounterRunner
             ConfirmationController.Instance.QuitApp(Quit);
         }
 
-        private void Quit()
+        private static void Quit()
         {
             Application.Quit();
         }

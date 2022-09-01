@@ -57,6 +57,7 @@ namespace HexedHeroes.EncounterRunner
         public void Open()
         {
             RectTransform.anchoredPosition = OffPos;
+            MakeCanvasGroupVisible();
             RectTransform.DOAnchorPosY(ON_POSITION_Y, tweenDuration).OnComplete(EnableCanvasGroup);
         }
 
@@ -82,6 +83,11 @@ namespace HexedHeroes.EncounterRunner
         private void EnableCanvasGroup()
         {
             canvasGroup.SetIsActive(true);
+        }
+
+        private void MakeCanvasGroupVisible()
+        {
+            canvasGroup.SetIsVisible(true);
         }
 
         private void DisableCanvasGroup()

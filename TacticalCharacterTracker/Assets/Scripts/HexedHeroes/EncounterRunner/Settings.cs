@@ -4,9 +4,9 @@ namespace HexedHeroes.EncounterRunner
 {
     public class Settings : MonoBehaviour
     {
-        public void ToggleFullscreen()
+        public void ToggleFullscreen(bool value)
         {
-            Screen.fullScreen = !Screen.fullScreen;
+            Screen.fullScreen = value;
         }
     }
 }

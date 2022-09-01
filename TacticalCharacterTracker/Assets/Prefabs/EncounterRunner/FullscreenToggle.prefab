@@ -465,10 +465,11 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5486826207927726483}
-        m_TargetAssemblyTypeName: Ebla.Utils.AppEventTrigger, Assembly-CSharp
+      - m_Target: {fileID: 6618818349428527072}
+        m_TargetAssemblyTypeName: MolkExtras.GenericAppEventTrigger`1[[System.Boolean,
+          mscorlib
         m_MethodName: Trigger
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -529,9 +530,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7218887696732632639}
-  - component: {fileID: 5486826207927726483}
-  - component: {fileID: 268863846773507701}
   - component: {fileID: 3017794916685759436}
+  - component: {fileID: 3441943666085907695}
+  - component: {fileID: 6618818349428527072}
   m_Layer: 5
   m_Name: FullscreenToggle
   m_TagString: Untagged
@@ -546,7 +547,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7218887696732632636}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -558,50 +559,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -17.3, y: 37.5}
+  m_AnchoredPosition: {x: -17.300049, y: 37.5}
   m_SizeDelta: {x: 112.566, y: 75}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &5486826207927726483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7218887696732632636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b63331ac455d4fe69e46a5fa1bbe2ab3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  appEvent: {fileID: 11400000, guid: 3b6eac61cc45449d681a017ee4000a5e, type: 2}
---- !u!114 &268863846773507701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7218887696732632636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 721bcf631fa64e2b9df956d59a8da9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  appEvent: {fileID: 11400000, guid: 3b6eac61cc45449d681a017ee4000a5e, type: 2}
-  onAppEventInvoked:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3017794916685759436}
-        m_TargetAssemblyTypeName: HexedHeroes.EncounterRunner.FullScreenToggle, Assembly-CSharp
-        m_MethodName: HandleFullscreenToggled
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &3017794916685759436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,3 +575,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: {fileID: 7218887696381154640}
+--- !u!114 &3441943666085907695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7218887696732632636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65fabf3338c4d5e99fc1e5aff1f31c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appEvent: {fileID: 11400000, guid: 7a37718e21fe74e7da290c7b75ca0bf3, type: 2}
+  onAppEventInvoked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3017794916685759436}
+        m_TargetAssemblyTypeName: HexedHeroes.EncounterRunner.FullScreenToggle, Assembly-CSharp
+        m_MethodName: HandleFullscreenChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6618818349428527072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7218887696732632636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5b35936f534b2b89fa4098491a8721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appEvent: {fileID: 11400000, guid: 9dd68f72bac5143c08b65916afb8b17b, type: 2}
