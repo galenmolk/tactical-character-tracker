@@ -3051,6 +3051,7 @@ GameObject:
   - component: {fileID: 1524225303}
   - component: {fileID: 1524225304}
   - component: {fileID: 1524225305}
+  - component: {fileID: 1524225306}
   m_Layer: 5
   m_Name: EncounterLibrary
   m_TagString: Untagged
@@ -3132,6 +3133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenDuration: 0.7
+  canvasGroup: {fileID: 0}
   itemParent: {fileID: 1228810809}
   itemPrefab: {fileID: 1221037057, guid: 9fa4f454064ed47de8e3fc01938b095f, type: 3}
 --- !u!114 &1524225304
@@ -3190,6 +3192,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!225 &1524225306
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524225299}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1538848014
 GameObject:
   m_ObjectHideFlags: 0
@@ -4110,7 +4124,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.00001812, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 75}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1978994522

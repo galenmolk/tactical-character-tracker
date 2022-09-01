@@ -3,6 +3,7 @@ using System.IO;
 using DG.Tweening;
 using Ebla.Models;
 using Ebla.Utils;
+using HexedHeroes.Utils;
 using MolkExtras;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -20,7 +21,18 @@ namespace HexedHeroes.EncounterRunner
         private const float ON_POSITION_Y = 0f;
         private static float OffPositionY => Screen.height / EncounterRunner.Instance.CanvasScaleFactor;
         
+        private Vector2 offPosition = Vector2.zero;
+        private Vector2 OffPos
+        {
+            get
+            {
+                offPosition.y = OffPositionY;
+                return offPosition;
+            }
+        }
+        
         [SerializeField] private float tweenDuration;
+        [SerializeField] private CanvasGroup canvasGroup;
         
         private RectTransform RectTransform
         {
@@ -44,12 +56,13 @@ namespace HexedHeroes.EncounterRunner
 
         public void Open()
         {
-            RectTransform.DOAnchorPosY(ON_POSITION_Y, tweenDuration);
+            RectTransform.anchoredPosition = OffPos;
+            RectTransform.DOAnchorPosY(ON_POSITION_Y, tweenDuration).OnComplete(EnableCanvasGroup);
         }
 
         public void Close()
         {
-            RectTransform.DOAnchorPosY(OffPositionY, tweenDuration);
+            RectTransform.DOAnchorPosY(OffPositionY, tweenDuration).OnComplete(DisableCanvasGroup);
         }
 
         public void NewEncounter()
@@ -64,6 +77,16 @@ namespace HexedHeroes.EncounterRunner
                 CreateEncounterListItem(encounterConfig);
                 SaveConfigToDisk(encounterConfig);
             });
+        }
+
+        private void EnableCanvasGroup()
+        {
+            canvasGroup.SetIsActive(true);
+        }
+
+        private void DisableCanvasGroup()
+        {
+            canvasGroup.SetIsActive(false);
         }
         
         private void Start()

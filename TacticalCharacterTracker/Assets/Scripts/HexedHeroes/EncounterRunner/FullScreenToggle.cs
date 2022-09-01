@@ -10,6 +10,7 @@ namespace HexedHeroes.EncounterRunner
         public void HandleFullscreenToggled()
         {
             bool isFullscreen = Screen.fullScreen;
+            
             if (isFullscreen != toggle.isOn)
             {
                 SetToggleWithState(isFullscreen);
