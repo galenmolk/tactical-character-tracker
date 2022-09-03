@@ -24,7 +24,7 @@ namespace HexedHeroes.Player
 
         private void Awake()
         {
-            if (Application.internetReachability == NetworkReachability.NotReachable || loadLocalConfig)
+            if (loadLocalConfig || Application.internetReachability == NetworkReachability.NotReachable)
             {
                 LoadCharacterConfigs();
                 return;
@@ -58,7 +58,7 @@ namespace HexedHeroes.Player
             SceneManager.LoadScene(SceneKeys.CHARACTER_SELECT);
         }
 
-        private List<CharacterConfig> GetCharacterListConfigForJson(string json)
+        private static List<CharacterConfig> GetCharacterListConfigForJson(string json)
         {
             return JsonConvert.DeserializeObject<List<CharacterConfig>>(json);
         }
@@ -66,8 +66,10 @@ namespace HexedHeroes.Player
         private List<CharacterConfig> GetConfigOrFallback()
         {
             if (loadLocalConfig)
+            {
                 return GetCharacterListConfigForJson(fallbackCharacterListConfig.text);
-        
+            }
+
             return GetCharacterListConfigForJson(GetCharacterListJson()) ?? 
                    GetCharacterListConfigForJson(fallbackCharacterListConfig.text);
         }
