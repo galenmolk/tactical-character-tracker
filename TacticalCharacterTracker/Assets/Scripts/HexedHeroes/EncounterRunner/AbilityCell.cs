@@ -104,5 +104,10 @@ namespace HexedHeroes.EncounterRunner
         {
             CooldownController.ReduceActive -= ReduceCooldown;
         }
+
+        private void OnDestroy()
+        {
+            OnDelete = null;
+        }
     }
 }

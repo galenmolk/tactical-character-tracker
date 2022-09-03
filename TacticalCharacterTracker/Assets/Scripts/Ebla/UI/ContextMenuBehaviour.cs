@@ -10,7 +10,26 @@ namespace Ebla.UI
         [Serializable]
         public class Option
         {
-            public string Label => label;
+            public string GetLabel()
+            {
+                if (!platformDependent)
+                {
+                    return label;
+                }
+                
+                #if UNITY_STANDALONE_WIN
+                return winLabel;
+                #elif UNITY_STANDALONE_OSX
+                return osxLabel;
+                #else
+                return label;
+                #endif
+            }
+
+            [SerializeField] private bool platformDependent;
+            [SerializeField] private string osxLabel;
+            [SerializeField] private string winLabel;
+            
             [SerializeField] private string label;
             
             public UnityEvent Action => action;

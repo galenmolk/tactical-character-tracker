@@ -613,8 +613,48 @@ PrefabInstance:
       value: 0.8509804
       objectReference: {fileID: 0}
     - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
       propertyPath: options.Array.data[0].label
       value: Open
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[1].label
+      value: Reveal on Disk
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[2].label
+      value: Delete
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[1].osxLabel
+      value: Reveal in Finder
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[1].winLabel
+      value: Reveal in Explorer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[0].addDividerBelow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[1].addDividerBelow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[1].platformDependent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[2].action.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
       propertyPath: options.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -625,11 +665,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1221037057}
     - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1221037057}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
       propertyPath: options.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Run
       objectReference: {fileID: 0}
     - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
       propertyPath: options.Array.data[1].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenInExplorer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Delete
       objectReference: {fileID: 0}
     - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
@@ -639,6 +691,14 @@ PrefabInstance:
     - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
       propertyPath: options.Array.data[1].action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: HexedHeroes.EncounterRunner.EncounterListItem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HexedHeroes.EncounterRunner.EncounterListItem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087416440150398324, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
+      propertyPath: options.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2804573057751915763, guid: 8b66ad15444e0450aa1930496f590189, type: 3}
       propertyPath: m_AnchorMax.y

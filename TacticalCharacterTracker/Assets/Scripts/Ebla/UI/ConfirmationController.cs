@@ -12,9 +12,9 @@ namespace Ebla.UI
 
         [Space(5), Header("Confirmation Parameter Assets")]
         [SerializeField] private ConfirmationParams deleteConfigParams;
+        [SerializeField] private ConfirmationParams encounterInfoParams;
 
         [SerializeField] private ConfirmationParams quitAppParams;
-        
         
         private ConfirmationOverlay overlayInstance;
 
@@ -33,10 +33,15 @@ namespace Ebla.UI
 
         public void DeleteFolder(FolderConfig folderConfig)
         {
-            string keyWord = StringUtils.GetCountDistinction("file", folderConfig.Configs.Count);
             deleteConfigParams.SetTitle(folderConfig.GetDeletionText());
             deleteConfigParams.LoadAction(folderConfig.DeleteConfig);
             CreateOverlay(deleteConfigParams);
+        }
+
+        public void EncounterInfo(EncounterConfig encounterConfig)
+        {
+            encounterInfoParams.SetTitle(encounterConfig.Name);
+            CreateOverlay(encounterInfoParams);
         }
 
         private void CreateOverlay(ConfirmationParams confirmationParams)

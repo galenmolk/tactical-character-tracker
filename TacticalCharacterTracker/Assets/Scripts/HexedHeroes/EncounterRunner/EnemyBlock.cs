@@ -66,7 +66,8 @@ namespace HexedHeroes.EncounterRunner
         
         public void IncreaseEnemyQuantity()
         {
-            CharacterInstanceConfig characterInstanceConfig = new(Config);
+            CharacterInstanceConfig characterInstanceConfig = new();
+            characterInstanceConfig.ConfigureInstance(Config);
             Config.AddInstance(characterInstanceConfig);
             CreateEnemy(Config.CharacterInstances.Count - 1);
         }

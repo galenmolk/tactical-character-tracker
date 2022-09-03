@@ -41,6 +41,7 @@ namespace Ebla.Models
                 return Path + PathUtils.PATH_DELIMITER + Name;
             }
         }
+
         public DateTime DateCreated { get; private set; }
         public DateTime DateModified { get; private set; }
 
@@ -121,7 +122,7 @@ namespace Ebla.Models
         {
             return $"Delete {(string.IsNullOrWhiteSpace(Name) ? BaseName : Name)}?";
         }
-
+        
         protected virtual void InvokeTypedOnConfigRemoved()
         {
             
@@ -134,11 +135,10 @@ namespace Ebla.Models
 
         protected void InvokeConfigModified()
         {
-            MarkAsDirty();
             OnAnyConfigModified?.Invoke();
             OnConfigModified?.Invoke(this);
         }
-
+        
         [OnSerialized]
         private void SerializedCallback(StreamingContext context)
         {
@@ -169,11 +169,6 @@ namespace Ebla.Models
         {
             DateCreated = DateTime.Now;
             DateModified = DateCreated;
-        }
-
-        private void MarkAsDirty()
-        {
-            DateModified = DateTime.Now;
         }
     }
 }

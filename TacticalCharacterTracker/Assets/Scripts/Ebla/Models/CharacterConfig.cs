@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Ebla.Utils;
@@ -10,8 +9,6 @@ namespace Ebla.Models
 {
     public abstract class CharacterConfig : BaseConfig
     {
-        public event Action<AbilityConfig> OnAbilityDeleted; 
-
         [JsonProperty(ConfigKeys.HEALTH_KEY)]
         public int Health { get; private set; }
         

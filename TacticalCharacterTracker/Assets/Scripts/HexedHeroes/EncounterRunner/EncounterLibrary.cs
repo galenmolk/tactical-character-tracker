@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using DG.Tweening;
 using Ebla.Models;
 using Ebla.Utils;
@@ -107,7 +109,7 @@ namespace HexedHeroes.EncounterRunner
         {
             DirectoryInfo saveFolder = new(SavePath);
             FileSystemInfo[] files = saveFolder.GetFileSystemInfos(JSON_SEARCH_PATTERN);
-
+            
             foreach (FileSystemInfo file in files)
             {
                 if (!TryGetEncounterFromFile(file, out EncounterConfig encounterConfig))
@@ -121,6 +123,7 @@ namespace HexedHeroes.EncounterRunner
 
         private void CreateEncounterListItem(EncounterConfig encounterConfig)
         {
+            encounterConfig.FilePath = GetFullSavePath(encounterConfig);
             EncounterListItem item = Instantiate(itemPrefab, itemParent);
             item.Configure(encounterConfig);
                 
@@ -168,7 +171,8 @@ namespace HexedHeroes.EncounterRunner
 
         private static bool TryGetEncounterFromFile(FileSystemInfo fileInfo, out EncounterConfig encounterConfig)
         {
-            using StreamReader sr = new StreamReader(fileInfo.FullName);
+            string path = fileInfo.FullName;
+            using StreamReader sr = new StreamReader(path);
             string json = sr.ReadToEnd();
             encounterConfig = JsonConvert.DeserializeObject<EncounterConfig>(json);
             return encounterConfig != null;
@@ -213,7 +217,7 @@ namespace HexedHeroes.EncounterRunner
 
         private static string GetFullSavePath(BaseConfig config)
         {
-            return SavePath + config.Id + JSON_EXTENSION;
+            return new StringBuilder().Append(SavePath).Append(config.Id).Append(JSON_EXTENSION).ToString();
         }
     }
 }

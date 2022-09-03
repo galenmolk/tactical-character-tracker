@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using Ebla.Libraries;
 using Ebla.Utils;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 
 namespace Ebla.Models
 {
     public class DungeonConfig : BaseConfig
     {
+        [UsedImplicitly]
         public static event Action<DungeonConfig> OnLoadIntoFolder;
         
         public override string BaseName => "Untitled Dungeon";

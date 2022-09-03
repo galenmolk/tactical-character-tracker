@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Ebla.Utils;
+using HexedHeroes.EncounterRunner;
 using MolkExtras;
 using Newtonsoft.Json;
 
@@ -7,7 +8,7 @@ namespace Ebla.Models
 {
     public class CharacterInstanceConfig : BaseConfig
     {
-        [JsonIgnore] public CharacterConfig Character { get; }
+        [JsonIgnore] private CharacterConfig Character { get; set; }
 
         [JsonProperty(ConfigKeys.CURRENT_HEALTH_KEY)]
         public int CurrentHealth { get; private set; }
@@ -33,26 +34,25 @@ namespace Ebla.Models
             UpdateName(newName);
             return newName;
         }
-        
-        public CharacterInstanceConfig(CharacterConfig character)
+
+        public void ConfigureInstance(CharacterConfig characterConfig)
         {
-            Character = character;
+            Character = characterConfig;
             
             AbilityInstances = new List<AbilityInstanceConfig>();
 
-            foreach (AbilityConfig characterAbility in character.Abilities)
+            foreach (AbilityConfig characterAbility in characterConfig.Abilities)
             {
                 AbilityInstances.Add(new AbilityInstanceConfig(characterAbility));
             }
             
-            CurrentHealth = character.Health;
-            CurrentDefense = character.Defense;
+            CurrentHealth = characterConfig.Health;
+            CurrentDefense = characterConfig.Defense;
         }
+        
 
-        public CharacterInstanceConfig()
-        {
-            
-        }
+        [JsonConstructor]
+        public CharacterInstanceConfig() { }
 
         public void UpdateHealth(int newHealth)
         {

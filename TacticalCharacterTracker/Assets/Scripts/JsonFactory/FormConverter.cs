@@ -11,7 +11,7 @@ namespace JsonFactory
             
             writer.WriteStartObject();
 
-            var properties = form.Properties;
+            PropertyAsset[] properties = form.Properties;
             for (int i = 0, length = properties.Length; i < length; i++)
             {
                 PropertyAsset property = properties[i];
@@ -21,11 +21,17 @@ namespace JsonFactory
             writer.WriteEndObject();
         }
 
-        public override object? ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var t = serializer.Deserialize(reader);
-            var iv = JsonConvert.DeserializeObject<Form>(t.ToString());
-            return iv;        
+            object obj = serializer.Deserialize(reader);
+
+            if (obj == null)
+            {
+                return null;
+            }
+
+            Form form = JsonConvert.DeserializeObject<Form>(obj.ToString());
+            return form;
         }
 
         public override bool CanConvert(Type objectType)

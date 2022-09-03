@@ -8,7 +8,7 @@ namespace HexedHeroes.Creator
     {
         public AbilityConfig AbilityConfig { get; private set; }
 
-        [SerializeField] private TMP_Text name;
+        [SerializeField] private TMP_Text cardName;
         [SerializeField] private TMP_Text cooldownText;
 
         public void Initialize(AbilityConfig _abilityConfig)
@@ -19,7 +19,7 @@ namespace HexedHeroes.Creator
         public void Display(AbilityConfig _abilityConfig)
         {
             AbilityConfig = _abilityConfig;
-            name.text = AbilityConfig.name;
+            cardName.text = AbilityConfig.name;
             cooldownText.text = AbilityConfig.isPassive ? AbilityConfig.PASSIVE_TEXT : AbilityConfig.cooldown.ToString();
         }
         

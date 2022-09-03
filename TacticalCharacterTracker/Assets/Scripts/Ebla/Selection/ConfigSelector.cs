@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Ebla.Models;
 using Ebla.Utils;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Ebla.Selection
@@ -11,6 +12,7 @@ namespace Ebla.Selection
         where TParentConfig : BaseConfig
         where TOption : BaseOption<TConfig, TOption>
     {
+        [UsedImplicitly]
         public event Action OnClose;
         
         [SerializeField] protected Transform optionParent;

@@ -67,7 +67,7 @@ namespace HexedHeroes.EncounterRunner
         
         private void CreateEnemyTypes()
         {
-            foreach (var enemyTypeConfig in ActiveConfig.GetEnemies())
+            foreach (EnemyConfig enemyTypeConfig in ActiveConfig.GetEnemies())
             {
                 CreateBlockForEnemyType(enemyTypeConfig);
             }

@@ -18,6 +18,7 @@ namespace Ebla.UI
         public string ConfirmButtonText => confirmButtonText;
         public string DenyButtonText => denyButtonText;
         public Sprite Icon => icon;
+        public bool IsDenyButtonActive => isDenyButtonActive;
 
         private readonly UnityEvent actionToConfirm = new();
         
@@ -37,6 +38,8 @@ namespace Ebla.UI
         [Space(5), Header("Icon")]
         [SerializeField] private Sprite icon;
 
+        [SerializeField] private bool isDenyButtonActive;
+        
         public void SetTitle(string newTitle)
         {
             title = newTitle;
@@ -45,7 +48,11 @@ namespace Ebla.UI
         public void LoadAction(UnityAction action)
         {
             actionToConfirm?.RemoveAllListeners();
-            actionToConfirm?.AddListener(action);
+            
+            if (action != null)
+            {
+                actionToConfirm?.AddListener(action);
+            }
         }
 
         public void InvokeAction()

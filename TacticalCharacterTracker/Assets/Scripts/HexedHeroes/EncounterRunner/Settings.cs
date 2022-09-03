@@ -6,7 +6,14 @@ namespace HexedHeroes.EncounterRunner
     {
         public void ToggleFullscreen(bool value)
         {
-            Screen.fullScreen = value;
+            SetMode(value ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed);
+        }
+
+        private void SetMode(FullScreenMode mode)
+        {
+            Screen.fullScreenMode = mode;
+            Resolution currentResolution = Screen.currentResolution;
+            Screen.SetResolution(currentResolution.width, currentResolution.height, mode);
         }
     }
 }

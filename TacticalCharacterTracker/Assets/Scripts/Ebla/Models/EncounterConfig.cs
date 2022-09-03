@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Ebla.Libraries;
 using Ebla.Utils;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 
 namespace Ebla.Models
@@ -9,18 +10,20 @@ namespace Ebla.Models
     public class EncounterConfig : BaseConfig
     {
         public static event Action<EncounterConfig> OnEncounterDeleted; 
+        [UsedImplicitly]
         public static event Action<EncounterConfig> OnLoadIntoFolder;
         
         public override string BaseName => "Untitled Encounter";
 
+        [JsonIgnore]
+        public string FilePath { get; set; }
+
         public EncounterConfig()
         {
             Identify();
-            Enemies = new List<EnemyConfig>();
         }
-        
-        [JsonProperty(ConfigKeys.ENEMIES)]
-        private List<EnemyConfig> Enemies { get; set; }
+
+        [JsonProperty(ConfigKeys.ENEMIES)] private List<EnemyConfig> Enemies { get; set; } = new();
 
         public void AddEnemy(EnemyConfig enemyConfig)
         {
@@ -28,7 +31,7 @@ namespace Ebla.Models
             InvokeConfigModified();
         }
 
-        public bool RemoveEnemy(EnemyConfig enemyConfig)
+        public void RemoveEnemy(EnemyConfig enemyConfig)
         {
             bool wasRemoved = Enemies.Remove(enemyConfig);
 
@@ -36,8 +39,6 @@ namespace Ebla.Models
             {
                 InvokeConfigModified();
             }
-
-            return wasRemoved;
         }
 
         public IEnumerable<EnemyConfig> GetEnemies()

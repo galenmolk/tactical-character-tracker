@@ -1,3 +1,4 @@
+using MolkExtras;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,14 +16,17 @@ namespace HexedHeroes.EncounterRunner
             }
         }
 
-        private void Start()
-        {
-            SetToggleWithState(Screen.fullScreen);
-        }
-
         private void SetToggleWithState(bool state)
         {
             toggle.SetIsOnWithoutNotify(state);
+        }
+
+        private void Start()
+        {
+            this.ExecuteAfterDelay(1f, () =>
+            {
+                SetToggleWithState(Screen.fullScreen);
+            });
         }
     }
 }

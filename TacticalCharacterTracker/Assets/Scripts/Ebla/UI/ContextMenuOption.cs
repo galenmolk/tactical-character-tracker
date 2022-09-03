@@ -17,7 +17,9 @@ namespace Ebla.UI
             get
             {
                 if (rectTransform == null)
+                {
                     rectTransform = transform as RectTransform;
+                }
 
                 return rectTransform;
             }
@@ -33,7 +35,7 @@ namespace Ebla.UI
         public void Configure(ContextMenuBehaviour.Option option)
         {
             action = option.Action;
-            text.text = option.Label;
+            text.text = option.GetLabel();
             button.onClick.AddListener(OnClick);
         }
 

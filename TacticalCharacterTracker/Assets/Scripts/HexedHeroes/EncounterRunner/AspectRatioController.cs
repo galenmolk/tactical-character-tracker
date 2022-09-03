@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+#if UNITY_STANDALONE_OSX
+using UnityEngine.UI;
+#endif
+
 #if UNITY_STANDALONE_WIN
 using System;
 using System.Collections;
@@ -31,8 +35,17 @@ namespace HexedHeroes.EncounterRunner
     public class AspectRatioController : MonoBehaviour
     {
         [SerializeField] private UnityEvent<bool> onFullscreenWillChange;
+
+        #if UNITY_STANDALONE_OSX 
+        private void Awake()
+        {
+            CanvasScaler scaler = gameObject.AddComponent<CanvasScaler>();
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1920f, 1080f);
+        }
+        #endif
         
-        #if UNITY_STANDALONE_WIN
+        #if UNITY_STANDALONE_WIN 
         /// <summary>
         /// This event gets triggered every time the window resolution changes or the user toggles fullscreen.
         /// The parameters are the new width, height and fullscreen state (true means fullscreen).
