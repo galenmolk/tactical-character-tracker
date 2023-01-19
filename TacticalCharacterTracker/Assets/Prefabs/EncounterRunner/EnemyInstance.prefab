@@ -953,6 +953,8 @@ GameObject:
   - component: {fileID: 2304061597248281277}
   - component: {fileID: 2368829457487438233}
   - component: {fileID: 538588752377793955}
+  - component: {fileID: 2366686666275708421}
+  - component: {fileID: 5827456052259350819}
   m_Layer: 5
   m_Name: EnemyInstance
   m_TagString: Untagged
@@ -1052,6 +1054,33 @@ MonoBehaviour:
   defenseCell: {fileID: 5261938033011131864}
   notesCell: {fileID: 3898174496448326939}
   abilityCellPrefab: {fileID: 1063184934425975704, guid: 1e8bf4c8fb1b64ab686ba7a6028501ce, type: 3}
+--- !u!225 &2366686666275708421
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451759682490343929}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &5827456052259350819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451759682490343929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b58831bf2d2b4feb96a6046b070bc2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 2366686666275708421}
+  fadeDuration: 0.15
+  autoFadeInOnStart: 1
 --- !u!1 &7759618871447697839
 GameObject:
   m_ObjectHideFlags: 0

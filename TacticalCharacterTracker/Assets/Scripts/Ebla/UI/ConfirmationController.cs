@@ -1,4 +1,5 @@
 using Ebla.Models;
+using HexedHeroes.EncounterRunner;
 using MolkExtras;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,6 +15,8 @@ namespace Ebla.UI
         [SerializeField] private ConfirmationParams deleteConfigParams;
         [SerializeField] private ConfirmationParams encounterInfoParams;
 
+        [SerializeField] private ConfirmationParams overwriteDefaultParams;
+        [SerializeField] private ConfirmationParams loadDefaultParams;
         [SerializeField] private ConfirmationParams quitAppParams;
         
         private ConfirmationOverlay overlayInstance;
@@ -42,6 +45,18 @@ namespace Ebla.UI
         {
             encounterInfoParams.SetTitle(encounterConfig.Name);
             CreateOverlay(encounterInfoParams);
+        }
+
+        public void SaveDefault()
+        {
+            overwriteDefaultParams.LoadAction(EncounterRunner.Instance.SaveDefault);
+            CreateOverlay(overwriteDefaultParams);
+        }
+
+        public void LoadDefault()
+        {
+            loadDefaultParams.LoadAction(EncounterRunner.Instance.LoadDefault);
+            CreateOverlay(loadDefaultParams);
         }
 
         private void CreateOverlay(ConfirmationParams confirmationParams)

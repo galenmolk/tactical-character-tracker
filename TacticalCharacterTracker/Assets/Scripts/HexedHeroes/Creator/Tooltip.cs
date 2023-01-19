@@ -17,7 +17,9 @@ namespace HexedHeroes.Creator
             get
             {
                 if (rectTransform == null)
+                {
                     rectTransform = transform as RectTransform;
+                }
 
                 return rectTransform;
             }
@@ -30,8 +32,10 @@ namespace HexedHeroes.Creator
         private void Activate(TooltipElementEventArgs eventArgs)
         {
             if (currentArgs?.Element == eventArgs.Element)
+            {
                 return;
-        
+            }
+
             currentArgs = eventArgs;
             tooltipText.text = eventArgs.Element.Text;
             this.ExecuteAtEndOfFrame(() =>
@@ -49,7 +53,9 @@ namespace HexedHeroes.Creator
         private void Deactivate(TooltipElementEventArgs eventArgs)
         {
             if (currentArgs?.Element != eventArgs.Element)
+            {
                 return;
+            }
 
             currentArgs = null;
             canvasGroup.SetIsVisible(false, fadeDuration);

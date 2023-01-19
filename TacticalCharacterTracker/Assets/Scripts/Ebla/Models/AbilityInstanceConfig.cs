@@ -1,9 +1,11 @@
+using System;
 using Ebla.Utils;
 using Newtonsoft.Json;
+using UnityEngine.Scripting;
 
 namespace Ebla.Models
 {
-    public class AbilityInstanceConfig : BaseConfig
+    public class AbilityInstanceConfig : BaseConfig, ICloneable
     {
         [JsonIgnore] public AbilityConfig Ability { get; set; }
 
@@ -12,6 +14,24 @@ namespace Ebla.Models
 
         [JsonProperty(ConfigKeys.IS_ACTIVATED_KEY)]
         public bool IsActivated { get; private set; }
+
+        public object Clone()
+        {
+            return new AbilityInstanceConfig(this);
+        }
+
+        [Preserve]
+        public AbilityInstanceConfig()
+        {
+
+        }
+
+        public AbilityInstanceConfig(AbilityInstanceConfig instance)
+        {
+            Ability = instance.Ability;
+            CurrentCooldownTurns = instance.CurrentCooldownTurns;
+            IsActivated = instance.IsActivated;
+        }
 
         public AbilityInstanceConfig(AbilityConfig ability)
         {

@@ -133,7 +133,7 @@ namespace Ebla.Models
             Debug.LogWarning("RemoveConfigFromLibrary not implemented.");
         }
 
-        protected void InvokeConfigModified()
+        protected virtual void InvokeConfigModified()
         {
             OnAnyConfigModified?.Invoke();
             OnConfigModified?.Invoke(this);

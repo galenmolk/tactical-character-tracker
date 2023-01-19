@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Ebla.Utils;
@@ -7,22 +8,22 @@ using UnityEngine;
 
 namespace Ebla.Models
 {
-    public abstract class CharacterConfig : BaseConfig
+    public abstract class CharacterConfig : BaseConfig 
     {
         [JsonProperty(ConfigKeys.HEALTH_KEY)]
-        public int Health { get; private set; }
+        public int Health { get; protected set; }
         
         [JsonProperty(ConfigKeys.DEFENSE_KEY)]
-        public int Defense { get; private set; }
+        public int Defense { get; protected set; }
         
         [JsonProperty(ConfigKeys.SPEED_KEY)]
-        public int Speed { get; private set; }
+        public int Speed { get; protected set; }
         
         [JsonProperty(ConfigKeys.ABILITIES_KEY)]
-        public List<AbilityConfig> Abilities { get; private set; }
+        public List<AbilityConfig> Abilities { get; protected set; }
                 
         [JsonProperty(ConfigKeys.CHARACTER_INSTANCES_KEY)]
-        public List<CharacterInstanceConfig> CharacterInstances { get; private set; }
+        public List<CharacterInstanceConfig> CharacterInstances { get; protected set; }
 
         protected CharacterConfig()
         {
@@ -78,20 +79,14 @@ namespace Ebla.Models
             InvokeConfigModified();
         }
 
-        [OnDeserialized]
-        private void OnDeserializedCallback(StreamingContext context)
+        public void AssociateAbilityInstances()
         {
-            if (!CharacterInstances.HasItems() || !Abilities.HasItems())
-            {
-                return;
-            }
-            
             for (int abilityIndex = 0, abilityCount = Abilities.Count; abilityIndex < abilityCount; abilityIndex++)
             {
                 foreach (CharacterInstanceConfig instance in CharacterInstances)
                 {
                     List<AbilityInstanceConfig> abilityInstances = instance.AbilityInstances;
-                    
+
                     if (abilityInstances.Count != abilityCount)
                     {
                         Debug.LogError($"{Name}: Mismatch between Character Instance Abilities and Character Abilities.");
@@ -101,6 +96,17 @@ namespace Ebla.Models
                     abilityInstances[abilityIndex].Ability = Abilities[abilityIndex];
                 }
             }
+        }
+
+        [OnDeserialized]
+        private void OnDeserializedCallback(StreamingContext context)
+        {
+            if (!CharacterInstances.HasItems() || !Abilities.HasItems())
+            {
+                return;
+            }
+
+            AssociateAbilityInstances();
         }
     }
 }

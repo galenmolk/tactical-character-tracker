@@ -2003,6 +2003,8 @@ GameObject:
   - component: {fileID: 3686105406675442201}
   - component: {fileID: 3686105406675442196}
   - component: {fileID: 2795149314560268950}
+  - component: {fileID: 6170685561627432163}
+  - component: {fileID: 1686190697918129619}
   m_Layer: 5
   m_Name: EnemyBlock
   m_TagString: Untagged
@@ -2052,6 +2054,8 @@ MonoBehaviour:
   health: {fileID: 3785837540927268777}
   notes: {fileID: 4269109987858003563}
   abilityRowParent: {fileID: 5946589135774449427}
+  shrinkDuration: 0.15
+  spacerPrefab: {fileID: 4170803363438240490, guid: 47765a925fc2541dcb9ad4a65491f5fa, type: 3}
 --- !u!114 &2795149314560268950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2078,6 +2082,33 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!225 &6170685561627432163
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3686105406675442202}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1686190697918129619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3686105406675442202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b58831bf2d2b4feb96a6046b070bc2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 6170685561627432163}
+  fadeDuration: 0.15
+  autoFadeInOnStart: 1
 --- !u!1 &3686105406773542882
 GameObject:
   m_ObjectHideFlags: 0

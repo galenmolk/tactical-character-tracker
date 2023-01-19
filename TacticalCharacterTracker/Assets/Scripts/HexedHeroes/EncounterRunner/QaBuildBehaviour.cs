@@ -10,7 +10,7 @@ namespace HexedHeroes.EncounterRunner
 
         private void Awake()
         {
-            #if QA_BUILD && !UNITY_EDITOR
+            #if QA_BUILD
             onQaBuildEnabled?.Invoke();
             #else
             onQaBuildDisabled?.Invoke();

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Ebla.Models;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 namespace HexedHeroes.EncounterRunner
 {
@@ -11,6 +13,10 @@ namespace HexedHeroes.EncounterRunner
         public event Action<EnemyBlock> OnDelete;
 
         public EnemyConfig Config { get; private set; }
+
+        public AutoFade Fade { get; private set; }
+
+        public RectTransform RectTransform { get; private set; }
 
         [Header("Prefabs")]
         [SerializeField] private AbilityRow abilityRowPrefab;
@@ -24,6 +30,10 @@ namespace HexedHeroes.EncounterRunner
         [SerializeField] private TMP_InputField health;
         [SerializeField] private TMP_InputField notes;
         [SerializeField] private Transform abilityRowParent;
+
+        [SerializeField, Min(0f)] private float shrinkDuration;
+
+        [SerializeField] private LayoutElement spacerPrefab;
 
         private readonly List<AbilityRow> abilityRows = new();
 
@@ -138,14 +148,47 @@ namespace HexedHeroes.EncounterRunner
             EnemyInstance instance = Instantiate(enemyInstancePrefab, instanceParent);
             enemyInstances.Add(instance);
             instance.OnDelete += HandleDeleteInstance;
-            instance.Configure(Config.CharacterInstances[index], index);
+            CharacterInstanceConfig config = Config.CharacterInstances[index];
+            config.SetCharacter(Config);
+            instance.Configure(config, index);
         }
 
         private void HandleDeleteInstance(EnemyInstance enemyInstance)
         {
+            int siblingIndex = enemyInstance.transform.GetSiblingIndex();
+            int instanceCount = enemyInstances.Count;
+
             enemyInstances.Remove(enemyInstance);
-            Destroy(enemyInstance.gameObject);
+
+            if (enemyInstance.Fade != null)
+            {
+                enemyInstance.Fade.FadeOut(DestroyInstance);
+            }
+
             Config.RemoveInstance(enemyInstance.Config);
+
+            void DestroyInstance()
+            {
+                Destroy(enemyInstance.gameObject);
+
+                if (instanceCount > 1)
+                {
+                    SlideOver(siblingIndex);
+                }
+            }
+        }
+
+        private void SlideOver(int siblingIndex)
+        {
+            LayoutElement spacer = Instantiate(spacerPrefab, instanceParent);
+            spacer.transform.SetSiblingIndex(siblingIndex);
+            Vector2 minSize = new Vector2(0f, spacer.minHeight);
+            spacer.DOMinSize(minSize, shrinkDuration).OnComplete(DestroySpacer);
+
+            void DestroySpacer()
+            {
+                Destroy(spacer.gameObject);
+            }
         }
 
         private void OnDisable()
@@ -156,6 +199,11 @@ namespace HexedHeroes.EncounterRunner
             {
                 Config.OnConfigRemoved -= HandleConfigDeleted;
             }
+        }
+        private void Awake()
+        {
+            Fade = GetComponent<AutoFade>();
+            RectTransform = transform as RectTransform;
         }
     }
 }

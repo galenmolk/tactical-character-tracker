@@ -41,7 +41,7 @@ namespace HexedHeroes.EncounterRunner
         public void OpenInExplorer()
         {
             Debug.Log(encounterConfig.FilePath);
-            #if UNITY_STANDALONE_OSX
+            #if UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
             Process process = new Process();
             process.StartInfo.FileName = "open";
             process.StartInfo.Arguments = "-n -R \"" + encounterConfig.FilePath + "\"";
@@ -61,10 +61,9 @@ namespace HexedHeroes.EncounterRunner
             process.BeginOutputReadLine();
             #endif
 
-            #if UNITY_STANDALONE_WIN
+            #if UNITY_STANDALONE_WIN && !UNITY_EDITOR_OSX
             string path = encounterConfig.FilePath.Replace(@"/", @"\");
             Process.Start("explorer.exe", "/select," + path);
-            
             #endif
         }
 

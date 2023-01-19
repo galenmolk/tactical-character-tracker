@@ -6,18 +6,53 @@ public class PointerInRect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     public bool IsPointerInRect { get; private set; }
 
+    public bool IsActive
+    {
+        get
+        {
+            return isActive;
+        }
+        set
+        {
+            if (IsPointerInRect && !value)
+            {
+                SetIsPointerInRect(false);
+            }
+
+            isActive = value;
+        }
+    }
+
+    private bool isActive = true;
+
     [SerializeField] private UnityEvent onPointerEnter;
     [SerializeField] private UnityEvent onPointerExit;
     
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        IsPointerInRect = true;
-        onPointerEnter?.Invoke();
+        if (!IsActive)
+        {
+            return;
+        }
+
+        SetIsPointerInRect(true);
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        IsPointerInRect = false;
-        onPointerExit?.Invoke();
+        if (!IsActive)
+        {
+            return;
+        }
+
+        SetIsPointerInRect(false);
+    }
+
+    private void SetIsPointerInRect(bool isPointerInRect)
+    {
+        IsPointerInRect = isPointerInRect;
+
+        UnityEvent unityEvent = isPointerInRect ? onPointerEnter : onPointerExit;
+        unityEvent?.Invoke();
     }
 }

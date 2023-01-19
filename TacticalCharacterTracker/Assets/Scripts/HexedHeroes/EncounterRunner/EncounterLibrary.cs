@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -109,7 +108,7 @@ namespace HexedHeroes.EncounterRunner
         {
             DirectoryInfo saveFolder = new(SavePath);
             FileSystemInfo[] files = saveFolder.GetFileSystemInfos(JSON_SEARCH_PATTERN);
-            
+
             foreach (FileSystemInfo file in files)
             {
                 if (!TryGetEncounterFromFile(file, out EncounterConfig encounterConfig))
@@ -123,6 +122,7 @@ namespace HexedHeroes.EncounterRunner
 
         private void CreateEncounterListItem(EncounterConfig encounterConfig)
         {
+            DebugConsole.Instance.Log("Creating Encounter Item.");
             encounterConfig.FilePath = GetFullSavePath(encounterConfig);
             EncounterListItem item = Instantiate(itemPrefab, itemParent);
             item.Configure(encounterConfig);
@@ -171,11 +171,10 @@ namespace HexedHeroes.EncounterRunner
 
         private static bool TryGetEncounterFromFile(FileSystemInfo fileInfo, out EncounterConfig encounterConfig)
         {
-            string path = fileInfo.FullName;
-            using StreamReader sr = new StreamReader(path);
-            string json = sr.ReadToEnd();
+            string json = File.ReadAllText(fileInfo.FullName);
             encounterConfig = JsonConvert.DeserializeObject<EncounterConfig>(json);
-            return encounterConfig != null;
+            bool wasSuccess = encounterConfig != null;
+            return wasSuccess;
         }
         
         private void OnEnable()
@@ -205,7 +204,7 @@ namespace HexedHeroes.EncounterRunner
             {
                 return;
             }
-            
+
             SaveConfigToDisk(config);
         }
 

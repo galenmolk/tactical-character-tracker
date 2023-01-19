@@ -21,7 +21,9 @@ namespace Ebla.Utils
         #region Encounter Keys
 
         public const string ENEMIES = "Enemies";
-        
+        public const string DEFAULT_ENEMIES = "Default";
+        public const string IS_DEFAULT_LOADED = "IsDefaultLoaded";
+
         #endregion
 
         #region Enemy Type Keys

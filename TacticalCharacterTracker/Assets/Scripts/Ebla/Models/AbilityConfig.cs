@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Ebla.Models
 {
-    public class AbilityConfig : BaseConfig
+    public class AbilityConfig : BaseConfig, ICloneable
     {
         public static event Action<AbilityConfig> OnLoadIntoFolder;
 
@@ -22,6 +22,21 @@ namespace Ebla.Models
         [JsonProperty(ConfigKeys.INTERRUPT_KEY)]
         public bool IsInterrupt { get; private set; }
 
+        public AbilityConfig()
+        {
+
+        }
+
+        public object Clone()
+        {
+            return new AbilityConfig(this);
+        }
+
+        public AbilityConfig(AbilityConfig ability)
+        {
+            Name = ability.Name;
+            CooldownTurns = ability.CooldownTurns;
+        }
 
         public void RemoveAllInstancesForEnemyInstance(CharacterInstanceConfig characterInstanceConfig)
         {

@@ -123,7 +123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   options:
-  - label: Delete Ability
+  - platformDependent: 0
+    osxLabel: 
+    winLabel: 
+    label: Delete Ability
     action:
       m_PersistentCalls:
         m_Calls:
@@ -819,8 +822,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 4100221840768275699}
     m_Modifications:
     - target: {fileID: 2838032700149919684, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}
+      propertyPath: m_Text
+      value: 1111111
+      objectReference: {fileID: 0}
+    - target: {fileID: 2838032700149919684, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}
       propertyPath: m_TargetGraphic
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2838032700149919684, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}
+      propertyPath: m_CharacterLimit
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2838032700149919684, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -921,6 +932,14 @@ PrefabInstance:
     - target: {fileID: 2838032700149919686, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}
       propertyPath: m_Name
       value: InputField
+      objectReference: {fileID: 0}
+    - target: {fileID: 2838032700478271376, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2838032700849346833, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}
+      propertyPath: m_text
+      value: "1111111\u200B"
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6029610830073732684, guid: 4667c4aa9965a471c941a349b36574c4, type: 3}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Ebla.Models;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HexedHeroes.EncounterRunner
 {
@@ -11,6 +12,9 @@ namespace HexedHeroes.EncounterRunner
         public event Action<EnemyInstance> OnDelete;
 
         public CharacterInstanceConfig Config { get; private set; }
+
+        public AutoFade Fade { get; private set; }
+        public LayoutElement LayoutElement { get; private set; } 
 
         [Header("Components")]
         [SerializeField] private LabelCell nameCell;
@@ -106,6 +110,12 @@ namespace HexedHeroes.EncounterRunner
         private void OnDisable()
         {
             OnDelete = null;
+        }
+
+        private void Awake()
+        {
+            Fade = GetComponent<AutoFade>();
+            LayoutElement = GetComponent<LayoutElement>();
         }
     }
 }

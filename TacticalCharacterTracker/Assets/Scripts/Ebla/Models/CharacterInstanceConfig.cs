@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
 using Ebla.Utils;
 using HexedHeroes.EncounterRunner;
 using MolkExtras;
 using Newtonsoft.Json;
+using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace Ebla.Models
 {
-    public class CharacterInstanceConfig : BaseConfig
+    public class CharacterInstanceConfig : BaseConfig, ICloneable
     {
         [JsonIgnore] private CharacterConfig Character { get; set; }
 
@@ -19,6 +22,26 @@ namespace Ebla.Models
         [JsonProperty(ConfigKeys.ABILITY_INSTANCES_KEY)]
         public List<AbilityInstanceConfig> AbilityInstances { get; private set; }
 
+        public object Clone()
+        {
+            return new CharacterInstanceConfig(this);
+        }
+
+        public CharacterInstanceConfig(CharacterInstanceConfig instance)
+        {
+            Name = instance.Name;
+            Character = instance.Character;
+            CurrentHealth = instance.CurrentHealth;
+            CurrentDefense = instance.CurrentHealth;
+
+            AbilityInstances = new List<AbilityInstanceConfig>();
+
+            foreach (AbilityInstanceConfig abilityInstance in instance.AbilityInstances)
+            {
+                AbilityInstances.Add((AbilityInstanceConfig)abilityInstance.Clone());
+            }
+        }
+
         public string GetOrUpdateName(int index)
         {
             if (!string.IsNullOrWhiteSpace(Name))
@@ -27,6 +50,7 @@ namespace Ebla.Models
             }
 
             int adjustedIndex = ++index;
+
             string newName = string.IsNullOrWhiteSpace(Character.Name)
                 ? $"{adjustedIndex}"
                 : $"{Character.Name} {adjustedIndex}";
@@ -37,7 +61,7 @@ namespace Ebla.Models
 
         public void ConfigureInstance(CharacterConfig characterConfig)
         {
-            Character = characterConfig;
+            SetCharacter(characterConfig);
             
             AbilityInstances = new List<AbilityInstanceConfig>();
 
@@ -49,7 +73,11 @@ namespace Ebla.Models
             CurrentHealth = characterConfig.Health;
             CurrentDefense = characterConfig.Defense;
         }
-        
+
+        public void SetCharacter(CharacterConfig characterConfig)
+        {
+            Character = characterConfig;
+        }
 
         [JsonConstructor]
         public CharacterInstanceConfig() { }

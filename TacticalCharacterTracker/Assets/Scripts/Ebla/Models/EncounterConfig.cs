@@ -23,7 +23,16 @@ namespace Ebla.Models
             Identify();
         }
 
-        [JsonProperty(ConfigKeys.ENEMIES)] private List<EnemyConfig> Enemies { get; set; } = new();
+        [JsonProperty(ConfigKeys.ENEMIES)]
+        private List<EnemyConfig> Enemies { get; set; } = new();
+
+        [JsonProperty(ConfigKeys.DEFAULT_ENEMIES)]
+        private List<EnemyConfig> DefaultEnemies { get; set; }
+
+        [JsonProperty(ConfigKeys.IS_DEFAULT_LOADED)]
+        public bool IsDefaultLoaded { get; private set; }
+
+        public bool HasDefault => DefaultEnemies != null;
 
         public void AddEnemy(EnemyConfig enemyConfig)
         {
@@ -44,6 +53,43 @@ namespace Ebla.Models
         public IEnumerable<EnemyConfig> GetEnemies()
         {
             return Enemies;
+        }
+
+        public void LoadDefault()
+        {
+            Enemies.Clear();
+
+            foreach (EnemyConfig enemy in DefaultEnemies)
+            {
+                EnemyConfig config = (EnemyConfig)enemy.Clone();
+                config.AssociateAbilityInstances();
+                Enemies.Add(config);
+            }
+
+            InvokeConfigModified();
+        }
+
+        public void SaveDefault()
+        {
+            DefaultEnemies = new List<EnemyConfig>();
+
+            foreach (EnemyConfig enemyConfig in Enemies)
+            {
+                DefaultEnemies.Add((EnemyConfig)enemyConfig.Clone());
+            }
+
+            InvokeConfigModified();
+        }
+
+        public void SetIsDefaultLoaded(bool isLoaded)
+        {
+            if (isLoaded == IsDefaultLoaded)
+            {
+                return;
+            }
+
+            IsDefaultLoaded = isLoaded;
+            InvokeConfigModified();
         }
 
         protected override void RemoveConfigFromLibrary()
