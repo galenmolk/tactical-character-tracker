@@ -16,6 +16,7 @@ namespace HexedHeroes.EncounterRunner
         private const string CUSTOM_DATA_PATH = "/Configs/Encounters/";
         private const string JSON_EXTENSION = ".json";
         private const string JSON_SEARCH_PATTERN = "*.json";
+        private const string FILE_NAME_SEPARATOR = "_";
         
         private static string SavePath => Application.persistentDataPath + CUSTOM_DATA_PATH;
 
@@ -181,12 +182,19 @@ namespace HexedHeroes.EncounterRunner
         {
             BaseConfig.OnAnyConfigModified += HandleAnyConfigModified;
             EncounterConfig.OnEncounterDeleted += HandleDeleteEncounter;
+            EncounterConfig.OnNameChanged += HandleNameChanged;
         }
 
         private void OnDisable()
         {
             BaseConfig.OnAnyConfigModified -= HandleAnyConfigModified;
             EncounterConfig.OnEncounterDeleted -= HandleDeleteEncounter;
+            EncounterConfig.OnNameChanged -= HandleNameChanged;
+        }
+
+        private void HandleNameChanged(EncounterConfig config)
+        {
+            File.Delete(GetFullSavePath(config));
         }
 
         private static void HandleAnyConfigModified()
@@ -208,15 +216,23 @@ namespace HexedHeroes.EncounterRunner
             SaveConfigToDisk(config);
         }
 
-        private static void SaveConfigToDisk(BaseConfig config)
+        private static void SaveConfigToDisk(EncounterConfig config)
         {
             string encounterJson = JsonConvert.SerializeObject(config);
-            File.WriteAllText(GetFullSavePath(config), encounterJson);
+            string savePath = GetFullSavePath(config);
+            config.FilePath = savePath;
+            File.WriteAllText(savePath, encounterJson);
         }
 
-        private static string GetFullSavePath(BaseConfig config)
+        private static string GetFullSavePath(EncounterConfig config)
         {
-            return new StringBuilder().Append(SavePath).Append(config.Id).Append(JSON_EXTENSION).ToString();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(SavePath);
+            sb.Append(config.Name);
+            sb.Append(FILE_NAME_SEPARATOR);
+            sb.Append(config.Id);
+            sb.Append(JSON_EXTENSION);
+            return sb.ToString();
         }
     }
 }

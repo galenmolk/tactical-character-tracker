@@ -79,7 +79,7 @@ namespace Ebla.Models
             }
         }
         
-        public void UpdateName(string newName)
+        public virtual void UpdateName(string newName)
         {
             if (string.Equals(newName, Name))
             {

@@ -156,7 +156,7 @@ namespace HexedHeroes.EncounterRunner
             {
                 Destroy(block.gameObject);
 
-                if (blockCount > 1)
+                if (blockCount > 1 && siblingIndex != blockCount - 1)
                 {
                     SlideOver(siblingIndex, height);
                 }

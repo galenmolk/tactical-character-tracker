@@ -171,7 +171,7 @@ namespace HexedHeroes.EncounterRunner
             {
                 Destroy(enemyInstance.gameObject);
 
-                if (instanceCount > 1)
+                if (instanceCount > 1 && siblingIndex != instanceCount - 1)
                 {
                     SlideOver(siblingIndex);
                 }

@@ -1,4 +1,5 @@
 using Ebla.Models;
+using Ebla.Utils;
 using HexedHeroes.EncounterRunner;
 using MolkExtras;
 using UnityEngine;
@@ -23,44 +24,46 @@ namespace Ebla.UI
 
         public void QuitApp(UnityAction quitAction)
         {
-            quitAppParams.LoadAction(quitAction);
-            CreateOverlay(quitAppParams);
+            CreateOverlay(quitAppParams, quitAction);
         }
         
         public void DeleteConfig(BaseConfig baseConfig)
         {
             deleteConfigParams.SetTitle(baseConfig.GetDeletionText());
-            deleteConfigParams.LoadAction(baseConfig.DeleteConfig);
-            CreateOverlay(deleteConfigParams);
+            CreateOverlay(deleteConfigParams, baseConfig.DeleteConfig);
         }
 
         public void DeleteFolder(FolderConfig folderConfig)
         {
             deleteConfigParams.SetTitle(folderConfig.GetDeletionText());
-            deleteConfigParams.LoadAction(folderConfig.DeleteConfig);
-            CreateOverlay(deleteConfigParams);
+            CreateOverlay(deleteConfigParams, folderConfig.DeleteConfig);
         }
 
-        public void EncounterInfo(EncounterConfig encounterConfig)
-        {
-            encounterInfoParams.SetTitle(encounterConfig.Name);
-            CreateOverlay(encounterInfoParams);
-        }
+        //public void EncounterInfo(EncounterConfig encounterConfig)
+        //{
+        //    encounterInfoParams.SetTitle(encounterConfig.Name);
+        //    CreateOverlay(encounterInfoParams);
+        //}
 
         public void SaveDefault()
         {
-            overwriteDefaultParams.LoadAction(EncounterRunner.Instance.SaveDefault);
-            CreateOverlay(overwriteDefaultParams);
+            CreateOverlay(overwriteDefaultParams, EncounterRunner.Instance.SaveDefault);
         }
 
         public void LoadDefault()
         {
-            loadDefaultParams.LoadAction(EncounterRunner.Instance.LoadDefault);
-            CreateOverlay(loadDefaultParams);
+            CreateOverlay(loadDefaultParams, EncounterRunner.Instance.LoadDefault);
         }
 
-        private void CreateOverlay(ConfirmationParams confirmationParams)
+        private void CreateOverlay(ConfirmationParams confirmationParams, UnityAction action)
         {
+            if (Input.GetKey(HotKeys.ForceExecute))
+            {
+                action?.Invoke();
+                return;
+            }
+
+            confirmationParams.LoadAction(action);
             ClearActiveInstance();
             overlayInstance = Instantiate(overlayPrefab, overlayParent);
             overlayInstance.OnClose += ClearActiveInstance;

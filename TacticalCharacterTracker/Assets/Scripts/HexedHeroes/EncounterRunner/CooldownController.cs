@@ -1,4 +1,5 @@
 using System;
+using Ebla.Utils;
 using UnityEngine;
 
 namespace HexedHeroes.EncounterRunner
@@ -10,6 +11,14 @@ namespace HexedHeroes.EncounterRunner
         public void ReduceActiveButtonClicked()
         {
             ReduceActive?.Invoke();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(HotKeys.ReduceCooldowns))
+            {
+                ReduceActiveButtonClicked();
+            }
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Ebla.Utils
 
         public static KeyCode Back => Map.Back;
         public static KeyCode ForceExecute => Map.ForceExecute;
-        
+        public static KeyCode ReduceCooldowns => Map.ReduceCooldowns;
+
         private static HotKeyMap Map
         {
             get

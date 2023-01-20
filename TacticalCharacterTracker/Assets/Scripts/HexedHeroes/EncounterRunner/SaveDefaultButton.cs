@@ -6,7 +6,6 @@ public class SaveDefaultButton : LockedButton
     public void SaveDefault()
     {
         EncounterRunner.Instance.TrySaveDefault();
-        Lock();
     }
 
     protected override bool CanUnlock()

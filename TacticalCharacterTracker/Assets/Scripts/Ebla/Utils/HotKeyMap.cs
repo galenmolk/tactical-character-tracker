@@ -13,5 +13,8 @@ namespace Ebla.Utils
 
         public KeyCode ForceExecute => forceExecute;
         [SerializeField] private KeyCode forceExecute;
+
+        public KeyCode ReduceCooldowns => reduceCooldowns;
+        [SerializeField] private KeyCode reduceCooldowns;
     }
 }

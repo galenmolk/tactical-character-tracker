@@ -9,6 +9,8 @@ namespace Ebla.Models
 {
     public class EncounterConfig : BaseConfig
     {
+        public static event Action<EncounterConfig> OnNameChanged;
+
         public static event Action<EncounterConfig> OnEncounterDeleted; 
         [UsedImplicitly]
         public static event Action<EncounterConfig> OnLoadIntoFolder;
@@ -33,6 +35,12 @@ namespace Ebla.Models
         public bool IsDefaultLoaded { get; private set; }
 
         public bool HasDefault => DefaultEnemies != null;
+
+        public override void UpdateName(string newName)
+        {
+            OnNameChanged?.Invoke(this);
+            base.UpdateName(newName);
+        }
 
         public void AddEnemy(EnemyConfig enemyConfig)
         {

@@ -6,7 +6,6 @@ public class LoadDefaultButton : LockedButton
     public void LoadDefault()
     {
         EncounterRunner.Instance.TryLoadDefault();
-        Lock();
     }
 
     protected override bool CanUnlock()
