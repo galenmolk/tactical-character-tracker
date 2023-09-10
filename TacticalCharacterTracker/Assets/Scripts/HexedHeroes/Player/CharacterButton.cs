@@ -17,7 +17,7 @@ namespace HexedHeroes.Player
         {
             selectAction = _selectAction;
             characterConfig = _characterConfig;
-            image.color = Utils.Utils.GetColorFromHex(characterConfig.nameButtonColor) ?? Color.white; 
+            image.color = Utils.Utils.GetColorFromHex(characterConfig.colorHex) ?? Color.white;
             characterName.text = characterConfig.name;
         }
 

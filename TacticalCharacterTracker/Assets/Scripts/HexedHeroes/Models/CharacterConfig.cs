@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using HexedHeroes.Models;
 using HexedHeroes.Utils;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace HexedHeroes
 {
@@ -14,24 +16,27 @@ namespace HexedHeroes
         public CharacterConfig(string _name = null)
         {
             name = _name; 
-            abilities = new List<AbilityConfig>();
+            abilityIds = new List<string>();
         }
 
         public CharacterConfig()
         {
             name = null;
-            nameButtonColor = null;
+            colorHex = null;
             defense = 0;
             health = 0;
             speed = 0;
-            abilities = null;
+            abilityIds = null;
         }
-    
+
+        [JsonProperty("id")]
+        public string id;
+
         [JsonProperty(ConfigKeys.CHARACTER_NAME_KEY)]
         public string name;
     
-        [JsonProperty(ConfigKeys.CHARACTER_NAME_BUTTON_COLOR_KEY)]
-        public string nameButtonColor;
+        [JsonProperty(ConfigKeys.CHARACTER_COLOR_HEX_KEY)]
+        public string colorHex;
 
         [JsonProperty(ConfigKeys.CHARACTER_DEFENSE_KEY)]
         public int defense;
@@ -42,7 +47,9 @@ namespace HexedHeroes
         [JsonProperty(ConfigKeys.CHARACTER_SPEED_KEY)]
         public int speed;
     
-        [JsonProperty(ConfigKeys.CHARACTER_ABILITIES_KEY)]
-        public List<AbilityConfig> abilities;
+        [JsonProperty(ConfigKeys.CHARACTER_ABILITY_IDS_KEY)]
+        public List<string> abilityIds;
+
+        public List<AbilityConfig> abilities { get; set; }
     }
 }

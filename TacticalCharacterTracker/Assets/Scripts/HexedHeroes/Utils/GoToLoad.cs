@@ -9,7 +9,14 @@ namespace HexedHeroes.Utils
         private void Awake()
         {
             if (ActiveSession.AvailableCharacters == null)
-                SceneManager.LoadScene(SceneKeys.LOAD);
+            {
+                Load();
+            }    
+        }
+
+        public void Load()
+        {
+            SceneManager.LoadScene(SceneKeys.LOAD);
         }
     }
 }

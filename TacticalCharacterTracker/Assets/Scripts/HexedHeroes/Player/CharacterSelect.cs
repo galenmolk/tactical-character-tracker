@@ -8,11 +8,15 @@ namespace HexedHeroes.Player
     {
         [SerializeField] private CharacterButton characterButtonPrefab;
         [SerializeField] private RectTransform characterButtonParent;
-    
+        [SerializeField] private GameObject offlineWarning;
+
         protected void Awake()
         {
-            Debug.Log(ActiveSession.AvailableCharacters);
-        
+            if (ActiveSession.IsOffline)
+            {
+                offlineWarning.SetActive(true);
+            }
+
             if (ActiveSession.AvailableCharacters == null)
                 return;
 

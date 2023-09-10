@@ -6669,10 +6669,10 @@ RectTransform:
   m_Father: {fileID: 2011615558}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10.442871, y: -0.7640381}
-  m_SizeDelta: {x: -438.598, y: -137.908}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1251.367, y: 324.09198}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1760822031
 MonoBehaviour:
@@ -6694,7 +6694,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <Name>
+  m_text: <NAME>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 295e5c83968a84e24ac6b357bc95bf24, type: 2}
   m_sharedMaterial: {fileID: 4948589842817884809, guid: 295e5c83968a84e24ac6b357bc95bf24, type: 2}
@@ -6721,12 +6721,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 225.3
+  m_fontSize: 250
   m_fontSizeBase: 225.3
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 75
+  m_fontSizeMax: 250
   m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -6737,9 +6737,9 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 1
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -7858,6 +7858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -8859,7 +8860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4224299240470402758, guid: 6f09d1dbadf3343f4a3ef231a977353f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1504
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4224299240470402758, guid: 6f09d1dbadf3343f4a3ef231a977353f, type: 3}
       propertyPath: m_SizeDelta.y
@@ -8867,7 +8868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4224299240470402758, guid: 6f09d1dbadf3343f4a3ef231a977353f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4224299240956286059, guid: 6f09d1dbadf3343f4a3ef231a977353f, type: 3}
       propertyPath: persistent

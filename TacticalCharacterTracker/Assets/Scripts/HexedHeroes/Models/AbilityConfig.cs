@@ -18,7 +18,10 @@ namespace HexedHeroes.Models
         }
     
         public const string PASSIVE_TEXT = "[Passive]";
-    
+
+        [JsonProperty("id")]
+        public string id;
+
         [JsonProperty(ConfigKeys.ABILITY_COOLDOWN_KEY)]
         public int cooldown;
 

@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Text.RegularExpressions;
-using TMPro;
 using UnityEngine;
 
 public static class ColorCoder
@@ -10,10 +7,17 @@ public static class ColorCoder
     private static Dictionary<string, Color> colorCodeRegistry = new();
 
     private const string CLOSING_COLOR_TAG = "</color>";
-    
-    public static void SetColorCodeRegistry(Dictionary<string, Color> _colorCodeRegistry)
+
+    private static ColorCode[] colorCodes;
+
+    public static void SetColorCodeRegistryOld(Dictionary<string, Color> _colorCodeRegistry)
     {
         colorCodeRegistry = _colorCodeRegistry;
+    }
+
+    public static void SetColorCodes(ColorCode[] _colorCodes)
+    {
+        colorCodes = _colorCodes;
     }
 
     // public static string GetColorCodedText2(string text)
@@ -62,7 +66,7 @@ public static class ColorCoder
         return ALPHABET.Contains(lowerC);
     }
     
-    public static string GetColorCodedText(string text)
+    public static string GetColorCodedTextOld(string text)
     {
         foreach (var code in colorCodeRegistry)
         {
@@ -93,6 +97,22 @@ public static class ColorCoder
         return text;
     }
 
+    public static string GetColorCodedText(string inputText)
+    {
+        foreach (var colorCode in colorCodes)
+        {
+            foreach (var wordToColorCode in colorCode.GetStrings())
+            {
+                var pattern = $@"\b{Regex.Escape(wordToColorCode)}\b";
+                var colorCodeStart = $"<color=#{ColorUtility.ToHtmlStringRGBA(colorCode.GetColor())}>";
+                var colorCodeEnd = "</color>";
+                inputText = Regex.Replace(inputText, pattern, $"{colorCodeStart}$&{colorCodeEnd}", RegexOptions.IgnoreCase);
+            }
+        }
+
+        return inputText;
+    }
+
     private static string GetOpeningColorTag(Color color)
     {
         string hex = ColorUtility.ToHtmlStringRGBA(color);
@@ -108,8 +128,8 @@ public class ColorCodeRegistryBuilder : MonoBehaviour
     
     private void Awake()
     {
-        BuildColorCodeRegistry();
-        ColorCoder.SetColorCodeRegistry(ColorCodeRegistry);
+        //BuildColorCodeRegistry();
+        ColorCoder.SetColorCodes(colorCodes);
     }
 
     private void BuildColorCodeRegistry()
@@ -127,7 +147,7 @@ public class ColorCodeRegistryBuilder : MonoBehaviour
         
         foreach (var stringToCode in strings)
         {
-            ColorCodeRegistry.Add(stringToCode, color);
+            ColorCodeRegistry.TryAdd(stringToCode, color);
         }
     }
 }

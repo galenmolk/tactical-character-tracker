@@ -3,11 +3,11 @@ namespace HexedHeroes.Utils
     public class ConfigKeys
     {
         public const string CHARACTER_NAME_KEY = "name";
-        public const string CHARACTER_NAME_BUTTON_COLOR_KEY = "nameButtonColor";
+        public const string CHARACTER_COLOR_HEX_KEY = "colorHex";
         public const string CHARACTER_DEFENSE_KEY = "defense";
         public const string CHARACTER_HEALTH_KEY = "health";
         public const string CHARACTER_SPEED_KEY = "speed";
-        public const string CHARACTER_ABILITIES_KEY = "abilities";
+        public const string CHARACTER_ABILITY_IDS_KEY = "abilityIds";
     
         public const string ABILITY_NAME_KEY = "name";
         public const string ABILITY_DESCRIPTION_KEY = "description";

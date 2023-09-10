@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Gisty;
+using HexedHeroes.Models;
 using HexedHeroes.Utils;
 using Newtonsoft.Json;
 using Unity.RemoteConfig;
@@ -22,15 +25,52 @@ namespace HexedHeroes.Player
     
         private readonly AppAttributes appParams = new();
 
-        private void Awake()
+        GistService characterService;
+        GistService abilityService;
+
+        private async void Awake()
         {
-            if (loadLocalConfig || Application.internetReachability == NetworkReachability.NotReachable)
+            if (loadLocalConfig || Application.internetReachability == NetworkReachability.NotReachable || !WebUtils.IsInternetAvailable())
             {
+                ActiveSession.IsOffline = true;
                 LoadCharacterConfigs();
                 return;
             }
-        
-            GetRemoteConfigSettings();
+
+            ActiveSession.IsOffline = false;
+
+            abilityService = new GistService("e081087e30ca9af5f1bfbeff95511c3a", "abilities.json", "hexed-heroes-character-tracker-app");
+
+            characterService = new GistService("12953c4c94be8897997bc3746fd82be9", "characters.json", "hexed-heroes-character-tracker-app");
+            await GetCharacters();
+            SceneManager.LoadScene(SceneKeys.CHARACTER_SELECT);
+
+            //GetRemoteConfigSettings();
+        }
+
+        private async Task GetCharacters()
+        {
+            var abilities = await abilityService.GetGistContent<AbilityConfig[]>();
+            var characters = await characterService.GetGistContent<List<CharacterConfig>>();
+
+            foreach (var character in characters)
+            {
+                List<AbilityConfig> abilityConfigs = new();
+                foreach (string id in character.abilityIds)
+                {
+                    foreach (AbilityConfig abilityConfig in abilities)
+                    {
+                        if (string.Equals(abilityConfig.id, id))
+                        {
+                            abilityConfigs.Add(abilityConfig);
+                            break;
+                        }
+                    } 
+                }
+                character.abilities = abilityConfigs;
+            }
+
+            ActiveSession.AvailableCharacters = characters;
         }
     
         private void GetRemoteConfigSettings()
@@ -54,7 +94,8 @@ namespace HexedHeroes.Player
 
         private void LoadCharacterConfigs()
         {
-            ActiveSession.AvailableCharacters = GetConfigOrFallback();
+            ActiveSession.AvailableCharacters = GetCharacterListConfigForJson(fallbackCharacterListConfig.text);
+            //ActiveSession.AvailableCharacters = GetConfigOrFallback();
             SceneManager.LoadScene(SceneKeys.CHARACTER_SELECT);
         }
 
