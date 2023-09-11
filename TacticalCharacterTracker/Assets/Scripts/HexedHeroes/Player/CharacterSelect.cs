@@ -12,7 +12,7 @@ namespace HexedHeroes.Player
 
         protected void Awake()
         {
-            if (ActiveSession.IsOffline)
+            if (!ActiveSession.IsOnline)
             {
                 offlineWarning.SetActive(true);
             }

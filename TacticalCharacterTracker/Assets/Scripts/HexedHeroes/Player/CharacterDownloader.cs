@@ -30,28 +30,27 @@ namespace HexedHeroes.Player
 
         private async void Awake()
         {
-            if (loadLocalConfig || Application.internetReachability == NetworkReachability.NotReachable || !WebUtils.IsInternetAvailable())
+            abilityService = new GistService("e081087e30ca9af5f1bfbeff95511c3a", "abilities.json", "hexed-heroes-character-tracker-app");
+            characterService = new GistService("12953c4c94be8897997bc3746fd82be9", "characters.json", "hexed-heroes-character-tracker-app");
+            ActiveSession.IsOnline = await TryGetCharacters();
+
+            if (!ActiveSession.IsOnline)
             {
-                ActiveSession.IsOffline = true;
-                LoadCharacterConfigs();
-                return;
+                ActiveSession.AvailableCharacters = GetCharacterListConfigForJson(fallbackCharacterListConfig.text);
             }
 
-            ActiveSession.IsOffline = false;
-
-            abilityService = new GistService("e081087e30ca9af5f1bfbeff95511c3a", "abilities.json", "hexed-heroes-character-tracker-app");
-
-            characterService = new GistService("12953c4c94be8897997bc3746fd82be9", "characters.json", "hexed-heroes-character-tracker-app");
-            await GetCharacters();
             SceneManager.LoadScene(SceneKeys.CHARACTER_SELECT);
-
-            //GetRemoteConfigSettings();
         }
 
-        private async Task GetCharacters()
+        private async Task<bool> TryGetCharacters()
         {
             var abilities = await abilityService.GetGistContent<AbilityConfig[]>();
             var characters = await characterService.GetGistContent<List<CharacterConfig>>();
+
+            if (abilities == null || characters == null)
+            {
+                return false;
+            }
 
             foreach (var character in characters)
             {
@@ -71,6 +70,7 @@ namespace HexedHeroes.Player
             }
 
             ActiveSession.AvailableCharacters = characters;
+            return true;
         }
     
         private void GetRemoteConfigSettings()
